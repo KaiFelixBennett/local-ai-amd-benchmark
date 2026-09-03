@@ -39,11 +39,13 @@
 
 <br>
 
-<img src="media/gif/hero-clair-obscur-qwen38.gif" width="700" alt="A 3D turn-based RPG with a party system, boss encounter and skill menus, written end to end by Qwen3.8-27B on a Radeon AI PRO R9700">
+<img src="media/gif/hero-moorland-mayhem-qwen38.gif" width="700" alt="A finished 2D arcade shooter called Moorland Mayhem, with a countdown timer, climbing score, combo chains, stacked PERFECT popups and a time-rift multiplier, written end to end by Qwen3.8-27B on a Radeon AI PRO R9700">
 
-<sub><b>No human wrote a line of this.</b> Qwen3.8-27B UD-Q6_K_M built it — renderer, turn
-order, AP economy, boss phases, dialogue — in one unattended session on a €1,500 Radeon.
-<a href="evidence/logs/qwen38-27b-q6-clairobscur-r9700.log">That session's server log is in this repo.</a></sub>
+<sub><b>No human wrote a line of this.</b> Qwen3.8-27B at Q4 built <i>Moorland Mayhem</i> —
+five game modes, combo chains, score multipliers, a persistent highscore table and
+colour-blind palettes — in one unattended session on a €1,500 Radeon, correcting itself four
+times. <a href="evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log">Its server log is in this
+repo.</a></sub>
 
 </div>
 
@@ -169,11 +171,11 @@ touch-ups, no cherry-picked frames.
 <table>
 <tr>
 <td width="33%" valign="top">
-<img src="media/gif/moorland-mayhem-qwen38.gif" width="100%" alt="A polished 2D arcade shooter with score multipliers and combo counters, built by Qwen3.8-27B">
-<b>"Moorland Mayhem"</b><br>
-<sub>Qwen3.8-27B UD-Q4_K_XL · R9700<br>
-Combo chains, score multipliers, fog modifiers — plus a settings panel with colour-blind
-palettes, a highscore table and a credits screen. The most complete artifact in the field.</sub>
+<img src="media/gif/clair-obscur-qwen38.gif" width="100%" alt="A 3D turn-based RPG showing a lumina ring animation, a boss title card and party combat menus, built by Qwen3.8-27B">
+<b>Clair Obscur</b><br>
+<sub>Qwen3.8-27B UD-Q6_K_M · R9700<br>
+Turn-based party combat with an AP economy, boss phases, parry timing and dialogue. Highest
+quality score of any agent run, and one of the two runs on the Pareto front.</sub>
 </td>
 <td width="33%" valign="top">
 <img src="media/gif/clair-obscur-flashnext.gif" width="100%" alt="A 3D party-based RPG battle scene at sunset, built by Qwen3.8-Flash-Next">
@@ -215,7 +217,8 @@ synthetic table.</sub>
 </table>
 
 > [!IMPORTANT]
-> **The cleanest experiment in this dataset is the first two tiles.** Same task, same machine,
+> **The cleanest experiment in this dataset is the build at the top of this page against the
+> Qwen3.6-27B Moorhuhn tile.** Same task, same machine,
 > decode medians 0.7 % apart — 33.69 against 33.45 t/s. One shipped *Moorland Mayhem* with
 > accessibility options, persistent highscores and five game modes, after **4** self-repairs.
 > The other needed **15** and scored two rubric points lower. Identical throughput, entirely
