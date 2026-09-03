@@ -14,7 +14,7 @@ cd evidence && sha256sum -c SHA256SUMS && cd ..
 python scripts/parse_logs.py
 ```
 
-The parser prints the leaderboard and checks each log against `SHA256SUMS` as it goes.
+The parser prints the throughput tables and checks each log against `SHA256SUMS` as it goes.
 It needs only Python 3 — no dependencies.
 
 ## What is here
