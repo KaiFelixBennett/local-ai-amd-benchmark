@@ -1,0 +1,454 @@
+[
+ {
+  "slug": "qwen38-27b-q4xl-moorhuhn-r9700",
+  "model": "Qwen3.8-27B",
+  "quant": "UD-Q4_K_XL",
+  "hw": "r9700",
+  "task": "Moorhuhn",
+  "kind": "agent",
+  "decode": {
+   "median": 33.69,
+   "p10": 27.83,
+   "p90": 45.31,
+   "peak": 84.92,
+   "n": 82
+  },
+  "prefill": {
+   "median": 266.9,
+   "max": 499.5
+  },
+  "tokens": 332405,
+  "minutes": 160,
+  "fixes": 4,
+  "quality": 16,
+  "spec": "draft-mtp + ngram-mod 24/48/64 · n_max 2",
+  "build": "b10717",
+  "ctx": 262144,
+  "kv": "q8_0 / q8_0",
+  "ub": 288,
+  "cmd": "llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf ^\n  --load-mode none --mmproj mmproj-F16.gguf --image-min-tokens 1024 ^\n  --alias Qwen3.8-27B -dev Vulkan0 --host 127.0.0.1 --port 8080 ^\n  -c 262144 -ngl 99 -fa on --fit off -ot \"token_embd\\.weight=Vulkan0\" ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 288 ^\n  --parallel 1 --kv-unified ^\n  --ctx-checkpoints 4 --checkpoint-min-step 16384 --cache-ram 0 ^\n  --spec-type draft-mtp,ngram-mod --spec-draft-n-max 2 ^\n  --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 48 --spec-ngram-mod-n-max 64 ^\n  --spec-draft-device Vulkan0 --spec-draft-ngl 99 ^\n  --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 ^\n  --presence-penalty 0.0 --repeat-penalty 1.0 ^\n  --jinja --reasoning on --reasoning-effort xhigh --reasoning-format deepseek --reasoning-budget -1",
+  "media": {
+   "image": "q38q4xl-play.jpg"
+  },
+  "source": "llama.cpp-Serverlog · 82 Antworten ab 200 Tokens",
+  "note": "Der ausgelieferte Build startet nicht: „Spiel starten“ bleibt in fünf getesteten Anläufen wirkungslos, Untermenüs funktionieren. Deshalb ein Standbild statt einer Aufnahme.",
+  "depth": {
+   "kind": "prefill",
+   "points": [
+    [
+     8,
+     498.3
+    ],
+    [
+     16,
+     423.1
+    ],
+    [
+     34,
+     323.0
+    ],
+    [
+     67,
+     223.3
+    ],
+    [
+     100,
+     172.4
+    ],
+    [
+     132,
+     139.6
+    ],
+    [
+     164,
+     118.0
+    ]
+   ],
+   "unit": "t/s",
+   "label": "Prefill über Kontexttiefe"
+  }
+ },
+ {
+  "slug": "qwen36-27b-q6-moorhuhn-r9700",
+  "model": "Qwen3.6-27B",
+  "quant": "UD-Q6_K_XL",
+  "hw": "r9700",
+  "task": "Moorhuhn",
+  "kind": "agent",
+  "decode": {
+   "median": 33.45,
+   "p10": 29.02,
+   "p90": 38.25,
+   "peak": 41.39,
+   "n": 221
+  },
+  "prefill": {
+   "median": 210.0,
+   "max": 423.6
+  },
+  "tokens": 175743,
+  "minutes": 88,
+  "fixes": 15,
+  "quality": 14,
+  "spec": "draft-mtp · n_max 2",
+  "build": "b9985",
+  "ctx": 172032,
+  "kv": "q8_0 / q4_0",
+  "ub": 512,
+  "cmd": "llama-server -m Qwen3.6-27B-UD-Q6_K_XL-mtp.gguf ^\n  --mmproj mmproj-F16.gguf --alias Qwen3.6-27B ^\n  --host 127.0.0.1 --port 8080 ^\n  -c 172032 -ngl 99 -fa on ^\n  -ctk q8_0 -ctv q4_0 -b 2048 -ub 512 ^\n  --parallel 1 --kv-unified ^\n  --ctx-checkpoints 4 --checkpoint-min-step 16384 --cache-ram 16384 ^\n  --spec-type draft-mtp --spec-draft-n-max 2 ^\n  --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 ^\n  --jinja --chat-template-file qwen-fixed-chat_template.jinja ^\n  --reasoning on --reasoning-format deepseek --reasoning-budget 20000",
+  "media": {
+   "video": "moor36.webm",
+   "poster": "moor36.jpg"
+  },
+  "source": "llama.cpp-Serverlog · 221 Antworten ab 200 Tokens",
+  "note": "Im Projektordner liegen 15 Reparaturskripte (fix_hit.cjs, fix_coords_final.cjs …) — so oft musste das Modell den Trefferbereich nachbessern.",
+  "depth": null
+ },
+ {
+  "slug": "qwen38-flashnext-moorhuhn-evox2",
+  "model": "Qwen3.8-Flash-Next",
+  "quant": "UD-Q4_K_XL",
+  "hw": "evox2",
+  "task": "Moorhuhn",
+  "kind": "agent",
+  "decode": {
+   "median": 23.84,
+   "p10": 18.93,
+   "p90": 27.38,
+   "peak": 33.89,
+   "n": 42
+  },
+  "prefill": {
+   "median": 117.2,
+   "max": 184.8
+  },
+  "tokens": 98871,
+  "minutes": 75,
+  "fixes": null,
+  "quality": 16,
+  "spec": "draft-mtp · 177 Mrd. gesamt, ~6 Mrd. aktiv",
+  "build": "580e88d",
+  "ctx": 262144,
+  "kv": "q8_0 / q8_0",
+  "ub": 512,
+  "cmd": "llama-server -m Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf ^\n  --mmproj mmproj-F16.gguf --alias qwen3.8-flash-next ^\n  --host 127.0.0.1 --port 8099 --device Vulkan0 ^\n  --gpu-layers all --n-cpu-moe 0 --fit off -fa on ^\n  --load-mode mmap --lazy-mode on ^\n  --ctx-size 262144 --parallel 1 --kv-unified ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --ctx-checkpoints 4 --checkpoint-min-step 4096 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-effort xhigh",
+  "media": null,
+  "source": "llama.cpp-Serverlog · 42 Antworten ab 200 Tokens · Lauf vom 03.09.2026",
+  "note": "Neue Unsloth-Fassung. Gegenüber dem Lauf vom August mehr als doppelt so schnell (23,84 statt 10,93 t/s Median).",
+  "depth": {
+   "kind": "decode",
+   "points": [
+    [
+     0.5,
+     22.14
+    ],
+    [
+     1,
+     22.5
+    ],
+    [
+     2,
+     21.99
+    ],
+    [
+     4,
+     21.66
+    ],
+    [
+     16,
+     19.04
+    ],
+    [
+     32,
+     16.65
+    ],
+    [
+     65,
+     12.25
+    ],
+    [
+     131,
+     8.84
+    ],
+    [
+     164,
+     7.7
+    ]
+   ],
+   "unit": "t/s",
+   "label": "Decode über Kontexttiefe (Vorgängerfassung)"
+  }
+ },
+ {
+  "slug": "qwen38-27b-q6-clairobscure-r9700",
+  "model": "Qwen3.8-27B",
+  "quant": "UD-Q6_K_M",
+  "hw": "r9700",
+  "task": "Clair Obscure",
+  "kind": "agent",
+  "decode": {
+   "median": 26.3,
+   "p10": 17.78,
+   "p90": 34.33,
+   "peak": 42.39,
+   "n": 30
+  },
+  "prefill": {
+   "median": 168.0,
+   "max": 350.8
+  },
+  "tokens": 118919,
+  "minutes": 88,
+  "fixes": 6,
+  "quality": 17,
+  "spec": "draft-mtp + ngram-mod · Annahme 0,553",
+  "build": "bd9bd1b",
+  "ctx": 262144,
+  "kv": "q8_0 / turbo4",
+  "ub": 128,
+  "cmd": "llama-server -m Qwen3.8-27B-UD-Q6_K_M.gguf ^\n  --load-mode none --mmproj mmproj-F16.gguf --image-min-tokens 1024 ^\n  -dev Vulkan0 --host 127.0.0.1 --port 8080 ^\n  -c 262144 -ngl 99 -fa on --fit off -ot \"token_embd\\.weight=Vulkan0\" ^\n  -ctk q8_0 -ctv turbo4 -b 2048 -ub 128 ^\n  --parallel 1 --kv-unified ^\n  --ctx-checkpoints 4 --checkpoint-min-step 16384 --cache-ram 0 ^\n  --spec-type draft-mtp,ngram-mod --spec-draft-n-max 2 ^\n  --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 48 --spec-ngram-mod-n-max 64 ^\n  --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-budget -1",
+  "media": {
+   "video": "hero.webm",
+   "poster": "hero.jpg"
+  },
+  "source": "llama.cpp-Serverlog · 30 Antworten ab 200 Tokens",
+  "note": null,
+  "depth": {
+   "kind": "prefill",
+   "points": [
+    [
+     8,
+     498.3
+    ],
+    [
+     16,
+     423.1
+    ],
+    [
+     34,
+     323.0
+    ],
+    [
+     67,
+     223.3
+    ],
+    [
+     100,
+     172.4
+    ],
+    [
+     132,
+     139.6
+    ],
+    [
+     164,
+     118.0
+    ]
+   ],
+   "unit": "t/s",
+   "label": "Prefill über Kontexttiefe"
+  }
+ },
+ {
+  "slug": "qwen36-27b-q6-clairobscure-r9700",
+  "model": "Qwen3.6-27B",
+  "quant": "UD-Q6_K_XL",
+  "hw": "r9700",
+  "task": "Clair Obscure",
+  "kind": "agent",
+  "decode": null,
+  "prefill": null,
+  "tokens": null,
+  "minutes": null,
+  "fixes": null,
+  "quality": 15,
+  "spec": "draft-mtp · n_max 2",
+  "build": "b9985",
+  "ctx": 172032,
+  "kv": "q8_0 / q4_0",
+  "ub": 512,
+  "cmd": "llama-server -m Qwen3.6-27B-UD-Q6_K_XL-mtp.gguf ^\n  --mmproj mmproj-F16.gguf --alias Qwen3.6-27B ^\n  --host 127.0.0.1 --port 8080 ^\n  -c 172032 -ngl 99 -fa on ^\n  -ctk q8_0 -ctv q4_0 -b 2048 -ub 512 ^\n  --parallel 1 --kv-unified ^\n  --ctx-checkpoints 4 --checkpoint-min-step 16384 --cache-ram 16384 ^\n  --spec-type draft-mtp --spec-draft-n-max 2 ^\n  --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 ^\n  --jinja --chat-template-file qwen-fixed-chat_template.jinja ^\n  --reasoning on --reasoning-format deepseek --reasoning-budget 20000",
+  "media": {
+   "video": "night.webm",
+   "poster": "night.jpg",
+   "image": "night.jpg"
+  },
+  "source": null,
+  "note": "Der Lauf ist noch nicht ausgewertet; das Artefakt liegt vor.",
+  "depth": null
+ },
+ {
+  "slug": "qwen35-122b-a10b-evox2",
+  "model": "Qwen3.5-122B-A10B",
+  "quant": "UD-Q4_K_XL",
+  "hw": "evox2",
+  "task": "Labortest",
+  "kind": "synth",
+  "decode": {
+   "median": 31.8,
+   "p10": null,
+   "p90": null,
+   "peak": null,
+   "n": null
+  },
+  "prefill": {
+   "median": 245.7,
+   "max": 245.7
+  },
+  "tokens": null,
+  "minutes": null,
+  "fixes": null,
+  "quality": 18,
+  "spec": "draft-mtp · n_max 2 · Annahme 0,866",
+  "build": "04b2b72",
+  "ctx": 262144,
+  "kv": "q8_0 / q8_0",
+  "ub": 512,
+  "cmd": "llama-server -m Qwen3.5-122B-A10B-UD-Q4_K_XL-00001-of-00003.gguf ^\n  --mmproj mmproj-F16.gguf --host 127.0.0.1 --port 8098 ^\n  -c 262144 -ngl 999 -fa on ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --spec-type draft-mtp --spec-draft-n-max 2 ^\n  --temp 0.6 --top-p 0.95 --presence-penalty 1.5 ^\n  --jinja --chat-template-file qwen-fixed-v21.3.jinja ^\n  --reasoning on --reasoning-format deepseek",
+  "media": null,
+  "source": "Synthetisch: pp512 / tg128, Messreihe vom 23.07.2026",
+  "note": "124,64 Mrd. gesamt, ~10 Mrd. aktiv, 73,23 GiB Gewichte. KV 98 KiB/Token bei f16, 52 KiB bei q8_0.",
+  "depth": null
+ },
+ {
+  "slug": "laguna-s21-evox2",
+  "model": "Laguna S 2.1",
+  "quant": "Q4_K_M",
+  "hw": "evox2",
+  "task": "Labortest",
+  "kind": "synth",
+  "decode": {
+   "median": 27.9,
+   "p10": null,
+   "p90": null,
+   "peak": null,
+   "n": null
+  },
+  "prefill": {
+   "median": 309.6,
+   "max": 309.6
+  },
+  "tokens": null,
+  "minutes": null,
+  "fixes": null,
+  "quality": 17,
+  "spec": "draft-dflash · n_max 3 · Annahme 0,53",
+  "build": "04b2b72",
+  "ctx": 262144,
+  "kv": "q8_0 / q8_0",
+  "ub": 512,
+  "cmd": "llama-server -m Laguna-S-2.1-UD-Q4_K_XL-00001-of-00003.gguf ^\n  --host 127.0.0.1 --port 8091 ^\n  -c 262144 -ngl 999 -fa on ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --spec-type draft-dflash --spec-draft-n-max 3 ^\n  --jinja --reasoning on",
+  "media": null,
+  "source": "Synthetisch: pp512 / tg128, Messreihe vom 22.07.2026",
+  "note": "118B-A8B MoE, 70,01 GiB Gewichte. Ohne Spekulation 20,55 t/s; mit der dokumentierten Entwurfstiefe 15 nur 8,1 t/s.",
+  "depth": null
+ },
+ {
+  "slug": "deepseek-v4-flash-clairobscure-evox2",
+  "model": "DeepSeek-V4-Flash-0731",
+  "quant": "UD-IQ3_XXS",
+  "hw": "evox2",
+  "task": "Clair Obscure",
+  "kind": "agent",
+  "decode": {
+   "median": 7.02,
+   "p10": 5.0,
+   "p90": 9.75,
+   "peak": 10.83,
+   "n": 98
+  },
+  "prefill": {
+   "median": 17.6,
+   "max": 40.9
+  },
+  "tokens": 150800,
+  "minutes": 303,
+  "fixes": 12,
+  "quality": 13,
+  "spec": "draft-dspark · n_max 3",
+  "build": "580e88d",
+  "ctx": 131072,
+  "kv": "f16 / f16",
+  "ub": 512,
+  "cmd": "llama-server -m DeepSeek-V4-Flash-0731-UD-IQ3_XXS-00001-of-00004.gguf ^\n  --alias deepseek-v4-flash --host 127.0.0.1 --port 8100 --device Vulkan0 ^\n  --gpu-layers all --n-cpu-moe 0 --fit off -fa on --load-mode mmap ^\n  --ctx-size 131072 --parallel 1 --kv-unified ^\n  -ctk f16 -ctv f16 -b 2048 -ub 512 ^\n  --ctx-checkpoints 4 --checkpoint-min-step 4096 ^\n  -md DSpark-draft.gguf --spec-type draft-dspark --spec-draft-n-max 3 ^\n  --spec-draft-device Vulkan0 --spec-draft-ngl 99 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-effort high",
+  "media": null,
+  "source": "llama.cpp-Serverlog · 98 Antworten ab 200 Tokens",
+  "note": "Größenlabel 256×8.4B, vier Shards, rund 99 GB. Der langsamste Lauf im Feld — dafür das größte Modell.",
+  "depth": null
+ },
+ {
+  "slug": "opus5-ultracode",
+  "model": "Opus 5 ULTRACODE",
+  "quant": "—",
+  "hw": "cloud",
+  "task": "Moorhuhn",
+  "kind": "offen",
+  "decode": null,
+  "prefill": null,
+  "tokens": null,
+  "minutes": 52,
+  "fixes": 1,
+  "quality": 19,
+  "spec": "—",
+  "build": "—",
+  "ctx": null,
+  "kv": null,
+  "ub": null,
+  "cmd": null,
+  "media": null,
+  "source": null,
+  "note": "Lauf steht aus; nur der Prompt liegt vor.",
+  "depth": null
+ },
+ {
+  "slug": "gpt56-sol",
+  "model": "GPT 5.6 Sol",
+  "quant": "—",
+  "hw": "cloud",
+  "task": "Moorhuhn",
+  "kind": "offen",
+  "decode": null,
+  "prefill": null,
+  "tokens": null,
+  "minutes": 61,
+  "fixes": 2,
+  "quality": 18,
+  "spec": "—",
+  "build": "—",
+  "ctx": null,
+  "kv": null,
+  "ub": null,
+  "cmd": null,
+  "media": null,
+  "source": null,
+  "note": "Lauf steht aus.",
+  "depth": null
+ },
+ {
+  "slug": "sonnet5",
+  "model": "Sonnet 5",
+  "quant": "—",
+  "hw": "cloud",
+  "task": "Moorhuhn",
+  "kind": "offen",
+  "decode": null,
+  "prefill": null,
+  "tokens": null,
+  "minutes": 47,
+  "fixes": 2,
+  "quality": 17,
+  "spec": "—",
+  "build": "—",
+  "ctx": null,
+  "kv": null,
+  "ub": null,
+  "cmd": {
+   "video": "sonnet.webm",
+   "poster": "sonnet.jpg"
+  },
+  "media": null,
+  "source": "Cloud-Referenz. Das Artefakt liegt vor, die Geschwindigkeit ist nicht vergleichbar gemessen.",
+  "note": null,
+  "depth": null
+ }
+]

@@ -1,0 +1,12 @@
+{
+  "name": "local-ai-amd-benchmark",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Nutzbarkeitstest lokaler KI auf AMD-Hardware — gemessene Agentenläufe, Bilderkennung und Startkonfigurationen.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node build.mjs && node -e \"const h=require('http'),f=require('fs'),p=require('path');const M={'.html':'text/html','.css':'text/css','.js':'text/javascript','.json':'application/json','.jpg':'image/jpeg','.png':'image/png','.webm':'video/webm'};h.createServer((q,r)=>{let u=decodeURIComponent(q.url.split('?')[0]);if(u.endsWith('/'))u+='index.html';const x=p.join('dist',u);if(!f.existsSync(x)||f.statSync(x).isDirectory()){r.writeHead(404);return r.end()}r.writeHead(200,{'Content-Type':M[p.extname(x)]||'application/octet-stream'});f.createReadStream(x).pipe(r)}).listen(4321,()=>console.log('http://127.0.0.1:4321'))\""
+  },
+  "license": "MIT"
+}

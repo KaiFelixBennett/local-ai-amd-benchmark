@@ -1,0 +1,101 @@
+{
+ "r9700": {
+  "id": "r9700",
+  "name": "Radeon AI PRO R9700",
+  "short": "R9700",
+  "color": "#1c9ab8",
+  "arch": "gfx1201 · RDNA4",
+  "memory": "32 GB dediziert",
+  "alloc": "32.624 MiB",
+  "price": "ab ~1 500 €",
+  "specs": [
+   [
+    "Zuweisbar",
+    "32.624 MiB"
+   ],
+   [
+    "CPU",
+    "Intel Core Ultra 7 265KF"
+   ],
+   [
+    "RAM",
+    "63,6 GiB"
+   ],
+   [
+    "Mainboard",
+    "ASUS PRIME Z890-P WIFI, BIOS 2401"
+   ],
+   [
+    "Treiber",
+    "Adrenalin 26.6.4"
+   ],
+   [
+    "Vulkan-ICD",
+    "amdvlk64 9.2.10.395"
+   ],
+   [
+    "System",
+    "Windows 11 Pro 26200"
+   ],
+   [
+    "Besonderheit",
+    "headless; RTX 5080 treibt den Desktop"
+   ]
+  ]
+ },
+ "evox2": {
+  "id": "evox2",
+  "name": "Ecotech Evo X2 · Ryzen AI Max+ 395",
+  "short": "Evo X2",
+  "color": "#cb7815",
+  "arch": "Strix Halo · Radeon 8060S · gfx1151",
+  "memory": "128 GiB unified",
+  "alloc": "98.123 MiB Vulkan-Heap",
+  "price": "ab ~1 800 €",
+  "specs": [
+   [
+    "Speicher",
+    "128 GiB LPDDR5X-8533, 8 Kanäle"
+   ],
+   [
+    "Bandbreite",
+    "~256 GB/s theoretisch"
+   ],
+   [
+    "Windows sichtbar",
+    "63,6 GiB"
+   ],
+   [
+    "UMA-Reservierung",
+    "64,4 GiB"
+   ],
+   [
+    "Vulkan-Heap",
+    "98.123 MiB / 93.217 MiB frei"
+   ],
+   [
+    "Treiber",
+    "32.0.31021.5001"
+   ],
+   [
+    "System",
+    "Windows 11 Pro 26200"
+   ],
+   [
+    "Vulkan SDK",
+    "1.4.350.0 (LunarG)"
+   ]
+  ]
+ },
+ "cloud": {
+  "id": "cloud",
+  "name": "Cloud-Referenz",
+  "short": "Cloud",
+  "color": "#7b7796",
+  "arch": "—",
+  "memory": "—",
+  "alloc": "—",
+  "price": "nach Verbrauch",
+  "specs": []
+ }
+}
