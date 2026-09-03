@@ -403,8 +403,9 @@ configuration that produced it can never drift apart:
 ### Verify every number yourself
 
 Every speed figure on [benchmark.securesight.ai](https://benchmark.securesight.ai) and in
-`data/runs.json` comes from a file in [`logs/`](logs/) — the unedited `llama.cpp` server logs
-and measurement tables, about 2.8 MB in total. Nothing is estimated, extrapolated, or quoted
+`data/runs.json` comes from a file in [`evidence/`](evidence/) — the unedited `llama.cpp` server logs,
+measurement tables and benchmark reports, about 3.8 MB in total, each with a SHA-256
+in [`evidence/SHA256SUMS`](evidence/SHA256SUMS). Nothing is estimated, extrapolated, or quoted
 from someone else's page.
 
 ```bash
@@ -423,14 +424,14 @@ It currently reports **0 deviations**. Two rules decide every number:
 
 | Run | Evidence | Responses used |
 |---|---|---|
-| Qwen3.8-27B UD-Q4_K_XL · Moorhuhn · R9700 | [`logs/qwen38-27b-q4xl-moorhuhn-r9700.log`](logs/qwen38-27b-q4xl-moorhuhn-r9700.log) | 82 |
-| Qwen3.6-27B UD-Q6 · Moorhuhn · R9700 | [`logs/qwen36-27b-q6-moorhuhn-r9700.log`](logs/qwen36-27b-q6-moorhuhn-r9700.log) | 221 |
-| Qwen3.8-27B UD-Q6 · Clair Obscure · R9700 | [`logs/qwen38-27b-q6-clairobscure-r9700.csv`](logs/qwen38-27b-q6-clairobscure-r9700.csv) | 30 of 35 |
-| Qwen3.8-Flash-Next · Moorhuhn · AI MAX 395 | [`logs/qwen38-flashnext-moorhuhn-aimax395.log`](logs/qwen38-flashnext-moorhuhn-aimax395.log) | 98 of 115 |
-| Qwen3.8-Flash-Next · Clair Obscure · AI MAX 395 | [`logs/qwen38-flashnext-clairobscure-aimax395.log`](logs/qwen38-flashnext-clairobscure-aimax395.log) | 92 of 106 |
-| DeepSeek-V4-Flash-0731 · Clair Obscure · AI MAX 395 | [`logs/deepseek-v4-flash-clairobscure-aimax395.log`](logs/deepseek-v4-flash-clairobscure-aimax395.log) | 98 |
-| Laguna S 2.1 · AI MAX 395 | [`logs/laguna-s21-aimax395-messreihe.md`](logs/laguna-s21-aimax395-messreihe.md) | pp512 / tg128 series |
-| Qwen3.5-122B-A10B · AI MAX 395 | [`logs/qwen35-122b-a10b-aimax395-messreihe.md`](logs/qwen35-122b-a10b-aimax395-messreihe.md) | pp512 / tg128 series |
+| Qwen3.8-27B UD-Q4_K_XL · Moorhuhn · R9700 | [`evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log`](evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log) | 82 |
+| Qwen3.6-27B UD-Q6 · Moorhuhn · R9700 | [`evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log`](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) | 221 |
+| Qwen3.8-27B UD-Q6 · Clair Obscure · R9700 | [`evidence/logs/qwen38-27b-q6-clairobscur-r9700.log`](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log) | 30 of 35 |
+| Qwen3.8-Flash-Next · Moorhuhn · AI MAX 395 | [`evidence/logs/qwen38-flashnext-moorhuhn-halo.log`](evidence/logs/qwen38-flashnext-moorhuhn-halo.log) | 98 of 115 |
+| Qwen3.8-Flash-Next · Clair Obscure · AI MAX 395 | [`evidence/logs/qwen38-flashnext-clairobscur-halo.log`](evidence/logs/qwen38-flashnext-clairobscur-halo.log) | 92 of 106 |
+| DeepSeek-V4-Flash-0731 · Clair Obscure · AI MAX 395 | [`evidence/logs/deepseek-v4-flash-clairobscur-halo.log`](evidence/logs/deepseek-v4-flash-clairobscur-halo.log) | 98 |
+| Laguna S 2.1 · AI MAX 395 | [`evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md`](evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md) | pp512 / tg128 series |
+| Qwen3.5-122B-A10B · AI MAX 395 | [`evidence/reports/qwen35-122b-a10b-strix-halo-vulkan-benchmark.md`](evidence/reports/qwen35-122b-a10b-strix-halo-vulkan-benchmark.md) | pp512 / tg128 series |
 
 **Where there is no measurement, there is no number.** The Qwen3.6-27B Clair Obscure run and
 the three cloud models carry no speed figure at all — the artifacts exist, the log does not.

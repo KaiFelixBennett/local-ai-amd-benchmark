@@ -38,14 +38,19 @@ MINDEST = 200
 
 # Welcher Lauf haengt an welchem Rohprotokoll
 BELEGE = {
-    "qwen36-27b-q6-moorhuhn-r9700":         "logs/qwen36-27b-q6-moorhuhn-r9700.log",
-    "qwen38-27b-q4xl-moorhuhn-r9700":       "logs/qwen38-27b-q4xl-moorhuhn-r9700.log",
-    "qwen38-flashnext-moorhuhn-evox2":      "logs/qwen38-flashnext-moorhuhn-aimax395.log",
-    "deepseek-v4-flash-clairobscure-evox2": "logs/deepseek-v4-flash-clairobscure-aimax395.log",
-    "qwen38-flashnext-clairobscure-evox2":  "logs/qwen38-flashnext-clairobscure-aimax395.log",
-    # Dieser Lauf lief ueber ein Messskript, das direkt eine Tabelle schreibt,
-    # nicht ueber das Serverprotokoll. Dieselben Regeln, andere Quellform.
-    "qwen38-27b-q6-clairobscure-r9700":     "logs/qwen38-27b-q6-clairobscure-r9700.csv",
+    "qwen36-27b-q6-moorhuhn-r9700":         "evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log",
+    "qwen38-27b-q4xl-moorhuhn-r9700":       "evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log",
+    "qwen38-27b-q6-clairobscure-r9700":     "evidence/logs/qwen38-27b-q6-clairobscur-r9700.log",
+    "qwen38-flashnext-moorhuhn-evox2":      "evidence/logs/qwen38-flashnext-moorhuhn-halo.log",
+    "qwen38-flashnext-clairobscure-evox2":  "evidence/logs/qwen38-flashnext-clairobscur-halo.log",
+    "deepseek-v4-flash-clairobscure-evox2": "evidence/logs/deepseek-v4-flash-clairobscur-halo.log",
+}
+
+# Laeufe aus llama-bench: eine Kennzahl je Einstellung, keine Verteilung. Die
+# Zahlen stehen im Messbericht, es gibt kein Serverprotokoll dazu.
+BERICHTE = {
+    "laguna-s21-evox2":       "evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md",
+    "qwen35-122b-a10b-evox2": "evidence/reports/qwen35-122b-a10b-strix-halo-vulkan-benchmark.md",
 }
 
 
@@ -148,6 +153,23 @@ def main():
                 "antworten_gesamt": m["antworten_gesamt"],
                 "gewertet": m["decode"]["n"],
                 "regel": "Antworten ab %d Tokens; Perzentile nach Rangplatz" % MINDEST,
+            }
+
+    # Die llama-bench-Laeufe bekommen ihren Messbericht als Beleg
+    if schreiben:
+        for r in runs:
+            rel = BERICHTE.get(r["slug"])
+            if not rel:
+                continue
+            voll = os.path.join(REPO, rel.replace("/", os.sep))
+            if not os.path.exists(voll):
+                print("FEHLT: %s" % rel)
+                continue
+            r["evidence"] = {
+                "log": rel,
+                "sha256": pruefsumme(voll),
+                "bytes": os.path.getsize(voll),
+                "regel": "Messbericht llama-bench pp512/tg128 mit allen Rohwerten",
             }
 
     if schreiben:

@@ -18,7 +18,7 @@
    "max": 499.49
   },
   "tokens": 332405,
-  "minutes": 160,
+  "minutes": 189,
   "fixes": 4,
   "quality": 16,
   "spec": "draft-mtp + ngram-mod 24/48/64 · n_max 2",
@@ -30,7 +30,7 @@
   "media": {
    "image": "q38q4xl-play.jpg"
   },
-  "source": "llama.cpp-Serverlog · 82 Antworten ab 200 Tokens",
+  "source": "llama.cpp server log, 82 of 108 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
   "note": "Der ausgelieferte Build startet nicht: „Spiel starten“ bleibt in fünf getesteten Anläufen wirkungslos, Untermenüs funktionieren. Deshalb ein Standbild statt einer Aufnahme.",
   "depth": {
    "kind": "prefill",
@@ -68,13 +68,20 @@
    "label": "Prefill über Kontexttiefe"
   },
   "evidence": {
-   "log": "logs/qwen38-27b-q4xl-moorhuhn-r9700.log",
+   "log": "evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log",
    "sha256": "8c8d3460492763d102d026adb4f0941f2647c846ad404119adc8eb2d3dff0a40",
    "bytes": 531494,
    "antworten_gesamt": 108,
    "gewertet": 82,
    "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
-  }
+  },
+  "tokens_all": 336107,
+  "responses_all": 108,
+  "gpu_minutes": {
+   "decode": 162.1,
+   "prefill": 26.8
+  },
+  "largest_prompt_tokens": 139720
  },
  {
   "slug": "qwen36-27b-q6-moorhuhn-r9700",
@@ -95,7 +102,7 @@
    "max": 423.64
   },
   "tokens": 175743,
-  "minutes": 88,
+  "minutes": 139,
   "fixes": 15,
   "quality": 14,
   "spec": "draft-mtp · n_max 2",
@@ -108,17 +115,24 @@
    "video": "moor36.webm",
    "poster": "moor36.jpg"
   },
-  "source": "llama.cpp-Serverlog · 221 Antworten ab 200 Tokens",
+  "source": "llama.cpp server log, 221 of 409 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
   "note": "Im Projektordner liegen 15 Reparaturskripte (fix_hit.cjs, fix_coords_final.cjs …) — so oft musste das Modell den Trefferbereich nachbessern.",
   "depth": null,
   "evidence": {
-   "log": "logs/qwen36-27b-q6-moorhuhn-r9700.log",
+   "log": "evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log",
    "sha256": "07f278fedcb8bc130cc393a05647156d7fa83e2e356024df70f670d956b3627d",
    "bytes": 691613,
    "antworten_gesamt": 409,
    "gewertet": 221,
    "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
-  }
+  },
+  "tokens_all": 196543,
+  "responses_all": 409,
+  "gpu_minutes": {
+   "decode": 98.1,
+   "prefill": 41.0
+  },
+  "largest_prompt_tokens": 43238
  },
  {
   "slug": "qwen38-flashnext-moorhuhn-evox2",
@@ -139,7 +153,7 @@
    "max": 184.76
   },
   "tokens": 285339,
-  "minutes": 75,
+  "minutes": 286,
   "fixes": null,
   "quality": 16,
   "spec": "draft-mtp · 177 Mrd. gesamt, ~6 Mrd. aktiv",
@@ -148,60 +162,72 @@
   "kv": "q8_0 / q8_0",
   "ub": 512,
   "cmd": "llama-server -m Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf ^\n  --mmproj mmproj-F16.gguf --alias qwen3.8-flash-next ^\n  --host 127.0.0.1 --port 8099 --device Vulkan0 ^\n  --gpu-layers all --n-cpu-moe 0 --fit off -fa on ^\n  --load-mode mmap --lazy-mode on ^\n  --ctx-size 262144 --parallel 1 --kv-unified ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --ctx-checkpoints 4 --checkpoint-min-step 4096 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-effort xhigh",
-  "media": null,
-  "source": "llama.cpp-Serverlog · 42 Antworten ab 200 Tokens · Lauf vom 03.09.2026",
-  "note": "Neue Unsloth-Fassung. Gegenüber dem Lauf vom August mehr als doppelt so schnell (23,84 statt 10,93 t/s Median).",
+  "media": {
+   "video": "clairfn.webm",
+   "poster": "clairfn.jpg"
+  },
+  "source": "llama.cpp server log, 98 of 115 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
+  "note": "Neue Unsloth-Fassung. Gegenüber dem Lauf vom August rund doppelt so schnell (21,82 statt 10,93 t/s Median).",
   "depth": {
    "kind": "decode",
    "points": [
     [
-     0.5,
-     22.14
+     33.6,
+     26.12
     ],
     [
-     1,
-     22.5
+     39.7,
+     21.76
     ],
     [
-     2,
-     21.99
+     44.9,
+     21.62
     ],
     [
-     4,
-     21.66
+     52.2,
+     22.83
     ],
     [
-     16,
-     19.04
+     58.6,
+     23.69
     ],
     [
-     32,
-     16.65
+     61.7,
+     21.8
     ],
     [
-     65,
-     12.25
+     66.6,
+     19.44
     ],
     [
-     131,
-     8.84
-    ],
-    [
-     164,
-     7.7
+     72.5,
+     17.28
     ]
    ],
    "unit": "t/s",
-   "label": "Decode über Kontexttiefe (Vorgängerfassung)"
+   "label": "Decode über Kontexttiefe · Sitzung vom 03.09.2026",
+   "note": "Je Punkt zwölf Antworten, Median. Gemessen zwischen 31k und 88k Token."
+  },
+  "draft": {
+   "accept": 69.2,
+   "meanlen": 2.38,
+   "n": 115
   },
   "evidence": {
-   "log": "logs/qwen38-flashnext-moorhuhn-aimax395.log",
+   "log": "evidence/logs/qwen38-flashnext-moorhuhn-halo.log",
    "sha256": "23cd83c01ad4d54d0dc5d02386f00970e442daf207116142723f6f20645f3700",
    "bytes": 699768,
    "antworten_gesamt": 115,
    "gewertet": 98,
    "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
-  }
+  },
+  "tokens_all": 287782,
+  "responses_all": 115,
+  "gpu_minutes": {
+   "decode": 246.7,
+   "prefill": 38.9
+  },
+  "largest_prompt_tokens": 34598
  },
  {
   "slug": "qwen38-flashnext-clairobscure-evox2",
@@ -222,7 +248,7 @@
    "max": 197.12
   },
   "tokens": 236460,
-  "minutes": null,
+  "minutes": 368,
   "fixes": null,
   "quality": 16,
   "spec": "draft-mtp · 177 Mrd. gesamt, ~6 Mrd. aktiv",
@@ -232,18 +258,25 @@
   "ub": 512,
   "cmd": "llama-server -m Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf ^\n  --mmproj mmproj-F16.gguf --alias qwen3.8-flash-next ^\n  --host 127.0.0.1 --port 8099 --device Vulkan0 ^\n  --gpu-layers all --n-cpu-moe 0 --fit off -fa on ^\n  --load-mode mmap --lazy-mode on ^\n  --ctx-size 262144 --parallel 1 --kv-unified ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --ctx-checkpoints 4 --checkpoint-min-step 4096 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-effort xhigh",
   "media": null,
-  "source": "llama.cpp-Serverlog · 92 von 106 Antworten ab 200 Tokens · Lauf vom August 2026",
+  "source": "llama.cpp server log, 92 of 106 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
   "note": "Die ältere Unsloth-Fassung. Sie ist der Vergleichspunkt für den Lauf vom September.",
   "depth": null,
+  "draft": null,
   "evidence": {
-   "log": "logs/qwen38-flashnext-clairobscure-aimax395.log",
+   "log": "evidence/logs/qwen38-flashnext-clairobscur-halo.log",
    "sha256": "35885e4476e8528fe7bc5bd1ec8512b2ec3fac24f397032c5c4ed57a3f2a4164",
    "bytes": 831682,
    "antworten_gesamt": 106,
    "gewertet": 92,
    "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
-  "draft": null
+  "tokens_all": 238371,
+  "responses_all": 106,
+  "gpu_minutes": {
+   "decode": 337.8,
+   "prefill": 30.2
+  },
+  "largest_prompt_tokens": 35009
  },
  {
   "slug": "qwen38-27b-q6-clairobscure-r9700",
@@ -264,7 +297,7 @@
    "max": 350.83
   },
   "tokens": 118919,
-  "minutes": 88,
+  "minutes": 114,
   "fixes": 6,
   "quality": 17,
   "spec": "draft-mtp + ngram-mod · Annahme 0,553",
@@ -274,10 +307,10 @@
   "ub": 128,
   "cmd": "llama-server -m Qwen3.8-27B-UD-Q6_K_M.gguf ^\n  --load-mode none --mmproj mmproj-F16.gguf --image-min-tokens 1024 ^\n  -dev Vulkan0 --host 127.0.0.1 --port 8080 ^\n  -c 262144 -ngl 99 -fa on --fit off -ot \"token_embd\\.weight=Vulkan0\" ^\n  -ctk q8_0 -ctv turbo4 -b 2048 -ub 128 ^\n  --parallel 1 --kv-unified ^\n  --ctx-checkpoints 4 --checkpoint-min-step 16384 --cache-ram 0 ^\n  --spec-type draft-mtp,ngram-mod --spec-draft-n-max 2 ^\n  --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 48 --spec-ngram-mod-n-max 64 ^\n  --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-budget -1",
   "media": {
-   "video": "hero.webm",
-   "poster": "hero.jpg"
+   "video": "clair38.webm",
+   "poster": "clair38.jpg"
   },
-  "source": "Artefakt vorhanden, Serverprotokoll nicht erhalten.",
+  "source": "llama.cpp server log, 30 of 35 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
   "note": null,
   "depth": {
    "kind": "prefill",
@@ -315,13 +348,20 @@
    "label": "Prefill über Kontexttiefe"
   },
   "evidence": {
-   "log": "logs/qwen38-27b-q6-clairobscure-r9700.csv",
-   "sha256": "00918c458d1270c693a0a0019186a06aed40bb1e07d1f85105c4d66f5e73a048",
-   "bytes": 2520,
+   "log": "evidence/logs/qwen38-27b-q6-clairobscur-r9700.log",
+   "sha256": "2a36b590f139c3d425f15f28e8e673ed97d169384d9af49bec267adb22a1fa22",
+   "bytes": 255050,
    "antworten_gesamt": 35,
    "gewertet": 30,
    "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
-  }
+  },
+  "tokens_all": 119627,
+  "responses_all": 35,
+  "gpu_minutes": {
+   "decode": 88.8,
+   "prefill": 25.7
+  },
+  "largest_prompt_tokens": 180396
  },
  {
   "slug": "qwen36-27b-q6-clairobscure-r9700",
@@ -380,14 +420,14 @@
   "ub": 512,
   "cmd": "llama-server -m Qwen3.5-122B-A10B-UD-Q4_K_XL-00001-of-00003.gguf ^\n  --mmproj mmproj-F16.gguf --host 127.0.0.1 --port 8098 ^\n  -c 262144 -ngl 999 -fa on ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --spec-type draft-mtp --spec-draft-n-max 2 ^\n  --temp 0.6 --top-p 0.95 --presence-penalty 1.5 ^\n  --jinja --chat-template-file qwen-fixed-v21.3.jinja ^\n  --reasoning on --reasoning-format deepseek",
   "media": null,
-  "source": "Synthetisch: pp512 / tg128, Messreihe vom 23.07.2026",
+  "source": "synthetic llama-bench sweep; see the linked report",
   "note": "124,64 Mrd. gesamt, ~10 Mrd. aktiv, 73,23 GiB Gewichte. KV 98 KiB/Token bei f16, 52 KiB bei q8_0.",
   "depth": null,
   "evidence": {
-   "log": "logs/qwen35-122b-a10b-aimax395-messreihe.md",
+   "log": "evidence/reports/qwen35-122b-a10b-strix-halo-vulkan-benchmark.md",
    "sha256": "d59ae98ca17abc746324fa064da263db71a4b15cba4731a329d9fccc8786879a",
    "bytes": 24322,
-   "regel": "Messreihe pp512/tg128 vom 23.07.2026, mit Rohwerten und Startkonfiguration"
+   "regel": "Messbericht llama-bench pp512/tg128 mit allen Rohwerten"
   }
  },
  {
@@ -395,7 +435,7 @@
   "model": "Laguna S 2.1",
   "quant": "Q4_K_M",
   "hw": "evox2",
-  "task": "Labortest",
+  "task": "Clair Obscure",
   "kind": "synth",
   "decode": {
    "median": 27.9,
@@ -418,15 +458,18 @@
   "kv": "q8_0 / q8_0",
   "ub": 512,
   "cmd": "llama-server -m Laguna-S-2.1-UD-Q4_K_XL-00001-of-00003.gguf ^\n  --host 127.0.0.1 --port 8091 ^\n  -c 262144 -ngl 999 -fa on ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --spec-type draft-dflash --spec-draft-n-max 3 ^\n  --jinja --reasoning on",
-  "media": null,
-  "source": "Synthetisch: pp512 / tg128, Messreihe vom 22.07.2026",
-  "note": "118B-A8B MoE, 70,01 GiB Gewichte. Ohne Spekulation 20,55 t/s; mit der dokumentierten Entwurfstiefe 15 nur 8,1 t/s.",
+  "media": {
+   "video": "laguna.webm",
+   "poster": "laguna.jpg"
+  },
+  "source": "synthetic llama-bench sweep; see the linked report",
+  "note": "118B-A8B MoE, 70,01 GiB Gewichte. Ohne Spekulation 20,55 t/s; mit der dokumentierten Entwurfstiefe 15 nur 8,1 t/s. Das Artefakt liegt vor — ein rundenbasiertes Rollenspiel mit Party, Aktionsmenü und Lebensanzeigen; die Geschwindigkeit dieses Laufs ist noch nicht aus dem Log ausgewertet.",
   "depth": null,
   "evidence": {
-   "log": "logs/laguna-s21-aimax395-messreihe.md",
+   "log": "evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md",
    "sha256": "ec4e2f141997091310dd874db3f255659930033f302295156806887c536d9921",
    "bytes": 50578,
-   "regel": "Messreihe pp512/tg128 vom 22.07.2026, mit Rohwerten und Startkonfiguration"
+   "regel": "Messbericht llama-bench pp512/tg128 mit allen Rohwerten"
   }
  },
  {
@@ -448,7 +491,7 @@
    "max": 40.91
   },
   "tokens": 150800,
-  "minutes": 303,
+  "minutes": 500,
   "fixes": 12,
   "quality": 13,
   "spec": "draft-dspark · n_max 3",
@@ -458,17 +501,24 @@
   "ub": 512,
   "cmd": "llama-server -m DeepSeek-V4-Flash-0731-UD-IQ3_XXS-00001-of-00004.gguf ^\n  --alias deepseek-v4-flash --host 127.0.0.1 --port 8100 --device Vulkan0 ^\n  --gpu-layers all --n-cpu-moe 0 --fit off -fa on --load-mode mmap ^\n  --ctx-size 131072 --parallel 1 --kv-unified ^\n  -ctk f16 -ctv f16 -b 2048 -ub 512 ^\n  --ctx-checkpoints 4 --checkpoint-min-step 4096 ^\n  -md DSpark-draft.gguf --spec-type draft-dspark --spec-draft-n-max 3 ^\n  --spec-draft-device Vulkan0 --spec-draft-ngl 99 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-effort high",
   "media": null,
-  "source": "llama.cpp-Serverlog · 98 Antworten ab 200 Tokens",
+  "source": "llama.cpp server log, 98 of 152 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
   "note": "Größenlabel 256×8.4B, vier Shards, rund 99 GB. Der langsamste Lauf im Feld — dafür das größte Modell.",
   "depth": null,
   "evidence": {
-   "log": "logs/deepseek-v4-flash-clairobscure-aimax395.log",
+   "log": "evidence/logs/deepseek-v4-flash-clairobscur-halo.log",
    "sha256": "04ef4d4fdf85bb2a199b6576864a40761b90a2eff3e2a25906851592e5048a96",
    "bytes": 738270,
    "antworten_gesamt": 152,
    "gewertet": 98,
    "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
-  }
+  },
+  "tokens_all": 158469,
+  "responses_all": 152,
+  "gpu_minutes": {
+   "decode": 328.8,
+   "prefill": 171.5
+  },
+  "largest_prompt_tokens": 36962
  },
  {
   "slug": "opus5-ultracode",

@@ -1,7 +1,14 @@
 # SHA-256 of every raw measurement file in this directory.
 # Verify with:  sha256sum -c SHA256SUMS   (run from evidence/)
-# The parser checks the logs against this file automatically:
-#   python ../scripts/parse_logs.py
+# Every number published in data/runs.json is recomputed from these files by:
+#   python -X utf8 ../scripts/verify_runs.py
+00918c458d1270c693a0a0019186a06aed40bb1e07d1f85105c4d66f5e73a048 *csv/20260828-clair-obscure-produktionslauf.csv
+361dc2a34c78827be0164b7d397fcf5c9086278261a7ac5a29be89b91cbd3835 *csv/20260831-143649-decode-depth-lauf1.csv
+624dd0b82863635217048fa0279def05277d6930ecfa6fc55068f847c606fd33 *csv/20260831-143649-decode-depth-lauf1.log
+cc8a5a19c0790ccda1b35fb43fd2495046f25a17e007e4f7984a535b90dc2f78 *csv/20260831-144559-decode-depth-lauf1.csv
+d39f183b36102e655133bc047d52a16af7688664f15047747e9e0a80426824e3 *csv/20260831-144559-decode-depth-lauf1.log
+30d44afabd5f52cbcdcced5847ebda3769c00ffc3975a36df9579ddedefea2cd *csv/20260831-145501-decode-depth-lauf1.csv
+39dafdb599f91cf220a560ab66654658c73ca08d2c19049890e6dc23ef6d8dbc *csv/20260831-145501-decode-depth-lauf1.log
 04ef4d4fdf85bb2a199b6576864a40761b90a2eff3e2a25906851592e5048a96 *logs/deepseek-v4-flash-clairobscur-halo.log
 07f278fedcb8bc130cc393a05647156d7fa83e2e356024df70f670d956b3627d *logs/qwen36-27b-q6-moorhuhn-r9700.log
 8c8d3460492763d102d026adb4f0941f2647c846ad404119adc8eb2d3dff0a40 *logs/qwen38-27b-q4xl-moorhuhn-r9700.log
@@ -11,10 +18,3 @@
 ec4e2f141997091310dd874db3f255659930033f302295156806887c536d9921 *reports/laguna-s21-strix-halo-vulkan-benchmark.md
 d59ae98ca17abc746324fa064da263db71a4b15cba4731a329d9fccc8786879a *reports/qwen35-122b-a10b-strix-halo-vulkan-benchmark.md
 7b8de9499ff80134c79a177d09632110c0ed3e42d8685b3786eaa07543c52a7f *reports/qwen38-27b-rdna4-quant-eval.md
-00918c458d1270c693a0a0019186a06aed40bb1e07d1f85105c4d66f5e73a048 *csv/20260828-clair-obscure-produktionslauf.csv
-361dc2a34c78827be0164b7d397fcf5c9086278261a7ac5a29be89b91cbd3835 *csv/20260831-143649-decode-depth-lauf1.csv
-624dd0b82863635217048fa0279def05277d6930ecfa6fc55068f847c606fd33 *csv/20260831-143649-decode-depth-lauf1.log
-cc8a5a19c0790ccda1b35fb43fd2495046f25a17e007e4f7984a535b90dc2f78 *csv/20260831-144559-decode-depth-lauf1.csv
-d39f183b36102e655133bc047d52a16af7688664f15047747e9e0a80426824e3 *csv/20260831-144559-decode-depth-lauf1.log
-30d44afabd5f52cbcdcced5847ebda3769c00ffc3975a36df9579ddedefea2cd *csv/20260831-145501-decode-depth-lauf1.csv
-39dafdb599f91cf220a560ab66654658c73ca08d2c19049890e6dc23ef6d8dbc *csv/20260831-145501-decode-depth-lauf1.log

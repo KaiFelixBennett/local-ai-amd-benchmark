@@ -41,12 +41,14 @@
     "Besonderheit",
     "headless; RTX 5080 treibt den Desktop"
    ]
-  ]
+  ],
+  "aka": "RDNA4 workstation card, headless",
+  "evidence": "evidence/reports/qwen38-27b-rdna4-quant-eval.md"
  },
  "evox2": {
   "id": "evox2",
-  "name": "Ecotech Evo X2 · Ryzen AI Max+ 395",
-  "short": "Evo X2",
+  "name": "AMD Ryzen AI Max+ 395",
+  "short": "AI MAX 395",
   "color": "#cb7815",
   "arch": "Strix Halo · Radeon 8060S · gfx1151",
   "memory": "128 GiB unified",
@@ -85,7 +87,9 @@
     "Vulkan SDK",
     "1.4.350.0 (LunarG)"
    ]
-  ]
+  ],
+  "aka": "AMD Halo / Strix Halo, in an Ecotech Evo X2 chassis",
+  "evidence": "evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md"
  },
  "cloud": {
   "id": "cloud",
