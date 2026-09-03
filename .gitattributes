@@ -1,0 +1,5 @@
+# The files under evidence/ are raw measurement records. They must round-trip
+# byte for byte on every platform, or the SHA-256 values in evidence/SHA256SUMS
+# stop matching after a clone and the whole provability claim collapses.
+# Treating them as binary disables end-of-line conversion.
+evidence/** -text

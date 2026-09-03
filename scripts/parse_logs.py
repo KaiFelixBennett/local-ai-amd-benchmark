@@ -26,28 +26,32 @@ import statistics
 PROMPT = re.compile(r"prompt eval time\s*=\s*([\d.]+) ms /\s*(\d+) tokens.*?([\d.]+) tokens per second")
 EVAL = re.compile(r"(?<!prompt )eval time\s*=\s*([\d.]+) ms /\s*(\d+) (?:tokens|runs).*?([\d.]+) tokens per second")
 
-# Decode statistics ignore responses below this length. Without the floor the logs
-# contribute entries reading 1,000,000 t/s, because a single token happened to be
-# emitted in ~0 ms. Every decode figure in the README carries this filter.
-DECODE_MIN_TOKENS = 200
-
-# Prefill statistics ignore prompts below this length: short prompts are served from
-# the context cache and measure the cache, not the prefill path.
-PREFILL_MIN_TOKENS = 500
+# Two conventions govern every number in this repository. They are shared verbatim
+# with scripts/verify_runs.py, which cross-checks data/runs.json against these same
+# logs -- the two scripts must never disagree.
+#
+# 1. Only responses of 200 tokens or more count. Shorter ones produce outliers up to
+#    1,000,000 t/s in the log (one token in near-zero milliseconds); those lines are
+#    a rounding artefact, not a measurement. The same floor applies to prompts.
+# 2. Percentiles are nearest-rank on the sorted list, not interpolated: p10 is the
+#    value at position floor(0.10 * n).
+MIN_TOKENS = 200
+DECODE_MIN_TOKENS = MIN_TOKENS
+PREFILL_MIN_TOKENS = MIN_TOKENS
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOG_DIR = os.path.join(ROOT, "evidence", "logs")
 SUMS = os.path.join(ROOT, "evidence", "SHA256SUMS")
 
 
-def percentile(values, p):
-    if not values:
+def percentile(sorted_values, fraction):
+    """Nearest-rank percentile -- no interpolation between neighbours.
+
+    Identical to rang() in scripts/verify_runs.py; keep the two in step.
+    """
+    if not sorted_values:
         return None
-    v = sorted(values)
-    k = (len(v) - 1) * p
-    f = int(k)
-    c = min(f + 1, len(v) - 1)
-    return v[f] + (v[c] - v[f]) * (k - f)
+    return sorted_values[min(len(sorted_values) - 1, int(len(sorted_values) * fraction))]
 
 
 def analyse(path):
@@ -60,7 +64,8 @@ def analyse(path):
 
     dc = [d for d in decode if d[1] >= DECODE_MIN_TOKENS]
     pf = [p for p in prefill if p[1] >= PREFILL_MIN_TOKENS]
-    rates = [d[0] for d in dc]
+    rates = sorted(d[0] for d in dc)
+    pf_rates = sorted(p[0] for p in pf)
 
     return {
         "log": os.path.basename(path),
@@ -71,13 +76,13 @@ def analyse(path):
             "median": round(statistics.median(rates), 2) if rates else None,
             "p10": round(percentile(rates, .10), 2) if rates else None,
             "p90": round(percentile(rates, .90), 2) if rates else None,
-            "min": round(min(rates), 2) if rates else None,
-            "peak": round(max(rates), 2) if rates else None,
+            "min": round(rates[0], 2) if rates else None,
+            "peak": round(rates[-1], 2) if rates else None,
         },
         "prefill": {
             "n": len(pf),
-            "median": round(statistics.median([p[0] for p in pf]), 2) if pf else None,
-            "max": round(max([p[0] for p in pf]), 2) if pf else None,
+            "median": round(statistics.median(pf_rates), 2) if pf_rates else None,
+            "max": round(pf_rates[-1], 2) if pf_rates else None,
             "largest_prompt_tokens": max([p[1] for p in prefill]) if prefill else None,
         },
         "tokens_filtered": sum(d[1] for d in dc),
