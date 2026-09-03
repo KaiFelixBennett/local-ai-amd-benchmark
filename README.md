@@ -12,23 +12,40 @@ Gemessen wird nicht der Laborwert, sondern der Median über hunderte echte Antwo
 
 | Ordner | Inhalt |
 |---|---|
-| `data/` | `runs.json` (alle Läufe), `configs.json` (19 Startkonfigurationen), `hardware.json` |
-| `src/` | Stylesheet, Hintergrund-Shader, Startseiten- und Detailseiten-Logik |
-| `media/` | Aufnahmen aus den ausgelieferten Builds, Screenshots, Prüfbilder |
-| `docs/` | Messdaten-Inventar mit allen Rohwerten, Plan der Seite |
-| `scripts/` | Log-Auswerter, Aufnahmeskript |
-| `build.mjs` | Erzeugt `dist/` — eine Startseite und eine Detailseite je Lauf |
+| `data/runs.json` | Alle Läufe mit Decode, Prefill, Perzentilen, Tokens und Startzeile |
+| `data/configs.json` | 19 vollständige `llama-server`-Startzeilen aus den Skripten |
+| `data/hardware.json` | Beide Prüfstände im Detail |
+| `docs/messdaten-inventar.md` | Alle Rohwerte, Quellen und was noch fehlt |
+| `scripts/parse_logs.py` | Wertet `llama.cpp`-Serverlogs aus: Prefill, Decode, Perzentile |
+| `scripts/record_gameplay.mjs` | Nimmt Spielszenen aus den ausgelieferten Builds auf |
+| `media/` | Aufnahmen, Screenshots, Prüfbild für die Bilderkennung |
 
-## Bauen
+Die Website, die diese Daten darstellt, liegt in einem eigenen, nicht öffentlichen Repository.
+
+## Logs selbst auswerten
 
 ```bash
-node build.mjs      # erzeugt dist/
-npm run serve       # baut und liefert auf http://127.0.0.1:4321
+python scripts/parse_logs.py     # Pfade im Skript anpassen
 ```
 
-Keine Abhängigkeiten, kein Framework. Node 20 oder neuer.
+Gemessen wird der Median über Antworten **ab 200 Tokens**. Der Filter ist notwendig: im
+Qwen3.6-Log stehen Einträge mit 1 000 000 t/s, weil dort ein einzelnes Token in ~0 ms
+erzeugt wurde.
 
 ---
+
+## Software-Stack
+
+Alle Läufe auf **llama.cpp mit dem Vulkan-Backend** — kein ROCm, keine BIOS-Änderung, keine
+vergrößerte Speicherreservierung. Der Server läuft im lokalen Netz und ist in **VS Code
+Copilot Chat als Custom Endpoint** hinterlegt.
+
+| | |
+|---|---|
+| Betriebssystem | Windows 11 Pro 10.0.26200 (beide Maschinen) |
+| Backend | Vulkan · SDK 1.4.350.0 (LunarG) |
+| Builds | `b10717`, `bd9bd1b` (TheTom-Fork), `b9985`, `580e88d` (qwen4exp), `04b2b72` (poolside) |
+| Anbindung | llama-server → VS Code Copilot Chat, Custom Endpoint |
 
 ## Der Prüfstand
 
@@ -109,6 +126,14 @@ Faktor 4,2. Ein Prompt mit 180 396 Tokens brauchte 16,6 Minuten bis zum ersten Z
 - [gemma4-turboquant-rdna4](https://github.com/KaiFelixBennett/gemma4-turboquant-rdna4) — Gemma-4-31B mit 256 K Kontext auf RDNA4
 - [RadeonForge](https://github.com/KaiFelixBennett/RadeonForge) — Fine-Tuning auf Radeon per QLoRA über ROCm
 - [llama-cpp-turboquant](https://github.com/KaiFelixBennett/llama-cpp-turboquant) — llama.cpp-Fork mit TurboQuant-KV-Cache
+
+## Zum Prüfbild der Bilderkennung
+
+Für die Bilderkennung dienen zwei eigene Bilder, die garantiert in keinem Trainingsdatensatz
+stecken. Nur das Dashboard-Prüfbild liegt hier. **Das zweite Prüfbild — ein Foto eines
+Messestands — ist bewusst nicht enthalten**, weil darauf Personen erkennbar sind und eine
+automatische Unkenntlichmachung an der Bildgröße dieser Gesichter scheitert. Es wird erst
+veröffentlicht, wenn die Gesichter von Hand unkenntlich gemacht sind.
 
 ## Lizenz
 
