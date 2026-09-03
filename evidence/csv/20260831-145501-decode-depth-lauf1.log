@@ -1,0 +1,28 @@
+﻿Lauf 1: Upstream b10717, q8_0/q8_0, Q6 gegen Q4
+Build: E:\Coding\llama-builds\b10717-win-vulkan-x64
+Gestartet: 2026-08-31 14:55:01Z
+
+
+### Q6_K_M - Decode
+-m "E:\Coding\custom-rag\data\models\qwen3.8-27b\Qwen3.8-27B-UD-Q6_K_M.gguf" -ngl 99 -fa 1 -ctk q8_0 -ctv q8_0 -b 2048 -ub 128 -d 0,32768,131072 -p 0 -n 64 -r 1 --no-warmup --progress -o csv
+load_backend: loaded RPC backend from E:\Coding\llama-builds\b10717-win-vulkan-x64\ggml-rpc.dll
+
+### UD-Q4_K_XL - Decode
+-m "E:\Coding\custom-rag\data\models\qwen3.8-27b\Qwen3.8-27B-UD-Q4_K_XL.gguf" -ngl 99 -fa 1 -ctk q8_0 -ctv q8_0 -b 2048 -ub 128 -d 0,32768,131072 -p 0 -n 64 -r 1 --no-warmup --progress -o csv
+load_backend: loaded RPC backend from E:\Coding\llama-builds\b10717-win-vulkan-x64\ggml-rpc.dll
+ggml_vulkan: Found 1 Vulkan devices:
+ggml_vulkan: 0 = AMD Radeon AI PRO R9700 (AMD proprietary driver) | uma: 0 | fp16: 1 | bf16: 1 | fp4: 0 | warp size: 64 | shared memory: 32768 | int dot: 1 | matrix cores: KHR_coopmat
+load_backend: loaded Vulkan backend from E:\Coding\llama-builds\b10717-win-vulkan-x64\ggml-vulkan.dll
+load_backend: loaded CPU backend from E:\Coding\llama-builds\b10717-win-vulkan-x64\ggml-cpu-alderlake.dll
+llama-bench: benchmark 1/3: starting
+llama-bench: benchmark 1/3: generation run 1/1
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,load_mode,lazy_mode,embeddings,no_op_offload,no_host,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"a32af33de","10717","Intel(R) Core(TM) Ultra 7 265KF","AMD Radeon AI PRO R9700","Vulkan","E:\Coding\custom-rag\data\models\qwen3.8-27b\Qwen3.8-27B-UD-Q4_K_XL.gguf","qwen35 27B Q4_K - Medium","17548181504","27320697856","2048","128","20","0x0","0","50","q8_0","q8_0","99","0","layer","0","0","1","auto","0.00","none","auto","auto","0","0","0","0","0","0","64","0","2026-08-31T12:55:12Z","3013110200","0","21.240511","0.000000"
+llama-bench: benchmark 2/3: starting
+llama-bench: benchmark 2/3: depth run 1/1
+llama-bench: benchmark 2/3: generation run 1/1
+"a32af33de","10717","Intel(R) Core(TM) Ultra 7 265KF","AMD Radeon AI PRO R9700","Vulkan","E:\Coding\custom-rag\data\models\qwen3.8-27b\Qwen3.8-27B-UD-Q4_K_XL.gguf","qwen35 27B Q4_K - Medium","17548181504","27320697856","2048","128","20","0x0","0","50","q8_0","q8_0","99","0","layer","0","0","1","auto","0.00","none","auto","auto","0","0","0","0","0","0","64","32768","2026-08-31T12:55:15Z","2482677600","0","25.778619","0.000000"
+llama-bench: benchmark 3/3: starting
+llama-bench: benchmark 3/3: depth run 1/1
+llama-bench: benchmark 3/3: generation run 1/1
+"a32af33de","10717","Intel(R) Core(TM) Ultra 7 265KF","AMD Radeon AI PRO R9700","Vulkan","E:\Coding\custom-rag\data\models\qwen3.8-27b\Qwen3.8-27B-UD-Q4_K_XL.gguf","qwen35 27B Q4_K - Medium","17548181504","27320697856","2048","128","20","0x0","0","50","q8_0","q8_0","99","0","layer","0","0","1","auto","0.00","none","auto","auto","0","0","0","0","0","0","64","131072","2026-08-31T12:56:21Z","2935526100","0","21.801884","0.000000"

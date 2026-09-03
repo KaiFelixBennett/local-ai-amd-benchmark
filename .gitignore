@@ -1,5 +1,10 @@
 node_modules/
 dist/
 *.log
+
+# Die Rohprotokolle unter evidence/ sind der Zweck dieses Repos und muessen
+# eingecheckt sein - sonst zeigen alle Belege auf der Seite ins Leere.
+!evidence/logs/*.log
+!evidence/csv/*.log
 .DS_Store
 Thumbs.db
