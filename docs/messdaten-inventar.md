@@ -39,8 +39,8 @@ echte Arbeit über viele Aufgaben statt `pp512`/`tg128` im Labor. Ausgewertet mi
 |---|---|---|---:|---:|---|---:|---:|---:|
 | Qwen3.8-27B UD-Q4_K_XL | R9700 | Moorhuhn | 108 | **34,36** t/s | 22,9–84,9 | 266,95 t/s | 336.107 | 162,1 min |
 | Qwen3.8-27B UD-Q6 | R9700 | Clair Obscure | 35 | **26,43** t/s | 13,9–42,4 | 167,98 t/s | 119.627 | 88,8 min |
-| Qwen3.8-Flash-Next UD-Q4_K_XL | Evo X2 | Clair Obscure | 106 | **10,98** t/s | 9,0–17,0 | 123,65 t/s | 238.371 | 337,8 min |
-| DeepSeek-V4-Flash-0731 UD-IQ3_XXS | Evo X2 | Clair Obscure | 152 | **6,32** t/s | 2,8–10,8 | 17,59 t/s | 158.469 | 328,8 min |
+| Qwen3.8-Flash-Next UD-Q4_K_XL | AI MAX 395 | Clair Obscure | 106 | **10,98** t/s | 9,0–17,0 | 123,65 t/s | 238.371 | 337,8 min |
+| DeepSeek-V4-Flash-0731 UD-IQ3_XXS | AI MAX 395 | Clair Obscure | 152 | **6,32** t/s | 2,8–10,8 | 17,59 t/s | 158.469 | 328,8 min |
 
 Zusammen **852.574 erzeugte Tokens** und rund **15,3 Stunden** reine Generierzeit.
 
@@ -189,3 +189,22 @@ Gemeinsame Flags der Halo-Läufe: `-ngl 999 -fa on -b 2048 -ub 512`, KV `q8_0`,
 (`pp512`, `tg128`, Tiefensweeps), die R9700-Zahlen aus einem *echten Agentenlauf* über 35
 Aufgaben. Das ist nicht dasselbe und darf auf der Seite nicht stillschweigend nebeneinander
 stehen — entweder als getrennte Messarten kennzeichnen oder eine gemeinsame Messart nachholen.
+
+## Nachtrag 03.09.2026 — Belegpflicht
+
+Ab diesem Stand gilt: **keine Zahl ohne Rohdatei.** Alle Serverprotokolle und
+Messtabellen liegen unter `logs/` im Repo, `scripts/verify_runs.py` rechnet jeden
+veroeffentlichten Wert daraus nach.
+
+Was sich dabei geaendert hat:
+
+| Lauf | vorher | jetzt | Grund |
+|---|---|---|---|
+| Qwen3.8-Flash-Next · Moorhuhn | 23,84 t/s aus 42 Antworten | **21,82 t/s aus 98** | Die Sitzung lief weiter. Der alte Wert war ein Zwischenstand. |
+| Qwen3.8-Flash-Next · Clair Obscure | nur als Vergleichszahl im Text | **eigener Lauf, 10,93 t/s aus 92** | Das Protokoll lag vor, war aber nicht als Lauf gefuehrt. |
+| Qwen3.8-27B Q6 · Clair Obscure | 26,3 t/s, Beleg unauffindbar | **26,30 t/s aus der Messtabelle** | Quelle war eine CSV des Produktionslaufs, nicht das Serverprotokoll. |
+| DeepSeek-V4-Flash | p10 5,0 / p90 9,75 | **4,85 / 9,89** | Perzentile jetzt einheitlich nach Rangplatz statt interpoliert. |
+| Qwen3.6-27B · Clair Obscure | — | **bleibt ohne Geschwindigkeit** | Kein Protokoll erhalten. Das Artefakt gibt es, die Messung nicht. |
+
+Zwei Regeln bestimmen jede Zahl: Antworten ab 200 Tokens (kuerzere erzeugen
+Ausreisser bis 1 000 000 t/s), Perzentile nach Rangplatz ohne Interpolation.

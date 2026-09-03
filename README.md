@@ -8,14 +8,14 @@
 </p>
 
 <p>
-  Six models. Two AMD machines. <b>876,738 tokens</b> of unattended agentic work.<br>
-  Every speed number in this repository was parsed out of a <code>llama.cpp</code> server log.
+  Seven models. Two AMD machines. <b>1,299,666 tokens</b> of unattended agentic work.<br>
+  Every speed number in this repository is reproducible from a raw log in <code>logs/</code>.
 </p>
 
 <p>
-  <img alt="5 evaluated agent runs" src="https://img.shields.io/badge/agent_runs-5_evaluated-1c9ab8?style=flat-square">
-  <img alt="473 logged responses" src="https://img.shields.io/badge/logged_responses-473-1c9ab8?style=flat-square">
-  <img alt="876,738 tokens generated" src="https://img.shields.io/badge/tokens_generated-876%2C738-cb7815?style=flat-square">
+  <img alt="6 evaluated agent runs" src="https://img.shields.io/badge/agent_runs-6_evaluated-1c9ab8?style=flat-square">
+  <img alt="621 logged responses" src="https://img.shields.io/badge/logged_responses-621-1c9ab8?style=flat-square">
+  <img alt="1,299,666 tokens generated" src="https://img.shields.io/badge/tokens_generated-1%2C299%2C666-cb7815?style=flat-square">
   <img alt="11.9 hours of agent time" src="https://img.shields.io/badge/agent_time-11.9_h-cb7815?style=flat-square">
   <br>
   <img alt="Backend llama.cpp Vulkan" src="https://img.shields.io/badge/backend-llama.cpp%20%C2%B7%20Vulkan-141130?style=flat-square">
@@ -32,6 +32,7 @@
   <a href="#context-depth-is-the-number-that-matters">Depth</a> ·
   <a href="#the-two-benches">Benches</a> ·
   <a href="#how-this-is-measured">Method</a> ·
+  <a href="#verify-every-number-yourself">Verify</a> ·
   <a href="#the-data">Data</a>
 </p>
 
@@ -83,8 +84,9 @@ server log. The floor matters: without it the Qwen3.6 log contributes entries re
 | **Qwen3.8-27B** | UD-Q4_K_XL | R9700 | Moorhuhn | 82 | **33.69** t/s | `████████████` | 27.8 – 45.3 | 84.9 | 332,405 | 160 min |
 | **Qwen3.6-27B** | UD-Q6_K_XL | R9700 | Moorhuhn | 221 | **33.45** t/s | `████████████` | 29.0 – 38.3 | 41.4 | 175,743 | 88 min |
 | **Qwen3.8-27B** | UD-Q6_K_M | R9700 | Clair Obscur | 30 | **26.30** t/s | `█████████▌` | 17.8 – 34.3 | 42.4 | 118,919 | 88 min |
-| **Qwen3.8-Flash-Next** | UD-Q4_K_XL | Evo X2 | Moorhuhn | 42 | **23.84** t/s | `████████▌` | 18.9 – 27.4 | 33.9 | 98,871 | 75 min |
-| **DeepSeek-V4-Flash-0731** | UD-IQ3_XXS | Evo X2 | Clair Obscur | 98 | **7.02** t/s | `██▌` | 5.0 – 9.8 | 10.8 | 150,800 | 303 min |
+| **Qwen3.8-Flash-Next** | UD-Q4_K_XL | AI MAX 395 | Moorhuhn | 98 | **21.82** t/s | `███████▌` | 17.2 – 26.7 | 33.9 | 285,339 | 240 min |
+| **Qwen3.8-Flash-Next** | UD-Q4_K_XL | AI MAX 395 | Clair Obscur | 92 | **10.93** t/s | `████` | 9.7 – 13.9 | 17.0 | 236,460 | — |
+| **DeepSeek-V4-Flash-0731** | UD-IQ3_XXS | AI MAX 395 | Clair Obscur | 98 | **7.02** t/s | `██▌` | 5.0 – 9.8 | 10.8 | 150,800 | 303 min |
 
 <sub><b>Moorhuhn</b> — a 2D arcade shooter; the German equivalent of "build Flappy Bird from
 scratch". <b>Clair Obscur</b> — a 3D action-RPG scene with a renderer, combat and dialogue. Both
@@ -95,8 +97,8 @@ purpose:
 
 | Model | Quant | Bench | Prefill (pp512) | Decode (tuned) | Draft acceptance |
 |---|---|---|--:|--:|--:|
-| Qwen3.5-122B-A10B | UD-Q4_K_XL | Evo X2 | 245.7 t/s | 31.80 t/s | **0.866** |
-| Laguna S 2.1 · 118B-A8B | Q4_K_M | Evo X2 | 309.6 t/s | 27.90 t/s | 0.53 |
+| Qwen3.5-122B-A10B | UD-Q4_K_XL | AI MAX 395 | 245.7 t/s | 31.80 t/s | **0.866** |
+| Laguna S 2.1 · 118B-A8B | Q4_K_M | AI MAX 395 | 309.6 t/s | 27.90 t/s | 0.53 |
 
 > [!WARNING]
 > **Do not sort those two tables together.** Where both measurement styles exist for the same
@@ -243,7 +245,7 @@ Two thirds of your throughput is gone by the time an agent has finished reading 
 <table>
 <tr>
 <th width="50%">Radeon AI PRO R9700</th>
-<th width="50%">Ecotech Evo X2 · Ryzen AI Max+ 395</th>
+<th width="50%">AMD AI MAX 395 (AMD Halo) · Ecotech Evo X2</th>
 </tr>
 <tr valign="top">
 <td>
@@ -330,7 +332,8 @@ flowchart LR
   L -- "tokens" --> V
   L --> G["llama.cpp server log"]
   V --> B["Shipped dist/ build"]
-  G --> S["parse_logs.py<br/>filter ≥ 200 tokens"]
+  G --> C["logs/ · raw, unedited"]
+  C --> S["verify_runs.py<br/>filter ≥ 200 tokens"]
   S --> J["data/runs.json"]
   B --> R["record_gameplay.mjs"]
   R --> M["media/"]
@@ -397,6 +400,43 @@ configuration that produced it can never drift apart:
 }
 ```
 
+### Verify every number yourself
+
+Every speed figure on [benchmark.securesight.ai](https://benchmark.securesight.ai) and in
+`data/runs.json` comes from a file in [`logs/`](logs/) — the unedited `llama.cpp` server logs
+and measurement tables, about 2.8 MB in total. Nothing is estimated, extrapolated, or quoted
+from someone else's page.
+
+```bash
+git clone https://github.com/KaiFelixBennett/local-ai-amd-benchmark
+cd local-ai-amd-benchmark
+python -X utf8 scripts/verify_runs.py
+```
+
+The script recomputes every published value from its raw log and reports any deviation.
+It currently reports **0 deviations**. Two rules decide every number:
+
+| Rule | Why |
+|---|---|
+| Only responses of **≥ 200 tokens** count | Shorter ones produce outliers up to 1,000,000 t/s — one token in near-zero milliseconds. That is a rounding artifact, not a measurement. |
+| Percentiles by **nearest rank**, not interpolated | p10 is the value at position `floor(0.10 × n)` of the sorted list. No value appears that was not measured. |
+
+| Run | Evidence | Responses used |
+|---|---|---|
+| Qwen3.8-27B UD-Q4_K_XL · Moorhuhn · R9700 | [`logs/qwen38-27b-q4xl-moorhuhn-r9700.log`](logs/qwen38-27b-q4xl-moorhuhn-r9700.log) | 82 |
+| Qwen3.6-27B UD-Q6 · Moorhuhn · R9700 | [`logs/qwen36-27b-q6-moorhuhn-r9700.log`](logs/qwen36-27b-q6-moorhuhn-r9700.log) | 221 |
+| Qwen3.8-27B UD-Q6 · Clair Obscure · R9700 | [`logs/qwen38-27b-q6-clairobscure-r9700.csv`](logs/qwen38-27b-q6-clairobscure-r9700.csv) | 30 of 35 |
+| Qwen3.8-Flash-Next · Moorhuhn · AI MAX 395 | [`logs/qwen38-flashnext-moorhuhn-aimax395.log`](logs/qwen38-flashnext-moorhuhn-aimax395.log) | 98 of 115 |
+| Qwen3.8-Flash-Next · Clair Obscure · AI MAX 395 | [`logs/qwen38-flashnext-clairobscure-aimax395.log`](logs/qwen38-flashnext-clairobscure-aimax395.log) | 92 of 106 |
+| DeepSeek-V4-Flash-0731 · Clair Obscure · AI MAX 395 | [`logs/deepseek-v4-flash-clairobscure-aimax395.log`](logs/deepseek-v4-flash-clairobscure-aimax395.log) | 98 |
+| Laguna S 2.1 · AI MAX 395 | [`logs/laguna-s21-aimax395-messreihe.md`](logs/laguna-s21-aimax395-messreihe.md) | pp512 / tg128 series |
+| Qwen3.5-122B-A10B · AI MAX 395 | [`logs/qwen35-122b-a10b-aimax395-messreihe.md`](logs/qwen35-122b-a10b-aimax395-messreihe.md) | pp512 / tg128 series |
+
+**Where there is no measurement, there is no number.** The Qwen3.6-27B Clair Obscure run and
+the three cloud models carry no speed figure at all — the artifacts exist, the log does not.
+
+---
+
 ### Run the parser yourself
 
 ```bash
@@ -425,7 +465,7 @@ Stated plainly, because a benchmark that hides its gaps is marketing.
 | **Energy measurement** | both benches | Wh per 1,000 tokens is the strongest figure against a cloud API — and it is missing. Needs a wall meter or `amdsmi` sampling. |
 | **Cloud reference runs** | Opus 5, GPT 5.6, Sonnet 5 | Prompts exist; the runs are outstanding. |
 | **One identical quant on both machines** | hardware comparison | Without it there is no true head-to-head, only two separate lists. |
-| **Prefill for DeepSeek-V4-Flash** | Evo X2 | Open. |
+| **Prefill for DeepSeek-V4-Flash** | AI MAX 395 | Open. |
 | **Vision reference image B** | vision benchmark | Withheld until the faces are redacted by hand. |
 | **Sixth agent run** | Qwen3.6-27B · Clair Obscur | Artifact shipped, log not yet parsed. |
 

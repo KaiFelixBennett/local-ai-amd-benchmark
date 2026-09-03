@@ -9,13 +9,13 @@
   "decode": {
    "median": 33.69,
    "p10": 27.83,
-   "p90": 45.31,
+   "p90": 45.34,
    "peak": 84.92,
    "n": 82
   },
   "prefill": {
-   "median": 266.9,
-   "max": 499.5
+   "median": 241.47,
+   "max": 499.49
   },
   "tokens": 332405,
   "minutes": 160,
@@ -66,6 +66,14 @@
    ],
    "unit": "t/s",
    "label": "Prefill über Kontexttiefe"
+  },
+  "evidence": {
+   "log": "logs/qwen38-27b-q4xl-moorhuhn-r9700.log",
+   "sha256": "8c8d3460492763d102d026adb4f0941f2647c846ad404119adc8eb2d3dff0a40",
+   "bytes": 531494,
+   "antworten_gesamt": 108,
+   "gewertet": 82,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   }
  },
  {
@@ -83,8 +91,8 @@
    "n": 221
   },
   "prefill": {
-   "median": 210.0,
-   "max": 423.6
+   "median": 174.92,
+   "max": 423.64
   },
   "tokens": 175743,
   "minutes": 88,
@@ -102,7 +110,15 @@
   },
   "source": "llama.cpp-Serverlog · 221 Antworten ab 200 Tokens",
   "note": "Im Projektordner liegen 15 Reparaturskripte (fix_hit.cjs, fix_coords_final.cjs …) — so oft musste das Modell den Trefferbereich nachbessern.",
-  "depth": null
+  "depth": null,
+  "evidence": {
+   "log": "logs/qwen36-27b-q6-moorhuhn-r9700.log",
+   "sha256": "07f278fedcb8bc130cc393a05647156d7fa83e2e356024df70f670d956b3627d",
+   "bytes": 691613,
+   "antworten_gesamt": 409,
+   "gewertet": 221,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
+  }
  },
  {
   "slug": "qwen38-flashnext-moorhuhn-evox2",
@@ -112,17 +128,17 @@
   "task": "Moorhuhn",
   "kind": "agent",
   "decode": {
-   "median": 23.84,
-   "p10": 18.93,
-   "p90": 27.38,
+   "median": 21.82,
+   "p10": 17.15,
+   "p90": 26.72,
    "peak": 33.89,
-   "n": 42
+   "n": 98
   },
   "prefill": {
-   "median": 117.2,
-   "max": 184.8
+   "median": 105.76,
+   "max": 184.76
   },
-  "tokens": 98871,
+  "tokens": 285339,
   "minutes": 75,
   "fixes": null,
   "quality": 16,
@@ -177,7 +193,57 @@
    ],
    "unit": "t/s",
    "label": "Decode über Kontexttiefe (Vorgängerfassung)"
+  },
+  "evidence": {
+   "log": "logs/qwen38-flashnext-moorhuhn-aimax395.log",
+   "sha256": "23cd83c01ad4d54d0dc5d02386f00970e442daf207116142723f6f20645f3700",
+   "bytes": 699768,
+   "antworten_gesamt": 115,
+   "gewertet": 98,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   }
+ },
+ {
+  "slug": "qwen38-flashnext-clairobscure-evox2",
+  "model": "Qwen3.8-Flash-Next",
+  "quant": "UD-Q4_K_XL",
+  "hw": "evox2",
+  "task": "Clair Obscure",
+  "kind": "agent",
+  "decode": {
+   "median": 10.93,
+   "p10": 9.7,
+   "p90": 13.85,
+   "peak": 17.01,
+   "n": 92
+  },
+  "prefill": {
+   "median": 112.33,
+   "max": 197.12
+  },
+  "tokens": 236460,
+  "minutes": null,
+  "fixes": null,
+  "quality": 16,
+  "spec": "draft-mtp · 177 Mrd. gesamt, ~6 Mrd. aktiv",
+  "build": "580e88d",
+  "ctx": 262144,
+  "kv": "q8_0 / q8_0",
+  "ub": 512,
+  "cmd": "llama-server -m Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf ^\n  --mmproj mmproj-F16.gguf --alias qwen3.8-flash-next ^\n  --host 127.0.0.1 --port 8099 --device Vulkan0 ^\n  --gpu-layers all --n-cpu-moe 0 --fit off -fa on ^\n  --load-mode mmap --lazy-mode on ^\n  --ctx-size 262144 --parallel 1 --kv-unified ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --ctx-checkpoints 4 --checkpoint-min-step 4096 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-effort xhigh",
+  "media": null,
+  "source": "llama.cpp-Serverlog · 92 von 106 Antworten ab 200 Tokens · Lauf vom August 2026",
+  "note": "Die ältere Unsloth-Fassung. Sie ist der Vergleichspunkt für den Lauf vom September.",
+  "depth": null,
+  "evidence": {
+   "log": "logs/qwen38-flashnext-clairobscure-aimax395.log",
+   "sha256": "35885e4476e8528fe7bc5bd1ec8512b2ec3fac24f397032c5c4ed57a3f2a4164",
+   "bytes": 831682,
+   "antworten_gesamt": 106,
+   "gewertet": 92,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
+  },
+  "draft": null
  },
  {
   "slug": "qwen38-27b-q6-clairobscure-r9700",
@@ -188,14 +254,14 @@
   "kind": "agent",
   "decode": {
    "median": 26.3,
-   "p10": 17.78,
-   "p90": 34.33,
+   "p10": 18.03,
+   "p90": 35.31,
    "peak": 42.39,
    "n": 30
   },
   "prefill": {
-   "median": 168.0,
-   "max": 350.8
+   "median": 159.41,
+   "max": 350.83
   },
   "tokens": 118919,
   "minutes": 88,
@@ -211,7 +277,7 @@
    "video": "hero.webm",
    "poster": "hero.jpg"
   },
-  "source": "llama.cpp-Serverlog · 30 Antworten ab 200 Tokens",
+  "source": "Artefakt vorhanden, Serverprotokoll nicht erhalten.",
   "note": null,
   "depth": {
    "kind": "prefill",
@@ -247,6 +313,14 @@
    ],
    "unit": "t/s",
    "label": "Prefill über Kontexttiefe"
+  },
+  "evidence": {
+   "log": "logs/qwen38-27b-q6-clairobscure-r9700.csv",
+   "sha256": "00918c458d1270c693a0a0019186a06aed40bb1e07d1f85105c4d66f5e73a048",
+   "bytes": 2520,
+   "antworten_gesamt": 35,
+   "gewertet": 30,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   }
  },
  {
@@ -308,7 +382,13 @@
   "media": null,
   "source": "Synthetisch: pp512 / tg128, Messreihe vom 23.07.2026",
   "note": "124,64 Mrd. gesamt, ~10 Mrd. aktiv, 73,23 GiB Gewichte. KV 98 KiB/Token bei f16, 52 KiB bei q8_0.",
-  "depth": null
+  "depth": null,
+  "evidence": {
+   "log": "logs/qwen35-122b-a10b-aimax395-messreihe.md",
+   "sha256": "d59ae98ca17abc746324fa064da263db71a4b15cba4731a329d9fccc8786879a",
+   "bytes": 24322,
+   "regel": "Messreihe pp512/tg128 vom 23.07.2026, mit Rohwerten und Startkonfiguration"
+  }
  },
  {
   "slug": "laguna-s21-evox2",
@@ -341,7 +421,13 @@
   "media": null,
   "source": "Synthetisch: pp512 / tg128, Messreihe vom 22.07.2026",
   "note": "118B-A8B MoE, 70,01 GiB Gewichte. Ohne Spekulation 20,55 t/s; mit der dokumentierten Entwurfstiefe 15 nur 8,1 t/s.",
-  "depth": null
+  "depth": null,
+  "evidence": {
+   "log": "logs/laguna-s21-aimax395-messreihe.md",
+   "sha256": "ec4e2f141997091310dd874db3f255659930033f302295156806887c536d9921",
+   "bytes": 50578,
+   "regel": "Messreihe pp512/tg128 vom 22.07.2026, mit Rohwerten und Startkonfiguration"
+  }
  },
  {
   "slug": "deepseek-v4-flash-clairobscure-evox2",
@@ -352,14 +438,14 @@
   "kind": "agent",
   "decode": {
    "median": 7.02,
-   "p10": 5.0,
-   "p90": 9.75,
+   "p10": 4.85,
+   "p90": 9.89,
    "peak": 10.83,
    "n": 98
   },
   "prefill": {
-   "median": 17.6,
-   "max": 40.9
+   "median": 17.5,
+   "max": 40.91
   },
   "tokens": 150800,
   "minutes": 303,
@@ -374,7 +460,15 @@
   "media": null,
   "source": "llama.cpp-Serverlog · 98 Antworten ab 200 Tokens",
   "note": "Größenlabel 256×8.4B, vier Shards, rund 99 GB. Der langsamste Lauf im Feld — dafür das größte Modell.",
-  "depth": null
+  "depth": null,
+  "evidence": {
+   "log": "logs/deepseek-v4-flash-clairobscure-aimax395.log",
+   "sha256": "04ef4d4fdf85bb2a199b6576864a40761b90a2eff3e2a25906851592e5048a96",
+   "bytes": 738270,
+   "antworten_gesamt": 152,
+   "gewertet": 98,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
+  }
  },
  {
   "slug": "opus5-ultracode",
@@ -398,7 +492,11 @@
   "media": null,
   "source": null,
   "note": "Lauf steht aus; nur der Prompt liegt vor.",
-  "depth": null
+  "depth": null,
+  "evidence": {
+   "log": null,
+   "regel": "Cloud-Referenz. Die Geschwindigkeit haengt an fremder Auslastung und wird hier bewusst nicht als Messwert gefuehrt."
+  }
  },
  {
   "slug": "gpt56-sol",
@@ -422,7 +520,11 @@
   "media": null,
   "source": null,
   "note": "Lauf steht aus.",
-  "depth": null
+  "depth": null,
+  "evidence": {
+   "log": null,
+   "regel": "Cloud-Referenz. Die Geschwindigkeit haengt an fremder Auslastung und wird hier bewusst nicht als Messwert gefuehrt."
+  }
  },
  {
   "slug": "sonnet5",
@@ -449,6 +551,10 @@
   "media": null,
   "source": "Cloud-Referenz. Das Artefakt liegt vor, die Geschwindigkeit ist nicht vergleichbar gemessen.",
   "note": null,
-  "depth": null
+  "depth": null,
+  "evidence": {
+   "log": null,
+   "regel": "Cloud-Referenz. Die Geschwindigkeit haengt an fremder Auslastung und wird hier bewusst nicht als Messwert gefuehrt."
+  }
  }
 ]
