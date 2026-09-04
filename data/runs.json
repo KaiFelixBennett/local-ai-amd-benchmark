@@ -237,8 +237,8 @@
   "datum": "2026-09-04",
   "fehler": [
    "Im Ladebildschirm steht „Featherstorm wordt geladen“ — Niederländisch statt Deutsch. Genau eine Stelle im ganzen Spiel; der Rest ist durchgehend deutsch.",
-   "Das Spiel rendert auf ein 1280×720-Canvas. Auf einem 390 Pixel breiten Telefon wird es auf 390×219 herunterskaliert — spielbar, aber die Zielscheiben sind klein.",
-   "Der Lauf brauchte drei Sitzungen (20, 376 und 419 Minuten). Zwischen den Sitzungen ging der Kontext verloren und musste neu aufgebaut werden."
+   "Der Lauf brauchte drei Sitzungen (20, 376 und 419 Minuten). Zwischen den Sitzungen ging der Kontext verloren und musste neu aufgebaut werden.",
+   "Das Menü ist rund 700 Pixel hoch und wird bei jeder Fensterhöhe unter 720 Pixeln abgeschnitten — der letzte Eintrag „Credits“ ist dann unerreichbar, weil html und body auf overflow:hidden stehen. Gemessen bei 1000×562, 800×450, 640×360 und 390×219."
   ]
  },
  {
