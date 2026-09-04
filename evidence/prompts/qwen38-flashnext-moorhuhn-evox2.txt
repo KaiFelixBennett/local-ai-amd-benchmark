@@ -1,0 +1,716 @@
+# Auftrag: Entwickle ein umfangreiches Moorhuhn-inspiriertes Arcade-Shooter-Spiel
+
+Du bist ein autonom arbeitender Senior Game Developer, Game Designer, UI/UX-Designer und Technical Artist. Entwickle in diesem Repository ein vollständig spielbares, visuell beeindruckendes und technisch sauberes 2D-Arcade-Shooter-Spiel für den Browser.
+
+Das Spiel soll das unmittelbare Spielgefühl eines klassischen Moorhuhn-artigen Schießbuden-Arcadespiels einfangen, aber eine eigenständige moderne Interpretation darstellen. Verwende ausschließlich eigene Namen, Figuren, Grafiken, Sounds, Levelkompositionen und Texte. Kopiere keine geschützten Original-Assets, Logos, Musikstücke, Sounds, Karten oder exakten Figuren.
+
+Der vorläufige Spieltitel lautet:
+
+**Moorland Mayhem – Featherstorm**
+
+## Zentrales Ziel
+
+Erschaffe kein Demo-Gerüst und keinen bloßen Prototyp, sondern ein rundes, umfangreiches Spiel, das man sofort starten und mehrere Runden lang mit Freude spielen kann.
+
+Das Ergebnis soll insbesondere überzeugen durch:
+
+* sehr direktes und präzises Schießgefühl
+* hochwertige, humorvolle Cartoon-Präsentation
+* zahlreiche unterschiedliche Ziele und Ereignisse
+* motivierendes Punkte-, Combo- und Fortschrittssystem
+* mehrere Spielmodi und Schauplätze
+* flüssige Animationen und starke audiovisuelle Rückmeldung
+* vollständige Menüs, Einstellungen, Statistiken und Highscores
+* saubere, wartbare und erweiterbare Architektur
+* hohe technische und visuelle Qualität
+
+## Technischer Rahmen
+
+Falls noch kein geeigneter Stack existiert, verwende:
+
+* Vite
+* TypeScript mit aktiviertem Strict Mode
+* Phaser 3
+* HTML/CSS für Menüs und HUD-Overlays, sofern dies sinnvoller als eine reine Canvas-Lösung ist
+* Vitest für Logiktests
+* ESLint und Prettier
+* LocalStorage für Einstellungen, Fortschritt, Statistiken und Highscores
+* Web Audio API beziehungsweise Phaser Audio
+* keine notwendige Backend-Abhängigkeit
+* keine externen Assets, die zur Laufzeit aus dem Internet geladen werden müssen
+
+Das Spiel muss mit folgenden Befehlen funktionieren:
+
+```bash
+npm install
+npm run dev
+npm run build
+npm run test
+```
+
+Falls bereits ein Projekt vorhanden ist, analysiere zuerst dessen Architektur und integriere die Umsetzung sinnvoll, anstatt unnötig alles zu ersetzen.
+
+## Zielplattform
+
+Primär:
+
+* Desktop-Browser
+* Maussteuerung
+* 16:9-Darstellung
+* Fullscreen-Unterstützung
+* Chrome, Edge und Firefox
+
+Zusätzlich:
+
+* sinnvoll skalierbar auf kleineren Displays
+* optionale Touch-Unterstützung
+* optional spielbar mit Gamepad
+* Layout darf bei anderen Seitenverhältnissen nicht auseinanderbrechen
+
+Ziel sind stabile 60 FPS auf einem durchschnittlichen modernen Rechner.
+
+## Grundlegender Spielablauf
+
+Eine Standardrunde dauert ungefähr 120 Sekunden und besteht aus mehreren zunehmend hektischen Phasen.
+
+Der Spieler bewegt ein animiertes Fadenkreuz mit der Maus und schießt per Linksklick auf vorbeifliegende oder in der Umgebung versteckte Ziele.
+
+Die Waffe besitzt:
+
+* ein Magazin mit sechs Schuss
+* deutlich sichtbare Munitionsanzeige
+* kurze, befriedigende Schussanimation
+* Rückstoß
+* Mündungsfeuer
+* Rauchpartikel
+* Sound-Layer für Schuss, Mechanik und Umgebungshall
+* Nachladefunktion über rechte Maustaste oder `R`
+* automatisches Nachladen bei leerem Magazin
+* abbrechbares oder taktisch bewusst ausgelöstes Nachladen
+* klar unterscheidbare Zustände für schussbereit, leer und nachladend
+
+Ein Schuss muss sich unmittelbar und kraftvoll anfühlen. Verwende dafür passend dosiert:
+
+* kurze Kamerabewegung beziehungsweise Screenshake
+* Fadenkreuz-Impuls
+* Mündungsblitz
+* Partikel
+* Trefferblitz
+* Hitmarker
+* schwebende Punkteanzeige
+* Combo-Feedback
+* kurze Soundvariationen
+* optional minimale Zeitlupe bei besonders wertvollen Treffern
+
+Das Spiel bleibt gewaltfrei-cartoonhaft. Keine realistische Gewaltdarstellung und kein Blut.
+
+## Zieltypen
+
+Implementiere mindestens folgende eigenständige Zielarten:
+
+1. **Moorflatterer**
+
+   Häufig, relativ langsam und leicht zu treffen.
+
+2. **Schnellfeder**
+
+   Klein, sehr schnell und mit abrupten Richtungswechseln.
+
+3. **Korkenzieher**
+
+   Fliegt in Wellen, Spiralen oder Schleifen.
+
+4. **Panzerpelz**
+
+   Trägt improvisierte Cartoon-Rüstung und benötigt mehrere Treffer. Die Rüstung muss sichtbar reagieren und stufenweise zerbrechen.
+
+5. **Goldschnabel**
+
+   Seltenes Bonusziel mit auffälligem Schimmer, besonderem Sound und hoher Punktzahl.
+
+6. **Nebelflüsterer**
+
+   Wird teilweise vom Nebel verdeckt und ist nur kurz klar sichtbar.
+
+7. **Täuscher**
+
+   Verhält sich zunächst wie ein wertvolles Ziel, verursacht bei einem Treffer aber einen Nachteil oder löst ein humorvolles Ereignis aus.
+
+8. **Schwarmvögel**
+
+   Treten als Formation auf. Mehrere schnelle Treffer lösen einen Schwarmbonus aus.
+
+9. **Kurvensegler**
+
+   Fliegt stark im Vorder- und Hintergrund und verändert dadurch Größe, Geschwindigkeit und Punktwert.
+
+10. **Sturmvogel**
+
+    Wird nur während eines Wetterereignisses aktiv und bewegt sich stark mit dem Wind.
+
+Jede Zielart benötigt:
+
+* eigenes Erscheinungsbild
+* eigene Silhouette
+* eigene Animationen
+* charakteristisches Bewegungsmuster
+* definierte Spawnregeln
+* eigene Sounds oder Soundvarianten
+* individuelle Punktewerte
+* unterschiedliche Hitboxen
+* mindestens eine humorvolle Reaktion
+* konfigurierbare Parameter statt hart codierter Einzelwerte
+
+## Bewegungs- und Spawn-System
+
+Entwickle ein datengetriebenes Spawn- und Flugbahnsystem.
+
+Unterstützte Flugbahnen sollen unter anderem sein:
+
+* gerade Linien
+* Bézierkurven
+* Sinus- und Wellenbewegungen
+* Spiralen
+* Sturzflüge
+* Richtungswechsel
+* kurze Stopps in der Luft
+* Fluchtbewegungen nach einem Fehlschuss
+* Formationsflug
+* Vordergrund-/Hintergrundwechsel
+* Eintritt und Austritt an allen Bildschirmrändern
+
+Verwende einen Seed-basierten Zufallsgenerator. Ein Daily-Challenge-Seed muss reproduzierbare Runden ermöglichen.
+
+Implementiere einen Difficulty Director, der während der Runde dynamisch reagiert auf:
+
+* Trefferquote
+* aktuelle Combo
+* Reaktionszeit
+* verbleibende Zeit
+* Zahl der Fehlschüsse
+* bisherige Punktzahl
+
+Er soll gute Spieler stärker fordern, ohne neue Spieler unfair zu überfordern. Die Anpassung muss begrenzt und nachvollziehbar sein.
+
+## Treffer- und Punktesystem
+
+Berechne Punkte aus mehreren Faktoren:
+
+* Basiswert des Ziels
+* Zielgeschwindigkeit
+* Entfernung beziehungsweise scheinbare Tiefe
+* Zielgröße
+* Präzision innerhalb der Hitbox
+* aktuelle Combo
+* Trefferfolge
+* verbleibende Zeit
+* aktiver Eventmultiplikator
+* Schwarm- oder Trickshot-Bonus
+
+Präzise Treffer im inneren Trefferbereich zählen als **Perfect Hit** und erhalten zusätzliches Feedback.
+
+Implementiere mindestens:
+
+* Combo-Zähler
+* Combo-Multiplikator
+* langsam auslaufendes Combo-Zeitfenster
+* Streak-Boni
+* Perfect-Hit-Serie
+* Multikill-Bonus
+* Schwarmbonus
+* Treffer ohne Fehlschuss
+* Longshot-Bonus
+* Trickshot-Bonus für besondere Umgebungskombinationen
+* sichtbare Punkteaufschlüsselung bei bedeutenden Treffern
+
+Fehlschüsse sollen die Combo beschädigen oder beenden. Sie dürfen sich jedoch nicht so hart auswirken, dass ein einzelner Fehler eine ganze Runde wertlos macht.
+
+Am Rundenende zeige eine verständliche Ergebnisberechnung mit:
+
+* Gesamtpunktzahl
+* Treffern
+* Fehlschüssen
+* abgegebenen Schüssen
+* Trefferquote
+* Perfect Hits
+* höchster Combo
+* wertvollstem Treffer
+* Reaktionszeit
+* getroffenen Zielarten
+* Eventboni
+* persönlichem Rekord
+* Rangbewertung von D bis SSS
+* Vergleich mit dem bisherigen Bestwert
+
+## Interaktive Umgebung
+
+Die Karte darf nicht nur Hintergrund sein. Implementiere zahlreiche anklick- oder beschießbare Objekte, beispielsweise:
+
+* klapperndes Windrad
+* alte Laternen
+* Dosen auf einem Zaun
+* morsches Schild
+* Glocke
+* Vogelscheuche
+* Kürbisse
+* Pilze mit Sporenwolke
+* Wasserflächen mit Spritzern
+* hängende Eimer
+* Baumhöhlen
+* Schilfbündel
+* verlassener Wagen
+* Wetterfahne
+* versteckte Flaschen
+* Glühwürmchen
+* kleine Geisterlichter
+
+Umgebungsobjekte können:
+
+* Punkte geben
+* Kettenreaktionen auslösen
+* versteckte Ziele erscheinen lassen
+* kurzfristig die Zeit verlangsamen
+* Bonuszeit gewähren
+* einen Punktemultiplikator starten
+* Tiere erschrecken
+* Flugbahnen beeinflussen
+* geheime Erfolge freischalten
+* rein humorvolle Animationen auslösen
+
+Baue mindestens fünf echte Kettenreaktionen ein. Beispiel: Ein Treffer auf ein Seil lässt einen Eimer fallen, der eine Glocke trifft, wodurch ein seltener Schwarm erscheint.
+
+## Rundenstruktur und Ereignisse
+
+Eine Standardrunde soll dramaturgisch aufgebaut sein:
+
+* ruhiger Einstieg
+* erste Beschleunigung
+* besonderes Zwischenereignis
+* kurze Erholungsphase
+* intensive Schlussphase
+* spektakuläres Finale
+
+Mögliche dynamische Ereignisse:
+
+* dichter Nebel
+* starker Seitenwind
+* Gewitter
+* goldener Schwarm
+* Vollmondphase
+* Massenstart aus dem Schilf
+* Bonusballons
+* wandernde Regenfront
+* Froschkonzert
+* Glühwürmchen-Nacht
+* Zeitriss mit kurzer Zeitlupe
+* Mini-Boss-Auftritt
+* chaotischer „Featherstorm“
+
+Ereignisse müssen sichtbar angekündigt werden und Spielmechanik, Farben, Soundscape oder Flugverhalten verändern.
+
+## Mini-Bosse
+
+Implementiere mindestens drei seltene Mini-Bosse:
+
+* einen großen gepanzerten Moorvogel
+* einen extrem schnellen Akrobatikvogel
+* einen geheimnisvollen Nachtvogel mit Illusionen
+
+Mini-Bosse benötigen:
+
+* mehrere Phasen
+* klar erkennbare Trefferreaktionen
+* eigene Bewegungsmuster
+* besondere Soundkulisse
+* sichtbare Lebens- oder Rüstungsanzeige
+* hochwertige Belohnung
+* keine unfairen oder unvermeidbaren Angriffe
+* eine kurze spektakuläre Einführung
+* ein befriedigendes Abschlussereignis
+
+## Spielmodi
+
+Implementiere mindestens diese Modi:
+
+### Classic Hunt
+
+120 Sekunden, ausgewogene Standardrunde mit dynamischem Schwierigkeitsgrad.
+
+### Blitz
+
+60 Sekunden, hohe Spawnrate, schnell steigender Multiplikator und sehr kurze Combo-Fenster.
+
+### Precision
+
+Begrenzte Munition, kein automatisches Nachladen und Schwerpunkt auf Trefferquote und Perfect Hits.
+
+### Endless
+
+Endlosmodus mit stetig steigender Schwierigkeit, Phasen und zufälligen Events.
+
+### Daily Challenge
+
+Täglich reproduzierbarer Seed mit identischen Spawns und Bedingungen. Speichere den lokalen Tagesrekord.
+
+### Zen Hunt
+
+Entspannter Modus ohne harten Zeitdruck, mit ruhiger Musik und reduzierten Strafen.
+
+## Schauplätze
+
+Erstelle mindestens drei deutlich unterschiedliche Karten:
+
+### Nebelmoor
+
+Klassisches Moor mit Schilf, Wasser, Nebelbänken, morschen Holzkonstruktionen und warmem Abendlicht.
+
+### Sturmklippen
+
+Küste mit starkem Wind, Leuchtturm, Wellen, Regenfronten und schnellen Flugbewegungen.
+
+### Mondbruch
+
+Nächtliches, leicht mystisches Moor mit Vollmond, Glühwürmchen, leuchtenden Pflanzen und geisterhaften Ereignissen.
+
+Jeder Schauplatz benötigt:
+
+* mehrere Parallax-Ebenen
+* Vordergrundelemente
+* animierte Vegetation
+* eigenes Farbschema
+* eigene Umgebungsgeräusche
+* eigenes Wetter
+* exklusive Zielvarianten
+* exklusive interaktive Objekte
+* mindestens ein eigenes Spezialereignis
+* mindestens eine geheime Kettenreaktion
+
+Die Szenen sollen Tiefe besitzen. Ziele können sich hinter Vordergrundobjekten bewegen und teilweise verdeckt werden.
+
+## Fortschritt und Motivation
+
+Implementiere einen lokalen Spielerfortschritt mit:
+
+* Erfahrungspunkten
+* Spielerlevel
+* freischaltbaren Karten
+* freischaltbaren Spielmodi
+* kosmetischen Fadenkreuzen
+* alternativen HUD-Designs
+* Waffen-Skins ohne Pay-to-win
+* Abzeichen
+* Herausforderungen
+* Erfolgen
+* dauerhaft gespeicherten Statistiken
+
+Verwende eine rein spielinterne Währung. Es gibt keine echten Käufe und keine Monetarisierung.
+
+Beispiele für Herausforderungen:
+
+* 20 Treffer ohne Fehlschuss
+* fünf Perfect Hits hintereinander
+* kompletter Schwarm in drei Sekunden
+* Mini-Boss ohne Fehlschuss
+* alle versteckten Objekte einer Karte finden
+* Runde mit mindestens 80 Prozent Trefferquote
+* Kettenreaktion mit fünf Stationen
+* Goldschnabel während eines Gewitters treffen
+
+## Benutzeroberfläche
+
+Benötigte Ansichten:
+
+* animierter Startbildschirm
+* Hauptmenü
+* Modusauswahl
+* Kartenauswahl
+* kurze Spielanleitung
+* erster interaktiver Tutorial-Ablauf
+* Ingame-HUD
+* Pausemenü
+* Einstellungsmenü
+* Ergebnisbildschirm
+* Highscore-Ansicht
+* Statistikseite
+* Fortschritts- und Freischaltungsseite
+* Erfolge
+* Credits
+
+Das HUD zeigt mindestens:
+
+* verbleibende Zeit
+* Punktzahl
+* Combo und Multiplikator
+* Munition
+* Eventstatus
+* kurze Challenge-Fortschritte
+* Bossstatus, wenn relevant
+
+Das HUD darf das Spielfeld nicht unnötig verdecken. Wichtige Informationen müssen auf einen Blick erkennbar sein.
+
+## Grafische Richtung
+
+Verwende einen hochwertigen, eigenständigen 2D-Cartoon-Stil:
+
+* handgemalt wirkende Landschaften
+* klare, humorvolle Silhouetten
+* ausdrucksstarke Figuren
+* starke, aber harmonische Farbpalette
+* atmosphärisches Licht
+* weiche Nebel- und Wetterschichten
+* lebendige Idle-Animationen
+* Partikel für Federn, Staub, Wasser, Regen, Funken und Blätter
+* dezente dynamische Beleuchtung
+* Parallax-Scrolling
+* animierte Übergänge
+* keine generische Standard-Bootstrap-Optik
+* keine im finalen Spiel sichtbaren simplen Debug-Rechtecke
+
+Falls keine fertigen Bild-Assets verfügbar sind, erstelle hochwertige eigene SVG-, Canvas- oder prozedurale Assets. Nutze Platzhalter nur kurzfristig während der Entwicklung und ersetze sie vor Abschluss.
+
+Falls Bildgenerierungswerkzeuge verfügbar sind, dürfen sie zur Erstellung eigenständiger Assets eingesetzt werden. Sorge dabei für ein einheitliches Design, transparente Hintergründe, passende Sprite-Abmessungen und konsistente Blickrichtungen.
+
+## Animation
+
+Nutze Animationen für:
+
+* Flügelschlag
+* Körperneigung in Kurven
+* Trefferreaktionen
+* Rüstungsbruch
+* Fluchtbewegungen
+* Landung und Start
+* Umgebungsobjekte
+* Wetter
+* Wasser
+* Vegetation
+* Menüübergänge
+* Score-Popups
+* Combo-Meilensteine
+* Nachladen
+* Fadenkreuz
+* Mini-Boss-Phasen
+
+Animationen sollen weich ineinander übergehen und dürfen die Eingabereaktion nicht verzögern.
+
+## Sound und Musik
+
+Erstelle eine vollständige Audioebene:
+
+* mehrere leicht unterschiedliche Schussvarianten
+* Nachladen
+* leeres Magazin
+* normale Treffer
+* Perfect Hits
+* Combo-Meilensteine
+* seltene Ziele
+* Mini-Bosse
+* Umgebungsketten
+* Menüinteraktionen
+* Wind, Wasser, Regen, Tiere und Vegetation
+* dynamische Musikintensität
+
+Die Musik soll auf Rundenphase, Combo und Ereignisse reagieren.
+
+Falls keine Audiodateien vorhanden sind, generiere einfache, hochwertige Soundeffekte prozedural mit der Web Audio API. Das Spiel darf nicht wegen Browser-Autoplay-Regeln fehlschlagen. Audio wird nach der ersten Nutzerinteraktion sauber initialisiert.
+
+Biete getrennte Regler für:
+
+* Gesamtlautstärke
+* Musik
+* Soundeffekte
+* Umgebungsgeräusche
+
+## Spielgefühl und Polish
+
+Achte besonders auf „Game Feel“. Jede Aktion muss eine klare Reaktion erzeugen.
+
+Verwende sinnvoll:
+
+* Animation Easing
+* kurze Scale-Punches
+* Screenshake mit einstellbarer Intensität
+* Partikel
+* Sound-Pitch-Variation
+* Farbblitze
+* Hitstop von wenigen Millisekunden
+* dynamische Combo-Musik
+* besondere Effekte bei Rekorden
+* animierte Ergebniszählung
+* Konfetti oder Federschauer bei S-/SS-/SSS-Rängen
+
+Effekte müssen intensiv, aber lesbar bleiben. Der Spieler darf durch Partikel und Screenshake nicht die Ziele verlieren.
+
+## Einstellungen und Barrierefreiheit
+
+Implementiere:
+
+* Gesamt-, Musik-, Effekt- und Umgebungslautstärke
+* Fullscreen
+* Qualitätsstufen
+* Screenshake-Stärke
+* Partikeldichte
+* Fadenkreuzgröße
+* mehrere Fadenkreuzfarben
+* Modus für Rot-Grün-Sehschwäche
+* kontrastreiche Trefferanzeigen
+* reduzierte Bewegung
+* reduzierte Lichtblitze
+* pausierbare Runde
+* frei konfigurierbare Tasten, soweit sinnvoll
+* Umschaltung zwischen deutscher und englischer Benutzeroberfläche
+
+Die Standardsprache soll anhand des Browsers gewählt werden, mit Deutsch als Fallback.
+
+## Architektur
+
+Strukturiere das Projekt modular. Sinnvolle Bereiche sind beispielsweise:
+
+* Szenen und Zustandsverwaltung
+* Ziel- und Entity-System
+* Flugbahnen
+* Spawn Director
+* Difficulty Director
+* Treffererkennung
+* Waffenlogik
+* Punkte- und Combo-System
+* Eventsystem
+* Audio Manager
+* Particle Manager
+* Savegame und Migration
+* Lokalisierung
+* Eingabeverwaltung
+* UI
+* Konfigurationen
+* Tests
+
+Verwende:
+
+* typisierte Konfigurationsobjekte
+* Entity-Pooling für häufig erzeugte Objekte
+* klar getrennte Spiellogik und Darstellung
+* definierte Scene-Lifecycle-Methoden
+* Eventkommunikation ohne unkontrollierte globale Zustände
+* deterministische, separat testbare Berechnungen
+* versioniertes Savegame-Schema
+* sauberes Aufräumen von Timern, Listenern und Audio
+* keine unnötigen `any`-Typen
+* keine riesigen monolithischen Dateien
+
+Balancierungswerte sollen zentral konfigurierbar sein.
+
+## Performance
+
+Achte auf:
+
+* stabile 60 FPS
+* Object Pooling
+* sparsame Partikelnutzung
+* keine Speicherlecks zwischen Runden
+* keine ständig neu erzeugten großen Objekte im Update-Loop
+* reduzierte Qualitätsstufen für schwächere Geräte
+* performante Hitboxprüfung
+* Begrenzung gleichzeitig aktiver Audioquellen
+* korrektes Pausieren in inaktiven Browser-Tabs
+
+Füge einen nur im Entwicklungsmodus verfügbaren Debug-Modus hinzu. Dieser darf anzeigen:
+
+* FPS
+* aktive Ziele
+* aktive Partikel
+* Spawnphase
+* Difficulty-Faktor
+* Seed
+* Hitboxen
+* Speicher- beziehungsweise Poolinformationen
+
+Der Debug-Modus darf im normalen Spiel nicht sichtbar sein.
+
+## Tests
+
+Schreibe automatisierte Tests mindestens für:
+
+* Punkteberechnung
+* Combo-Logik
+* Rangberechnung
+* Seed-Zufallsgenerator
+* Daily-Challenge-Seed
+* Schwierigkeitsbegrenzung
+* Spawnregeln
+* Munitions- und Nachladesystem
+* Savegame-Migration
+* Achievement-Bedingungen
+* Lokalisierungs-Fallbacks
+
+Teste außerdem manuell beziehungsweise über verfügbare Browserwerkzeuge:
+
+* Start einer Runde
+* Schießen und Treffen
+* Fehlschüsse
+* Nachladen
+* leeres Magazin
+* Pausieren und Fortsetzen
+* Rundenende
+* Speichern eines Highscores
+* erneutes Laden der Seite
+* Wechsel von Modus und Karte
+* Audioeinstellungen
+* Fullscreen
+* verschiedene Fenstergrößen
+
+## Abnahmekriterien
+
+Das Projekt ist erst fertig, wenn:
+
+1. Das Spiel nach `npm install` und `npm run dev` ohne manuelle Nacharbeit startet.
+2. Eine vollständige Runde vom Hauptmenü bis zum Ergebnisbildschirm spielbar ist.
+3. Mindestens drei Karten und sechs Spielmodi auswählbar sind.
+4. Alle wichtigen Ziele eigene Optik und eigenes Verhalten besitzen.
+5. Schießen, Treffen und Nachladen audiovisuell überzeugend wirken.
+6. Punkte, Combo, Munition, Zeit und Highscores korrekt funktionieren.
+7. Fortschritt und Einstellungen nach einem Reload erhalten bleiben.
+8. Daily Challenges deterministisch reproduzierbar sind.
+9. Menüs und HUD professionell und zusammenhängend gestaltet sind.
+10. Keine offensichtlichen Platzhalter, fehlenden Assets oder leeren Ansichten verbleiben.
+11. Keine kritischen Konsolenfehler auftreten.
+12. Build, Lint und Tests erfolgreich durchlaufen.
+13. Das Spiel auch nach mehreren aufeinanderfolgenden Runden stabil bleibt.
+14. Ein vollständiges README vorhanden ist.
+15. Das Endergebnis deutlich über einen einfachen Tutorial- oder Game-Jam-Prototyp hinausgeht.
+
+## README
+
+Dokumentiere:
+
+* Installation
+* Entwicklungsstart
+* Produktionsbuild
+* Tests
+* Steuerung
+* Spielmodi
+* Zielarten
+* Karten
+* Architektur
+* Asset-Herkunft
+* Erweiterungsmöglichkeiten
+* Debug-Modus
+* bekannte, tatsächlich verbleibende Einschränkungen
+
+## Vorgehensweise
+
+Arbeite autonom und zielorientiert:
+
+1. Untersuche zuerst das Repository und die vorhandenen Dateien.
+2. Erstelle eine kurze interne Umsetzungsplanung.
+3. Sorge zuerst für einen vollständigen spielbaren Kernloop.
+4. Erweitere ihn anschließend um Inhalte, Modi, Karten und Fortschritt.
+5. Führe nach größeren Schritten Build und Tests aus.
+6. Öffne das Spiel, sofern Browserwerkzeuge verfügbar sind, und prüfe es visuell.
+7. Behebe Fehler, unklare UI, schlechte Lesbarkeit und schwaches Spielgefühl selbstständig.
+8. Hinterlasse keine zentralen Funktionen nur als TODO.
+9. Triff bei kleinen Unklarheiten selbst vernünftige Entscheidungen.
+10. Frage nur nach, wenn ein echter externer Blocker besteht.
+11. Höre nicht nach dem Scaffold oder der ersten spielbaren Szene auf.
+12. Nutze die verbleibende Arbeitszeit vorrangig für sichtbare Qualität, Spieltiefe und Stabilität.
+
+Beginne jetzt mit der Analyse des Repositories und setze das Spiel anschließend vollständig um.
