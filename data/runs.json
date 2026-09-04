@@ -234,7 +234,12 @@
   "tokens_ein": 1051292,
   "kontext_gelesen": 24935272,
   "anfragen": 459,
-  "datum": "2026-09-04"
+  "datum": "2026-09-04",
+  "fehler": [
+   "Im Ladebildschirm steht „Featherstorm wordt geladen“ — Niederländisch statt Deutsch. Genau eine Stelle im ganzen Spiel; der Rest ist durchgehend deutsch.",
+   "Das Spiel rendert auf ein 1280×720-Canvas. Auf einem 390 Pixel breiten Telefon wird es auf 390×219 herunterskaliert — spielbar, aber die Zielscheiben sind klein.",
+   "Der Lauf brauchte drei Sitzungen (20, 376 und 419 Minuten). Zwischen den Sitzungen ging der Kontext verloren und musste neu aufgebaut werden."
+  ]
  },
  {
   "slug": "qwen38-flashnext-clairobscure-evox2",
