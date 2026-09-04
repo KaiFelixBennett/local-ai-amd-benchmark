@@ -92,14 +92,12 @@
    "median": 33.45,
    "p10": 29.02,
    "p90": 38.25,
-   "min": 25.86,
    "peak": 41.39,
    "n": 221
   },
   "prefill": {
    "median": 174.92,
-   "max": 423.64,
-   "n": 311
+   "max": 423.64
   },
   "tokens": 175743,
   "minutes": 139,
@@ -120,7 +118,11 @@
   "depth": null,
   "evidence": {
    "log": "evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log",
-   "sha256": "07f278fedcb8bc130cc393a05647156d7fa83e2e356024df70f670d956b3627d"
+   "sha256": "07f278fedcb8bc130cc393a05647156d7fa83e2e356024df70f670d956b3627d",
+   "bytes": 691613,
+   "antworten_gesamt": 409,
+   "gewertet": 221,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
   "tokens_all": 196543,
   "responses_all": 409,
@@ -138,82 +140,88 @@
   "task": "Moorhuhn",
   "kind": "agent",
   "decode": {
-   "median": 21.82,
+   "median": 21.76,
    "p10": 17.15,
-   "p90": 26.72,
-   "min": 15.84,
+   "p90": 26.28,
    "peak": 33.89,
-   "n": 98
+   "n": 346
   },
   "prefill": {
-   "median": 105.76,
-   "max": 184.76,
-   "n": 100
+   "median": 87.22,
+   "max": 184.76
   },
-  "tokens": 285339,
-  "minutes": 286,
+  "tokens": 770428,
+  "minutes": 816,
   "fixes": null,
   "quality": 16,
-  "spec": "draft-mtp · 177 Mrd. gesamt, ~6 Mrd. aktiv",
+  "spec": "MTP, Shared-Q8_0, n-max 2",
   "build": "580e88d",
   "ctx": 262144,
   "kv": "q8_0 / q8_0",
   "ub": 512,
   "cmd": "llama-server -m Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf ^\n  --mmproj mmproj-F16.gguf --alias qwen3.8-flash-next ^\n  --host 127.0.0.1 --port 8099 --device Vulkan0 ^\n  --gpu-layers all --n-cpu-moe 0 --fit off -fa on ^\n  --load-mode mmap --lazy-mode on ^\n  --ctx-size 262144 --parallel 1 --kv-unified ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --ctx-checkpoints 4 --checkpoint-min-step 4096 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-effort xhigh",
   "media": {
-   "video": "clairfn.webm",
-   "poster": "clairfn.jpg"
+   "video": "fnmoor.webm",
+   "poster": "fnmoor.jpg",
+   "breite": 1100,
+   "hoehe": 678,
+   "text": "Moorland Mayhem — Featherstorm: Titelbild, Spielrunde, Wertung und Abspann, ungeschnitten",
+   "bilder": []
   },
-  "source": "llama.cpp server log, 98 of 115 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
-  "note": "MTP shared-Q8_0 speculative decoding on, n_max 2, ctx 131072. Decode median is 2.00x the August run without MTP - which lands inside the 1.84-2.13x the log header records for MTP measured in isolation. Task, context size and reasoning budget also differ between the two runs, so the ratio corroborates rather than proves.",
+  "source": "llama.cpp-Serverlog · 346 von 459 Antworten ab 200 Tokens · Lauf vom 03./04.09.2026, 13 h 36 min",
+  "note": "Der längste Lauf im Feld: 13 Stunden 36 Minuten an einem einzigen Auftrag, 459 Anfragen, ohne dass der Kontext je abgeschnitten wurde.",
   "depth": {
    "kind": "decode",
    "points": [
     [
-     33.6,
-     26.12
+     33.7,
+     23.29
     ],
     [
-     39.7,
-     21.76
+     41.4,
+     23.27
     ],
     [
-     44.9,
-     21.62
+     46.8,
+     22.0
     ],
     [
-     52.2,
-     22.83
+     53.2,
+     23.11
     ],
     [
-     58.6,
-     23.69
+     58.2,
+     22.39
     ],
     [
-     61.7,
-     21.8
+     63.0,
+     21.17
     ],
     [
-     66.6,
-     19.44
+     68.5,
+     18.94
     ],
     [
-     72.5,
-     17.28
+     75.2,
+     17.89
     ]
    ],
    "unit": "t/s",
-   "label": "Decode über Kontexttiefe · Sitzung vom 03.09.2026",
-   "note": "Je Punkt zwölf Antworten, Median. Gemessen zwischen 31k und 88k Token."
+   "label": "Decode über Kontexttiefe · Lauf vom 04.09.2026",
+   "note": "Je Punkt 43 Antworten, Median. Gemessen zwischen 29k und 98k Token."
   },
   "draft": {
-   "accept": 69.2,
-   "meanlen": 2.38,
-   "n": 115
+   "accept": 70.7,
+   "meanlen": 2.42,
+   "n": 459
   },
   "evidence": {
-   "log": "evidence/logs/qwen38-flashnext-moorhuhn-halo.log",
-   "sha256": "23cd83c01ad4d54d0dc5d02386f00970e442daf207116142723f6f20645f3700"
+   "log": "evidence/logs/qwen38-flashnext-moorhuhn-evox2.log",
+   "sha256": "317185ea5ee4760c7f2e838c7feed8cf05b793969cab8679c2ceedb893d71eba",
+   "bytes": 1967907,
+   "antworten_gesamt": 459,
+   "gewertet": 346,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
   "tokens_all": 287782,
   "responses_all": 115,
@@ -221,7 +229,12 @@
    "decode": 246.7,
    "prefill": 38.9
   },
-  "largest_prompt_tokens": 34598
+  "largest_prompt_tokens": 34598,
+  "tokens_aus": 786506,
+  "tokens_ein": 1051292,
+  "kontext_gelesen": 24935272,
+  "anfragen": 459,
+  "datum": "2026-09-04"
  },
  {
   "slug": "qwen38-flashnext-clairobscure-evox2",
@@ -234,14 +247,12 @@
    "median": 10.93,
    "p10": 9.7,
    "p90": 13.85,
-   "min": 9.01,
    "peak": 17.01,
    "n": 92
   },
   "prefill": {
    "median": 112.33,
-   "max": 197.12,
-   "n": 100
+   "max": 197.12
   },
   "tokens": 236460,
   "minutes": 368,
@@ -260,7 +271,11 @@
   "draft": null,
   "evidence": {
    "log": "evidence/logs/qwen38-flashnext-clairobscur-halo.log",
-   "sha256": "35885e4476e8528fe7bc5bd1ec8512b2ec3fac24f397032c5c4ed57a3f2a4164"
+   "sha256": "35885e4476e8528fe7bc5bd1ec8512b2ec3fac24f397032c5c4ed57a3f2a4164",
+   "bytes": 831682,
+   "antworten_gesamt": 106,
+   "gewertet": 92,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
   "tokens_all": 238371,
   "responses_all": 106,
@@ -281,14 +296,12 @@
    "median": 26.3,
    "p10": 18.03,
    "p90": 35.31,
-   "min": 13.93,
    "peak": 42.39,
    "n": 30
   },
   "prefill": {
    "median": 159.41,
-   "max": 350.83,
-   "n": 34
+   "max": 350.83
   },
   "tokens": 118919,
   "minutes": 114,
@@ -343,7 +356,11 @@
   },
   "evidence": {
    "log": "evidence/logs/qwen38-27b-q6-clairobscur-r9700.log",
-   "sha256": "2a36b590f139c3d425f15f28e8e673ed97d169384d9af49bec267adb22a1fa22"
+   "sha256": "2a36b590f139c3d425f15f28e8e673ed97d169384d9af49bec267adb22a1fa22",
+   "bytes": 255050,
+   "antworten_gesamt": 35,
+   "gewertet": 30,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
   "tokens_all": 119627,
   "responses_all": 35,
@@ -473,14 +490,12 @@
    "median": 7.02,
    "p10": 4.85,
    "p90": 9.89,
-   "min": 3.97,
    "peak": 10.83,
    "n": 98
   },
   "prefill": {
    "median": 17.5,
-   "max": 40.91,
-   "n": 76
+   "max": 40.91
   },
   "tokens": 150800,
   "minutes": 500,
@@ -498,7 +513,11 @@
   "depth": null,
   "evidence": {
    "log": "evidence/logs/deepseek-v4-flash-clairobscur-halo.log",
-   "sha256": "04ef4d4fdf85bb2a199b6576864a40761b90a2eff3e2a25906851592e5048a96"
+   "sha256": "04ef4d4fdf85bb2a199b6576864a40761b90a2eff3e2a25906851592e5048a96",
+   "bytes": 738270,
+   "antworten_gesamt": 152,
+   "gewertet": 98,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
   "tokens_all": 158469,
   "responses_all": 152,

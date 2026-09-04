@@ -41,7 +41,7 @@ BELEGE = {
     "qwen36-27b-q6-moorhuhn-r9700":         "evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log",
     "qwen38-27b-q4xl-moorhuhn-r9700":       "evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log",
     "qwen38-27b-q6-clairobscure-r9700":     "evidence/logs/qwen38-27b-q6-clairobscur-r9700.log",
-    "qwen38-flashnext-moorhuhn-evox2":      "evidence/logs/qwen38-flashnext-moorhuhn-halo.log",
+    "qwen38-flashnext-moorhuhn-evox2":      "evidence/logs/qwen38-flashnext-moorhuhn-evox2.log",
     "qwen38-flashnext-clairobscure-evox2":  "evidence/logs/qwen38-flashnext-clairobscur-halo.log",
     "deepseek-v4-flash-clairobscure-evox2": "evidence/logs/deepseek-v4-flash-clairobscur-halo.log",
 }
@@ -52,6 +52,18 @@ BERICHTE = {
     "laguna-s21-evox2":       "evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md",
     "qwen35-122b-a10b-evox2": "evidence/reports/qwen35-122b-a10b-strix-halo-vulkan-benchmark.md",
 }
+
+
+def r2(x):
+    """Auf zwei Stellen, halbe Werte aufwaerts.
+
+    Pythons eingebautes round() rundet zur geraden Zahl: round(21.755, 2)
+    ergibt 21.75, JavaScript ergibt 21.76. Ohne feste Regel widersprechen sich
+    verify_runs.py und harness/werkzeuge/lauf.mjs bei denselben Daten - und
+    dann ist die ganze Nachrechnung wertlos.
+    """
+    from decimal import Decimal, ROUND_HALF_UP
+    return float(Decimal(repr(x)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
 
 
 def rang(sortiert, anteil):
@@ -82,15 +94,15 @@ def messwerte(pfad):
 
     return {
         "decode": {
-            "median": round(st.median(dg), 2),
-            "p10": round(rang(dg, 0.10), 2),
-            "p90": round(rang(dg, 0.90), 2),
-            "peak": round(dg[-1], 2),
+            "median": r2(st.median(dg)),
+            "p10": r2(rang(dg, 0.10)),
+            "p90": r2(rang(dg, 0.90)),
+            "peak": r2(dg[-1]),
             "n": len(dg),
         },
         "prefill": {
-            "median": round(st.median(pg), 2) if pg else None,
-            "max": round(pg[-1], 2) if pg else None,
+            "median": r2(st.median(pg)) if pg else None,
+            "max": r2(pg[-1]) if pg else None,
         },
         # Tokens nur aus den gewerteten Antworten - dieselbe Grundmenge wie oben
         "tokens": sum(n for n, _ in dec if n >= MINDEST),
