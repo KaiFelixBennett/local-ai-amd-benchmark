@@ -587,3 +587,9 @@ measurement style — agentic or synthetic — attached.
 <br>
 <sub>Measured on hardware that fits under a desk · <a href="https://securesight.ai">securesight.ai</a></sub>
 </div>
+
+## Der Code der Modelle
+
+Unter [`benchmarks/`](benchmarks/) liegt der Quelltext jedes Laufs, sortiert nach
+Modell und darunter nach Lauf. So wie das Modell ihn abgeliefert hat, ohne
+Nachbesserung. Der Wegweiser dort erklaert, was fehlt und warum.

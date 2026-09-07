@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clair Obscur Echo — Studio of the Gilded Hour</title>
+<style>
+  :root {
+    --gold: #d8a94a;
+    --gold-bright: #f4d489;
+    --teal: #3f6b6d;
+    --teal-bright: #8fbcb6;
+    --ink: #0c1215;
+    --paper: #e8e2d2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0c1215; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: var(--paper); }
+  canvas { position: fixed; inset: 0; display: block; }
+  #gl { z-index: 0; }
+  #overlay { z-index: 2; pointer-events: none; }
+  #ui { position: fixed; inset: 0; z-index: 3; pointer-events: none; }
+  #ui button, #ui .clickable { pointer-events: auto; }
+
+  /* ---------- loading / fatal ---------- */
+  #loading, #fatal, #end-victory, #end-defeat, #context-lost {
+    position: fixed; inset: 0; z-index: 20; pointer-events: auto;
+    display: none; align-items: center; justify-content: center; flex-direction: column;
+    background: radial-gradient(ellipse at center, #16242a 0%, #0a1013 78%);
+    text-align: center; padding: 8vh 6vw;
+  }
+  #loading.show, #fatal.show, .overlay-show { display: flex !important; }
+  #loading .fleur { color: var(--gold); font-size: 30px; letter-spacing: 14px; animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: 0.35; } }
+  #loading { letter-spacing: 3px; }
+  #loading h1 { font-weight: normal; font-style: italic; font-size: clamp(20px, 4vw, 34px); color: var(--gold-bright); margin: 18px 0 8px; }
+  #loading p { color: #9a958a; font-style: italic; font-size: 14px; max-width: 520px; }
+  #fatal h1 { color: #d06a6f; font-size: 26px; margin-bottom: 14px; }
+  #fatal p { color: #b9b2a2; font-size: 15px; line-height: 1.6; max-width: 600px; }
+
+  /* ---------- seed + hints ---------- */
+  #seed { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 4;
+    color: rgba(154,149,138,0.55); font-size: 10px; letter-spacing: 2px; pointer-events: none; font-style: italic; }
+  #hint { position: fixed; bottom: 8px; right: 14px; z-index: 4; color: rgba(154,149,138,0.5);
+    font-size: 10.5px; letter-spacing: 0.5px; pointer-events: none; }
+
+  /* ---------- battle menu ---------- */
+  #menu {
+    position: absolute; right: 26px; bottom: 26px; width: 330px;
+    background: linear-gradient(160deg, rgba(15,23,27,0.94), rgba(9,14,17,0.96));
+    border: 1px solid rgba(216,169,74,0.55);
+    border-radius: 10px;
+    box-shadow: 0 10px 46px rgba(0,0,0,0.65), inset 0 0 40px rgba(216,169,74,0.05);
+    padding: 12px 14px 14px;
+    transition: opacity 0.18s ease, translateY 0.18s ease;
+  }
+  #menu.hidden { opacity: 0; pointer-events: none; display: none; }
+  .menu-head { display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid rgba(216,169,74,0.3); padding-bottom: 8px; margin-bottom: 10px; }
+  .menu-head .who { font-style: italic; font-size: 17px; color: var(--gold-bright); }
+  .menu-head .ap { font-size: 12px; color: var(--teal-bright); letter-spacing: 1px; }
+  .menu-grid { display: flex; flex-direction: column; gap: 6px; }
+  .cmd {
+    display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 9px;
+    background: rgba(63,107,109,0.1);
+    border: 1px solid rgba(143,188,182,0.25);
+    color: var(--paper); font-family: Georgia, serif; font-size: 14.5px;
+    padding: 8px 10px; border-radius: 6px; cursor: pointer; text-align: left;
+    transition: background 0.12s, border-color 0.12s, transform 0.08s;
+  }
+  .cmd:hover:not(:disabled) { background: rgba(216,169,74,0.16); border-color: var(--gold); transform: translateX(-3px); }
+  .cmd:active:not(:disabled) { transform: translateX(-1px) scale(0.99); }
+  .cmd:disabled { opacity: 0.38; cursor: default; }
+  .cmd kbd { font-family: inherit; font-size: 10px; color: var(--gold); border: 1px solid rgba(216,169,74,0.5);
+    border-radius: 4px; padding: 1px 5px; text-align: center; }
+  .cmd em { font-style: normal; font-size: 11px; color: #8a8577; }
+  .cmd .desc { grid-column: 2 / 4; font-style: italic; font-size: 10.5px; color: #86816f; margin-top: 2px; }
+  .cmd.hot { border-color: var(--gold-bright); background: rgba(244,212,137,0.18);
+    animation: hotpulse 1.1s ease-in-out infinite; }
+  @keyframes hotpulse { 50% { background: rgba(244,212,137,0.32); } }
+  .menu-back { margin-top: 8px; font-size: 11px; color: #8a8577; font-style: italic; }
+  .menu-back kbd { font-family: inherit; color: var(--gold); }
+
+  /* ---------- end overlays ---------- */
+  #end-victory, #end-defeat { display: none; }
+  #end-victory.show, #end-defeat.show { display: flex; }
+  #end-victory h1 { font-size: clamp(30px, 7vw, 64px); color: var(--gold-bright); font-style: italic; font-weight: normal;
+    text-shadow: 0 0 40px rgba(244,212,137,0.5); letter-spacing: 6px; }
+  #end-defeat h1 { font-size: clamp(30px, 7vw, 64px); color: #d06a6f; font-style: italic; font-weight: normal; letter-spacing: 6px; }
+  .end-sub { margin: 18px 0 34px; color: #9a958a; font-style: italic; font-size: 15px; }
+  .btn-restart {
+    pointer-events: auto; font-family: Georgia, serif; font-style: italic; font-size: 17px;
+    color: var(--ink); background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    border: none; border-radius: 6px; padding: 12px 34px; cursor: pointer;
+    box-shadow: 0 6px 26px rgba(216,169,74,0.35);
+    letter-spacing: 2px;
+  }
+  .btn-restart:hover { filter: brightness(1.1); }
+
+  /* ---------- wave banner ---------- */
+  #wave-banner { position: fixed; top: 34%; left: 0; right: 0; z-index: 6; text-align: center;
+    font-style: italic; font-size: clamp(20px, 4vw, 36px); color: var(--gold-bright);
+    letter-spacing: 8px; text-shadow: 0 0 34px rgba(244,212,137,0.6), 0 2px 8px #000;
+    opacity: 0; transform: scale(1.06); transition: opacity 0.4s, transform 0.4s; pointer-events: none; }
+  #wave-banner.show { opacity: 1; transform: scale(1); }
+
+  /* ---------- context loss ---------- */
+  #context-lost { display: none; }
+  #context-lost.show { display: flex; }
+  #context-lost h1 { color: var(--gold-bright); font-style: italic; font-size: 24px; margin-bottom: 12px; }
+  #context-lost p { color: #9a958a; font-style: italic; }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+  <canvas id="gl"></canvas>
+  <canvas id="overlay"></canvas>
+
+  <div id="ui">
+    <!-- #menu injected here by ui/menu.js -->
+    <div id="end-victory"><h1>VICTOIRE</h1><p class="end-sub">The gilded hour holds. The Expedition rests — briefly.</p><button class="btn-restart" data-restart>NEW RUN (R)</button></div>
+    <div id="end-defeat"><h1>LE PEINTRE MEURT</h1><p class="end-sub">The canvas fades to wash. Every dusk ends differently — begin again.</p><button class="btn-restart" data-restart>RETRY (R)</button></div>
+    <div id="context-lost"><h1>The easel went dark…</h1><p>The WebGL context was lost. It usually restores itself — hold on.</p></div>
+  </div>
+
+  <div id="wave-banner"></div>
+  <div id="seed"></div>
+  <div id="hint">[A] parry · [SPACE] dodge · [G] palette · [M] mute · arrows/click to choose</div>
+
+  <div id="loading" class="show">
+    <div class="fleur">&#10070;&nbsp;&#10070;&nbsp;&#10070;</div>
+    <h1>Clair Obscur Echo</h1>
+    <p>Studio of the Gilded Hour — grinding the pigments…</p>
+  </div>
+
+  <div id="fatal"><h1></h1><p></p></div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

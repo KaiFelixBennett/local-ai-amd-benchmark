@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clair Obscur: Expedition 33</title>
+    <script type="importmap">
+    { "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    } }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { overflow: hidden; background: #0a0a0f; font-family: 'Georgia', serif; }
+        canvas { display: block; }
+        #ui-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 10;
+        }
+        #ui-canvas.interactive { pointer-events: auto; }
+        #overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            pointer-events: none;
+        }
+        #overlay.active { pointer-events: auto; }
+        #overlay .panel {
+            background: rgba(10, 10, 15, 0.92);
+            border: 2px solid #c4a35a;
+            border-radius: 8px;
+            padding: 40px 60px;
+            text-align: center;
+            color: #e8dcc8;
+            display: none;
+        }
+        #overlay.active .panel { display: block; }
+        #overlay h1 { font-size: 42px; color: #c4a35a; margin-bottom: 16px; letter-spacing: 4px; }
+        #overlay h2 { font-size: 28px; color: #c4a35a; margin-bottom: 20px; }
+        #overlay p { font-size: 16px; margin-bottom: 24px; color: #a89880; }
+        #overlay button {
+            background: linear-gradient(135deg, #8b7340, #c4a35a);
+            border: 1px solid #e8dcc8;
+            color: #1a1a2e;
+            padding: 12px 36px;
+            font-size: 18px;
+            font-family: 'Georgia', serif;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 6px;
+            letter-spacing: 2px;
+        }
+        #overlay button:hover { background: linear-gradient(135deg, #c4a35a, #e8dcc8); }
+        #error-msg {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff6b6b;
+            font-size: 18px;
+            display: none;
+            z-index: 100;
+            text-align: center;
+            background: rgba(0,0,0,0.85);
+            padding: 20px 40px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay">
+        <div class="panel" id="victory-panel">
+            <h1>VICTORY</h1>
+            <p id="victory-text">The expedition prevails.</p>
+            <button id="restart-btn">Continue Expedition</button>
+        </div>
+        <div class="panel" id="defeat-panel">
+            <h1>DEFEAT</h1>
+            <p id="defeat-text">The expedition has fallen.</p>
+            <button id="retry-btn">Try Again</button>
+        </div>
+    </div>
+    <div id="error-msg"></div>
+    <canvas id="ui-canvas"></canvas>
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>

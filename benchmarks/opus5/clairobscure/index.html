@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>Expedition — Gilded Requiem</title>
+
+<script type="importmap">
+{ "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+} }
+</script>
+
+<style>
+  :root {
+    --gold: #d9b262;
+    --gold-dim: #8a6a2f;
+    --teal-deep: #08171a;
+    --teal: #113034;
+    --parchment: #e8ddc4;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background: #05100f; overflow: hidden;
+    font-family: Georgia, "Times New Roman", "Palatino Linotype", serif;
+    color: var(--parchment);
+    -webkit-font-smoothing: antialiased;
+  }
+  #stage { position: fixed; inset: 0; }
+  canvas { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+  #gl  { z-index: 1; }
+  #hud { z-index: 2; }
+
+  #boot {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 26px;
+    background:
+      radial-gradient(ellipse at 50% 42%, #1b3f42 0%, #0b2124 42%, #05100f 100%);
+    transition: opacity 0.7s ease;
+  }
+  #boot.gone { opacity: 0; pointer-events: none; }
+  .crest {
+    width: 108px; height: 108px; position: relative;
+  }
+  .crest::before, .crest::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid transparent;
+  }
+  .crest::before {
+    border-top-color: var(--gold); border-right-color: var(--gold-dim);
+    animation: spin 2.4s linear infinite;
+  }
+  .crest::after {
+    inset: 16px;
+    border-bottom-color: var(--gold-dim); border-left-color: var(--gold);
+    animation: spin 1.6s linear infinite reverse;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #boot h1 {
+    margin: 0; font-size: 30px; letter-spacing: 0.34em; font-weight: 400;
+    text-transform: uppercase; color: var(--gold);
+    text-shadow: 0 0 26px rgba(217,178,98,0.45);
+  }
+  #boot h2 {
+    margin: -16px 0 0; font-size: 12px; letter-spacing: 0.42em; font-weight: 400;
+    text-transform: uppercase; color: var(--parchment); opacity: 0.55;
+  }
+  #boot p { margin: 0; font-size: 13px; letter-spacing: 0.22em; opacity: 0.7; }
+  #boot-track {
+    width: 320px; height: 3px; background: rgba(217,178,98,0.14);
+    border: 1px solid rgba(217,178,98,0.28);
+  }
+  #boot-bar {
+    width: 0%; height: 100%; background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    transition: width 0.25s ease;
+  }
+  #boot small {
+    font-size: 10px; letter-spacing: 0.18em; opacity: 0.4; max-width: 460px;
+    text-align: center; line-height: 1.8;
+  }
+
+  #fatal {
+    position: fixed; inset: 0; z-index: 90; display: none;
+    align-items: center; justify-content: center; padding: 34px;
+    background: rgba(5,16,15,0.96);
+  }
+  #fatal.show { display: flex; }
+  #fatal .panel {
+    max-width: 760px; width: 100%; padding: 26px 30px;
+    border: 1px solid var(--gold-dim);
+    background: linear-gradient(160deg, rgba(17,48,52,0.9), rgba(8,23,26,0.95));
+    box-shadow: 0 0 60px rgba(0,0,0,0.7), inset 0 0 40px rgba(0,0,0,0.4);
+  }
+  #fatal h2 {
+    margin: 0 0 12px; font-size: 20px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #e0705c;
+  }
+  #fatal p { margin: 0 0 14px; font-size: 14px; line-height: 1.6; opacity: 0.86; }
+  #fatal pre {
+    margin: 0; padding: 14px; max-height: 260px; overflow: auto;
+    background: rgba(0,0,0,0.45); border-left: 3px solid var(--gold-dim);
+    font-family: Consolas, "Courier New", monospace; font-size: 12px;
+    line-height: 1.5; color: #d8c9a4; white-space: pre-wrap; word-break: break-word;
+  }
+</style>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="gl"></canvas>
+    <canvas id="hud"></canvas>
+  </div>
+
+  <div id="boot">
+    <div class="crest"></div>
+    <h1>Gilded Requiem</h1>
+    <h2>Le Parvis Noyé</h2>
+    <div id="boot-track"><div id="boot-bar"></div></div>
+    <p id="boot-msg">PREPARING THE CANVAS&hellip;</p>
+    <small>Environment, textures and models: Poly Haven (CC0) &middot; see ASSETS.md</small>
+  </div>
+
+  <div id="fatal">
+    <div class="panel">
+      <h2>The Expedition Faltered</h2>
+      <p id="fatal-msg">An unexpected error occurred while loading the encounter.</p>
+      <pre id="fatal-detail"></pre>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+  <noscript>
+    <div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;">
+      This game requires JavaScript modules.
+    </div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,389 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v3.6.27",
+    "version": "2.0"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "large_iron_gate_right_door"
+    },
+    {
+      "mesh": 1,
+      "name": "large_iron_gate_bolt"
+    },
+    {
+      "mesh": 2,
+      "name": "large_iron_gate_left_door"
+    },
+    {
+      "mesh": 3,
+      "name": "large_iron_gate"
+    }
+  ],
+  "materials": [
+    {
+      "name": "large_iron_gate",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicRoughnessTexture": {
+          "index": 2
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "iron_gate_01_right_door",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "iron_gate_01_bolt",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4,
+            "NORMAL": 5,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "iron_gate_01_left_door",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 8,
+            "NORMAL": 9,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "iron_gate_01_left_hinge",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 12,
+            "NORMAL": 13,
+            "TEXCOORD_0": 14
+          },
+          "indices": 15,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "name": "large_iron_gate_nor_gl",
+      "uri": "textures/large_iron_gate_nor_gl_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "large_iron_gate_diff",
+      "uri": "textures/large_iron_gate_diff_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "large_iron_gate_metal-large_iron_gate_rough",
+      "uri": "textures/large_iron_gate_arm_1k.jpg"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 11576,
+      "max": [
+        1.433621883392334,
+        2.9207804203033447,
+        0.0615086555480957
+      ],
+      "min": [
+        -0.03631901741027832,
+        -0.007873366586863995,
+        -0.023921901360154152
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 11576,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 11576,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 56976,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 251,
+      "max": [
+        0.17468950152397156,
+        1.0337485074996948,
+        0.0361134372651577
+      ],
+      "min": [
+        -0.06514662504196167,
+        0.9212461113929749,
+        0.023413358256220818
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 251,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5126,
+      "count": 251,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 7,
+      "componentType": 5123,
+      "count": 1224,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 8,
+      "componentType": 5126,
+      "count": 11046,
+      "max": [
+        -0.0014781355857849121,
+        2.9207804203033447,
+        0.03695067763328552
+      ],
+      "min": [
+        -1.433621883392334,
+        -0.007873366586863995,
+        -0.023921901360154152
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 9,
+      "componentType": 5126,
+      "count": 11046,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 10,
+      "componentType": 5126,
+      "count": 11046,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 11,
+      "componentType": 5123,
+      "count": 54492,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 12,
+      "componentType": 5126,
+      "count": 346,
+      "max": [
+        1.475045919418335,
+        2.211371421813965,
+        0.035826995968818665
+      ],
+      "min": [
+        -1.475045919418335,
+        2.179039716720581,
+        -0.03582783043384552
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 13,
+      "componentType": 5126,
+      "count": 346,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 14,
+      "componentType": 5126,
+      "count": 346,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 15,
+      "componentType": 5123,
+      "count": 1728,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 138912,
+      "byteOffset": 0,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 138912,
+      "byteOffset": 138912,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 92608,
+      "byteOffset": 277824,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 113952,
+      "byteOffset": 370432,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3012,
+      "byteOffset": 484384,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3012,
+      "byteOffset": 487396,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2008,
+      "byteOffset": 490408,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2448,
+      "byteOffset": 492416,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 132552,
+      "byteOffset": 494864,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 132552,
+      "byteOffset": 627416,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 88368,
+      "byteOffset": 759968,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 108984,
+      "byteOffset": 848336,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 4152,
+      "byteOffset": 957320,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 4152,
+      "byteOffset": 961472,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2768,
+      "byteOffset": 965624,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3456,
+      "byteOffset": 968392,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 971848,
+      "uri": "large_iron_gate.bin"
+    }
+  ]
+}

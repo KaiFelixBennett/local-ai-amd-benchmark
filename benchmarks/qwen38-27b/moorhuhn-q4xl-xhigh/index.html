@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#141b22" />
+    <meta
+      name="description"
+      content="Moorland Mayhem – Featherstorm: eigeninterpretiertes 2D-Arcade-Schießbuden-Spiel"
+    />
+    <title>Moorland Mayhem – Featherstorm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/ui/css/main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="game-container"></div>
+      <div id="ui-root"></div>
+      <div id="boot-splash">
+        <div class="boot-inner">
+          <div class="boot-bird">
+            <svg viewBox="0 0 100 100" width="90" height="90" aria-hidden="true">
+              <ellipse cx="45" cy="58" rx="26" ry="20" fill="#e8933a" />
+              <circle cx="70" cy="42" r="14" fill="#f2a952" />
+              <polygon points="83,40 96,44 83,48" fill="#ffd23e" />
+              <circle cx="74" cy="39" r="3" fill="#26160c" />
+              <path d="M30 52 Q12 34 26 48 Q20 62 36 60 Z" fill="#c9721f" />
+              <rect x="38" y="74" width="5" height="12" fill="#d97b16" />
+              <rect x="52" y="74" width="5" height="12" fill="#d97b16" />
+            </svg>
+          </div>
+          <div class="boot-title">Moorland Mayhem</div>
+          <div class="boot-sub">Featherstorm</div>
+          <div class="boot-bar"><div class="boot-bar-fill"></div></div>
+          <div class="boot-hint">Assets werden lokal generiert …</div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

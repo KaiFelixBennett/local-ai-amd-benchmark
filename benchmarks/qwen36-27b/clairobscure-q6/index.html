@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clair Obscur: Expedition 33 — Battle Clone</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a1a; }
+    #game-container {
+      position: relative; width: 100vw; height: 100vh;
+    }
+    #game-container canvas {
+      display: block; width: 100%; height: 100%;
+    }
+    /* Loading screen */
+    #loading {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #0a0a1a, #1a1a2e);
+      z-index: 1000; transition: opacity 0.5s;
+    }
+    #loading h1 {
+      color: #c8a84e; font: bold 36px serif;
+      text-shadow: 0 0 20px rgba(200,170,100,0.3);
+      margin-bottom: 8px;
+    }
+    #loading p {
+      color: #887755; font: 14px serif; margin-bottom: 30px;
+    }
+    #loading .bar {
+      width: 200px; height: 4px; background: #2a2a3e; border-radius: 2px; overflow: hidden;
+    }
+    #loading .bar-fill {
+      width: 0%; height: 100%; background: linear-gradient(90deg, #c8a84e, #ffd700);
+      transition: width 0.3s;
+    }
+    /* Controls hint */
+    #controls-hint {
+      position: absolute; bottom: 10px; right: 10px;
+      color: rgba(200,170,100,0.35); font: 10px sans-serif;
+      text-align: right; z-index: 10; pointer-events: none;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .key-icon {
+      display: inline-block; background: rgba(40,40,60,0.7);
+      border: 1px solid rgba(200,170,100,0.3); border-radius: 3px;
+      padding: 1px 5px; font-size: 9px; font-weight: bold;
+      color: rgba(255,215,0,0.6); margin: 0 2px;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="loading">
+      <h1>Clair Obscur</h1>
+      <p>Preparing the canvas...</p>
+      <div class="bar"><div class="bar-fill" id="load-bar"></div></div>
+    </div>
+    <div id="controls-hint">
+      <div><span class="key-icon">↑↓</span> Navigate</div>
+      <div><span class="key-icon">Enter</span> Confirm</div>
+      <div><span class="key-icon">Space</span> Parry</div>
+      <div><span class="key-icon">Shift</span> Dodge</div>
+      <div><span class="key-icon">U</span> Ultimate</div>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    // Simulate loading progress
+    const bar = document.getElementById('load-bar');
+    let progress = 0;
+    const loadInterval = setInterval(() => {
+      progress += Math.random() * 15;
+      if (progress > 90) progress = 90;
+      bar.style.width = progress + '%';
+    }, 200);
+
+    // Import main — this will trigger all module loads
+    import('./src/main.js').then(() => {
+      clearInterval(loadInterval);
+      bar.style.width = '100%';
+      setTimeout(() => {
+        const loading = document.getElementById('loading');
+        loading.style.opacity = '0';
+        setTimeout(() => loading.style.display = 'none', 500);
+      }, 400);
+    }).catch(err => {
+      clearInterval(loadInterval);
+      console.error('Module load failed:', err);
+      document.getElementById('loading').innerHTML = `
+        <h1 style="color:#ff6666">⚠ Load Failed</h1>
+        <p style="color:#aa8888">${err.message}</p>
+        <p style="color:#666;font-size:12px">Check console for details</p>
+      `;
+    });
+  </script>
+</body>
+</html>

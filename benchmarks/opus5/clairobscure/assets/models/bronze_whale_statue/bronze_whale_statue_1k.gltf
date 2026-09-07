@@ -1,0 +1,171 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.1.20",
+    "version": "2.0"
+  },
+  "extensionsUsed": [
+    "KHR_materials_specular"
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "bronze_whale_statue"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_specular": {
+          "specularColorFactor": [
+            0.20000000298023224,
+            0.20000000298023224,
+            0.20000000298023224
+          ]
+        }
+      },
+      "name": "bronze_whale_statue",
+      "normalTexture": {
+        "index": 0
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicRoughnessTexture": {
+          "index": 2
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Mesh.007",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ],
+  "images": [
+    {
+      "mimeType": "image/jpeg",
+      "name": "bronze_whale_statue_nor_gl",
+      "uri": "textures/bronze_whale_statue_nor_gl_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "bronze_whale_statue_diff",
+      "uri": "textures/bronze_whale_statue_diff_1k.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "bronze_whale_statue_metal-bronze_whale_statue_rough",
+      "uri": "textures/bronze_whale_statue_arm_1k.jpg"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 2483,
+      "max": [
+        0.4241368770599365,
+        1.0727776288986206,
+        0.5493661165237427
+      ],
+      "min": [
+        -0.5078663229942322,
+        -0.0001417640596628189,
+        -0.8164841532707214
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2483,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 2483,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 11448,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 29796,
+      "byteOffset": 0,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 29796,
+      "byteOffset": 29796,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 19864,
+      "byteOffset": 59592,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 22896,
+      "byteOffset": 79456,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 102352,
+      "uri": "bronze_whale_statue.bin"
+    }
+  ]
+}

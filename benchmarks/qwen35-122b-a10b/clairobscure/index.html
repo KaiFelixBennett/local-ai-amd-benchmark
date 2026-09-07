@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clair Obscur: Battle Engine</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      overflow: hidden; 
+      background: #0a0a0f;
+      font-family: 'Georgia', serif;
+    }
+    canvas { display: block; }
+    #overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999 !important;
+      image-rendering: pixelated;
+    }
+    #error-overlay {
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(20, 10, 10, 0.95);
+      border: 2px solid #c9a;
+      padding: 30px;
+      color: #f8d;
+      font-size: 16px;
+      max-width: 500px;
+      text-align: center;
+      z-index: 1000;
+    }
+    #error-overlay h2 { color: #faa; margin-bottom: 15px; }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+      "tone": "https://unpkg.com/tone@14.7.77/build/Tone.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <canvas id="overlay"></canvas>
+  <div id="error-overlay">
+    <h2>Initialization Error</h2>
+    <p id="error-message"></p>
+    <button onclick="location.reload()" style="margin-top:20px;padding:10px 30px;background:#864;border:none;color:#210;cursor:pointer;">Retry</button>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

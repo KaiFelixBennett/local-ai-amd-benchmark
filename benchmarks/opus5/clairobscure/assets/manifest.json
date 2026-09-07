@@ -1,0 +1,786 @@
+{
+  "generated": "tools/fetch-assets.mjs",
+  "ok": [
+    {
+      "file": "hdri/table_mountain_2_puresky_4k.hdr",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/4k/table_mountain_2_puresky_4k.hdr",
+      "bytes": 19096506,
+      "kind": "hdri",
+      "source": "https://polyhaven.com/a/table_mountain_2_puresky",
+      "license": "CC0 1.0",
+      "author": "Greg Zaal, Jarod Guest"
+    },
+    {
+      "file": "textures/cobblestone_floor_08/diff.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/cobblestone_floor_08/cobblestone_floor_08_diff_2k.jpg",
+      "bytes": 2289909,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/cobblestone_floor_08",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel"
+    },
+    {
+      "file": "textures/cobblestone_floor_08/nor.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/cobblestone_floor_08/cobblestone_floor_08_nor_gl_2k.jpg",
+      "bytes": 3948187,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/cobblestone_floor_08",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel"
+    },
+    {
+      "file": "textures/cobblestone_floor_08/arm.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/cobblestone_floor_08/cobblestone_floor_08_arm_2k.jpg",
+      "bytes": 805558,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/cobblestone_floor_08",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel"
+    },
+    {
+      "file": "textures/medieval_blocks_05/diff.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/medieval_blocks_05/medieval_blocks_05_diff_2k.jpg",
+      "bytes": 2461352,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/medieval_blocks_05",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel"
+    },
+    {
+      "file": "textures/medieval_blocks_05/nor.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/medieval_blocks_05/medieval_blocks_05_nor_gl_2k.jpg",
+      "bytes": 3890074,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/medieval_blocks_05",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel"
+    },
+    {
+      "file": "textures/medieval_blocks_05/arm.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/medieval_blocks_05/medieval_blocks_05_arm_2k.jpg",
+      "bytes": 667549,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/medieval_blocks_05",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel"
+    },
+    {
+      "file": "textures/forest_ground_04/diff.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/forest_ground_04/forest_ground_04_diff_2k.jpg",
+      "bytes": 4529321,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/forest_ground_04",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel, Rico Cilliers"
+    },
+    {
+      "file": "textures/forest_ground_04/nor.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/forest_ground_04/forest_ground_04_nor_gl_2k.jpg",
+      "bytes": 5288849,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/forest_ground_04",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel, Rico Cilliers"
+    },
+    {
+      "file": "textures/forest_ground_04/arm.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/forest_ground_04/forest_ground_04_arm_2k.jpg",
+      "bytes": 3418726,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/forest_ground_04",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel, Rico Cilliers"
+    },
+    {
+      "file": "textures/rock_wall_09/diff.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rock_wall_09/rock_wall_09_diff_2k.jpg",
+      "bytes": 3238536,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/rock_wall_09",
+      "license": "CC0 1.0",
+      "author": "Dimitrios Savva"
+    },
+    {
+      "file": "textures/rock_wall_09/nor.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rock_wall_09/rock_wall_09_nor_gl_2k.jpg",
+      "bytes": 4687262,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/rock_wall_09",
+      "license": "CC0 1.0",
+      "author": "Dimitrios Savva"
+    },
+    {
+      "file": "textures/rock_wall_09/arm.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/rock_wall_09/rock_wall_09_arm_2k.jpg",
+      "bytes": 2661970,
+      "kind": "texture",
+      "source": "https://polyhaven.com/a/rock_wall_09",
+      "license": "CC0 1.0",
+      "author": "Dimitrios Savva"
+    },
+    {
+      "file": "models/street_lamp_01/street_lamp_01_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/street_lamp_01/street_lamp_01_1k.gltf",
+      "bytes": 6419,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/street_lamp_01",
+      "license": "CC0 1.0",
+      "author": "Josh Dean"
+    },
+    {
+      "file": "models/street_lamp_01/textures/street_lamp_01_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/street_lamp_01/street_lamp_01_arm_1k.jpg",
+      "bytes": 664324,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/street_lamp_01",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "part": true
+    },
+    {
+      "file": "models/street_lamp_01/textures/street_lamp_01_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/street_lamp_01/street_lamp_01_diff_1k.jpg",
+      "bytes": 307889,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/street_lamp_01",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "part": true
+    },
+    {
+      "file": "models/street_lamp_01/textures/street_lamp_01_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/street_lamp_01/street_lamp_01_nor_gl_1k.jpg",
+      "bytes": 438623,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/street_lamp_01",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "part": true
+    },
+    {
+      "file": "models/street_lamp_01/street_lamp_01.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/street_lamp_01/street_lamp_01.bin",
+      "bytes": 748908,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/street_lamp_01",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "part": true
+    },
+    {
+      "file": "models/street_lamp_01/street_lamp_01_1k.gltf",
+      "entry": true,
+      "id": "street_lamp_01",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/street_lamp_01",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "primary": true
+    },
+    {
+      "file": "models/large_iron_gate/large_iron_gate_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/large_iron_gate/large_iron_gate_1k.gltf",
+      "bytes": 7101,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/large_iron_gate",
+      "license": "CC0 1.0",
+      "author": "Josh Dean"
+    },
+    {
+      "file": "models/large_iron_gate/textures/large_iron_gate_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/large_iron_gate/large_iron_gate_nor_gl_1k.jpg",
+      "bytes": 698636,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/large_iron_gate",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "part": true
+    },
+    {
+      "file": "models/large_iron_gate/textures/large_iron_gate_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/large_iron_gate/large_iron_gate_diff_1k.jpg",
+      "bytes": 610309,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/large_iron_gate",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "part": true
+    },
+    {
+      "file": "models/large_iron_gate/large_iron_gate.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/large_iron_gate/large_iron_gate.bin",
+      "bytes": 971848,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/large_iron_gate",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "part": true
+    },
+    {
+      "file": "models/large_iron_gate/textures/large_iron_gate_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/large_iron_gate/large_iron_gate_arm_1k.jpg",
+      "bytes": 840287,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/large_iron_gate",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "part": true
+    },
+    {
+      "file": "models/large_iron_gate/large_iron_gate_1k.gltf",
+      "entry": true,
+      "id": "large_iron_gate",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/large_iron_gate",
+      "license": "CC0 1.0",
+      "author": "Josh Dean",
+      "primary": true
+    },
+    {
+      "file": "models/Chandelier_01/Chandelier_01_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/Chandelier_01/Chandelier_01_1k.gltf",
+      "bytes": 4438,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/Chandelier_01",
+      "license": "CC0 1.0",
+      "author": "Kirill Sannikov"
+    },
+    {
+      "file": "models/Chandelier_01/textures/Chandelier_01_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Chandelier_01/Chandelier_01_nor_gl_1k.jpg",
+      "bytes": 171686,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/Chandelier_01",
+      "license": "CC0 1.0",
+      "author": "Kirill Sannikov",
+      "part": true
+    },
+    {
+      "file": "models/Chandelier_01/Chandelier_01.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/Chandelier_01/Chandelier_01.bin",
+      "bytes": 892104,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/Chandelier_01",
+      "license": "CC0 1.0",
+      "author": "Kirill Sannikov",
+      "part": true
+    },
+    {
+      "file": "models/Chandelier_01/textures/Chandelier_01_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Chandelier_01/Chandelier_01_arm_1k.jpg",
+      "bytes": 151301,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/Chandelier_01",
+      "license": "CC0 1.0",
+      "author": "Kirill Sannikov",
+      "part": true
+    },
+    {
+      "file": "models/Chandelier_01/textures/Chandelier_01_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Chandelier_01/Chandelier_01_diff_1k.jpg",
+      "bytes": 86766,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/Chandelier_01",
+      "license": "CC0 1.0",
+      "author": "Kirill Sannikov",
+      "part": true
+    },
+    {
+      "file": "models/Chandelier_01/Chandelier_01_1k.gltf",
+      "entry": true,
+      "id": "Chandelier_01",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/Chandelier_01",
+      "license": "CC0 1.0",
+      "author": "Kirill Sannikov",
+      "primary": true
+    },
+    {
+      "file": "models/bronze_whale_statue/bronze_whale_statue_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/bronze_whale_statue/bronze_whale_statue_1k.gltf",
+      "bytes": 3108,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/bronze_whale_statue",
+      "license": "CC0 1.0",
+      "author": "Tina"
+    },
+    {
+      "file": "models/bronze_whale_statue/textures/bronze_whale_statue_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/bronze_whale_statue/bronze_whale_statue_nor_gl_1k.jpg",
+      "bytes": 736986,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/bronze_whale_statue",
+      "license": "CC0 1.0",
+      "author": "Tina",
+      "part": true
+    },
+    {
+      "file": "models/bronze_whale_statue/textures/bronze_whale_statue_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/bronze_whale_statue/bronze_whale_statue_diff_1k.jpg",
+      "bytes": 493169,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/bronze_whale_statue",
+      "license": "CC0 1.0",
+      "author": "Tina",
+      "part": true
+    },
+    {
+      "file": "models/bronze_whale_statue/textures/bronze_whale_statue_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/bronze_whale_statue/bronze_whale_statue_arm_1k.jpg",
+      "bytes": 854626,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/bronze_whale_statue",
+      "license": "CC0 1.0",
+      "author": "Tina",
+      "part": true
+    },
+    {
+      "file": "models/bronze_whale_statue/bronze_whale_statue.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/bronze_whale_statue/bronze_whale_statue.bin",
+      "bytes": 102352,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/bronze_whale_statue",
+      "license": "CC0 1.0",
+      "author": "Tina",
+      "part": true
+    },
+    {
+      "file": "models/bronze_whale_statue/bronze_whale_statue_1k.gltf",
+      "entry": true,
+      "id": "bronze_whale_statue",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/bronze_whale_statue",
+      "license": "CC0 1.0",
+      "author": "Tina",
+      "primary": true
+    },
+    {
+      "file": "models/dead_tree_trunk_02/dead_tree_trunk_02_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/dead_tree_trunk_02/dead_tree_trunk_02_1k.gltf",
+      "bytes": 2849,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Rico Cilliers"
+    },
+    {
+      "file": "models/dead_tree_trunk_02/textures/dead_tree_trunk_02_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/dead_tree_trunk_02/dead_tree_trunk_02_diff_1k.jpg",
+      "bytes": 932059,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Rico Cilliers",
+      "part": true
+    },
+    {
+      "file": "models/dead_tree_trunk_02/textures/dead_tree_trunk_02_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/dead_tree_trunk_02/dead_tree_trunk_02_arm_1k.jpg",
+      "bytes": 805609,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Rico Cilliers",
+      "part": true
+    },
+    {
+      "file": "models/dead_tree_trunk_02/textures/dead_tree_trunk_02_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/dead_tree_trunk_02/dead_tree_trunk_02_nor_gl_1k.jpg",
+      "bytes": 1192056,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Rico Cilliers",
+      "part": true
+    },
+    {
+      "file": "models/dead_tree_trunk_02/dead_tree_trunk_02.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/dead_tree_trunk_02/dead_tree_trunk_02.bin",
+      "bytes": 1974352,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Rico Cilliers",
+      "part": true
+    },
+    {
+      "file": "models/dead_tree_trunk_02/dead_tree_trunk_02_1k.gltf",
+      "entry": true,
+      "id": "dead_tree_trunk_02",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Rico Cilliers",
+      "primary": true
+    },
+    {
+      "file": "models/tree_stump_01/tree_stump_01_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/tree_stump_01/tree_stump_01_1k.gltf",
+      "bytes": 2793,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/tree_stump_01",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel"
+    },
+    {
+      "file": "models/tree_stump_01/tree_stump_01.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/tree_stump_01/tree_stump_01.bin",
+      "bytes": 965380,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/tree_stump_01",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel",
+      "part": true
+    },
+    {
+      "file": "models/tree_stump_01/textures/tree_stump_01_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_stump_01/tree_stump_01_diff_1k.jpg",
+      "bytes": 907451,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/tree_stump_01",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel",
+      "part": true
+    },
+    {
+      "file": "models/tree_stump_01/textures/tree_stump_01_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_stump_01/tree_stump_01_nor_gl_1k.jpg",
+      "bytes": 1238404,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/tree_stump_01",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel",
+      "part": true
+    },
+    {
+      "file": "models/tree_stump_01/textures/tree_stump_01_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/tree_stump_01/tree_stump_01_arm_1k.jpg",
+      "bytes": 825646,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/tree_stump_01",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel",
+      "part": true
+    },
+    {
+      "file": "models/tree_stump_01/tree_stump_01_1k.gltf",
+      "entry": true,
+      "id": "tree_stump_01",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/tree_stump_01",
+      "license": "CC0 1.0",
+      "author": "Rob Tuytel",
+      "primary": true
+    },
+    {
+      "file": "models/namaqualand_boulder_02/namaqualand_boulder_02_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/namaqualand_boulder_02/namaqualand_boulder_02_1k.gltf",
+      "bytes": 2818,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_02",
+      "license": "CC0 1.0",
+      "author": "Greg Zaal, Rico Cilliers"
+    },
+    {
+      "file": "models/namaqualand_boulder_02/namaqualand_boulder_02.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/namaqualand_boulder_02/namaqualand_boulder_02.bin",
+      "bytes": 2297768,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_02",
+      "license": "CC0 1.0",
+      "author": "Greg Zaal, Rico Cilliers",
+      "part": true
+    },
+    {
+      "file": "models/namaqualand_boulder_02/textures/namaqualand_boulder_02_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulder_02/namaqualand_boulder_02_nor_gl_1k.jpg",
+      "bytes": 1031460,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_02",
+      "license": "CC0 1.0",
+      "author": "Greg Zaal, Rico Cilliers",
+      "part": true
+    },
+    {
+      "file": "models/namaqualand_boulder_02/textures/namaqualand_boulder_02_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulder_02/namaqualand_boulder_02_arm_1k.jpg",
+      "bytes": 796910,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_02",
+      "license": "CC0 1.0",
+      "author": "Greg Zaal, Rico Cilliers",
+      "part": true
+    },
+    {
+      "file": "models/namaqualand_boulder_02/textures/namaqualand_boulder_02_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulder_02/namaqualand_boulder_02_diff_1k.jpg",
+      "bytes": 1010348,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_02",
+      "license": "CC0 1.0",
+      "author": "Greg Zaal, Rico Cilliers",
+      "part": true
+    },
+    {
+      "file": "models/namaqualand_boulder_02/namaqualand_boulder_02_1k.gltf",
+      "entry": true,
+      "id": "namaqualand_boulder_02",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_02",
+      "license": "CC0 1.0",
+      "author": "Greg Zaal, Rico Cilliers",
+      "primary": true
+    },
+    {
+      "file": "models/namaqualand_boulder_03/namaqualand_boulder_03_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/namaqualand_boulder_03/namaqualand_boulder_03_1k.gltf",
+      "bytes": 2823,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_03",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Dario Barresi"
+    },
+    {
+      "file": "models/namaqualand_boulder_03/textures/namaqualand_boulder_03_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulder_03/namaqualand_boulder_03_diff_1k.jpg",
+      "bytes": 867015,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_03",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Dario Barresi",
+      "part": true
+    },
+    {
+      "file": "models/namaqualand_boulder_03/textures/namaqualand_boulder_03_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulder_03/namaqualand_boulder_03_nor_gl_1k.jpg",
+      "bytes": 851531,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_03",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Dario Barresi",
+      "part": true
+    },
+    {
+      "file": "models/namaqualand_boulder_03/namaqualand_boulder_03.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/namaqualand_boulder_03/namaqualand_boulder_03.bin",
+      "bytes": 1450268,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_03",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Dario Barresi",
+      "part": true
+    },
+    {
+      "file": "models/namaqualand_boulder_03/textures/namaqualand_boulder_03_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/namaqualand_boulder_03/namaqualand_boulder_03_arm_1k.jpg",
+      "bytes": 607318,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_03",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Dario Barresi",
+      "part": true
+    },
+    {
+      "file": "models/namaqualand_boulder_03/namaqualand_boulder_03_1k.gltf",
+      "entry": true,
+      "id": "namaqualand_boulder_03",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/namaqualand_boulder_03",
+      "license": "CC0 1.0",
+      "author": "Jenelle van Heerden, Dario Barresi",
+      "primary": true
+    },
+    {
+      "file": "models/wooden_picnic_table/wooden_picnic_table_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/wooden_picnic_table/wooden_picnic_table_1k.gltf",
+      "bytes": 5099,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/wooden_picnic_table",
+      "license": "CC0 1.0",
+      "author": "Ulan Cabanilla"
+    },
+    {
+      "file": "models/wooden_picnic_table/textures/wooden_picnic_table_top_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_picnic_table/wooden_picnic_table_top_arm_1k.jpg",
+      "bytes": 747432,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/wooden_picnic_table",
+      "license": "CC0 1.0",
+      "author": "Ulan Cabanilla",
+      "part": true
+    },
+    {
+      "file": "models/wooden_picnic_table/textures/wooden_picnic_table_top_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_picnic_table/wooden_picnic_table_top_nor_gl_1k.jpg",
+      "bytes": 625681,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/wooden_picnic_table",
+      "license": "CC0 1.0",
+      "author": "Ulan Cabanilla",
+      "part": true
+    },
+    {
+      "file": "models/wooden_picnic_table/wooden_picnic_table.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/wooden_picnic_table/wooden_picnic_table.bin",
+      "bytes": 279116,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/wooden_picnic_table",
+      "license": "CC0 1.0",
+      "author": "Ulan Cabanilla",
+      "part": true
+    },
+    {
+      "file": "models/wooden_picnic_table/textures/wooden_picnic_table_bottom_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_picnic_table/wooden_picnic_table_bottom_arm_1k.jpg",
+      "bytes": 699984,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/wooden_picnic_table",
+      "license": "CC0 1.0",
+      "author": "Ulan Cabanilla",
+      "part": true
+    },
+    {
+      "file": "models/wooden_picnic_table/textures/wooden_picnic_table_top_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_picnic_table/wooden_picnic_table_top_diff_1k.jpg",
+      "bytes": 722582,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/wooden_picnic_table",
+      "license": "CC0 1.0",
+      "author": "Ulan Cabanilla",
+      "part": true
+    },
+    {
+      "file": "models/wooden_picnic_table/textures/wooden_picnic_table_bottom_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_picnic_table/wooden_picnic_table_bottom_nor_gl_1k.jpg",
+      "bytes": 548315,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/wooden_picnic_table",
+      "license": "CC0 1.0",
+      "author": "Ulan Cabanilla",
+      "part": true
+    },
+    {
+      "file": "models/wooden_picnic_table/textures/wooden_picnic_table_bottom_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_picnic_table/wooden_picnic_table_bottom_diff_1k.jpg",
+      "bytes": 680087,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/wooden_picnic_table",
+      "license": "CC0 1.0",
+      "author": "Ulan Cabanilla",
+      "part": true
+    },
+    {
+      "file": "models/wooden_picnic_table/wooden_picnic_table_1k.gltf",
+      "entry": true,
+      "id": "wooden_picnic_table",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/wooden_picnic_table",
+      "license": "CC0 1.0",
+      "author": "Ulan Cabanilla",
+      "primary": true
+    },
+    {
+      "file": "models/stone_fire_pit/stone_fire_pit_1k.gltf",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/stone_fire_pit/stone_fire_pit_1k.gltf",
+      "bytes": 2792,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/stone_fire_pit",
+      "license": "CC0 1.0",
+      "author": "Sebastian Platen"
+    },
+    {
+      "file": "models/stone_fire_pit/stone_fire_pit.bin",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/stone_fire_pit/stone_fire_pit.bin",
+      "bytes": 96220,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/stone_fire_pit",
+      "license": "CC0 1.0",
+      "author": "Sebastian Platen",
+      "part": true
+    },
+    {
+      "file": "models/stone_fire_pit/textures/stone_fire_pit_diff_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/stone_fire_pit/stone_fire_pit_diff_1k.jpg",
+      "bytes": 785670,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/stone_fire_pit",
+      "license": "CC0 1.0",
+      "author": "Sebastian Platen",
+      "part": true
+    },
+    {
+      "file": "models/stone_fire_pit/textures/stone_fire_pit_nor_gl_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/stone_fire_pit/stone_fire_pit_nor_gl_1k.jpg",
+      "bytes": 969822,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/stone_fire_pit",
+      "license": "CC0 1.0",
+      "author": "Sebastian Platen",
+      "part": true
+    },
+    {
+      "file": "models/stone_fire_pit/textures/stone_fire_pit_arm_1k.jpg",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/stone_fire_pit/stone_fire_pit_arm_1k.jpg",
+      "bytes": 681441,
+      "kind": "model",
+      "source": "https://polyhaven.com/a/stone_fire_pit",
+      "license": "CC0 1.0",
+      "author": "Sebastian Platen",
+      "part": true
+    },
+    {
+      "file": "models/stone_fire_pit/stone_fire_pit_1k.gltf",
+      "entry": true,
+      "id": "stone_fire_pit",
+      "res": "1k",
+      "kind": "model",
+      "source": "https://polyhaven.com/a/stone_fire_pit",
+      "license": "CC0 1.0",
+      "author": "Sebastian Platen",
+      "primary": true
+    },
+    {
+      "file": "characters/Soldier.glb",
+      "url": "https://raw.githubusercontent.com/mrdoob/three.js/r160/examples/models/gltf/Soldier.glb",
+      "bytes": 2160468,
+      "kind": "character",
+      "source": "https://github.com/mrdoob/three.js/blob/r160/examples/models/gltf/Soldier.glb",
+      "license": "three.js repository (MIT); character by Adobe Mixamo",
+      "author": "Adobe Mixamo, via the three.js examples",
+      "id": "Soldier",
+      "note": "locomotion source: Idle / Walk / Run"
+    },
+    {
+      "file": "characters/Michelle.glb",
+      "url": "https://raw.githubusercontent.com/mrdoob/three.js/r160/examples/models/gltf/Michelle.glb",
+      "bytes": 3276888,
+      "kind": "character",
+      "source": "https://github.com/mrdoob/three.js/blob/r160/examples/models/gltf/Michelle.glb",
+      "license": "three.js repository (MIT); character by Adobe Mixamo",
+      "author": "Adobe Mixamo, via the three.js examples",
+      "id": "Michelle",
+      "note": "textured realistic figure"
+    },
+    {
+      "file": "characters/Xbot.glb",
+      "url": "https://raw.githubusercontent.com/mrdoob/three.js/r160/examples/models/gltf/Xbot.glb",
+      "bytes": 2930032,
+      "kind": "character",
+      "source": "https://github.com/mrdoob/three.js/blob/r160/examples/models/gltf/Xbot.glb",
+      "license": "three.js repository (MIT); character by Adobe Mixamo",
+      "author": "Adobe Mixamo, via the three.js examples",
+      "id": "Xbot",
+      "note": "third silhouette"
+    }
+  ],
+  "failed": []
+}

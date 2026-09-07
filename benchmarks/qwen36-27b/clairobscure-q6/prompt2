@@ -1,0 +1,57 @@
+AUFTRAG: Vom Turn-Based-Kampf-Demo zu einem spielbaren, grafisch erstklassigen 3D-Vertical-Slice.
+Du kannst alles Hilfsmittel inklusive Web Search einsetzen!
+
+Baue aus dem aktuellen Battle-Clone einen EXPLORIERBAREN, cinematisch aussehenden 3D-Abschnitt
+mit ECHTEN Assets aus dem Netz — die bestmögliche Grafik, die stabil bei 60 FPS läuft. Der
+bestehende Kampf bleibt erhalten und wird zur Begegnung im Areal.
+
+REALISTISCHER SCOPE (Pflicht): AAA-Vollspiel in einem Zug. Wähle EINEN Vertical Slice
+(ein mittleres begehbares Areal + einige Begegnungen) und mach ihn WIRKLICH gut und lauffähig, statt
+vieles halbfertig/kaputt. Baue inkrementell, Datei für Datei, verifiziere jeden Meilenstein.
+Schneide, was du nicht sauber fertigbekommst, und nimm es aus dem Manifest.
+
+1) ASSETS AUS DEM NETZ 
+- ALLE Externe Assets sind fuer dieses Projekt ERLAUBT (ueberschreibt die alte
+  "nur prozedural"-Regel). 
+- Beispiel-Quellen: Poly Haven (HDRIs/Texturen/Modelle, JSON-API), ambientCG (PBR-Texturen/
+  HDRIs, API), Quaternius & Kenney , Poly Pizza (Modelle). Sketchfab
+- ERFINDE NIEMALS URLs. Oeffne die Seite mit agent_browser, hol die ECHTE
+  Download-URL — oder nutze die dokumentierte JSON-API der Seite. Jeden Download pruefen:
+  HTTP 200, Groesse > 0, richtiges Format. Fehlschlag -> Asset ueberspringen, NICHT raten.
+- Lege Assets unter assets/ ab (serve.mjs liefert sie). Fuehre ASSETS.md:
+  Datei | Quelle-URL | Lizenz | Autor. Ohne Eintrag kein Asset.
+- Formate: Modelle glTF/GLB, Texturen WebP/PNG, Umgebung HDR/EXR. Bevorzuge UNkomprimiertes
+  glTF (kein Draco/KTX2-Decoder-Setup noetig).
+
+2) TECHNIK (three.js 0.160.0, NUR ueber die Importmap in index.html)
+- Loader ueber three/addons/: GLTFLoader (Modelle), RGBELoader (HDRI), TextureLoader.
+  OrbitControls oder eine einfache WASD/Third-Person-Steuerung fuers Erkunden.
+- PBR: MeshStandardMaterial/MeshPhysicalMaterial. HDRI als scene.environment (echte
+  Reflexionen + Beleuchtung) statt flacher Ambient. Schatten an: ein klares Key-Light +
+  weicher Fill.
+- Post: EffectComposer + RenderPass + UnrealBloomPass + OutputPass, ACESFilmicToneMapping,
+  getunte Exposure. Bist du dir bei einer Pass-Signatur/Import NICHT sicher, lass Post weg —
+  ein korrekter Renderer schlaegt einen Composer, der wirft.
+- KEINE erfundenen APIs. Nur Aufrufe, deren Existenz in three 0.160.0 sicher ist.
+
+3) GRAFIK-ZIEL (behebe die aktuellen Maengel!)
+Ist-Zustand: zu dunkel, Figuren sind schwarze Blobs auf grauen Platzhalter-Wuerfeln.
+Ziel: helle, lesbare, gut beleuchtete Szene; echte Modelle statt Blobs; texturierter Boden
+statt grauer Boxen; HDRI-Beleuchtung; klare Figuren-Ausleuchtung. Weniger dunkler
+"Atmosphaere"-Clutter, mehr saubere, hochwertige Praesentation.
+
+4) VERIFIKATION (verpflichtend, pro Meilenstein — siehe AGENTS.md)
+- node --check auf jeder geaenderten Datei.
+- Server im Hintergrund: ./serve-bg.bat  (NIE node serve.mjs im Vordergrund).
+- Screenshot machen UND kritisch wie ein fremder Art-Director bewerten — was sieht
+  kaputt/billig/unfertig aus? "Angewandt/sichtbar" ist KEINE Bewertung.
+- Ablauf END-TO-END durchspielen: Canvas anklicken (Fokus!), erkunden, Begegnung ausloesen,
+  Kampf spielen. Wirkung per window.__game per eval BEWEISEN (HP sinkt, Zug wechselt), nicht
+  raten.
+- 60 FPS mit allem aktiv, Delta-Zeit ueberall, ungenutzte Ressourcen disposen.
+
+DEFINITION OF DONE: Ein begehbares, gut aussehendes Areal mit echten CC0/CC-BY-Assets (in
+ASSETS.md dokumentiert), das fluessig laeuft, in dem man eine Begegnung ausloest und den Kampf
+spielt — nachweislich (State-Assertions + kritisch gepruefter Screenshot), NULL Konsolenfehler.
+Du bist NICHT fertig, solange ein skeptischer Blick etwas Kaputtes/Haessliches findet oder ein
+Flow nicht nachweislich funktioniert.
