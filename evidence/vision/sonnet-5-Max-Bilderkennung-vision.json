@@ -1,0 +1,139 @@
+{
+  "slug": "sonnet-5-Max-Bilderkennung",
+  "modell": "Claude Sonnet 5",
+  "datum": "2026-09-07",
+  "a1_ablesen": {
+    "kopfbereich": {
+      "ueberschrift": "DER HEUTIGE GAMING-PC SCHLÄGT DAS RECHENZENTRUM VON GESTERN",
+      "unterzeile": "Open-Weight-Modelle auf einer 32-GB-Gaming-GPU — kein API-Schlüssel, keine Token-Kosten. Wie nah sind sie an der proprietären Spitze?",
+      "aktiver_reiter": "Lokal · Kostenlos",
+      "inaktive_reiter": ["Open Weight", "ROI / Break-even"]
+    },
+    "filter": [
+      { "name": "Frontier", "aktiv": true },
+      { "name": "Kimi", "aktiv": false, "badge": "möglich kleines Abzeichen neben dem Punkt, Ziffer nicht lesbar" },
+      { "name": "Qwen", "aktiv": true },
+      { "name": "Meta", "aktiv": false },
+      { "name": "Gemma", "aktiv": true },
+      { "name": "Mistral", "aktiv": true, "badge": "möglich kleines Abzeichen neben dem Punkt, Ziffer nicht lesbar" },
+      { "name": "DeepSeek", "aktiv": false },
+      { "name": "GLM", "aktiv": false }
+    ],
+    "tooltip_tabelle": {
+      "spalten": ["Claude Opus 4.5", "Qwen3.6 27B"],
+      "zeilen": [
+        { "name": "Intelligence Index", "werte": [40.8, 37.1] },
+        { "name": "GPQA Diamond", "werte": [87, 84] },
+        { "name": "Humanity's Last Exam", "werte": [29, 22] },
+        { "name": "Terminal-Bench 2.0", "werte": [50, 61] }
+      ],
+      "fusszeile": "AA Intelligence Index v4.0 · Punkt erneut anklicken zum Entfernen (klein, nicht vollständig sicher gelesen)"
+    },
+    "kennzahlkacheln": [
+      {
+        "titel": "QWEN3.6 27B · OPEN",
+        "wert": "37.1",
+        "beschreibung": "AA Intelligence Index — Open-Weight, kein API-Key, läuft auf ihrer eigenen GPU."
+      },
+      {
+        "titel": "VS. OPUS 4.5 (40,8)",
+        "titel_unsicher": true,
+        "wert": "91%",
+        "beschreibung": "des Opus-4.5-Niveaus im Gesamtindex. Bei Coding-Benchmarks: gleichauf."
+      },
+      {
+        "titel": "PROPRIETÄRE SPITZE · HEUTE",
+        "wert": "59.9",
+        "beschreibung": "Das Rechenzentrum klettert weiter — doch der Abstand schrumpft jedes Quartal."
+      }
+    ],
+    "achsen": {
+      "y_beschriftung": "INTELLIGENCE INDEX (AA v4.0)",
+      "y_beschriftung_unsicher": true,
+      "y_werte": [10, 20, 30, 40, 50, 60, 70],
+      "x_beschriftung": null,
+      "x_werte": ["'23", "'24", "'25", "'26", "NOW"],
+      "x_erster_wert_unsicher": true
+    },
+    "legende": [
+      { "serie": "Proprietäre Flaggschiffe", "farbe": "gold/gelb" },
+      { "serie": "Qwen", "farbe": "türkis", "zusatz": "open" },
+      { "serie": "Gemma", "farbe": "grün", "zusatz": "open" },
+      { "serie": "Mistral", "farbe": "orange", "zusatz": "nicht sicher lesbar" }
+    ]
+  },
+  "a2_nachbau": {
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 820 500' font-family='Arial, Helvetica, sans-serif'><rect width='820' height='500' fill='#0b0f14'/><g stroke='#1b2530' stroke-width='1'><line x1='70' y1='420' x2='780' y2='420'/><line x1='70' y1='356.7' x2='780' y2='356.7'/><line x1='70' y1='293.3' x2='780' y2='293.3'/><line x1='70' y1='230' x2='780' y2='230'/><line x1='70' y1='166.7' x2='780' y2='166.7'/><line x1='70' y1='103.3' x2='780' y2='103.3'/><line x1='70' y1='40' x2='780' y2='40'/></g><text x='64' y='424' font-size='11' fill='#8fa3b8' text-anchor='end'>10</text><text x='64' y='360.7' font-size='11' fill='#8fa3b8' text-anchor='end'>20</text><text x='64' y='297.3' font-size='11' fill='#8fa3b8' text-anchor='end'>30</text><text x='64' y='234' font-size='11' fill='#8fa3b8' text-anchor='end'>40</text><text x='64' y='170.7' font-size='11' fill='#8fa3b8' text-anchor='end'>50</text><text x='64' y='107.3' font-size='11' fill='#8fa3b8' text-anchor='end'>60</text><text x='64' y='44' font-size='11' fill='#8fa3b8' text-anchor='end'>70</text><text x='100' y='440' font-size='11' fill='#8fa3b8' text-anchor='middle'>'23</text><text x='280' y='440' font-size='11' fill='#8fa3b8' text-anchor='middle'>'24</text><text x='460' y='440' font-size='11' fill='#8fa3b8' text-anchor='middle'>'25</text><text x='630' y='440' font-size='11' fill='#8fa3b8' text-anchor='middle'>'26</text><text x='760' y='440' font-size='11' fill='#8fa3b8' text-anchor='middle'>NOW</text><text transform='translate(22 230) rotate(-90)' font-size='12' fill='#8fa3b8' text-anchor='middle'>Intelligence Index (AA v4.0)</text><polyline points='100,369 280,306 460,262 610,179 680,122 750,84' fill='none' stroke='#e0b23d' stroke-width='2.5'/><circle cx='100' cy='369' r='4' fill='#e0b23d'/><circle cx='280' cy='306' r='4' fill='#e0b23d'/><circle cx='460' cy='262' r='4' fill='#e0b23d'/><circle cx='610' cy='179' r='4' fill='#e0b23d'/><circle cx='680' cy='122' r='4' fill='#e0b23d'/><circle cx='750' cy='84' r='4' fill='#e0b23d'/><text x='100' y='359' font-size='10' fill='#e0b23d' text-anchor='middle'>GPT-4</text><text x='280' y='296' font-size='10' fill='#e0b23d' text-anchor='middle'>GPT-4o</text><text x='460' y='252' font-size='10' fill='#e0b23d' text-anchor='middle'>Claude 3.5 Sonnet</text><text x='610' y='169' font-size='10' fill='#e0b23d' text-anchor='middle'>Opus 4.6</text><text x='680' y='112' font-size='10' fill='#e0b23d' text-anchor='middle'>GPT-5.5</text><text x='750' y='74' font-size='10' fill='#e0b23d' text-anchor='middle'>Claude Fable 5</text><polyline points='630,230 700,198' fill='none' stroke='#2dd4bf' stroke-width='2.5'/><circle cx='630' cy='230' r='4' fill='#2dd4bf'/><circle cx='700' cy='198' r='4' fill='#2dd4bf'/><text x='630' y='246' font-size='10' fill='#2dd4bf' text-anchor='middle'>Qwen-Next 80B</text><text x='700' y='214' font-size='10' fill='#2dd4bf' text-anchor='middle'>Qwen3.6 27B ★</text><polyline points='560,293 700,255 730,217' fill='none' stroke='#4ade80' stroke-width='2.5'/><circle cx='560' cy='293' r='4' fill='#4ade80'/><circle cx='700' cy='255' r='4' fill='#4ade80'/><circle cx='730' cy='217' r='4' fill='#4ade80'/><text x='560' y='309' font-size='10' fill='#4ade80' text-anchor='middle'>Gemma 3 27B</text><text x='700' y='271' font-size='10' fill='#4ade80' text-anchor='middle'>Gemma 4 12B</text><text x='730' y='207' font-size='10' fill='#4ade80' text-anchor='end'>Gemma 4 31B ★</text><polyline points='580,344 650,319' fill='none' stroke='#fb923c' stroke-width='2.5'/><circle cx='580' cy='344' r='4' fill='#fb923c'/><circle cx='650' cy='319' r='4' fill='#fb923c'/><text x='580' y='360' font-size='10' fill='#fb923c' text-anchor='middle'>Ministral 3 14B</text><text x='650' y='335' font-size='10' fill='#fb923c' text-anchor='middle'>Mistral Small 4</text><line x1='70' y1='470' x2='100' y2='470' stroke='#e0b23d' stroke-width='3'/><text x='106' y='474' font-size='12' fill='#cfe0ee'>Proprietäre Flaggschiffe</text><line x1='290' y1='470' x2='320' y2='470' stroke='#2dd4bf' stroke-width='3'/><text x='326' y='474' font-size='12' fill='#cfe0ee'>Qwen <tspan font-size='10' fill='#5c7488'>open</tspan></text><line x1='410' y1='470' x2='440' y2='470' stroke='#4ade80' stroke-width='3'/><text x='446' y='474' font-size='12' fill='#cfe0ee'>Gemma <tspan font-size='10' fill='#5c7488'>open</tspan></text><line x1='540' y1='470' x2='570' y2='470' stroke='#fb923c' stroke-width='3'/><text x='576' y='474' font-size='12' fill='#cfe0ee'>Mistral</text></svg>"
+  },
+  "b_schilder": {
+    "gefunden": [
+      {
+        "name": "MASS EFFECT",
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false,
+        "position": "silber-rotes mechanisches Helmvisier, links-mittig im Wertungsbereich; Name auf dem Schild lesbar, Preiszeile darunter zu klein/unscharf"
+      },
+      {
+        "name": "JOKER",
+        "gbp": 30,
+        "eur": 40,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": false,
+        "waehrung_unsicher": true,
+        "position": "cremefarbene Maske mit grünem Haar, ganz unten links"
+      },
+      {
+        "name": null,
+        "gbp": 45,
+        "eur": 35,
+        "reihenfolge": "eur_zuerst",
+        "sicher": false,
+        "waehrung_unsicher": true,
+        "position": "weiße Maske mit roter Bemalung/Streifen über den Augen, neben JOKER; kein Name auf dem Schild sicher erkennbar"
+      },
+      {
+        "name": null,
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false,
+        "position": "rote Maske links-mittig, Schildtext beginnt mit 'REDHOOD', Rest des Namens und Preis nicht lesbar"
+      },
+      {
+        "name": null,
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false,
+        "position": "zweite rote 'REDHOOD'-Maske, unterer Bildbereich; Zusatzbezeichnung und Preis nicht lesbar"
+      },
+      {
+        "name": null,
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false,
+        "position": "dritte rote 'REDHOOD'-Maske ganz unten am Bildrand; Zusatzbezeichnung und Preis nicht lesbar"
+      }
+    ],
+    "sichtbar_gesamt": 8,
+    "nicht_lesbar": 2
+  },
+  "selbsteinschaetzung": {
+    "schwierigstes": "Im Diagramm die eng gedrängten Punktbeschriftungen oben rechts (Qwen-, Gemma- und Mistral-Punkte liegen dicht beieinander, Labels überschneiden sich fast). In Bild B die Preisziffern selbst: die Schilder liegen schräg zur Kamera und sind bei mehreren Masken so klein/unscharf abgebildet, dass ich nicht einmal den vollständigen Produktnamen sicher lesen konnte, geschweige denn die Beträge.",
+    "unsicher_bei": [
+      "Bild A: erster X-Achsen-Wert — gelesen als '23, könnte auch '22 sein",
+      "Bild A: Klammerwert in Kachel 2 — gelesen als '(40,8)', Ziffer nicht eindeutig",
+      "Bild A: Y-Achsenbeschriftung '(AA v4.0)' im Klammerteil unsicher",
+      "Bild A: Fußzeile unter der Tooltip-Tabelle nur teilweise lesbar",
+      "Bild A: mögliche kleine Zahlen-Abzeichen neben KIMI und MISTRAL im Filter — Ziffern zu klein für eine sichere Lesung",
+      "Bild A: Zusatztext neben dem Mistral-Legendeneintrag nicht sicher entzifferbar",
+      "Bild B: bei den meisten Schildern im Wertungsbereich waren die Pfund-/Euro-Ziffern zu klein bzw. zu schräg fotografiert, um sie ohne Raten zu übernehmen — deshalb dort null statt einer erfundenen Zahl",
+      "Bild B: Reihenfolge £/€ bei mehreren Schildern nicht sicher bestimmbar",
+      "Bild B: genaue Zusatzbezeichnungen der drei 'REDHOOD'-Masken (z. B. V1 / Armor / Battle Damaged / Airman) nicht sicher unterscheidbar",
+      "Bild B: die Abgrenzung des Wertungsbereichs (x bis 700, y ab 950) konnte ich nur optisch schätzen, ohne Koordinatenwerkzeug — einzelne Schilder nahe der Grenze könnten falsch zugeordnet sein"
+    ]
+  }
+}
