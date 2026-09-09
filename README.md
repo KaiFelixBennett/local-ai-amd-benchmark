@@ -62,7 +62,7 @@ Three things you can take away today, in descending order of how much time they 
 | | |
 |---|---|
 | **1. Copy a launch line that is known to work** | [`data/configs.json`](data/configs.json) holds **19 complete `llama-server` configurations** — every flag, for both machines, exactly as measured. Not a tutorial; the actual command lines. |
-| **2. Skip four settings mistakes** | Two published presets and one piece of vendor guidance are wrong for agentic coding on this hardware. [Findings](#five-findings-that-contradict-the-model-cards) — each with the protocol behind it. |
+| **2. Skip three settings mistakes** | Two published presets and one piece of vendor guidance are wrong for agentic coding on this hardware. [Findings](#five-findings-that-contradict-the-model-cards) — each with the protocol behind it. |
 | **3. Plan for the number that matters** | Peak t/s is measured on an empty context. [Throughput at depth](#context-depth-is-the-number-that-matters) is what an agent actually gets, and it is a third of the headline. |
 
 **The fastest useful thing in this repo** — the exact line behind the run at the top of this page:
@@ -157,7 +157,7 @@ across them are not comparable. **The log behind every row is one click below ea
 
 ### Moorhuhn — 2D arcade shooter
 
-| Model | t/s | Qual † | Rep. | Wall<br>min |
+| Model | t/s | Qual † | Rep.* | Wall<br>min |
 |---|--:|--:|--:|--:|
 | **Qwen3.8**<br>**Flash‑Next** | **21.76** | 16 | — | **815** |
 | **Qwen3.8‑27B** | **33.69** | 16 | **4** | 540 ‡ |
@@ -178,7 +178,10 @@ across them are not comparable. **The log behind every row is one click below ea
 
 </details>
 
-<sub>Percentile spread, decode p10 – p90: Flash-Next 17.15 – 26.28 · Qwen3.8-27B 27.83 – 45.34 ·
+<sub><b>t/s</b> decode median · <b>Qual †</b> provisional quality, 20-point scale, see the
+caution below · <b>Rep.\*</b> self-repair scripts the model left behind · <b>Wall</b> minutes
+from the first request to the end of the last.<br>
+Percentile spread, decode p10 – p90: Flash-Next 17.15 – 26.28 · Qwen3.8-27B 27.83 – 45.34 ·
 Qwen3.6-27B 29.02 – 38.25. Peaks 33.89 / 84.92 / 41.39 t/s.<br>
 ‡ The Qwen3.8-27B run spans two server sessions totalling 9 h; the published log covers the
 first 191 minutes. Its GPU time is for that log only — it is the one row where wall clock and
@@ -186,7 +189,7 @@ GPU time are not measured over the same window.</sub>
 
 ### Clair Obscur — 3D turn-based RPG
 
-| Model | t/s | Qual † | Rep. | Wall<br>min |
+| Model | t/s | Qual † | Rep.* | Wall<br>min |
 |---|--:|--:|--:|--:|
 | **Qwen3.8‑27B** | **26.30** | **17** | 6 | 115 |
 | **Qwen3.8**<br>**Flash‑Next** | **10.93** | 16 | — | 370 |
@@ -506,7 +509,7 @@ came back** — and it is the largest prompt in the whole dataset, visible as th
 
 **Decode vs. depth** — Ryzen AI Max+ 395, Qwen3.8-Flash-Next UD-Q4_K_XL, build `580e88d`:
 
-| Context | Decode t/s | Kept | |
+| Context | Decode t/s | Retained | |
 |---|--:|--:|---|
 | 512 | 22.14 | 100 % | `████████` |
 | 1 K | **22.50** | 102 % | `████████` |
