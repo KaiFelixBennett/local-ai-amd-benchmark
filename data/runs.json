@@ -10,17 +10,14 @@
    "median": 33.69,
    "p10": 27.83,
    "p90": 45.34,
-   "min": 24.77,
    "peak": 84.92,
    "n": 82
   },
   "prefill": {
-   "median": 241.47,
-   "max": 499.49,
-   "n": 101
+   "median": 234.86,
+   "max": 499.49
   },
   "tokens": 332405,
-  "minutes": 189,
   "fixes": 4,
   "quality": 16,
   "spec": "draft-mtp + ngram-mod 24/48/64 · n_max 2",
@@ -71,7 +68,11 @@
   },
   "evidence": {
    "log": "evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log",
-   "sha256": "8c8d3460492763d102d026adb4f0941f2647c846ad404119adc8eb2d3dff0a40"
+   "sha256": "8c8d3460492763d102d026adb4f0941f2647c846ad404119adc8eb2d3dff0a40",
+   "bytes": 531494,
+   "antworten_gesamt": 108,
+   "gewertet": 82,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
   "tokens_all": 336107,
   "responses_all": 108,
@@ -79,7 +80,8 @@
    "decode": 162.1,
    "prefill": 26.8
   },
-  "largest_prompt_tokens": 139720
+  "largest_prompt_tokens": 139720,
+  "wall_minutes": 540
  },
  {
   "slug": "qwen36-27b-q6-moorhuhn-r9700",
@@ -96,11 +98,10 @@
    "n": 221
   },
   "prefill": {
-   "median": 174.92,
+   "median": 152.71,
    "max": 423.64
   },
   "tokens": 175743,
-  "minutes": 139,
   "fixes": 15,
   "quality": 14,
   "spec": "draft-mtp · n_max 2",
@@ -130,7 +131,8 @@
    "decode": 98.1,
    "prefill": 41.0
   },
-  "largest_prompt_tokens": 43238
+  "largest_prompt_tokens": 43238,
+  "wall_minutes": 153
  },
  {
   "slug": "qwen38-flashnext-moorhuhn-evox2",
@@ -147,11 +149,10 @@
    "n": 346
   },
   "prefill": {
-   "median": 87.22,
+   "median": 77.63,
    "max": 184.76
   },
   "tokens": 770428,
-  "minutes": 816,
   "fixes": null,
   "quality": 16,
   "spec": "MTP, Shared-Q8_0, n-max 2",
@@ -223,13 +224,13 @@
    "gewertet": 346,
    "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
-  "tokens_all": 287782,
-  "responses_all": 115,
+  "tokens_all": 786506,
+  "responses_all": 459,
   "gpu_minutes": {
-   "decode": 246.7,
-   "prefill": 38.9
+   "decode": 664.5,
+   "prefill": 134.3
   },
-  "largest_prompt_tokens": 34598,
+  "largest_prompt_tokens": 69985,
   "tokens_aus": 786506,
   "tokens_ein": 1051292,
   "kontext_gelesen": 24935272,
@@ -239,7 +240,8 @@
    "Im Ladebildschirm steht „Featherstorm wordt geladen“ — Niederländisch statt Deutsch. Genau eine Stelle im ganzen Spiel; der Rest ist durchgehend deutsch.",
    "Der Lauf brauchte drei Sitzungen (20, 376 und 419 Minuten). Zwischen den Sitzungen ging der Kontext verloren und musste neu aufgebaut werden.",
    "Das Menü ist rund 700 Pixel hoch und wird bei jeder Fensterhöhe unter 720 Pixeln abgeschnitten — der letzte Eintrag „Credits“ ist dann unerreichbar, weil html und body auf overflow:hidden stehen. Gemessen bei 1000×562, 800×450, 640×360 und 390×219."
-  ]
+  ],
+  "wall_minutes": 815
  },
  {
   "slug": "qwen38-flashnext-clairobscure-evox2",
@@ -256,11 +258,10 @@
    "n": 92
   },
   "prefill": {
-   "median": 112.33,
+   "median": 109.74,
    "max": 197.12
   },
   "tokens": 236460,
-  "minutes": 368,
   "fixes": null,
   "quality": 16,
   "spec": "draft-mtp · 177 Mrd. gesamt, ~6 Mrd. aktiv",
@@ -288,7 +289,8 @@
    "decode": 337.8,
    "prefill": 30.2
   },
-  "largest_prompt_tokens": 35009
+  "largest_prompt_tokens": 35009,
+  "wall_minutes": 370
  },
  {
   "slug": "qwen38-27b-q6-clairobscure-r9700",
@@ -299,17 +301,16 @@
   "kind": "agent",
   "decode": {
    "median": 26.3,
-   "p10": 18.03,
-   "p90": 35.31,
+   "p10": 15.55,
+   "p90": 34.22,
    "peak": 42.39,
    "n": 30
   },
   "prefill": {
-   "median": 159.41,
+   "median": 159.4,
    "max": 350.83
   },
   "tokens": 118919,
-  "minutes": 114,
   "fixes": 6,
   "quality": 17,
   "spec": "draft-mtp + ngram-mod · Annahme 0,553",
@@ -373,7 +374,8 @@
    "decode": 88.8,
    "prefill": 25.7
   },
-  "largest_prompt_tokens": 180396
+  "largest_prompt_tokens": 180396,
+  "wall_minutes": 115
  },
  {
   "slug": "qwen36-27b-q6-clairobscure-r9700",
@@ -385,7 +387,6 @@
   "decode": null,
   "prefill": null,
   "tokens": null,
-  "minutes": null,
   "fixes": null,
   "quality": 15,
   "spec": "draft-mtp · n_max 2",
@@ -422,7 +423,6 @@
    "max": 245.7
   },
   "tokens": null,
-  "minutes": null,
   "fixes": null,
   "quality": 18,
   "spec": "draft-mtp · n_max 2 · Annahme 0,866",
@@ -461,7 +461,6 @@
    "max": 309.6
   },
   "tokens": null,
-  "minutes": null,
   "fixes": null,
   "quality": 17,
   "spec": "draft-dflash · n_max 3 · Annahme 0,53",
@@ -499,11 +498,10 @@
    "n": 98
   },
   "prefill": {
-   "median": 17.5,
+   "median": 15.24,
    "max": 40.91
   },
   "tokens": 150800,
-  "minutes": 500,
   "fixes": 12,
   "quality": 13,
   "spec": "draft-dspark · n_max 3",
@@ -530,7 +528,8 @@
    "decode": 328.8,
    "prefill": 171.5
   },
-  "largest_prompt_tokens": 36962
+  "largest_prompt_tokens": 36962,
+  "wall_minutes": 502
  },
  {
   "slug": "opus5-ultracode",
@@ -542,7 +541,6 @@
   "decode": null,
   "prefill": null,
   "tokens": null,
-  "minutes": 52,
   "fixes": 1,
   "quality": 19,
   "spec": "—",
@@ -570,7 +568,6 @@
   "decode": null,
   "prefill": null,
   "tokens": null,
-  "minutes": 61,
   "fixes": 2,
   "quality": 18,
   "spec": "—",
@@ -598,7 +595,6 @@
   "decode": null,
   "prefill": null,
   "tokens": null,
-  "minutes": 47,
   "fixes": 2,
   "quality": 17,
   "spec": "—",

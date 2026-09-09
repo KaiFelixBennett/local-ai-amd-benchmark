@@ -14,8 +14,20 @@ Zwei Regeln, die jede Zahl hier bestimmen:
    Ausreisser bis zu 1 000 000 t/s (ein Token in nahezu null Millisekunden).
    Solche Zeilen sind keine Messung, sondern ein Rundungsartefakt.
 
+   Die Schwelle gilt fuer ANTWORTEN, nicht fuer Prompts. Ein kurzer Prompt
+   erzeugt kein solches Artefakt, seine Rate ist eine gueltige Messung. Die
+   Schwelle wurde frueher auch auf den Prefill angewandt und hat dessen Median
+   in jedem Lauf zu hoch ausgewiesen - beim Moorhuhn-Lauf von Qwen3.6-27B um
+   22 t/s.
+
 2. Perzentile nach Rangplatz (nearest-rank) auf der sortierten Liste, nicht
-   interpoliert. p10 ist der Wert an Position floor(0,10 * n).
+   interpoliert. p10 ist der ceil(0,10 * n)-te Wert, einsbasiert gezaehlt.
+
+   Hier stand frueher floor(0,10 * n) auf einem nullbasierten Feld. Das ist um
+   einen Platz daneben, sobald n * anteil glatt aufgeht - bei 30 gewerteten
+   Antworten und p10 also genau dann, wenn es zaehlt. Nachgemessen beim
+   Clair-Obscure-Lauf von Qwen3.8-27B: p10 stand bei 18,03 statt 15,55, p90
+   bei 35,31 statt 34,22.
 """
 import io
 import os
@@ -67,8 +79,15 @@ def r2(x):
 
 
 def rang(sortiert, anteil):
-    """Perzentil nach Rangplatz - kein Interpolieren zwischen Nachbarn."""
-    return sortiert[min(len(sortiert) - 1, int(len(sortiert) * anteil))]
+    """Perzentil nach Rangplatz - kein Interpolieren zwischen Nachbarn.
+
+    Einsbasiert: der ceil(anteil * n)-te Wert. Gleichlautend mit percentile()
+    in scripts/parse_logs.py; die beiden muessen im Gleichschritt bleiben.
+    """
+    import math
+    n = len(sortiert)
+    platz = int(math.ceil(n * anteil))
+    return sortiert[min(n - 1, max(0, platz - 1))]
 
 
 def aus_tabelle(pfad):
@@ -88,7 +107,8 @@ def messwerte(pfad):
         pre = [(int(m.group(1)), float(m.group(2))) for m in PREFILL.finditer(text)]
 
     dg = sorted(v for n, v in dec if n >= MINDEST)
-    pg = sorted(v for n, v in pre if n >= MINDEST)
+    # Kein MINDEST beim Prefill - siehe Regel 1 im Kopf dieser Datei.
+    pg = sorted(v for _, v in pre)
     if not dg:
         return None
 

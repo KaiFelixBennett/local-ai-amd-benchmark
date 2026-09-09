@@ -8,43 +8,44 @@
 </p>
 
 <p>
-  Seven models. Two AMD machines. <b>1,299,666 tokens</b> of unattended agentic work.<br>
+  Nine models. Two AMD machines. <b>1,835,623 tokens</b> of unattended agentic work.<br>
   Every number below is re-derived from a raw <code>llama.cpp</code> server log that ships
   in this repository.
 </p>
 
 <p>
-  <img alt="6 evaluated agent runs" src="https://img.shields.io/badge/agent_runs-6_evaluated-1c9ab8?style=flat-square">
-  <img alt="621 logged responses" src="https://img.shields.io/badge/logged_responses-621-1c9ab8?style=flat-square">
-  <img alt="1,299,666 tokens generated" src="https://img.shields.io/badge/tokens-1%2C299%2C666-cb7815?style=flat-square">
-  <img alt="26.6 hours of GPU time" src="https://img.shields.io/badge/GPU_time-26.6_h-cb7815?style=flat-square">
+  <img alt="6 evaluated agent runs" src="https://img.shields.io/badge/agent_runs-6_with_logs-1c9ab8?style=flat-square">
+  <img alt="869 scored responses" src="https://img.shields.io/badge/scored_responses-869_of_1%2C269-1c9ab8?style=flat-square">
+  <img alt="1,835,623 tokens generated" src="https://img.shields.io/badge/tokens-1%2C835%2C623-cb7815?style=flat-square">
+  <img alt="35.2 hours of GPU time" src="https://img.shields.io/badge/GPU_time-35.2_h-cb7815?style=flat-square">
   <br>
   <img alt="Backend llama.cpp Vulkan" src="https://img.shields.io/badge/backend-llama.cpp%20%C2%B7%20Vulkan-141130?style=flat-square">
   <img alt="Silicon RDNA4 and Ryzen AI Max+ 395" src="https://img.shields.io/badge/silicon-RDNA4%20%C2%B7%20AI%20MAX%20395-141130?style=flat-square">
   <img alt="ROCm not required" src="https://img.shields.io/badge/ROCm-not%20required-141130?style=flat-square">
-  <img alt="Raw logs included" src="https://img.shields.io/badge/raw_logs-included%20%C2%B7%20SHA--256-8957e5?style=flat-square">
+  <img alt="Raw logs included with SHA-256" src="https://img.shields.io/badge/raw_logs-included%20%C2%B7%20SHA--256-8957e5?style=flat-square">
   <img alt="Code license MIT" src="https://img.shields.io/badge/code-MIT-3fb950?style=flat-square">
   <img alt="Data license CC BY 4.0" src="https://img.shields.io/badge/data-CC--BY--4.0-3fb950?style=flat-square">
 </p>
 
 <p>
+  <a href="#start-here">Start here</a> ·
   <a href="#measured-throughput">Results</a> ·
   <a href="#what-the-models-actually-shipped">Artifacts</a> ·
-  <a href="#four-findings-that-contradict-the-model-cards">Findings</a> ·
+  <a href="#five-findings-that-contradict-the-model-cards">Findings</a> ·
   <a href="#context-depth-is-the-number-that-matters">Depth</a> ·
-  <a href="#the-two-benches">Benches</a> ·
   <a href="#verify-every-number">Evidence</a> ·
-  <a href="#the-data">Data</a>
+  <a href="#faq">FAQ</a>
 </p>
 
 <br>
 
-<img src="media/gif/hero-moorland-mayhem-qwen38.gif" width="700" alt="A finished 2D arcade shooter called Moorland Mayhem, with a countdown timer, climbing score, combo chains, stacked PERFECT popups and a time-rift multiplier, written end to end by Qwen3.8-27B on a Radeon AI PRO R9700">
+<img src="media/gif/hero-featherstorm-flashnext.gif" width="700" alt="A finished 2D arcade shooter called Moorland Mayhem - Featherstorm, with a countdown timer, climbing score, a combo multiplier and hit popups, written end to end by Qwen3.8-Flash-Next on a Ryzen AI Max+ 395 mini-PC">
 
-<sub><b>No human wrote a line of this.</b> Qwen3.8-27B at Q4 built <i>Moorland Mayhem</i> —
-five game modes, combo chains, score multipliers, a persistent highscore table and
-colour-blind palettes — in one unattended session on a €1,500 Radeon, correcting itself four
-times. <a href="evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log">Its server log is in this
+<sub><b>No human wrote a line of this.</b> Qwen3.8-Flash-Next at Q4 built
+<i>Moorland Mayhem — Featherstorm</i> in <b>one prompt and 13 h 35 min</b>, unattended, on a
+€1,800 mini-PC: <b>55 files, 10,531 lines of source and 1,398 lines of tests</b>, across 459
+requests, and the context was never once truncated.
+<a href="evidence/logs/qwen38-flashnext-moorhuhn-evox2.log">Its 1.9 MB server log is in this
 repo.</a></sub>
 
 </div>
@@ -53,9 +54,52 @@ repo.</a></sub>
 
 > [!NOTE]
 > Almost every local-LLM speed figure you have read is `pp512` / `tg128`: a few hundred tokens,
-> a cold cache, a quiet machine. A coding agent works at **50,000–180,000 tokens of context for
-> hours on end**. Measured side by side, **the lab number is roughly twice what you actually
-> get.** This repository publishes the second number — and ships the logs it came from.
+> a cold cache, a quiet machine. A coding agent works at **27,000–180,000 tokens of context for
+> hours on end**. Measured side by side on the same machine, **the lab number is roughly twice
+> what you actually get.** This repository publishes the second number — and ships the logs it
+> came from.
+
+## Start here
+
+Three things you can take away today, in descending order of how much time they save you.
+
+| | |
+|---|---|
+| **1. Copy a launch line that is known to work** | [`data/configs.json`](data/configs.json) holds **19 complete `llama-server` configurations** — every flag, for both machines, exactly as measured. Not a tutorial; the actual command lines. |
+| **2. Skip four settings mistakes** | Two published presets and one piece of vendor guidance are wrong for agentic coding on this hardware. [Findings](#five-findings-that-contradict-the-model-cards) — each with the protocol behind it. |
+| **3. Plan for the number that matters** | Peak t/s is measured on an empty context. [Throughput at depth](#context-depth-is-the-number-that-matters) is what an agent actually gets, and it is a third of the headline. |
+
+**The fastest useful thing in this repo** — the exact line behind the run at the top of this page:
+
+```bash
+llama-server -m Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf \
+  --mmproj mmproj-F16.gguf --alias qwen3.8-flash-next \
+  --host 127.0.0.1 --port 8099 --device Vulkan0 \
+  --gpu-layers all --n-cpu-moe 0 --fit off -fa on \
+  --load-mode mmap --lazy-mode on \
+  --ctx-size 262144 --parallel 1 --kv-unified \
+  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 \
+  --ctx-checkpoints 4 --checkpoint-min-step 4096 \
+  --jinja --reasoning on --reasoning-format deepseek --reasoning-effort xhigh
+```
+
+<sub>Ryzen AI Max+ 395 · llama.cpp build <code>580e88d</code> · MTP speculation, shared-Q8_0,
+<code>n_max 2</code>. Point VS Code Copilot Chat at <code>http://127.0.0.1:8099/v1</code> as a
+custom endpoint and you have the setup that produced the build above.</sub>
+
+**And to check that this repository is not lying to you:**
+
+```bash
+git clone https://github.com/KaiFelixBennett/local-ai-amd-benchmark
+cd local-ai-amd-benchmark
+cd evidence && sha256sum -c SHA256SUMS && cd ..   # the raw files are the ones cited
+python scripts/parse_logs.py                      # re-derive every published figure
+```
+
+No dependencies beyond Python 3. It prints the tables below and checks every log against its
+checksum as it goes.
+
+---
 
 ## Why this exists
 
@@ -67,13 +111,14 @@ So this is not a question set. Each model gets the same brief in **VS Code Copil
 pointed at a `llama-server` on the local network, and is then left alone for hours. What it
 ships is a playable build. What the server log records is what it cost.
 
-Three things get measured here that no leaderboard reports:
+Four things get measured here that no leaderboard reports:
 
 | | |
 |---|---|
 | **Agentic throughput** | The median decode rate across hundreds of *real* responses, not a synthetic burst. |
 | **Self-repairs** | How many times a model had to patch its own broken code before it worked. This is the number that decides whether you want to work with a model. |
 | **Depth decay** | Throughput at the context depth agents actually live at, not at 512 tokens. |
+| **Wall clock vs. GPU time** | How much of an unattended afternoon the GPU is actually busy. The answer surprised me — see [below](#an-agent-run-has-no-idle-time). |
 
 ---
 
@@ -94,47 +139,52 @@ Three things get measured here that no leaderboard reports:
 
 Three things the chart says that a speed-ordered column cannot:
 
-- **Fast does not mean good.** Qwen3.6-27B Q6 is the second-fastest run in the field and the
+- **Fast does not mean good.** Qwen3.6-27B Q6 is among the fastest runs in the field and the
   *weakest* Qwen on the quality axis — 14, with 15 self-repairs.
-- **Qwen3.8-Flash-Next is level with the fastest run on quality (16) at half the speed**, and
-  it is the only model scoring the same on both briefs. Its low t/s is a memory-system
-  result: ~177 B of weights, ~6 B active, reached over ~256 GB/s of unified LPDDR5X with MoE
-  routing moving the working set every token. That is not a capability measurement.
+- **The slowest agent run on the Moorhuhn brief scored joint-highest on it.** Qwen3.8-Flash-Next
+  is level with the fastest run on quality at **two thirds of its decode rate**, and it is the
+  only model scoring the same on both briefs. Its low t/s is a memory-system result: ~177 B of
+  weights, ~6 B active, reached over ~256 GB/s of unified LPDDR5X with MoE routing moving the
+  working set every token. That is not a capability measurement.
 - **The highest local quality score in the dataset sits on the AI MAX 395** — Qwen3.5-122B-A10B
   at 18, above every R9700 run — and it only has a synthetic sweep, so no speed-ordered table
   would ever show it.
 
-Only two runs are on the **Pareto front**: Qwen3.8-27B Q6 (26.30 t/s, quality 17) and
-Qwen3.8-27B Q4_XL (33.69 t/s, quality 16). Everything else is beaten on both axes at once.
+Only two runs are on the **Pareto front** — beaten by nothing on both axes at once:
+Qwen3.8-27B Q6 (26.30 t/s, quality 17) and Qwen3.8-27B Q4_XL (33.69 t/s, quality 16). The run
+at the top of this page is not one of them: it ties the best Moorhuhn quality score but is
+slower, and on a chart that is a trade-off, not a defeat. It is here first because a thirteen
+and a half hour single-prompt build is the thing this repository exists to show.
 
 Tables are grouped by task, because Moorhuhn and Clair Obscur are different briefs and rows
-across them are not comparable. Within each table rows run fastest-first; the bar is scaled
-against the fastest run in the whole field, so bar lengths mean the same thing in both tables.
-**Every row links to the log it came from.**
+across them are not comparable. **Every row links to the log it came from.**
 
 ### Moorhuhn — 2D arcade shooter
 
-| Model | Quant | Machine | n | Decode median | | Quality † | Self-repairs | Tokens | GPU time | Log |
-|---|---|---|--:|--:|---|--:|--:|--:|--:|:-:|
-| **Qwen3.8-27B** | UD-Q4_K_XL | R9700 | 82 | **33.69** t/s | `████████████` | 16 | **4** | 332,405 | 189 min | [log](evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log) |
-| **Qwen3.6-27B** | UD-Q6_K_XL | R9700 | 221 | **33.45** t/s | `████████████` | **14** | **15** | 175,743 | 139 min | [log](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) |
-| **Qwen3.8-Flash-Next** | UD-Q4_K_XL | AI MAX 395 | 98 | **21.82** t/s | `████████` | 16 | — | 285,339 | 286 min | [log](evidence/logs/qwen38-flashnext-moorhuhn-halo.log) |
-| Sonnet 5 · *cloud reference* | — | cloud | — | *no local rate* | | 17 | 2 | — | — | *artifact only* |
+| Model | Quant | Machine | n | Decode median | | Quality † | Self-repairs | Tokens | Wall clock | GPU time | Log |
+|---|---|---|--:|--:|---|--:|--:|--:|--:|--:|:-:|
+| **Qwen3.8-Flash-Next** | UD-Q4_K_XL | AI MAX 395 | **346** | **21.76** t/s | `████████` | 16 | — | **770,428** | **815** min | 799 min | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) |
+| **Qwen3.8-27B** | UD-Q4_K_XL | R9700 | 82 | **33.69** t/s | `████████████` | 16 | **4** | 332,405 | 540 min ‡ | 189 min | [log](evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log) |
+| **Qwen3.6-27B** | UD-Q6_K_XL | R9700 | 221 | **33.45** t/s | `████████████` | **14** | **15** | 175,743 | 153 min | 139 min | [log](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) |
+| Sonnet 5 · *cloud reference* | — | cloud | — | *no local rate* | | 17 | 2 | — | 70 min | — | *artifact only* |
 
-<sub>Percentile spread, decode p10 – p90: Qwen3.8-27B 27.8 – 45.3 · Qwen3.6-27B 29.0 – 38.3 ·
-Flash-Next 17.2 – 26.7. Peaks 84.9 / 41.4 / 33.9 t/s.</sub>
+<sub>Percentile spread, decode p10 – p90: Flash-Next 17.15 – 26.28 · Qwen3.8-27B 27.83 – 45.34 ·
+Qwen3.6-27B 29.02 – 38.25. Peaks 33.89 / 84.92 / 41.39 t/s.<br>
+‡ The Qwen3.8-27B run spans two server sessions totalling 9 h; the published log covers the
+first 191 minutes. Its GPU time is for that log only — it is the one row where wall clock and
+GPU time are not measured over the same window.</sub>
 
 ### Clair Obscur — 3D turn-based RPG
 
-| Model | Quant | Machine | n | Decode median | | Quality † | Self-repairs | Tokens | GPU time | Log |
-|---|---|---|--:|--:|---|--:|--:|--:|--:|:-:|
-| **Qwen3.8-27B** | UD-Q6_K_M | R9700 | 30 | **26.30** t/s | `█████████▌` | **17** | 6 | 118,919 | 115 min | [log](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log) |
-| **Qwen3.8-Flash-Next** | UD-Q4_K_XL | AI MAX 395 | 92 | **10.93** t/s | `████` | 16 | — | 236,460 | 368 min | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) |
-| **DeepSeek-V4-Flash-0731** | UD-IQ3_XXS | AI MAX 395 | 98 | **7.02** t/s | `██▌` | **13** | 12 | 150,800 | 500 min | [log](evidence/logs/deepseek-v4-flash-clairobscur-halo.log) |
-| **Qwen3.6-27B** | UD-Q6_K_XL | R9700 | — | *log not parsed* | | 15 | — | — | — | — |
+| Model | Quant | Machine | n | Decode median | | Quality † | Self-repairs | Tokens | Wall clock | GPU time | Log |
+|---|---|---|--:|--:|---|--:|--:|--:|--:|--:|:-:|
+| **Qwen3.8-27B** | UD-Q6_K_M | R9700 | 30 | **26.30** t/s | `█████████▌` | **17** | 6 | 118,919 | 115 min | 115 min | [log](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log) |
+| **Qwen3.8-Flash-Next** | UD-Q4_K_XL | AI MAX 395 | 92 | **10.93** t/s | `████` | 16 | — | 236,460 | 370 min | 368 min | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) |
+| **DeepSeek-V4-Flash-0731** | UD-IQ3_XXS | AI MAX 395 | 98 | **7.02** t/s | `██▌` | **13** | 12 | 150,800 | 502 min | 500 min | [log](evidence/logs/deepseek-v4-flash-clairobscur-halo.log) |
+| **Qwen3.6-27B** | UD-Q6_K_XL | R9700 | — | *log not parsed* | | 15 | — | — | — | — | — |
 
-<sub>Percentile spread, decode p10 – p90: Qwen3.8-27B 18.0 – 35.3 · Flash-Next 9.7 – 13.9 ·
-DeepSeek 4.9 – 9.9. Peaks 42.4 / 17.0 / 10.8 t/s. The two Flash-Next rows differ by MTP
+<sub>Percentile spread, decode p10 – p90: Qwen3.8-27B 15.55 – 34.22 · Flash-Next 9.70 – 13.85 ·
+DeepSeek 4.85 – 9.89. Peaks 42.39 / 17.01 / 10.83 t/s. The two Flash-Next rows differ by MTP
 speculation, not by model — see finding 4.</sub>
 
 ### Synthetic sweeps — same machine, different measurement style
@@ -166,23 +216,24 @@ token count and no place on the Pareto front.
 ## What the models actually shipped
 
 Every clip is the model's own build, recorded from the shipped `dist/` — no edits, no human
-touch-ups, no cherry-picked frames.
+touch-ups, no cherry-picked frames. The **full source of every run** is in
+[`benchmarks/`](benchmarks/), exactly as the model left it.
 
 <table>
 <tr>
-<td width="33%" valign="top">
-<img src="media/gif/clair-obscur-qwen38.gif" width="100%" alt="A 3D turn-based RPG showing a lumina ring animation, a boss title card and party combat menus, built by Qwen3.8-27B">
-<b>Clair Obscur</b><br>
-<sub>Qwen3.8-27B UD-Q6_K_M · R9700<br>
-Turn-based party combat with an AP economy, boss phases, parry timing and dialogue. Highest
-quality score of any agent run, and one of the two runs on the Pareto front.</sub>
-</td>
 <td width="33%" valign="top">
 <img src="media/gif/clair-obscur-flashnext.gif" width="100%" alt="A 3D party-based RPG battle scene at sunset, built by Qwen3.8-Flash-Next">
 <b>Clair Obscur</b><br>
 <sub>Qwen3.8-Flash-Next UD-Q4_K_XL · AI MAX 395<br>
 Four-character party, turn-order panel, enemy nameplates with health bars, an expedition
-roster — and a French-language UI it chose on its own.</sub>
+roster — and a French-language UI it chose on its own. 29 files, 6,157 lines.</sub>
+</td>
+<td width="33%" valign="top">
+<img src="media/gif/clair-obscur-qwen38.gif" width="100%" alt="A 3D turn-based RPG showing a lumina ring animation, a boss title card and party combat menus, built by Qwen3.8-27B">
+<b>Clair Obscur</b><br>
+<sub>Qwen3.8-27B UD-Q6_K_M · R9700<br>
+Turn-based party combat with an AP economy, boss phases, parry timing and dialogue. Highest
+quality score of any agent run. 36 files, 11,115 lines.</sub>
 </td>
 <td width="33%" valign="top">
 <img src="media/gif/clair-obscur-qwen36.gif" width="100%" alt="A foggy 3D forest scene with a controllable character, built by Qwen3.6-27B">
@@ -197,14 +248,15 @@ artifact exists; its log is not parsed yet.</sub>
 <img src="media/gif/moorhuhn-qwen36.gif" width="100%" alt="A 2D side-scrolling shooter with parallax layers, built by Qwen3.6-27B">
 <b>Moorhuhn</b><br>
 <sub>Qwen3.6-27B UD-Q6_K_XL · R9700<br>
-Parallax layers, scoring, ammo, round timer. Also <b>15 self-repair scripts</b> — see below.</sub>
+Parallax layers, scoring, ammo, round timer. Also <b>15 self-repair scripts</b> and
+<b>zero tests</b> — see below.</sub>
 </td>
 <td width="33%" valign="top">
 <img src="media/gif/moorhuhn-sonnet5.gif" width="100%" alt="A minimal, flat-designed 2D shooter, built by Sonnet 5 as a cloud reference">
 <b>Moorhuhn</b><br>
 <sub>Sonnet 5 · cloud reference<br>
 The control group. Same brief, a frontier model, so the local results have a ceiling to be read
-against.</sub>
+against. 72 files, 9,433 lines.</sub>
 </td>
 <td width="33%" valign="top">
 <img src="media/gif/clair-obscur-laguna.gif" width="100%" alt="A dark 3D arena with a four-character party and a boss health bar, built by Laguna S 2.1">
@@ -217,14 +269,14 @@ synthetic table.</sub>
 </table>
 
 > [!IMPORTANT]
-> **The cleanest experiment in this dataset is the build at the top of this page against the
-> Qwen3.6-27B Moorhuhn tile.** Same task, same machine,
-> decode medians 0.7 % apart — 33.69 against 33.45 t/s. One shipped *Moorland Mayhem* with
-> accessibility options, persistent highscores and five game modes, after **4** self-repairs.
-> The other needed **15** and scored two rubric points lower. Identical throughput, entirely
-> different afternoons. Whatever decode t/s measures, it is not that.
+> **The cleanest experiment in this dataset is the Qwen3.8-27B Moorhuhn run against the
+> Qwen3.6-27B one.** Same task, same machine, decode medians **0.7 % apart** — 33.69 against
+> 33.45 t/s. One shipped a game with accessibility options, persistent highscores and five
+> game modes after **4** self-repairs and with **11 test files**. The other needed **15**
+> self-repairs, shipped **no tests at all**, and scored two rubric points lower. Identical
+> throughput, entirely different afternoons. Whatever decode t/s measures, it is not that.
 
-### Self-repairs: the metric nobody reports
+### Self-repairs and tests: the metrics nobody reports
 
 Left alone, a model does not fail cleanly — it writes another patch script. The project folder
 of the Qwen3.6-27B Moorhuhn run contains fifteen of them:
@@ -236,12 +288,56 @@ fix_coords_proper.cjs  fix_hit_v2.cjs            … 10 more
 
 Fifteen attempts at one hit test. Across the four runs where they were counted, **37 self-repair
 scripts** were left behind — and the two runs with the fewest (4 and 6) produced the two best
-artifacts. None of that shows up in a decode median, and it is exactly what you feel when you
-work with a model all afternoon.
+artifacts.
+
+Whether a model writes tests at all splits the field just as sharply, and the counts come
+straight out of [`benchmarks/`](benchmarks/):
+
+| Run | Source files | Source lines | Test files | Test lines |
+|---|--:|--:|--:|--:|
+| Qwen3.8-Flash-Next · Moorhuhn | 55 | 10,531 | **10** | **1,398** |
+| Qwen3.8-27B · Moorhuhn | 42 | 10,839 | **11** | **1,257** |
+| Sonnet 5 · Moorhuhn *(cloud ref.)* | 72 | 9,433 | **11** | **885** |
+| Qwen3.8-27B · Clair Obscur | 36 | 11,115 | 0 | 0 |
+| Qwen3.6-27B · Moorhuhn | 39 | 6,903 | 0 | 0 |
+| Qwen3.8-Flash-Next · Clair Obscur | 29 | 6,157 | 0 | 0 |
+| DeepSeek-V4-Flash · Clair Obscur | 24 | 3,901 | 0 | 0 |
+
+None of that shows up in a decode median, and it is exactly what you feel when you work with a
+model all afternoon.
 
 ---
 
-## Four findings that contradict the model cards
+## An agent run has no idle time
+
+This one I did not expect, and it is the strongest argument in the repository for buying
+hardware rather than renting tokens.
+
+An unattended agent run *feels* like it should be full of idle time — the model thinking, the
+editor waiting, a human occasionally looking over. It is not. Measuring the wall clock from the
+first request to the end of the last, minus every idle gap over 60 seconds, against the GPU time
+the log itself reports:
+
+| Run | Wall clock | GPU busy | Share |
+|---|--:|--:|--:|
+| Qwen3.8-Flash-Next · Moorhuhn | 815 min | 799 min | **98 %** |
+| Qwen3.8-Flash-Next · Clair Obscur | 370 min | 368 min | **99 %** |
+| DeepSeek-V4-Flash · Clair Obscur | 502 min | 500 min | **100 %** |
+| Qwen3.8-27B · Clair Obscur | 115 min | 115 min | **100 %** |
+| Qwen3.6-27B · Moorhuhn | 153 min | 139 min | **91 %** |
+
+The machine is not waiting for you. It is the bottleneck, from the first request to the last —
+which also means an idle-priced cloud comparison is the wrong comparison, and that every
+percent of throughput you tune back is a percent off the wall clock.
+
+<sub>Wall clock is measured from the first `launch_slot_` to the last `eval time` line, minus
+every gap over 60 s between the end of one response and the start of the next task. Idle
+measured between arbitrary log lines would count a slow model's own generation as a pause —
+DeepSeek at 7 t/s would show 63 phantom "breaks".</sub>
+
+---
+
+## Five findings that contradict the model cards
 
 These took weeks to find, and each one links to the protocol it came from. They are the reason
 this repository is worth more than its tables.
@@ -306,18 +402,40 @@ run had **MTP shared-Q8_0 speculative decoding on** (`n_max 2`); the August run 
 
 | Run | Speculation | Context | Decode median | Log |
 |---|---|--:|--:|:-:|
-| Moorhuhn, September | **MTP shared-Q8_0, `n_max 2`** | 131,072 | **21.82** t/s | [log](evidence/logs/qwen38-flashnext-moorhuhn-halo.log) |
+| Moorhuhn, September | **MTP shared-Q8_0, `n_max 2`** | 131,072 | **21.76** t/s | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) |
 | Clair Obscur, August | none | 262,144 | **10.93** t/s | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) |
 
-That is **2.00×** — landing inside the **1.84–2.13×** range the run's own log header records for
+That is **1.99×** — landing inside the **1.84–2.13×** range the run's own log header records for
 MTP measured in isolation. Two independent measurements agreeing is the interesting part: the
-lab figure for speculation actually survived contact with a five-hour agent session, which is
-not true of raw throughput.
+lab figure for speculation actually survived contact with a thirteen-hour agent session, which
+is not true of raw throughput.
 
 > [!CAUTION]
 > This is corroboration, not a clean A/B. The two runs also differ in task, context size and
 > reasoning budget. It is reported as agreement between two measurements, not as an isolated
 > effect.
+
+### 5. A local 27B read the chart better than the frontier model
+
+Two images made for this benchmark, so they are provably in nobody's training set. Task A1 is
+pure extraction: read 50 specified values out of a dense analytics dashboard — tooltip figures,
+KPI tiles, filter chips, axis labels, footnotes — and emit JSON. Only what is visible in the
+image is scored, never anything a model could answer from world knowledge.
+
+| Model | Where it runs | A1 · values read correctly | |
+|---|---|--:|---|
+| **Qwen3.6-27B** UD-Q6_K_XL | R9700, local | **50 / 50 · 100 %** | `████████████` |
+| Sonnet 5 | cloud | 46 / 50 · 92 % | `███████████` |
+| Qwen3.8-27B UD-Q4_K_XL | R9700, local | 44 / 50 · 88 % | `██████████▌` |
+
+The model that scored *worst* on shipping software read the dashboard *best*, and beat a
+frontier cloud model doing it. Chart-reading and code-shipping are not the same ability, and a
+single leaderboard number hides that completely.
+
+<sub>Model answers: [`evidence/vision/`](evidence/vision/). The scoring keys stay unpublished on
+purpose — publishing them would burn the benchmark for every future model. Image B, a convention
+stand with 40+ price tags, is withheld until the recognisable faces in it are redacted by
+hand.</sub>
 
 <details>
 <summary><b>Bonus finding — where the depth decay actually comes from</b></summary>
@@ -437,20 +555,45 @@ Nothing here is hand-typed. The raw logs ship in [`evidence/`](evidence/), each 
 and the parser that produced every published figure reads *those* files:
 
 ```bash
-git clone https://github.com/KaiFelixBennett/local-ai-amd-benchmark
-cd local-ai-amd-benchmark
-
-cd evidence && sha256sum -c SHA256SUMS && cd ..   # the raw files are the ones cited
+cd evidence && sha256sum -c SHA256SUMS && cd ..   # 22 files, all pinned
 python scripts/parse_logs.py                      # re-derive every published figure
+python scripts/verify_runs.py                     # cross-check data/runs.json against the logs
 ```
 
-The parser needs only Python 3, no dependencies. It prints the table above and checks each log
-against `SHA256SUMS` as it goes. **If a number in this README disagrees with what the script
-reads out of the logs, the script is right.**
+The two scripts are written independently and must agree; `verify_runs.py` exits non-zero on any
+deviation. **If a number in this README disagrees with what the scripts read out of the logs, the
+scripts are right.**
+
+Two conventions govern every figure, and both are stated in the scripts' own headers:
+
+1. **Only responses of 200 tokens or more are scored.** Shorter ones produce artefacts up to
+   1,000,000 t/s — one token in near-zero milliseconds. The floor applies to *responses only*;
+   prompts are never filtered.
+2. **Percentiles are nearest-rank**, 1-based: p10 is the `ceil(0.10 · n)`-th value, no
+   interpolation. Medians are the classic middle value. Halves round up.
+
+<details>
+<summary><b>Corrections — three measurement bugs found and fixed in these scripts</b></summary>
+
+<br>
+
+Every one of these was found by re-deriving the same figures a second way and comparing. They
+are listed because a benchmark that silently edits its own numbers is worth nothing.
+
+| Bug | Effect | Fixed |
+|---|---|---|
+| The 200-token response floor was also applied to **prompts** | Prefill median came out too high in **every run** — 241.47 instead of 234.86 t/s on Qwen3.8-27B Moorhuhn, 174.92 instead of 152.71 on Qwen3.6-27B, 87.22 instead of 77.63 on Flash-Next | `parse_logs.py`, `verify_runs.py` |
+| Percentile rank read `floor(f·n)` as a **0-based** index | One rank too high whenever `f·n` is a whole number. With 30 scored responses that is exactly when it bites: Qwen3.8-27B Clair Obscur p10 read **18.03 instead of 15.55**, p90 **35.31 instead of 34.22** | both scripts |
+| `SHA256SUMS` still pinned a **replaced** log | The Flash-Next Moorhuhn log had been superseded by a longer run (346 scored responses instead of 98) and the checksum file was never updated | `evidence/SHA256SUMS` |
+
+The corrected values are what this README now shows, and `python scripts/verify_runs.py` reports
+zero deviations against them.
+
+</details>
 
 | | |
 |---|---|
-| [`evidence/`](evidence/) | 22 raw files, 3.9 MB — six `llama.cpp` server logs, six measurement protocols, ten CSV tables |
+| [`evidence/`](evidence/) | 22 raw files — six `llama.cpp` server logs, six measurement protocols, ten CSV tables, two vision answer sets |
 | [`evidence/README.md`](evidence/README.md) | **Claim-to-source map**: every published figure, and the exact file and section backing it |
 | [`evidence/SHA256SUMS`](evidence/SHA256SUMS) | Checksum of all 22 |
 | [`scripts/parse_logs.py`](scripts/parse_logs.py) | The parser. `--json` for machine-readable output; pass a path to analyse a log of your own |
@@ -470,16 +613,16 @@ They carry no prompt text and no response text, so there was nothing in them to 
 ## The data
 
 ```
-data/runs.json        12 runs — decode, prefill, percentiles, tokens, self-repairs, GPU time,
-                      the full llama-server command line, and an `evidence` field naming the
-                      log and its SHA-256
+data/runs.json        12 runs — decode, prefill, percentiles, tokens, self-repairs,
+                      wall clock, GPU time, the full llama-server command line, and an
+                      `evidence` field naming the log and its SHA-256
 data/configs.json     19 complete llama-server launch configurations from the .bat files
 data/hardware.json    both benches, every memory figure, drivers, Vulkan versions
-evidence/             the raw logs, reports and CSVs behind every number
-scripts/parse_logs.py the parser
-scripts/verify_runs.py    independent cross-check of data/runs.json against the logs
-scripts/make_chart.py     regenerates media/chart/ from data/runs.json
-media/                full-length recordings of each shipped build, plus the README's GIFs
+benchmarks/          the source code of every run, as the model delivered it
+evidence/            the raw logs, reports, CSVs and vision answers behind every number
+harness/             the agent instructions each model was given, verbatim
+media/               full-length recordings of each shipped build, plus the README's GIFs
+scripts/             the parser, the independent cross-check, the chart generator
 ```
 
 Each run carries its launch line verbatim and a pointer to its own log, so a result, the
@@ -487,21 +630,21 @@ configuration that produced it, and the evidence for it can never drift apart:
 
 ```jsonc
 {
-  "slug": "qwen38-27b-q4xl-moorhuhn-r9700",
-  "model": "Qwen3.8-27B", "quant": "UD-Q4_K_XL", "hw": "r9700", "kind": "agent",
-  "decode":  { "median": 33.69, "p10": 27.83, "p90": 45.31, "peak": 84.92, "n": 82 },
-  "prefill": { "median": 241.47, "max": 499.49, "n": 101 },
-  "tokens": 332405, "tokens_all": 336107, "responses_all": 108,
-  "gpu_minutes": { "decode": 162.1, "prefill": 26.8 },
-  "largest_prompt_tokens": 139720, "fixes": 4,
-  "spec": "draft-mtp + ngram-mod 24/48/64 · n_max 2",
-  "build": "b10717", "ctx": 262144, "kv": "q8_0 / q8_0", "ub": 288,
-  "cmd": "llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf …",
+  "slug": "qwen38-flashnext-moorhuhn-evox2",
+  "model": "Qwen3.8-Flash-Next", "quant": "UD-Q4_K_XL", "hw": "evox2", "kind": "agent",
+  "decode":  { "median": 21.76, "p10": 17.15, "p90": 26.28, "peak": 33.89, "n": 346 },
+  "prefill": { "median": 77.63, "max": 184.76 },
+  "tokens": 770428, "tokens_all": 786506, "responses_all": 459,
+  "wall_minutes": 815, "gpu_minutes": { "decode": 664.5, "prefill": 134.3 },
+  "largest_prompt_tokens": 69985,
+  "spec": "MTP, Shared-Q8_0, n-max 2",
+  "build": "580e88d", "ctx": 262144, "kv": "q8_0 / q8_0", "ub": 512,
+  "cmd": "llama-server -m Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf …",
   "evidence": {
-    "log": "evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log",
-    "sha256": "8c8d3460492763d102d026adb4f0941f2647c846ad404119adc8eb2d3dff0a40"
-  },
-  "source": "llama.cpp server log, 82 of 108 responses at >=200 tokens; re-derived by scripts/parse_logs.py"
+    "log": "evidence/logs/qwen38-flashnext-moorhuhn-evox2.log",
+    "sha256": "317185ea5ee4760c7f2e838c7feed8cf05b793969cab8679c2ceedb893d71eba",
+    "antworten_gesamt": 459, "gewertet": 346
+  }
 }
 ```
 
@@ -510,31 +653,91 @@ configuration that produced it, and the evidence for it can never drift apart:
 > launch line for your hardware out of `data/configs.json` and get the same performance in your
 > own editor this afternoon.
 
+### The code the models wrote
+
+[`benchmarks/`](benchmarks/) holds the full source of every run, sorted by model and then by
+run, exactly as the model delivered it — nothing tidied up, nothing corrected afterwards. The
+guide in that folder says what is missing from each and why. It is the only place in this
+project where you can read what a "quality 14" run actually looks like next to a "quality 17"
+one.
+
 ---
 
-## Vision benchmark
+## FAQ
 
-Two images that are provably in nobody's training set, because they were made for this.
+<details>
+<summary><b>Why not just quote tokens per second like everyone else?</b></summary>
 
-<div align="center">
-<img src="media/vision-dashboard.jpg" width="620" alt="A dense analytics dashboard used as the vision benchmark reference image">
-</div>
+<br>
 
-**Image A — dashboard.** A comparison tooltip carrying 4 × 2 figures, three KPI tiles, active
-filter chips, series labels, axis labels and footnotes across five type sizes. Two tasks:
-*extract* it to JSON, then *rebuild* the line chart as standalone SVG. Only what is visible in
-the image is scored — never anything a model could answer from world knowledge, or you are
-measuring memory instead of perception.
+Because the two runs at the top of the Moorhuhn table are **0.7 % apart on decode t/s** and
+produced completely different afternoons — one needed 4 self-repairs and wrote 11 test files,
+the other needed 15 and wrote none. Decode t/s is a property of model size, memory bandwidth and
+speculation settings. It does not predict whether you will get working software.
 
-**Image B — convention stand.** 40+ objects, dual-currency price tags, occlusion, glare. Scored
-as precision / recall / hallucination rate over `{name, gbp, eur}`. One tag lists the currencies
-in reversed order as a deliberate trap.
+</details>
 
-> [!NOTE]
-> **Image B is deliberately not in this repository.** People are recognisable in it, and
-> automatic face blurring fails at the size those faces occupy. It ships once the faces have been
-> redacted by hand. Both images are pinned by SHA-256 before any model sees them, so it stays
-> provable that every model was shown the same pixels.
+<details>
+<summary><b>Is this ROCm or Vulkan? Do I need to flash a BIOS?</b></summary>
+
+<br>
+
+Vulkan, on stock drivers, on Windows 11. No ROCm, no BIOS tinkering, no enlarged UMA carve-out
+— [finding 3](#3-reserving-more-vram-on-unified-memory-buys-nothing) shows the carve-out buys
+nothing anyway. Every launch line in `data/configs.json` runs as-is.
+
+</details>
+
+<details>
+<summary><b>Which machine should I buy?</b></summary>
+
+<br>
+
+They answer different questions. The **R9700** (~€1,500, 32 GB dedicated) is roughly 1.5× the
+decode rate on a 27B at Q4–Q6 and is the better machine if your models fit in 32 GB. The
+**Ryzen AI Max+ 395** (~€1,800, 128 GiB unified) runs models that do not fit on a consumer GPU
+at all — the 122B and 118B MoEs in the synthetic table have nowhere else to go — and it is the
+machine that produced the 13-hour single-prompt run at the top of this page. This repository
+deliberately does not pick a winner; it gives you both columns.
+
+</details>
+
+<details>
+<summary><b>Why is the quality score so vague?</b></summary>
+
+<br>
+
+Because it is, and pretending otherwise would be worse. It is human-assigned on a 20-point
+scale with no published protocol, and the entire local field lands between 13 and 18 in whole
+integers. It cannot separate three runs tied at 16 — which is exactly the comparison that
+matters most. Writing a real rubric is the first item under
+[what is missing](#what-is-missing).
+
+</details>
+
+<details>
+<summary><b>Can I add my hardware or my model?</b></summary>
+
+<br>
+
+Yes, and that is the most useful thing you could contribute. `scripts/parse_logs.py <yourlog>`
+analyses any `llama-server` log with the same conventions, so a new row is a log file plus the
+launch line that produced it. Open an issue with both and I will add it — or run the same brief
+from [`harness/`](harness/) and send the artifact too.
+
+</details>
+
+<details>
+<summary><b>How do I know the numbers are real?</b></summary>
+
+<br>
+
+You do not have to take my word for any of them: `sha256sum -c SHA256SUMS` proves the logs are
+the ones cited, and `python scripts/parse_logs.py` re-derives every published figure from those
+bytes. The three measurement bugs found so far are listed
+[under Corrections](#verify-every-number) with their before-and-after values.
+
+</details>
 
 ---
 
@@ -545,13 +748,13 @@ Stated plainly, because a benchmark that hides its gaps is marketing.
 | Gap | Affects | Status |
 |---|---|---|
 | **Quality rubric scores** | every run, and the y axis of the field chart | Provisional throughout: human-assigned, no published protocol, whole integers, and the entire local field inside 13–18. It cannot separate the three runs tied at 16 — which is exactly the comparison that matters most. This is the single most valuable thing missing from the project. |
-| **Energy measurement** | both benches | Wh per 1,000 tokens is the strongest figure against a cloud API — and it is missing. Needs a wall meter or `amdsmi` sampling. |
-| **Cloud reference runs** | Opus 5, GPT 5.6, Sonnet 5 | Sonnet 5 shipped an artifact; the logged runs are outstanding. |
+| **Energy measurement** | both benches | Wh per 1,000 tokens is the strongest figure against a cloud API — and it is missing. Needs a wall meter or `amdsmi` sampling. The 98–100 % GPU-busy result above says it would not be a small number. |
+| **Cloud reference runs** | Opus 5, GPT 5.6, Sonnet 5 | Sonnet 5 shipped an artifact and a vision answer; the logged runs are outstanding. |
 | **One identical quant on both machines** | hardware comparison | Without it there is no true head-to-head, only two separate lists. |
 | **Agent runs for Laguna and Qwen3.5** | AI MAX 395 | Both have artifacts and synthetic sweeps, but no agent log — so neither can join the Pareto front, and Qwen3.5's field-leading quality 18 rests on a sweep. |
-| **Prefill for DeepSeek-V4-Flash at depth** | AI MAX 395 | Its 17.5 t/s prefill median is the lowest in the field and cost 171 of its 500 GPU minutes. Worth its own sweep. |
+| **Prefill for DeepSeek-V4-Flash at depth** | AI MAX 395 | Its 15.24 t/s prefill median is the lowest in the field and cost 171 of its 500 GPU minutes. Worth its own sweep. |
 | **Sixth artifact's log** | Qwen3.6-27B · Clair Obscur | Artifact shipped, log not yet parsed. |
-| **Vision reference image B** | vision benchmark | Withheld until the faces are redacted by hand. |
+| **Vision reference image B** | vision benchmark | Withheld until the recognisable faces are redacted by hand. |
 
 ---
 
@@ -587,9 +790,3 @@ measurement style — agentic or synthetic — attached.
 <br>
 <sub>Measured on hardware that fits under a desk · <a href="https://securesight.ai">securesight.ai</a></sub>
 </div>
-
-## Der Code der Modelle
-
-Unter [`benchmarks/`](benchmarks/) liegt der Quelltext jedes Laufs, sortiert nach
-Modell und darunter nach Lauf. So wie das Modell ihn abgeliefert hat, ohne
-Nachbesserung. Der Wegweiser dort erklaert, was fehlt und warum.

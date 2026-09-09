@@ -21,6 +21,7 @@ import sys
 import json
 import glob
 import hashlib
+import math
 import statistics
 
 PROMPT = re.compile(r"prompt eval time\s*=\s*([\d.]+) ms /\s*(\d+) tokens.*?([\d.]+) tokens per second")
@@ -30,14 +31,35 @@ EVAL = re.compile(r"(?<!prompt )eval time\s*=\s*([\d.]+) ms /\s*(\d+) (?:tokens|
 # with scripts/verify_runs.py, which cross-checks data/runs.json against these same
 # logs -- the two scripts must never disagree.
 #
-# 1. Only responses of 200 tokens or more count. Shorter ones produce outliers up to
+# 1. Only RESPONSES of 200 tokens or more count. Shorter ones produce outliers up to
 #    1,000,000 t/s in the log (one token in near-zero milliseconds); those lines are
-#    a rounding artefact, not a measurement. The same floor applies to prompts.
+#    a rounding artefact, not a measurement.
+#
+#    The floor does NOT apply to prompts. A short prompt has no such artefact -- its
+#    rate is a perfectly good measurement -- and filtering prompts biased the prefill
+#    median upward in every single run: 241.47 instead of 234.86 t/s on the Qwen3.8-27B
+#    Moorhuhn log, 174.92 instead of 152.71 on Qwen3.6-27B, 87.22 instead of 77.63 on
+#    Flash-Next. The filter used to be shared with the decode side; that was the bug.
 # 2. Percentiles are nearest-rank on the sorted list, not interpolated: p10 is the
-#    value at position floor(0.10 * n).
+#    ceil(0.10 * n)-th value, counting from 1.
+#
+#    This used to read floor(0.10 * n) as a 0-based index, which is one place too high
+#    whenever n * fraction lands on a whole number. With 30 scored responses -- the
+#    Qwen3.8-27B Clair Obscur run -- that is exactly when it bites: p10 read 18.03
+#    instead of 15.55 and p90 35.31 instead of 34.22.
+# 3. Halves round up. Python's round() rounds to even (21.755 -> 21.75) while the
+#    JavaScript side of the project rounds up (21.76). Without a fixed rule the two
+#    disagree on the same data, which is how you lose an afternoon.
 MIN_TOKENS = 200
 DECODE_MIN_TOKENS = MIN_TOKENS
-PREFILL_MIN_TOKENS = MIN_TOKENS
+PREFILL_MIN_TOKENS = 0          # see note 1: prompts are not filtered
+
+
+def r2(x):
+    """Round to two places, halves upward -- matches the JavaScript harness."""
+    if x is None:
+        return None
+    return math.floor(x * 100 + 0.5) / 100.0
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOG_DIR = os.path.join(ROOT, "evidence", "logs")
@@ -47,11 +69,14 @@ SUMS = os.path.join(ROOT, "evidence", "SHA256SUMS")
 def percentile(sorted_values, fraction):
     """Nearest-rank percentile -- no interpolation between neighbours.
 
-    Identical to rang() in scripts/verify_runs.py; keep the two in step.
+    The rank is 1-based: the ceil(fraction * n)-th value. Identical to rang() in
+    scripts/verify_runs.py; keep the two in step.
     """
     if not sorted_values:
         return None
-    return sorted_values[min(len(sorted_values) - 1, int(len(sorted_values) * fraction))]
+    n = len(sorted_values)
+    rank = int(math.ceil(n * fraction))
+    return sorted_values[min(n - 1, max(0, rank - 1))]
 
 
 def analyse(path):
@@ -73,16 +98,16 @@ def analyse(path):
         "bytes": len(raw),
         "decode": {
             "n": len(dc),
-            "median": round(statistics.median(rates), 2) if rates else None,
-            "p10": round(percentile(rates, .10), 2) if rates else None,
-            "p90": round(percentile(rates, .90), 2) if rates else None,
-            "min": round(rates[0], 2) if rates else None,
-            "peak": round(rates[-1], 2) if rates else None,
+            "median": r2(statistics.median(rates)) if rates else None,
+            "p10": r2(percentile(rates, .10)) if rates else None,
+            "p90": r2(percentile(rates, .90)) if rates else None,
+            "min": r2(rates[0]) if rates else None,
+            "peak": r2(rates[-1]) if rates else None,
         },
         "prefill": {
             "n": len(pf),
-            "median": round(statistics.median(pf_rates), 2) if pf_rates else None,
-            "max": round(pf_rates[-1], 2) if pf_rates else None,
+            "median": r2(statistics.median(pf_rates)) if pf_rates else None,
+            "max": r2(pf_rates[-1]) if pf_rates else None,
             "largest_prompt_tokens": max([p[1] for p in prefill]) if prefill else None,
         },
         "tokens_filtered": sum(d[1] for d in dc),
@@ -145,8 +170,10 @@ def main(argv):
         print("    %d KB   sha256 %s   (%s)" % (r["bytes"] / 1024, r["sha256"][:16], mark))
         print("    decode   n=%-4d median %-7s p10 %-7s p90 %-7s min %-7s peak %s   [>=%d tokens]"
               % (d["n"], d["median"], d["p10"], d["p90"], d["min"], d["peak"], DECODE_MIN_TOKENS))
-        print("    prefill  n=%-4d median %-7s max %-7s   largest prompt %s tokens   [>=%d tokens]"
-              % (p["n"], p["median"], p["max"], p["largest_prompt_tokens"], PREFILL_MIN_TOKENS))
+        print("    prefill  n=%-4d median %-7s max %-7s   largest prompt %s tokens   [%s]"
+              % (p["n"], p["median"], p["max"], p["largest_prompt_tokens"],
+                 "all prompts" if PREFILL_MIN_TOKENS <= 0
+                 else ">=%d tokens" % PREFILL_MIN_TOKENS))
         print("    tokens   %d in the filter, %d over all %d responses"
               % (r["tokens_filtered"], r["tokens_all"], r["responses_all"]))
         print("    GPU time %.1f min decoding + %.1f min prefill = %.1f min"

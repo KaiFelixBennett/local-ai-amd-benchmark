@@ -52,9 +52,9 @@
 <circle cx="703.3" cy="366.5" r="7.5" fill="#14748c" stroke="#ffffff" stroke-width="2.5"/>
 <text x="691.3" y="371.5" fill="#1f2328" font-size="12.5" font-weight="600" text-anchor="end">Qwen3.6-27B Q6</text>
 <text x="691.3" y="384.5" fill="#656d76" font-size="11" text-anchor="end">Moorhuhn</text>
-<circle cx="481.0" cy="259.0" r="7.5" fill="#a35f11" stroke="#ffffff" stroke-width="2.5"/>
-<text x="481.0" y="243.0" fill="#1f2328" font-size="12.5" font-weight="600" text-anchor="middle">Qwen3.8-Flash-Next</text>
-<text x="481.0" y="256.0" fill="#656d76" font-size="11" text-anchor="middle">Moorhuhn</text>
+<circle cx="479.9" cy="259.0" r="7.5" fill="#a35f11" stroke="#ffffff" stroke-width="2.5"/>
+<text x="479.9" y="243.0" fill="#1f2328" font-size="12.5" font-weight="600" text-anchor="middle">Qwen3.8-Flash-Next</text>
+<text x="479.9" y="256.0" fill="#656d76" font-size="11" text-anchor="middle">Moorhuhn</text>
 <circle cx="272.9" cy="259.0" r="7.5" fill="#a35f11" stroke="#ffffff" stroke-width="2.5"/>
 <text x="272.9" y="243.0" fill="#1f2328" font-size="12.5" font-weight="600" text-anchor="middle">Qwen3.8-Flash-Next</text>
 <text x="272.9" y="256.0" fill="#656d76" font-size="11" text-anchor="middle">Clair Obscur</text>
