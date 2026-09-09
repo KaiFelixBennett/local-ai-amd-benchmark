@@ -465,10 +465,15 @@ Peak t/s is measured on an empty context. Agents never work on an empty context.
 **Prefill vs. depth** — Radeon AI PRO R9700, Qwen3.8-27B UD-Q6, build `bd9bd1b`, sampled across
 a single 180,396-token task:
 
-| Depth | 8 K | 16 K | 34 K | 67 K | 100 K | 132 K | 164 K |
-|---|--:|--:|--:|--:|--:|--:|--:|
-| Prefill | **498.3** | 423.1 | 323.0 | 223.3 | 172.4 | 139.6 | **118.0** t/s |
-| | `█` | `▇` | `▅` | `▃` | `▂` | `▁` | `▁` |
+| Context depth | Prefill | |
+|---|--:|---|
+| 8 K | **498.3** t/s | `████████████` |
+| 16 K | 423.1 t/s | `██████████` |
+| 34 K | 323.0 t/s | `███████▌` |
+| 67 K | 223.3 t/s | `█████▌` |
+| 100 K | 172.4 t/s | `████` |
+| 132 K | 139.6 t/s | `███▌` |
+| 164 K | **118.0** t/s | `███` |
 
 A **4.2× fall**. That one 180,396-token prompt took **16.6 minutes before the first character
 came back** — and it is the largest prompt in the whole dataset, visible as the biggest
@@ -477,11 +482,17 @@ came back** — and it is the largest prompt in the whole dataset, visible as th
 
 **Decode vs. depth** — Ryzen AI Max+ 395, Qwen3.8-Flash-Next UD-Q4_K_XL, build `580e88d`:
 
-| Context | 512 | 1 K | 2 K | 4 K | 16 K | 32 K | 64 K | 128 K | 164 K |
-|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| Decode | 22.14 | **22.50** | 21.99 | 21.66 | 19.04 | 16.65 | 12.25 | 8.84 | **7.70** t/s |
-| Retained | 100 % | 102 % | 99 % | 98 % | 86 % | 75 % | 55 % | 40 % | **35 %** |
-| | `█` | `█` | `█` | `█` | `▆` | `▅` | `▃` | `▂` | `▁` |
+| Context | Decode | Retained | |
+|---|--:|--:|---|
+| 512 | 22.14 t/s | 100 % | `████████████` |
+| 1 K | **22.50** t/s | 102 % | `████████████` |
+| 2 K | 21.99 t/s | 99 % | `███████████▌` |
+| 4 K | 21.66 t/s | 98 % | `███████████▌` |
+| 16 K | 19.04 t/s | 86 % | `██████████` |
+| 32 K | 16.65 t/s | 75 % | `█████████` |
+| 64 K | 12.25 t/s | 55 % | `██████▌` |
+| 128 K | 8.84 t/s | 40 % | `████▌` |
+| 164 K | **7.70** t/s | **35 %** | `████` |
 
 Two thirds of your throughput is gone by the time an agent has finished reading your codebase.
 **Depth behaviour, not peak throughput, decides whether a model is usable.**
