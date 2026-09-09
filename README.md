@@ -161,12 +161,12 @@ across them are not comparable. **Every row links to the log it came from.**
 
 ### Moorhuhn — 2D arcade shooter
 
-| Model | Quant | Machine | n | Decode median | | Quality † | Self-repairs | Tokens | Wall clock | GPU time | Log |
-|---|---|---|--:|--:|---|--:|--:|--:|--:|--:|:-:|
-| **Qwen3.8-Flash-Next** | UD-Q4_K_XL | AI MAX 395 | **346** | **21.76** t/s | `████████` | 16 | — | **770,428** | **815** min | 799 min | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) |
-| **Qwen3.8-27B** | UD-Q4_K_XL | R9700 | 82 | **33.69** t/s | `████████████` | 16 | **4** | 332,405 | 540 min ‡ | 189 min | [log](evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log) |
-| **Qwen3.6-27B** | UD-Q6_K_XL | R9700 | 221 | **33.45** t/s | `████████████` | **14** | **15** | 175,743 | 153 min | 139 min | [log](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) |
-| Sonnet 5 · *cloud reference* | — | cloud | — | *no local rate* | | 17 | 2 | — | 70 min | — | *artifact only* |
+| Model | n | Decode median | Quality † | Repairs | Tokens | Wall · GPU | Log |
+|---|--:|--:|--:|--:|--:|--:|:-:|
+| **Qwen3.8-Flash-Next**<br><sub>UD-Q4_K_XL · AI MAX 395</sub> | **346** | **21.76** t/s | 16 | — | **770,428** | **815** · 799 min | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) |
+| **Qwen3.8-27B**<br><sub>UD-Q4_K_XL · R9700</sub> | 82 | **33.69** t/s | 16 | **4** | 332,405 | 540 ‡ · 189 min | [log](evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log) |
+| **Qwen3.6-27B**<br><sub>UD-Q6_K_XL · R9700</sub> | 221 | **33.45** t/s | **14** | **15** | 175,743 | 153 · 139 min | [log](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) |
+| Sonnet 5<br><sub>*cloud reference*</sub> | — | *no local rate* | 17 | 2 | — | 70 min · — | *artifact only* |
 
 <sub>Percentile spread, decode p10 – p90: Flash-Next 17.15 – 26.28 · Qwen3.8-27B 27.83 – 45.34 ·
 Qwen3.6-27B 29.02 – 38.25. Peaks 33.89 / 84.92 / 41.39 t/s.<br>
@@ -176,12 +176,12 @@ GPU time are not measured over the same window.</sub>
 
 ### Clair Obscur — 3D turn-based RPG
 
-| Model | Quant | Machine | n | Decode median | | Quality † | Self-repairs | Tokens | Wall clock | GPU time | Log |
-|---|---|---|--:|--:|---|--:|--:|--:|--:|--:|:-:|
-| **Qwen3.8-27B** | UD-Q6_K_M | R9700 | 30 | **26.30** t/s | `█████████▌` | **17** | 6 | 118,919 | 115 min | 115 min | [log](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log) |
-| **Qwen3.8-Flash-Next** | UD-Q4_K_XL | AI MAX 395 | 92 | **10.93** t/s | `████` | 16 | — | 236,460 | 370 min | 368 min | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) |
-| **DeepSeek-V4-Flash-0731** | UD-IQ3_XXS | AI MAX 395 | 98 | **7.02** t/s | `██▌` | **13** | 12 | 150,800 | 502 min | 500 min | [log](evidence/logs/deepseek-v4-flash-clairobscur-halo.log) |
-| **Qwen3.6-27B** | UD-Q6_K_XL | R9700 | — | *log not parsed* | | 15 | — | — | — | — | — |
+| Model | n | Decode median | Quality † | Repairs | Tokens | Wall · GPU | Log |
+|---|--:|--:|--:|--:|--:|--:|:-:|
+| **Qwen3.8-27B**<br><sub>UD-Q6_K_M · R9700</sub> | 30 | **26.30** t/s | **17** | 6 | 118,919 | 115 · 115 min | [log](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log) |
+| **Qwen3.8-Flash-Next**<br><sub>UD-Q4_K_XL · AI MAX 395</sub> | 92 | **10.93** t/s | 16 | — | 236,460 | 370 · 368 min | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) |
+| **DeepSeek-V4-Flash-0731**<br><sub>UD-IQ3_XXS · AI MAX 395</sub> | 98 | **7.02** t/s | **13** | 12 | 150,800 | 502 · 500 min | [log](evidence/logs/deepseek-v4-flash-clairobscur-halo.log) |
+| **Qwen3.6-27B**<br><sub>UD-Q6_K_XL · R9700</sub> | — | *log not parsed* | 15 | — | — | — | — |
 
 <sub>Percentile spread, decode p10 – p90: Qwen3.8-27B 15.55 – 34.22 · Flash-Next 9.70 – 13.85 ·
 DeepSeek 4.85 – 9.89. Peaks 42.39 / 17.01 / 10.83 t/s. The two Flash-Next rows differ by MTP
@@ -193,10 +193,10 @@ Kept in the section rather than in a distant side table, because leaving them ou
 AI MAX 395's quality showing goes missing. They have no agent log, so they carry no `n`, no
 token count and no place on the Pareto front.
 
-| Model | Quant | Machine | Prefill (pp512) | Decode (tuned) | Draft acceptance | Quality † | Report |
-|---|---|---|--:|--:|--:|--:|:-:|
-| **Qwen3.5-122B-A10B** | UD-Q4_K_XL | AI MAX 395 | 245.71 t/s | 31.80 t/s | **0.866** | **18** | [report](evidence/reports/qwen35-122b-a10b-strix-halo-vulkan-benchmark.md) |
-| **Laguna S 2.1** · 118B-A8B | Q4_K_M | AI MAX 395 | 309.64 t/s | 27.90 t/s | 0.559 | 17 | [report](evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md) |
+| Model | Prefill (pp512) | Decode (tuned) | Draft acceptance | Quality † | Report |
+|---|--:|--:|--:|--:|:-:|
+| **Qwen3.5-122B-A10B**<br><sub>UD-Q4_K_XL · AI MAX 395</sub> | 245.71 t/s | 31.80 t/s | **0.866** | **18** | [report](evidence/reports/qwen35-122b-a10b-strix-halo-vulkan-benchmark.md) |
+| **Laguna S 2.1** · 118B-A8B<br><sub>Q4_K_M · AI MAX 395</sub> | 309.64 t/s | 27.90 t/s | 0.559 | 17 | [report](evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md) |
 
 > [!WARNING]
 > **Do not read those two rows against the agentic ones.** Where both measurement styles exist
@@ -221,47 +221,49 @@ touch-ups, no cherry-picked frames. The **full source of every run** is in
 
 <table>
 <tr>
-<td width="33%" valign="top">
+<td width="50%" valign="top">
 <img src="media/gif/clair-obscur-flashnext.gif" width="100%" alt="A 3D party-based RPG battle scene at sunset, built by Qwen3.8-Flash-Next">
-<b>Clair Obscur</b><br>
-<sub>Qwen3.8-Flash-Next UD-Q4_K_XL · AI MAX 395<br>
+<b>Clair Obscur</b> · Qwen3.8-Flash-Next<br>
+<sub>UD-Q4_K_XL · AI MAX 395 · 29 files, 6,157 lines<br>
 Four-character party, turn-order panel, enemy nameplates with health bars, an expedition
-roster — and a French-language UI it chose on its own. 29 files, 6,157 lines.</sub>
+roster — and a French-language UI it chose on its own.</sub>
 </td>
-<td width="33%" valign="top">
+<td width="50%" valign="top">
 <img src="media/gif/clair-obscur-qwen38.gif" width="100%" alt="A 3D turn-based RPG showing a lumina ring animation, a boss title card and party combat menus, built by Qwen3.8-27B">
-<b>Clair Obscur</b><br>
-<sub>Qwen3.8-27B UD-Q6_K_M · R9700<br>
+<b>Clair Obscur</b> · Qwen3.8-27B<br>
+<sub>UD-Q6_K_M · R9700 · 36 files, 11,115 lines<br>
 Turn-based party combat with an AP economy, boss phases, parry timing and dialogue. Highest
-quality score of any agent run. 36 files, 11,115 lines.</sub>
-</td>
-<td width="33%" valign="top">
-<img src="media/gif/clair-obscur-qwen36.gif" width="100%" alt="A foggy 3D forest scene with a controllable character, built by Qwen3.6-27B">
-<b>Clair Obscur</b><br>
-<sub>Qwen3.6-27B UD-Q6_K_XL · R9700<br>
-Third-person exploration with volumetric fog, physics colliders and combat markers. The
-artifact exists; its log is not parsed yet.</sub>
+quality score of any agent run.</sub>
 </td>
 </tr>
 <tr>
-<td width="33%" valign="top">
+<td width="50%" valign="top">
 <img src="media/gif/moorhuhn-qwen36.gif" width="100%" alt="A 2D side-scrolling shooter with parallax layers, built by Qwen3.6-27B">
-<b>Moorhuhn</b><br>
-<sub>Qwen3.6-27B UD-Q6_K_XL · R9700<br>
+<b>Moorhuhn</b> · Qwen3.6-27B<br>
+<sub>UD-Q6_K_XL · R9700 · 39 files, 6,903 lines<br>
 Parallax layers, scoring, ammo, round timer. Also <b>15 self-repair scripts</b> and
 <b>zero tests</b> — see below.</sub>
 </td>
-<td width="33%" valign="top">
+<td width="50%" valign="top">
 <img src="media/gif/moorhuhn-sonnet5.gif" width="100%" alt="A minimal, flat-designed 2D shooter, built by Sonnet 5 as a cloud reference">
-<b>Moorhuhn</b><br>
-<sub>Sonnet 5 · cloud reference<br>
-The control group. Same brief, a frontier model, so the local results have a ceiling to be read
-against. 72 files, 9,433 lines.</sub>
+<b>Moorhuhn</b> · Sonnet 5 <i>· cloud reference</i><br>
+<sub>72 files, 9,433 lines<br>
+The control group. Same brief, a frontier model, so the local results have a ceiling to be
+read against.</sub>
 </td>
-<td width="33%" valign="top">
+</tr>
+<tr>
+<td width="50%" valign="top">
+<img src="media/gif/clair-obscur-qwen36.gif" width="100%" alt="A foggy 3D forest scene with a controllable character, built by Qwen3.6-27B">
+<b>Clair Obscur</b> · Qwen3.6-27B<br>
+<sub>UD-Q6_K_XL · R9700 · 26 files, 8,705 lines<br>
+Third-person exploration with volumetric fog, physics colliders and combat markers. The
+artifact exists; its log is not parsed yet.</sub>
+</td>
+<td width="50%" valign="top">
 <img src="media/gif/clair-obscur-laguna.gif" width="100%" alt="A dark 3D arena with a four-character party and a boss health bar, built by Laguna S 2.1">
-<b>Clair Obscur</b><br>
-<sub>Laguna S 2.1 · AI MAX 395<br>
+<b>Clair Obscur</b> · Laguna S 2.1<br>
+<sub>Q4_K_M · AI MAX 395 · 21 files, 5,994 lines<br>
 From the coding evaluation in its report. No agent-log run yet, so it appears only in the
 synthetic table.</sub>
 </td>
@@ -368,12 +370,12 @@ Unsloth's "precise coding" preset ships `presence_penalty 0.0`, `min_p 0.0` and
 `repetition_penalty 1.0` together — safe for instruct mode, unbounded in thinking mode. On an
 identical task, varying only the sampling:
 
-| Config | temp | presence | repeat | min_p | Tokens | Wall | Finish | |
-|---|--:|--:|--:|--:|--:|--:|---|---|
-| **A** *(Unsloth "precise coding")* | 0.6 | **0.0** | 1.0 | 0.0 | **32,768** | 1,087 s | `length` | **FAIL** |
-| **B** *(adopted)* | 0.6 | **1.5** | 1.0 | 0.0 | **7,680** | **297 s** | `stop` | **PASS** |
-| **C** | 0.6 | 0.0 | **1.05** | **0.05** | 8,453 | 333 s | `stop` | PASS |
-| **D** | **1.0** | 1.5 | 1.0 | 0.0 | 12,456 | 540 s | `stop` | PASS |
+| Config | temp | presence | repeat | min_p | Tokens | Wall | Result |
+|---|--:|--:|--:|--:|--:|--:|---|
+| **A** *(Unsloth "precise coding")* | 0.6 | **0.0** | 1.0 | 0.0 | **32,768** | 1,087 s | **FAIL** · `length` |
+| **B** *(adopted)* | 0.6 | **1.5** | 1.0 | 0.0 | **7,680** | **297 s** | **PASS** · `stop` |
+| **C** | 0.6 | 0.0 | **1.05** | **0.05** | 8,453 | 333 s | PASS · `stop` |
+| **D** | **1.0** | 1.5 | 1.0 | 0.0 | 12,456 | 540 s | PASS · `stop` |
 
 Config A never terminated — it ran to the context ceiling. **Any** anti-repetition mechanism
 prevents the runaway; having none engaged causes it. What works is a mix no published preset
@@ -492,49 +494,16 @@ Two thirds of your throughput is gone by the time an agent has finished reading 
 
 ## The two benches
 
-<table>
-<tr>
-<th width="50%">Radeon AI PRO R9700</th>
-<th width="50%">AMD Ryzen AI Max+ 395</th>
-</tr>
-<tr valign="top">
-<td>
-
-`gfx1201` · RDNA4 · **32 GB dedicated**
-
-| | |
-|---|---|
-| Allocatable | 32,624 MiB |
-| CPU | Intel Core Ultra 7 265KF |
-| System RAM | 63.6 GiB |
-| Board | ASUS PRIME Z890-P WIFI · BIOS 2401 |
-| Driver | Adrenalin 26.6.4 |
-| Vulkan ICD | `amdvlk64` 9.2.10.395 |
-| OS | Windows 11 Pro 26200 |
-| Note | Headless; an RTX 5080 drives the desktop |
-| Street price | from ~€1,500 |
-
-</td>
-<td>
-
-`gfx1151` · AMD Halo / Strix Halo · Radeon 8060S · **128 GiB unified**
-
-| | |
-|---|---|
-| Memory | 128 GiB LPDDR5X-8533, 8 channels |
-| Bandwidth | ~256 GB/s theoretical |
-| Visible to Windows | 63.6 GiB |
-| UMA reservation | 64.4 GiB |
-| Vulkan heap | 98,123 MiB · 93,217 MiB free |
-| Driver | 32.0.31021.5001 |
-| Vulkan SDK | 1.4.350.0 (LunarG) |
-| OS | Windows 11 Pro 26200 |
-| Chassis | Ecotech / GMKtec Evo X2 |
-| Street price | from ~€1,800 |
-
-</td>
-</tr>
-</table>
+| | **Radeon AI PRO R9700** | **AMD Ryzen AI Max+ 395** |
+|---|---|---|
+| Silicon | `gfx1201` · RDNA4 | `gfx1151` · Strix Halo · Radeon 8060S |
+| Memory | **32 GB dedicated**<br><sub>32,624 MiB allocatable</sub> | **128 GiB unified** LPDDR5X-8533<br><sub>8 channels · ~256 GB/s theoretical</sub> |
+| What the OS sees | 63.6 GiB system RAM | 63.6 GiB · UMA reservation 64.4 GiB<br><sub>Vulkan heap 98,123 MiB, 93,217 free</sub> |
+| CPU / chassis | Intel Core Ultra 7 265KF<br><sub>ASUS PRIME Z890-P WIFI · BIOS 2401</sub> | Ecotech / GMKtec Evo X2 |
+| Driver | Adrenalin 26.6.4<br><sub>Vulkan ICD `amdvlk64` 9.2.10.395</sub> | 32.0.31021.5001<br><sub>Vulkan SDK 1.4.350.0 (LunarG)</sub> |
+| OS | Windows 11 Pro 26200 | Windows 11 Pro 26200 |
+| Note | Headless; an RTX 5080 drives the desktop | — |
+| Street price | from ~**€1,500** | from ~**€1,800** |
 
 > [!CAUTION]
 > **The Ryzen AI Max+ 395 does not have 128 GB of VRAM.** It has 128 GiB of *unified* LPDDR5X.
