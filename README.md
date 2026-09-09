@@ -295,7 +295,7 @@ artifacts.
 Whether a model writes tests at all splits the field just as sharply, and the counts come
 straight out of [`benchmarks/`](benchmarks/):
 
-| Run | Source files | Source lines | Test files | Test lines |
+| Run | Files | Lines | Tests | Test lines |
 |---|--:|--:|--:|--:|
 | Qwen3.8-Flash-Next · Moorhuhn | 55 | 10,531 | **10** | **1,398** |
 | Qwen3.8-27B · Moorhuhn | 42 | 10,839 | **11** | **1,257** |
@@ -320,7 +320,7 @@ editor waiting, a human occasionally looking over. It is not. Measuring the wall
 first request to the end of the last, minus every idle gap over 60 seconds, against the GPU time
 the log itself reports:
 
-| Run | Wall clock | GPU busy | Share |
+| Run | Wall | GPU busy | Share |
 |---|--:|--:|--:|
 | Qwen3.8-Flash-Next · Moorhuhn | 815 min | 799 min | **98 %** |
 | Qwen3.8-Flash-Next · Clair Obscur | 370 min | 368 min | **99 %** |
@@ -424,7 +424,7 @@ pure extraction: read 50 specified values out of a dense analytics dashboard —
 KPI tiles, filter chips, axis labels, footnotes — and emit JSON. Only what is visible in the
 image is scored, never anything a model could answer from world knowledge.
 
-| Model | Where it runs | A1 · values read correctly | |
+| Model | Runs on | A1 · correct | |
 |---|---|--:|---|
 | **Qwen3.6-27B** UD-Q6_K_XL | R9700, local | **50 / 50 · 100 %** | `████████████` |
 | Sonnet 5 | cloud | 46 / 50 · 92 % | `███████████` |
@@ -465,15 +465,15 @@ Peak t/s is measured on an empty context. Agents never work on an empty context.
 **Prefill vs. depth** — Radeon AI PRO R9700, Qwen3.8-27B UD-Q6, build `bd9bd1b`, sampled across
 a single 180,396-token task:
 
-| Context depth | Prefill | |
+| Depth | Prefill t/s | |
 |---|--:|---|
-| 8 K | **498.3** t/s | `████████████` |
-| 16 K | 423.1 t/s | `██████████` |
-| 34 K | 323.0 t/s | `███████▌` |
-| 67 K | 223.3 t/s | `█████▌` |
-| 100 K | 172.4 t/s | `████` |
-| 132 K | 139.6 t/s | `███▌` |
-| 164 K | **118.0** t/s | `███` |
+| 8 K | **498.3** | `████████` |
+| 16 K | 423.1 | `██████▌` |
+| 34 K | 323.0 | `█████` |
+| 67 K | 223.3 | `███▌` |
+| 100 K | 172.4 | `██▌` |
+| 132 K | 139.6 | `██` |
+| 164 K | **118.0** | `█▌` |
 
 A **4.2× fall**. That one 180,396-token prompt took **16.6 minutes before the first character
 came back** — and it is the largest prompt in the whole dataset, visible as the biggest
@@ -482,17 +482,17 @@ came back** — and it is the largest prompt in the whole dataset, visible as th
 
 **Decode vs. depth** — Ryzen AI Max+ 395, Qwen3.8-Flash-Next UD-Q4_K_XL, build `580e88d`:
 
-| Context | Decode | Retained | |
+| Context | Decode t/s | Kept | |
 |---|--:|--:|---|
-| 512 | 22.14 t/s | 100 % | `████████████` |
-| 1 K | **22.50** t/s | 102 % | `████████████` |
-| 2 K | 21.99 t/s | 99 % | `███████████▌` |
-| 4 K | 21.66 t/s | 98 % | `███████████▌` |
-| 16 K | 19.04 t/s | 86 % | `██████████` |
-| 32 K | 16.65 t/s | 75 % | `█████████` |
-| 64 K | 12.25 t/s | 55 % | `██████▌` |
-| 128 K | 8.84 t/s | 40 % | `████▌` |
-| 164 K | **7.70** t/s | **35 %** | `████` |
+| 512 | 22.14 | 100 % | `████████` |
+| 1 K | **22.50** | 102 % | `████████` |
+| 2 K | 21.99 | 99 % | `███████▌` |
+| 4 K | 21.66 | 98 % | `███████▌` |
+| 16 K | 19.04 | 86 % | `██████▌` |
+| 32 K | 16.65 | 75 % | `██████` |
+| 64 K | 12.25 | 55 % | `████▌` |
+| 128 K | 8.84 | 40 % | `███` |
+| 164 K | **7.70** | **35 %** | `██▌` |
 
 Two thirds of your throughput is gone by the time an agent has finished reading your codebase.
 **Depth behaviour, not peak throughput, decides whether a model is usable.**
@@ -505,12 +505,12 @@ Two thirds of your throughput is gone by the time an agent has finished reading 
 
 ## The two benches
 
-| | **Radeon AI PRO R9700** | **AMD Ryzen AI Max+ 395** |
+| | **Radeon AI PRO R9700** | **Ryzen AI Max+ 395** |
 |---|---|---|
-| Silicon | `gfx1201` · RDNA4 | `gfx1151` · Strix Halo · Radeon 8060S |
+| Silicon | `gfx1201` · RDNA4 | `gfx1151` · Strix Halo<br><sub>Radeon 8060S</sub> |
 | Memory | **32 GB dedicated**<br><sub>32,624 MiB allocatable</sub> | **128 GiB unified** LPDDR5X-8533<br><sub>8 channels · ~256 GB/s theoretical</sub> |
 | What the OS sees | 63.6 GiB system RAM | 63.6 GiB · UMA reservation 64.4 GiB<br><sub>Vulkan heap 98,123 MiB, 93,217 free</sub> |
-| CPU / chassis | Intel Core Ultra 7 265KF<br><sub>ASUS PRIME Z890-P WIFI · BIOS 2401</sub> | Ecotech / GMKtec Evo X2 |
+| CPU / chassis | Intel Core Ultra 7 265KF<br><sub>ASUS PRIME Z890-P · BIOS 2401</sub> | Ecotech / GMKtec Evo X2 |
 | Driver | Adrenalin 26.6.4<br><sub>Vulkan ICD `amdvlk64` 9.2.10.395</sub> | 32.0.31021.5001<br><sub>Vulkan SDK 1.4.350.0 (LunarG)</sub> |
 | OS | Windows 11 Pro 26200 | Windows 11 Pro 26200 |
 | Note | Headless; an RTX 5080 drives the desktop | — |
