@@ -157,16 +157,30 @@ slower, and on a chart that is a trade-off, not a defeat. It is here first becau
 and a half hour single-prompt build is the thing this repository exists to show.
 
 Tables are grouped by task, because Moorhuhn and Clair Obscur are different briefs and rows
-across them are not comparable. **Every model name links to the log the row came from.**
+across them are not comparable. **The log behind every row is one click below each table.**
 
 ### Moorhuhn — 2D arcade shooter
 
-| Model | Decode median | Quality † | Repairs | Wall · GPU |
+| Model | t/s | Quality † | Repairs | Wall |
 |---|--:|--:|--:|--:|
-| **[Qwen3.8-Flash-Next](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log)**<br><sub>UD-Q4_K_XL · AI MAX 395</sub> | **21.76** t/s<br><sub>346 responses · 770,428 tok</sub> | 16 | — | **815** · 799 min |
-| **[Qwen3.8-27B](evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log)**<br><sub>UD-Q4_K_XL · R9700</sub> | **33.69** t/s<br><sub>82 responses · 332,405 tok</sub> | 16 | **4** | 540 ‡ · 189 min |
-| **[Qwen3.6-27B](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log)**<br><sub>UD-Q6_K_XL · R9700</sub> | **33.45** t/s<br><sub>221 responses · 175,743 tok</sub> | **14** | **15** | 153 · 139 min |
-| Sonnet 5<br><sub>*cloud reference*</sub> | *no local rate*<br><sub>artifact only</sub> | 17 | 2 | 70 min · — |
+| **Qwen3.8-Flash-Next** | **21.76** | 16 | — | **815** min |
+| **Qwen3.8-27B** | **33.69** | 16 | **4** | 540 min ‡ |
+| **Qwen3.6-27B** | **33.45** | **14** | **15** | 153 min |
+| Sonnet 5 *(cloud)* | — | 17 | 2 | 70 min |
+
+<details>
+<summary>Quantisation, machine, sample size, tokens and GPU time per run</summary>
+
+<br>
+
+| Model | Quant | Machine | n | Tokens | GPU | Log |
+|---|---|---|--:|--:|--:|:-:|
+| Qwen3.8-Flash-Next | UD-Q4_K_XL | AI MAX 395 | **346** | **770,428** | 799 min | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) |
+| Qwen3.8-27B | UD-Q4_K_XL | R9700 | 82 | 332,405 | 189 min | [log](evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log) |
+| Qwen3.6-27B | UD-Q6_K_XL | R9700 | 221 | 175,743 | 139 min | [log](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) |
+| Sonnet 5 | — | cloud | — | — | — | *artifact only* |
+
+</details>
 
 <sub>Percentile spread, decode p10 – p90: Flash-Next 17.15 – 26.28 · Qwen3.8-27B 27.83 – 45.34 ·
 Qwen3.6-27B 29.02 – 38.25. Peaks 33.89 / 84.92 / 41.39 t/s.<br>
@@ -176,12 +190,26 @@ GPU time are not measured over the same window.</sub>
 
 ### Clair Obscur — 3D turn-based RPG
 
-| Model | Decode median | Quality † | Repairs | Wall · GPU |
+| Model | t/s | Quality † | Repairs | Wall |
 |---|--:|--:|--:|--:|
-| **[Qwen3.8-27B](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log)**<br><sub>UD-Q6_K_M · R9700</sub> | **26.30** t/s<br><sub>30 responses · 118,919 tok</sub> | **17** | 6 | 115 · 115 min |
-| **[Qwen3.8-Flash-Next](evidence/logs/qwen38-flashnext-clairobscur-halo.log)**<br><sub>UD-Q4_K_XL · AI MAX 395</sub> | **10.93** t/s<br><sub>92 responses · 236,460 tok</sub> | 16 | — | 370 · 368 min |
-| **[DeepSeek-V4-Flash-0731](evidence/logs/deepseek-v4-flash-clairobscur-halo.log)**<br><sub>UD-IQ3_XXS · AI MAX 395</sub> | **7.02** t/s<br><sub>98 responses · 150,800 tok</sub> | **13** | 12 | 502 · 500 min |
-| **Qwen3.6-27B**<br><sub>UD-Q6_K_XL · R9700</sub> | *log not parsed* | 15 | — | — |
+| **Qwen3.8-27B** | **26.30** | **17** | 6 | 115 min |
+| **Qwen3.8-Flash-Next** | **10.93** | 16 | — | 370 min |
+| **DeepSeek-V4-Flash-0731** | **7.02** | **13** | 12 | 502 min |
+| **Qwen3.6-27B** | — | 15 | — | — |
+
+<details>
+<summary>Quantisation, machine, sample size, tokens and GPU time per run</summary>
+
+<br>
+
+| Model | Quant | Machine | n | Tokens | GPU | Log |
+|---|---|---|--:|--:|--:|:-:|
+| Qwen3.8-27B | UD-Q6_K_M | R9700 | 30 | 118,919 | 115 min | [log](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log) |
+| Qwen3.8-Flash-Next | UD-Q4_K_XL | AI MAX 395 | 92 | 236,460 | 368 min | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) |
+| DeepSeek-V4-Flash-0731 | UD-IQ3_XXS | AI MAX 395 | 98 | 150,800 | 500 min | [log](evidence/logs/deepseek-v4-flash-clairobscur-halo.log) |
+| Qwen3.6-27B | UD-Q6_K_XL | R9700 | — | — | — | *log not parsed* |
+
+</details>
 
 <sub>Percentile spread, decode p10 – p90: Qwen3.8-27B 15.55 – 34.22 · Flash-Next 9.70 – 13.85 ·
 DeepSeek 4.85 – 9.89. Peaks 42.39 / 17.01 / 10.83 t/s. The two Flash-Next rows differ by MTP
