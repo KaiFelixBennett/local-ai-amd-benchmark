@@ -211,8 +211,11 @@ GPU time are not measured over the same window.</sub>
 </details>
 
 <sub>Percentile spread, decode p10 – p90: Qwen3.8-27B 15.55 – 34.22 · Flash-Next 9.70 – 13.85 ·
-DeepSeek 4.85 – 9.89. Peaks 42.39 / 17.01 / 10.83 t/s. The two Flash-Next rows differ by MTP
-speculation, not by model — see finding 4.</sub>
+DeepSeek 4.85 – 9.89. Peaks 42.39 / 17.01 / 10.83 t/s.<br>
+<b>Read the Flash-Next row with its draft model in mind.</b> It ran on an <b>older, weaker MTP
+draft model — not the Unsloth one</b> the Moorhuhn run used. Its 10.93 t/s is therefore not this
+model's ceiling on this machine, and the gap to the 21.76 t/s Moorhuhn row is a draft-model
+result, not a task result. See <a href="#4-a-better-mtp-draft-model-is-worth-about-2-in-real-agent-work">finding 4</a>.</sub>
 
 ### Synthetic sweeps — same machine, different measurement style
 
@@ -424,25 +427,32 @@ Memory is not what limits this machine. Time is.
 
 <sub>Source: [Laguna report §6.3](evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md)</sub>
 
-### 4. Speculative decoding is worth about 2× in real agent work, not just in the lab
+### 4. A better MTP draft model is worth about 2× in real agent work
 
-The two Qwen3.8-Flash-Next runs are the same model and quant on the same machine. The September
-run had **MTP shared-Q8_0 speculative decoding on** (`n_max 2`); the August run had none:
+The two Qwen3.8-Flash-Next runs are the same model and quant on the same machine. What changed
+between them is the **draft model**: the September run used Unsloth's MTP shared-Q8_0 head, the
+August run an **older and weaker MTP build**.
 
-| Run | Speculation | Context | Decode median | Log |
+| Run | Draft model | Context | Decode median | Log |
 |---|---|--:|--:|:-:|
-| Moorhuhn, September | **MTP shared-Q8_0, `n_max 2`** | 131,072 | **21.76** t/s | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) |
-| Clair Obscur, August | none | 262,144 | **10.93** t/s | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) |
+| Moorhuhn, September | **Unsloth MTP shared-Q8_0, `n_max 2`** | 131,072 | **21.76** t/s | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) |
+| Clair Obscur, August | older MTP build | 262,144 | **10.93** t/s | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) |
 
-That is **1.99×** — landing inside the **1.84–2.13×** range the run's own log header records for
-MTP measured in isolation. Two independent measurements agreeing is the interesting part: the
-lab figure for speculation actually survived contact with a thirteen-hour agent session, which
-is not true of raw throughput.
+That is **1.99×** — landing inside the **1.84–2.13×** range the September run's own log header
+records for its MTP measured in isolation. The interesting part is that a lab figure survived
+contact with a thirteen-hour agent session, which is not true of raw throughput.
+
+**Swapping the draft head is the cheapest 2× on this page.** It costs one file and one flag, no
+new hardware and no quality trade-off, and the acceptance telemetry is right there in the log to
+tell you whether yours is working: the September run averages **0.71 acceptance at mean length
+2.42** over 459 responses.
 
 > [!CAUTION]
-> This is corroboration, not a clean A/B. The two runs also differ in task, context size and
-> reasoning budget. It is reported as agreement between two measurements, not as an isolated
-> effect.
+> **This is corroboration, not a clean A/B, and one side of it is not in the log.** The two runs
+> also differ in task, context size and reasoning budget. And the August log records no draft
+> model being loaded and carries none of the 459 `draft acceptance` lines the September log has —
+> which build of MTP it ran is the operator's record, not the log's. Read the 1.99× as agreement
+> between two measurements taken months apart, not as an isolated effect.
 
 ### 5. A local 27B read the chart better than the frontier model
 
