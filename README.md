@@ -14,17 +14,13 @@
 </p>
 
 <p>
-  <img alt="6 evaluated agent runs" src="https://img.shields.io/badge/agent_runs-6_with_logs-1c9ab8?style=flat-square">
-  <img alt="869 scored responses" src="https://img.shields.io/badge/scored_responses-869_of_1%2C269-1c9ab8?style=flat-square">
   <img alt="1,835,623 tokens generated" src="https://img.shields.io/badge/tokens-1%2C835%2C623-cb7815?style=flat-square">
   <img alt="35.2 hours of GPU time" src="https://img.shields.io/badge/GPU_time-35.2_h-cb7815?style=flat-square">
+  <img alt="Raw logs included, pinned by SHA-256" src="https://img.shields.io/badge/raw_logs-included%20%C2%B7%20SHA--256-8957e5?style=flat-square">
   <br>
-  <img alt="Backend llama.cpp Vulkan" src="https://img.shields.io/badge/backend-llama.cpp%20%C2%B7%20Vulkan-141130?style=flat-square">
-  <img alt="Silicon RDNA4 and Ryzen AI Max+ 395" src="https://img.shields.io/badge/silicon-RDNA4%20%C2%B7%20AI%20MAX%20395-141130?style=flat-square">
+  <img alt="Backend llama.cpp Vulkan" src="https://img.shields.io/badge/llama.cpp-Vulkan-141130?style=flat-square">
   <img alt="ROCm not required" src="https://img.shields.io/badge/ROCm-not%20required-141130?style=flat-square">
-  <img alt="Raw logs included with SHA-256" src="https://img.shields.io/badge/raw_logs-included%20%C2%B7%20SHA--256-8957e5?style=flat-square">
-  <img alt="Code license MIT" src="https://img.shields.io/badge/code-MIT-3fb950?style=flat-square">
-  <img alt="Data license CC BY 4.0" src="https://img.shields.io/badge/data-CC--BY--4.0-3fb950?style=flat-square">
+  <img alt="Code MIT, data CC BY 4.0" src="https://img.shields.io/badge/code_MIT-data_CC--BY--4.0-3fb950?style=flat-square">
 </p>
 
 <p>
