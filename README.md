@@ -161,12 +161,12 @@ across them are not comparable. **The log behind every row is one click below ea
 
 ### Moorhuhn — 2D arcade shooter
 
-| Model | t/s | Quality † | Repairs | Wall |
+| Model | t/s | Qual † | Rep. | Wall<br>min |
 |---|--:|--:|--:|--:|
-| **Qwen3.8**<br>**Flash‑Next** | **21.76** | 16 | — | **815** min |
-| **Qwen3.8‑27B** | **33.69** | 16 | **4** | 540 min ‡ |
-| **Qwen3.6‑27B** | **33.45** | **14** | **15** | 153 min |
-| Sonnet 5 *(cloud)* | — | 17 | 2 | 70 min |
+| **Qwen3.8**<br>**Flash‑Next** | **21.76** | 16 | — | **815** |
+| **Qwen3.8‑27B** | **33.69** | 16 | **4** | 540 ‡ |
+| **Qwen3.6‑27B** | **33.45** | **14** | **15** | 153 |
+| Sonnet 5 *(cloud)* | — | 17 | 2 | 70 |
 
 <details>
 <summary>Quantisation, machine, sample size, tokens and GPU time per run</summary>
@@ -190,11 +190,11 @@ GPU time are not measured over the same window.</sub>
 
 ### Clair Obscur — 3D turn-based RPG
 
-| Model | t/s | Quality † | Repairs | Wall |
+| Model | t/s | Qual † | Rep. | Wall<br>min |
 |---|--:|--:|--:|--:|
-| **Qwen3.8‑27B** | **26.30** | **17** | 6 | 115 min |
-| **Qwen3.8**<br>**Flash‑Next** | **10.93** | 16 | — | 370 min |
-| **DeepSeek‑V4**<br>**Flash‑0731** | **7.02** | **13** | 12 | 502 min |
+| **Qwen3.8‑27B** | **26.30** | **17** | 6 | 115 |
+| **Qwen3.8**<br>**Flash‑Next** | **10.93** | 16 | — | 370 |
+| **DeepSeek‑V4**<br>**Flash‑0731** | **7.02** | **13** | 12 | 502 |
 | **Qwen3.6‑27B** | — | 15 | — | — |
 
 <details>
