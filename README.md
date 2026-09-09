@@ -157,7 +157,7 @@ across them are not comparable. **The log behind every row is one click below ea
 
 ### Moorhuhn — 2D arcade shooter
 
-| Model | t/s | Qual † | Rep.* | Wall<br>min |
+| Model | t/s | Qual † | Rep. | Wall<br>min |
 |---|--:|--:|--:|--:|
 | **Qwen3.8**<br>**Flash‑Next** | **21.76** | 16 | — | **815** |
 | **Qwen3.8‑27B** | **33.69** | 16 | **4** | 540 ‡ |
@@ -179,7 +179,7 @@ across them are not comparable. **The log behind every row is one click below ea
 </details>
 
 <sub><b>t/s</b> decode median · <b>Qual †</b> provisional quality, 20-point scale, see the
-caution below · <b>Rep.\*</b> self-repair scripts the model left behind · <b>Wall</b> minutes
+caution below · <b>Rep.</b> self-repair scripts the model left behind · <b>Wall</b> minutes
 from the first request to the end of the last.<br>
 Percentile spread, decode p10 – p90: Flash-Next 17.15 – 26.28 · Qwen3.8-27B 27.83 – 45.34 ·
 Qwen3.6-27B 29.02 – 38.25. Peaks 33.89 / 84.92 / 41.39 t/s.<br>
@@ -189,7 +189,7 @@ GPU time are not measured over the same window.</sub>
 
 ### Clair Obscur — 3D turn-based RPG
 
-| Model | t/s | Qual † | Rep.* | Wall<br>min |
+| Model | t/s | Qual † | Rep. | Wall<br>min |
 |---|--:|--:|--:|--:|
 | **Qwen3.8‑27B** | **26.30** | **17** | 6 | 115 |
 | **Qwen3.8**<br>**Flash‑Next** | **10.93** | 16 | — | 370 |
