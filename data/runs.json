@@ -19,7 +19,21 @@
   },
   "tokens": 332405,
   "fixes": 4,
-  "quality": 16,
+  "code": {
+   "dateien": 42,
+   "zeilen_quelle": 10839,
+   "dateien_test": 11,
+   "zeilen_test": 1257
+  },
+  "quality": 31,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 7,
+   "presentation": 7,
+   "code_quality": 8,
+   "scope": 9,
+   "status": "confirmed"
+  },
   "spec": "draft-mtp + ngram-mod 24/48/64 · n_max 2",
   "build": "b10717",
   "ctx": 262144,
@@ -30,7 +44,7 @@
    "image": "q38q4xl-play.jpg"
   },
   "source": "llama.cpp server log, 82 of 108 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
-  "note": "Der ausgelieferte Build startet nicht: „Spiel starten“ bleibt in fünf getesteten Anläufen wirkungslos, Untermenüs funktionieren. Deshalb ein Standbild statt einer Aufnahme.",
+  "note": "Der ausgelieferte Build läuft. Nachgespielt am 07.09.2026 im Chromium-Browser: Classic Hunt auf der Karte Nebelmoor, 120-Sekunden-Runde, Trefferwertung, Munitionsanzeige und Nachladen funktionieren, das Video zeigt eine ungeschnittene Runde. Zwei Bedienhürden gibt es: „Spiel starten“ im Hauptmenü startet keine Runde, sondern öffnet die Modusauswahl, der eigentliche Start liegt am Ende der Kartenauswahl. Und der erste Klick nach dem Laden wird verschluckt. Beides zusammen lässt den Startknopf beim ersten Versuch wirkungslos wirken.",
   "depth": {
    "kind": "prefill",
    "points": [
@@ -102,8 +116,22 @@
    "max": 423.64
   },
   "tokens": 175743,
-  "fixes": 15,
-  "quality": 14,
+  "fixes": 12,
+  "code": {
+   "dateien": 39,
+   "zeilen_quelle": 6903,
+   "dateien_test": 0,
+   "zeilen_test": 0
+  },
+  "quality": 20,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 6,
+   "presentation": 6,
+   "code_quality": 2,
+   "scope": 6,
+   "status": "proposal"
+  },
   "spec": "draft-mtp · n_max 2",
   "build": "b9985",
   "ctx": 172032,
@@ -115,7 +143,7 @@
    "poster": "moor36.jpg"
   },
   "source": "llama.cpp server log, 221 of 409 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
-  "note": "Im Projektordner liegen 15 Reparaturskripte (fix_hit.cjs, fix_coords_final.cjs …) — so oft musste das Modell den Trefferbereich nachbessern.",
+  "note": "Im Projektordner liegen 12 Reparaturskripte (fix_hit.cjs, fix_coords_final.cjs …) — so oft musste das Modell den Trefferbereich nachbessern.",
   "depth": null,
   "evidence": {
    "log": "evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log",
@@ -154,13 +182,27 @@
   },
   "tokens": 770428,
   "fixes": null,
-  "quality": 16,
+  "code": {
+   "dateien": 55,
+   "zeilen_quelle": 10531,
+   "dateien_test": 10,
+   "zeilen_test": 1398
+  },
+  "quality": 35,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 9,
+   "presentation": 9,
+   "code_quality": 8,
+   "scope": 9,
+   "status": "confirmed"
+  },
   "spec": "MTP, Shared-Q8_0, n-max 2",
-  "build": "580e88d",
-  "ctx": 262144,
+  "build": null,
+  "ctx": 131072,
   "kv": "q8_0 / q8_0",
   "ub": 512,
-  "cmd": "llama-server -m Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf ^\n  --mmproj mmproj-F16.gguf --alias qwen3.8-flash-next ^\n  --host 127.0.0.1 --port 8099 --device Vulkan0 ^\n  --gpu-layers all --n-cpu-moe 0 --fit off -fa on ^\n  --load-mode mmap --lazy-mode on ^\n  --ctx-size 262144 --parallel 1 --kv-unified ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --ctx-checkpoints 4 --checkpoint-min-step 4096 ^\n  --jinja --reasoning on --reasoning-format deepseek --reasoning-effort xhigh",
+  "cmd": "llama-server ^\n  -m Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf ^\n  -md mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf ^\n  --spec-type draft-mtp --spec-draft-n-max 2 ^\n  --mmproj mmproj-F16.gguf --alias qwen3.8-flash-next ^\n  --host 127.0.0.1 --port 8099 --device Vulkan0 --gpu-layers all ^\n  --n-cpu-moe 0 --fit off -fa on --load-mode mmap --lazy-mode on ^\n  --ctx-size 131072 --parallel 1 --kv-unified ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 ^\n  --ctx-checkpoints 4 --checkpoint-min-step 4096 --jinja ^\n  --reasoning on --reasoning-format deepseek ^\n  --reasoning-effort xhigh --reasoning-budget 12000 ^\n  --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 ^\n  --presence-penalty 0.0 --repeat-penalty 1.0",
   "media": {
    "video": "fnmoor.webm",
    "poster": "fnmoor.jpg",
@@ -169,7 +211,7 @@
    "text": "Moorland Mayhem — Featherstorm: Titelbild, Spielrunde, Wertung und Abspann, ungeschnitten",
    "bilder": []
   },
-  "source": "llama.cpp-Serverlog · 346 von 459 Antworten ab 200 Tokens · Lauf vom 03./04.09.2026, 13 h 36 min",
+  "source": "llama.cpp-Serverlog · 346 von 459 Antworten ab 200 Tokens · Lauf vom 03./04.09.2026, 13 h 35 min. Der Server lief 844,3 Minuten am Stück. Von der ersten Aufgabe bis zum Ende der letzten sind es 837,0 Minuten; darin liegt eine Leerlaufpause von 21,9 Minuten. Das Arbeitsfenster sind also 815 Minuten. Die reine Rechenzeit auf der GPU beträgt 798,8 Minuten.",
   "note": "Der längste Lauf im Feld: 13 Stunden 36 Minuten an einem einzigen Auftrag, 459 Anfragen, ohne dass der Kontext je abgeschnitten wurde.",
   "depth": {
    "kind": "decode",
@@ -263,7 +305,21 @@
   },
   "tokens": 236460,
   "fixes": null,
-  "quality": 16,
+  "code": {
+   "dateien": 29,
+   "zeilen_quelle": 6157,
+   "dateien_test": 0,
+   "zeilen_test": 0
+  },
+  "quality": 22,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 6,
+   "presentation": 6,
+   "code_quality": 4,
+   "scope": 6,
+   "status": "proposal"
+  },
   "spec": "MTP, ältere Fassung (nicht die von Unsloth)",
   "build": "580e88d",
   "ctx": 262144,
@@ -312,7 +368,21 @@
   },
   "tokens": 118919,
   "fixes": 6,
-  "quality": 17,
+  "code": {
+   "dateien": 36,
+   "zeilen_quelle": 11115,
+   "dateien_test": 0,
+   "zeilen_test": 0
+  },
+  "quality": 28,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 8,
+   "presentation": 8,
+   "code_quality": 4,
+   "scope": 8,
+   "status": "proposal"
+  },
   "spec": "draft-mtp + ngram-mod · Annahme 0,553",
   "build": "bd9bd1b",
   "ctx": 262144,
@@ -378,6 +448,49 @@
   "wall_minutes": 115
  },
  {
+  "slug": "qwen38-27b-q4xl-moorhuhn-medium-r9700",
+  "model": "Qwen3.8-27B",
+  "quant": "UD-Q4_K_XL",
+  "hw": "r9700",
+  "task": "Moorhuhn",
+  "kind": "agent",
+  "reasoning": "medium",
+  "decode": null,
+  "prefill": null,
+  "tokens": null,
+  "fixes": 2,
+  "code": {
+   "dateien": 44,
+   "zeilen_quelle": 8530,
+   "dateien_test": 10,
+   "zeilen_test": 604
+  },
+  "quality": 26,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 6,
+   "presentation": 6,
+   "code_quality": 8,
+   "scope": 6,
+   "status": "proposal"
+  },
+  "spec": "draft-mtp + ngram-mod 24/48/64 · n_max 2",
+  "build": "b10717",
+  "ctx": 262144,
+  "kv": "q8_0 / q8_0",
+  "ub": 288,
+  "cmd": "llama-server -m Qwen3.8-27B-UD-Q4_K_XL.gguf ^\n  --load-mode none --mmproj mmproj-F16.gguf --image-min-tokens 1024 ^\n  --alias Qwen3.8-27B -dev Vulkan0 --host 127.0.0.1 --port 8080 ^\n  -c 262144 -ngl 99 -fa on --fit off -ot \"token_embd\\.weight=Vulkan0\" ^\n  -ctk q8_0 -ctv q8_0 -b 2048 -ub 288 ^\n  --parallel 1 --kv-unified ^\n  --ctx-checkpoints 4 --checkpoint-min-step 16384 --cache-ram 0 ^\n  --spec-type draft-mtp,ngram-mod --spec-draft-n-max 2 ^\n  --spec-ngram-mod-n-match 24 --spec-ngram-mod-n-min 48 --spec-ngram-mod-n-max 64 ^\n  --spec-draft-device Vulkan0 --spec-draft-ngl 99 ^\n  --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 ^\n  --presence-penalty 0.0 --repeat-penalty 1.0 ^\n  --jinja --reasoning on --reasoning-effort medium --reasoning-format deepseek --reasoning-budget -1",
+  "source": "Zweiter Durchgang desselben Modells mit derselben Startzeile, nur mit --reasoning-effort medium statt xhigh. Laufzeit 6 h 28 min, von Kai Bennett aus der Anzeige in VS Code abgelesen. Ein Auftrag und ein Klick auf „Continue to iterate“, sonst kein Eingriff. Der Chatverlauf zählt 95 Terminalbefehle, 110 abgeschlossene Werkzeugaufrufe und 17 Test-, Build- oder Lint-Läufe. Eine Decode-Geschwindigkeit gibt es nicht: dafür bräuchte es das Serverprotokoll, und das liegt für diesen Lauf nicht vor.",
+  "note": "Der Vergleich mit dem xhigh-Lauf ist der Zweck dieses Eintrags. Bei gleicher Startzeile und gleichem Auftrag lieferte xhigh 10 839 Quellzeilen und 1 257 Testzeilen in 9 h, medium 8 530 und 604 in 6,5 h. Das ausgelieferte Hauptmenü trägt hier fünf Einträge, beim xhigh-Lauf elf.",
+  "depth": null,
+  "evidence": {
+   "log": null,
+   "chat": "evidence/chats/qwen38-27b-q4xl-moorhuhn-medium-r9700.md",
+   "regel": "Kein Serverprotokoll, deshalb keine Geschwindigkeit. Der Ablauf stammt aus dem Chatverlauf und dem ausgelieferten Quelltext, die Laufzeit aus der Anzeige in VS Code.",
+   "regel_en": "No server log, so no speed. The sequence of events comes from the chat history and the delivered source code, the runtime from the display in VS Code."
+  }
+ },
+ {
   "slug": "qwen36-27b-q6-clairobscure-r9700",
   "model": "Qwen3.6-27B",
   "quant": "UD-Q6_K_XL",
@@ -388,7 +501,21 @@
   "prefill": null,
   "tokens": null,
   "fixes": null,
-  "quality": 15,
+  "code": {
+   "dateien": 26,
+   "zeilen_quelle": 8705,
+   "dateien_test": 0,
+   "zeilen_test": 0
+  },
+  "quality": 22,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 6,
+   "presentation": 6,
+   "code_quality": 4,
+   "scope": 6,
+   "status": "proposal"
+  },
   "spec": "draft-mtp · n_max 2",
   "build": "b9985",
   "ctx": 172032,
@@ -400,8 +527,8 @@
    "poster": "night.jpg",
    "image": "night.jpg"
   },
-  "source": null,
-  "note": "Der Lauf ist noch nicht ausgewertet; das Artefakt liegt vor.",
+  "source": "Nachprüfbar ist das Fehlen selbst: das Belegrepo führt für diesen Lauf unter LAUF.md „Rohprotokoll: keins“, und die Prüfsummenliste evidence/SHA256SUMS enthält sechs Protokolle, keines davon für Qwen3.6 mit Clair Obscure. Gearbeitet wurde zwischen dem 23. und dem 27. Juli 2026.",
+  "note": "Für diesen Lauf gibt es kein Serverprotokoll, deshalb keine Geschwindigkeit. Belegt sind Modell und Aufbau über das Startskript pi_clair_obscur.bat, das den Pi Coding Agent gegen Qwen3.6-27B-MTP mit Vision und 131 072 Kontext startet, sowie das Artefakt selbst: 24 JavaScript-Dateien mit 8 705 Zeilen, dazu 96 CC0-Dateien an Grafik und Ton, die nicht vom Modell stammen. Gearbeitet wurde zwischen dem 23. und dem 27. Juli 2026.",
   "depth": null
  },
  {
@@ -419,12 +546,26 @@
    "n": null
   },
   "prefill": {
-   "median": 245.7,
-   "max": 245.7
+   "median": 245.71,
+   "max": 245.71
   },
   "tokens": null,
   "fixes": null,
-  "quality": 18,
+  "code": {
+   "dateien": 24,
+   "zeilen_quelle": 6537,
+   "dateien_test": 0,
+   "zeilen_test": 0
+  },
+  "quality": 4,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 0,
+   "presentation": 0,
+   "code_quality": 2,
+   "scope": 2,
+   "status": "proposal"
+  },
   "spec": "draft-mtp · n_max 2 · Annahme 0,866",
   "build": "04b2b72",
   "ctx": 262144,
@@ -450,20 +591,34 @@
   "task": "Clair Obscure",
   "kind": "synth",
   "decode": {
-   "median": 27.9,
+   "median": 20.71,
    "p10": null,
    "p90": null,
    "peak": null,
    "n": null
   },
   "prefill": {
-   "median": 309.6,
-   "max": 309.6
+   "median": 338.68,
+   "max": 338.68
   },
   "tokens": null,
   "fixes": null,
-  "quality": 17,
-  "spec": "draft-dflash · n_max 3 · Annahme 0,53",
+  "code": {
+   "dateien": 21,
+   "zeilen_quelle": 5994,
+   "dateien_test": 0,
+   "zeilen_test": 0
+  },
+  "quality": 22,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 6,
+   "presentation": 6,
+   "code_quality": 4,
+   "scope": 6,
+   "status": "proposal"
+  },
+  "spec": "draft-dflash · n_max 3 · im Spiellauf aktiv, später abgeschaltet",
   "build": "04b2b72",
   "ctx": 262144,
   "kv": "q8_0 / q8_0",
@@ -474,7 +629,7 @@
    "poster": "laguna.jpg"
   },
   "source": "synthetic llama-bench sweep; see the linked report",
-  "note": "118B-A8B MoE, 70,01 GiB Gewichte. Ohne Spekulation 20,55 t/s; mit der dokumentierten Entwurfstiefe 15 nur 8,1 t/s. Das Artefakt liegt vor — ein rundenbasiertes Rollenspiel mit Party, Aktionsmenü und Lebensanzeigen; die Geschwindigkeit dieses Laufs ist noch nicht aus dem Log ausgewertet.",
+  "note": "118B-A8B MoE, 70,01 GiB Gewichte in Q4_K_M. Ohne Spekulation 20,71 t/s, mit der Entwurfstiefe 15 aus der Modellkarte nur 8,1 t/s. Das Spiel hat das Modell in UD-Q4_K_XL gebaut, von diesem Lauf gibt es kein Serverprotokoll.",
   "depth": null,
   "evidence": {
    "log": "evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md",
@@ -503,7 +658,21 @@
   },
   "tokens": 150800,
   "fixes": 12,
-  "quality": 13,
+  "code": {
+   "dateien": 24,
+   "zeilen_quelle": 3901,
+   "dateien_test": 0,
+   "zeilen_test": 0
+  },
+  "quality": 16,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 4,
+   "presentation": 4,
+   "code_quality": 4,
+   "scope": 4,
+   "status": "proposal"
+  },
   "spec": "draft-dspark · n_max 3",
   "build": "580e88d",
   "ctx": 131072,
@@ -541,8 +710,10 @@
   "decode": null,
   "prefill": null,
   "tokens": null,
-  "fixes": 1,
-  "quality": 19,
+  "fixes": null,
+  "quality": null,
+  "quality_scale": 40,
+  "rubric": null,
   "spec": "—",
   "build": "—",
   "ctx": null,
@@ -559,6 +730,47 @@
   }
  },
  {
+  "slug": "opus5-clairobscure",
+  "model": "Opus 5 ULTRACODE",
+  "quant": "—",
+  "hw": "cloud",
+  "task": "Clair Obscure",
+  "kind": "agent",
+  "reasoning": null,
+  "decode": null,
+  "prefill": null,
+  "tokens": null,
+  "fixes": null,
+  "code": {
+   "dateien": 58,
+   "zeilen_quelle": 16308,
+   "dateien_test": 0,
+   "zeilen_test": 0
+  },
+  "quality": 34,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 10,
+   "presentation": 10,
+   "code_quality": 4,
+   "scope": 10,
+   "status": "proposal"
+  },
+  "spec": "—",
+  "build": "—",
+  "ctx": null,
+  "kv": null,
+  "ub": null,
+  "cmd": null,
+  "source": "Artefakt vorhanden und spielbar. Geschwindigkeit in der Cloud nicht vergleichbar messbar.",
+  "note": "Referenzfassung. Opus 5 lief in der Cloud, nicht auf der geprüften Hardware — eine Geschwindigkeit wird deshalb nicht ausgewiesen. Was zählt, ist das Artefakt.",
+  "depth": null,
+  "evidence": {
+   "log": null,
+   "regel": "Der Lauf ging über eine fremde Schnittstelle. Es gibt kein Serverprotokoll, also weder Geschwindigkeit noch Tokenbilanz. Was zählt, ist das Artefakt."
+  }
+ },
+ {
   "slug": "gpt56-sol",
   "model": "GPT 5.6 Sol",
   "quant": "—",
@@ -568,8 +780,10 @@
   "decode": null,
   "prefill": null,
   "tokens": null,
-  "fixes": 2,
-  "quality": 18,
+  "fixes": null,
+  "quality": null,
+  "quality_scale": 40,
+  "rubric": null,
   "spec": "—",
   "build": "—",
   "ctx": null,
@@ -596,19 +810,33 @@
   "prefill": null,
   "tokens": null,
   "fixes": 2,
-  "quality": 17,
+  "code": {
+   "dateien": 72,
+   "zeilen_quelle": 9433,
+   "dateien_test": 11,
+   "zeilen_test": 885
+  },
+  "quality": 32,
+  "quality_scale": 40,
+  "rubric": {
+   "game_feel": 8,
+   "presentation": 8,
+   "code_quality": 8,
+   "scope": 8,
+   "status": "proposal"
+  },
   "spec": "—",
   "build": "—",
   "ctx": null,
   "kv": null,
   "ub": null,
-  "cmd": {
+  "cmd": null,
+  "media": {
    "video": "sonnet.webm",
    "poster": "sonnet.jpg"
   },
-  "media": null,
   "source": "Cloud-Referenz. Das Artefakt liegt vor, die Geschwindigkeit ist nicht vergleichbar gemessen.",
-  "note": null,
+  "note": "Cloud-Referenz, gelaufen mit hoher Reasoning-Stufe. Sie steht hier zum Vergleich des Ergebnisses, nicht der Geschwindigkeit.",
   "depth": null,
   "evidence": {
    "log": null,

@@ -3,10 +3,12 @@
 
     python scripts/make_chart.py
 
-Speed on x, provisional quality on y, colour by machine, with the Pareto front over
-the agent runs. Two files are written, one per GitHub theme; README.md picks between
-them with <picture>. The chart is generated rather than hand-drawn so it cannot drift
-away from the data it claims to show.
+Speed on x, quality on y, colour by machine, with the Pareto front over the agent
+runs. Quality is the rubric used on benchmark.securesight.ai: four criteria of
+10 points each (game feel, presentation, code quality, scope), 40 in total. Each
+run's rubric carries a status, "confirmed" or "proposal". Two files are written,
+one per GitHub theme; README.md picks between them with <picture>. The chart is
+generated rather than hand-drawn so it cannot drift away from the data it shows.
 
 Why a Pareto front and no total score: any weighting of speed against quality is an
 opinion, and a single ranked column reads as a verdict whether or not one was meant.
@@ -25,7 +27,8 @@ W, H = 900, 562
 X0, X1 = 64, 752            # plot area
 Y0, Y1 = 44, 474
 XMAX = 36.0                 # t/s
-QMIN, QMAX = 12.0, 20.0     # provisional rubric
+QMIN, QMAX = 0.0, 40.0      # rubric, four criteria of 10 points each
+QSTEP = 5
 
 FONT = "system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
 
@@ -38,20 +41,20 @@ THEMES = {
 
 # Where each point's label sits, so nothing collides. dx/dy in px, anchor for text.
 LABELS = {
-    "qwen38-27b-q4xl-moorhuhn-r9700":       (-12,  26, "end",    "Qwen3.8-27B Q4_XL"),
+    # Below its point: above it run the Sonnet 5 reference line and the end of the Pareto front.
+    "qwen38-27b-q4xl-moorhuhn-r9700":       (  8,  30, "end",    "Qwen3.8-27B Q4_XL"),
     "qwen36-27b-q6-moorhuhn-r9700":         (-12,   5, "end",    "Qwen3.6-27B Q6"),
-    "qwen38-27b-q6-clairobscure-r9700":     (-12, -20, "end",    "Qwen3.8-27B Q6"),
-    "qwen38-flashnext-moorhuhn-evox2":      (  0, -16, "middle", "Qwen3.8-Flash-Next"),
-    "qwen38-flashnext-clairobscure-evox2":  (  0, -16, "middle", "Qwen3.8-Flash-Next"),
+    "qwen38-27b-q6-clairobscure-r9700":     (-12,   5, "end",    "Qwen3.8-27B Q6"),
+    # High enough that the second line clears the point.
+    "qwen38-flashnext-moorhuhn-evox2":      (  0, -30, "middle", "Qwen3.8-Flash-Next"),
+    "qwen38-flashnext-clairobscure-evox2":  (  0, -30, "middle", "Qwen3.8-Flash-Next"),
     "deepseek-v4-flash-clairobscure-evox2": ( 12,   5, "start",  "DeepSeek-V4-Flash-0731"),
-    "qwen35-122b-a10b-evox2":               (-12,  -9, "end",    "Qwen3.5-122B-A10B"),
-    "laguna-s21-evox2":                     ( 13, -11, "start",  "Laguna S 2.1"),
+    "qwen35-122b-a10b-evox2":               (-12,   5, "end",    "Qwen3.5-122B-A10B"),
+    "laguna-s21-evox2":                     ( 13,   5, "start",  "Laguna S 2.1"),
 }
 
 # Cloud rows are drawn as a horizontal reference line, never as a point: they have no
-# local decode rate, and inventing an x position for them would be a lie. Only runs
-# that actually shipped an artifact get a line -- Opus 5 and GPT 5.6 have neither an
-# artifact nor a logged run, so their scores stay out of the picture entirely.
+# local decode rate, and inventing an x position for them would be a lie.
 CLOUD_LINES = {"sonnet5": "Sonnet 5 · cloud"}
 
 TASK_SHORT = {"Moorhuhn": "Moorhuhn", "Clair Obscure": "Clair Obscur"}
@@ -98,7 +101,8 @@ def collect():
             if q is not None:
                 skipped.append(r)
             continue
-        p = {"slug": r["slug"], "x": dec, "y": q, "hw": r["hw"],
+        status = (r.get("rubric") or {}).get("status")
+        p = {"slug": r["slug"], "x": dec, "y": q, "hw": r["hw"], "confirmed": status == "confirmed",
              "task": TASK_SHORT.get(r.get("task"), r.get("task") or "")}
         (synth if r["kind"] == "synth" else agent).append(p)
     return agent, synth, cloud, skipped
@@ -109,12 +113,12 @@ def draw(theme_name, agent, synth, cloud):
     s = []
     a = s.append
     a('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" height="%d" '
-      'font-family="%s" role="img" aria-label="Decode speed against provisional quality '
+      'font-family="%s" role="img" aria-label="Decode speed against the quality rubric '
       'for every measured run, coloured by machine">' % (W, H, W, H, FONT))
     a('<rect width="%d" height="%d" fill="%s"/>' % (W, H, c["bg"]))
 
     # grid + ticks
-    for q in range(int(QMIN), int(QMAX) + 1):
+    for q in range(int(QMIN), int(QMAX) + 1, QSTEP):
         y = py(q)
         a('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f" stroke="%s" stroke-width="1"/>'
           % (X0, y, X1, y, c["grid"]))
@@ -135,11 +139,11 @@ def draw(theme_name, agent, synth, cloud):
     a('<text x="%.1f" y="%.1f" fill="%s" font-size="13" text-anchor="middle">'
       'Decode · t/s</text>' % ((X0 + X1) / 2, Y1 + 44, c["ink"]))
     a('<text x="%.1f" y="%.1f" fill="%s" font-size="11.5" text-anchor="middle">'
-      'filled = agent-run median over responses ≥ 200 tokens   ·   '
-      'hollow = synthetic llama-bench sweep, a different measurement style</text>'
+      'filled: agent run, median over responses of 200 tokens or more   ·   '
+      'hollow: synthetic llama-bench sweep, a different measurement</text>'
       % ((X0 + X1) / 2, Y1 + 64, c["mute"]))
     a('<text transform="translate(20,%.1f) rotate(-90)" fill="%s" font-size="13" '
-      'text-anchor="middle">Quality · provisional rubric, 0–20</text>'
+      'text-anchor="middle">Quality · rubric, 0 to 40</text>'
       % ((Y0 + Y1) / 2, c["ink"]))
 
     # cloud reference lines, under everything else
@@ -171,22 +175,25 @@ def draw(theme_name, agent, synth, cloud):
         dx, dy, anchor, name = LABELS.get(p["slug"], (11, 5, "start", p["slug"]))
         a('<text x="%.1f" y="%.1f" fill="%s" font-size="12.5" font-weight="600" '
           'text-anchor="%s">%s</text>' % (x + dx, y + dy, c["ink"], anchor, esc(name)))
-        if p["task"] and filled:
+        sub = p["task"] if filled else ""
+        if p.get("confirmed"):
+            sub = (sub + " · confirmed").strip(" ·")
+        if sub:
             a('<text x="%.1f" y="%.1f" fill="%s" font-size="11" text-anchor="%s">%s</text>'
-              % (x + dx, y + dy + 13, c["mute"], anchor, esc(p["task"])))
+              % (x + dx, y + dy + 13, c["mute"], anchor, esc(sub)))
 
     for p in synth:
         marker(p, False)
     for p in agent:
         marker(p, True)
 
-    # legend
-    lx, ly = X0 + 16, Y0 + 20
+    # legend, bottom left: the cloud reference line crosses the top left
+    lx, ly = X0 + 16, Y1 - 12 - 4 * 21
     rows = [
         ("dot", c["r9700"], True, "Radeon AI PRO R9700"),
-        ("dot", c["evox2"], True, "AMD Ryzen AI Max+ 395"),
-        ("dot", c["evox2"], False, "synthetic sweep — not comparable"),
-        ("dash", c["ink"], True, "Pareto front — agent runs"),
+        ("dot", c["evox2"], True, "AMD AI MAX 395 (AMD Halo)"),
+        ("dot", c["evox2"], False, "synthetic sweep, not comparable"),
+        ("dash", c["ink"], True, "Pareto front of the agent runs"),
         ("dot2", c["cloud"], True, "cloud reference"),
     ]
     for i, (kind, col, filled, text) in enumerate(rows):
@@ -224,7 +231,7 @@ def main():
           % (len(agent), len(synth), len(cloud)))
     print("Pareto front over the agent runs:")
     for p in front:
-        print("  %-38s %6.2f t/s   quality %d" % (p["slug"], p["x"], p["y"]))
+        print("  %-38s %6.2f t/s   quality %d of 40" % (p["slug"], p["x"], p["y"]))
     for r in skipped:
         print("not plotted (quality but no decode median): %s" % r["slug"])
 
