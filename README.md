@@ -18,16 +18,16 @@ tried out first hand on local, affordable AMD hardware.</p>
   <a href="#start-here">Start here</a> ·
   <a href="#every-measured-run">Results</a> ·
   <a href="#what-the-models-built">Games</a> ·
-  <a href="#eight-findings">Findings</a> ·
+  <a href="#nine-findings">Findings</a> ·
   <a href="#verify-every-number">Verify</a> ·
   <a href="#faq">FAQ</a>
 </p>
 
 <p>
   <a href="https://benchmark.securesight.ai"><img alt="Website benchmark.securesight.ai" src="https://img.shields.io/badge/website-benchmark.securesight.ai-cb7815?style=flat-square"></a>
-  <a href="#verify-every-number"><img alt="1,835,623 tokens generated, as printed by scripts/parse_logs.py" src="https://img.shields.io/badge/tokens_generated-1%2C835%2C623-1c9ab8?style=flat-square"></a>
-  <a href="evidence/SHA256SUMS"><img alt="6 raw llama.cpp logs, pinned by SHA-256" src="https://img.shields.io/badge/raw_logs-6_%C2%B7_SHA--256_pinned-8957e5?style=flat-square"></a>
-  <img alt="llama.cpp on Vulkan, no ROCm" src="https://img.shields.io/badge/llama.cpp-Vulkan_%C2%B7_no_ROCm-141130?style=flat-square">
+  <a href="#verify-every-number"><img alt="3,013,509 tokens generated, as printed by scripts/parse_logs.py" src="https://img.shields.io/badge/tokens_generated-3%2C013%2C509-1c9ab8?style=flat-square"></a>
+  <a href="evidence/SHA256SUMS"><img alt="7 raw server logs, pinned by SHA-256" src="https://img.shields.io/badge/raw_logs-7_%C2%B7_SHA--256_pinned-8957e5?style=flat-square"></a>
+  <img alt="Servers: llama.cpp on Vulkan, and Halogen in one run" src="https://img.shields.io/badge/servers-llama.cpp_Vulkan_%C2%B7_Halogen-141130?style=flat-square">
   <a href="#license-and-citation"><img alt="Code MIT, measurement data CC BY 4.0" src="https://img.shields.io/badge/license-MIT_%C2%B7_data_CC_BY_4.0-3fb950?style=flat-square"></a>
 </p>
 
@@ -36,9 +36,10 @@ tried out first hand on local, affordable AMD hardware.</p>
 ## At a glance
 
 Every local model got one of two prompts in VS Code Copilot Chat and then worked on its own
-against a `llama-server` on the local network. What it shipped is a playable game. What the
-server log recorded is what it cost, and two independent scripts re-derive every agent run
-figure from those logs. Each run has its own page on
+against a server on the local network: `llama-server`, and Halogen in one run. What it
+shipped is a playable game. What the server log recorded is what it cost, and two
+independent scripts re-derive every agent run figure from those logs. Each run has its own
+page on
 **[benchmark.securesight.ai](https://benchmark.securesight.ai)** with a video, the playable
 build and the launch line to copy.
 
@@ -167,7 +168,7 @@ Python 3, no dependencies. `parse_logs.py` also reads a log of your own: pass it
 
 ## Every measured run
 
-Six agent runs have a raw server log. Their speed is the median over every response of 200
+Seven agent runs have a raw server log. Their speed is the median over every response of 200
 tokens or more in that log.
 
 | Model | Task | Decode | Quality | Tests | Evidence |
@@ -178,11 +179,12 @@ tokens or more in that log.
 | Qwen3.8-27B<br><sub>UD-Q6_K_M</sub> | Clair Obscure | **26.30** | 28 | 0 | [log](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log) · [page](https://benchmark.securesight.ai/m/qwen38-27b/en?lauf=qwen38-27b-q6-clairobscure-r9700) |
 | **AMD AI MAX 395 (AMD Halo)** | | | | | |
 | Qwen3.8-Flash-Next<br><sub>UD-Q4_K_XL</sub> | Moorhuhn | **21.76** | **35** ✓ | 10 | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) · [page](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-evox2) |
+| Qwen3.8-Flash-Next<br><sub>W4B · Halogen</sub> | Moorhuhn | **38.28** | — | 11 | [log](evidence/logs/qwen38-flashnext-moorhuhn-halogen-evox2.log) · [page](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-halogen-evox2) |
 | Qwen3.8-Flash-Next<br><sub>UD-Q4_K_XL</sub> | Clair Obscure | **10.93** | 22 | 0 | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) · [page](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-clairobscure-evox2) |
 | DeepSeek-V4-Flash-0731<br><sub>UD-IQ3_XXS</sub> | Clair Obscure | **7.02** | 16 | 0 | [log](evidence/logs/deepseek-v4-flash-clairobscur-halo.log) · [page](https://benchmark.securesight.ai/m/deepseek-v4-flash-0731/en?lauf=deepseek-v4-flash-clairobscure-evox2) |
 
-<sub><b>Decode</b> median in t/s · <b>Quality</b> rubric of four criteria with 10 points each (game feel, presentation, code quality, scope), ✓ confirmed, the others are proposals · <b>Tests</b> files named <code>*.test.*</code> in the delivered project · <b>page</b> the model page with video, playable build and the reason behind every rubric point.<br>
-The Qwen3.8-27B UD-Q4_K_XL log covers the first of two sessions. For the Flash-Next Clair Obscure run the run notes record an older MTP version, but its log shows no draft model being loaded and no draft acceptance line, so this log cannot show what MTP contributed.</sub>
+<sub><b>Decode</b> median in t/s · <b>Quality</b> rubric of four criteria with 10 points each (game feel, presentation, code quality, scope), ✓ confirmed, — not assessed yet, the others are proposals · <b>Tests</b> files named <code>*.test.*</code> in the delivered project · <b>page</b> the model page with video, playable build and the reason behind every rubric point.<br>
+The Qwen3.8-27B UD-Q4_K_XL log covers the first of two sessions. For the Flash-Next Clair Obscure run the run notes record an older MTP version, but its log shows no draft model being loaded and no draft acceptance line, so this log cannot show what MTP contributed. The Halogen run used another server on Linux, halogen-flash-server 0.6.3 with weights in W4B, and served two requests at a time: 268 of its 652 scored responses ran next to a second one.</sub>
 
 <details>
 <summary>Percentiles, prefill, largest prompt, tokens and GPU time per run</summary>
@@ -195,10 +197,11 @@ The Qwen3.8-27B UD-Q4_K_XL log covers the first of two sessions. For the Flash-N
 | Qwen3.6-27B UD-Q6_K_XL · Moorhuhn | 221 of 409 | 29.02 to 38.25 | 152.71 | 43,238 | 196,543 | 139.1 |
 | Qwen3.8-27B UD-Q6_K_M · Clair Obscure | 30 of 35 | 15.55 to 34.22 | 159.40 | 180,396 | 119,627 | 114.5 |
 | Qwen3.8-Flash-Next · Moorhuhn | 346 of 459 | 17.15 to 26.28 | 77.63 | 69,985 | 786,506 | 798.8 |
+| Qwen3.8-Flash-Next W4B · Halogen · Moorhuhn | 652 of 891 | 33.08 to 43.65 | 347.85<br><sub>1,120.69 from 8,192 new tokens</sub> | 149,681 | 1,177,886 | 634.9 |
 | Qwen3.8-Flash-Next · Clair Obscure | 92 of 106 | 9.70 to 13.85 | 109.74 | 35,009 | 238,371 | 368.0 |
 | DeepSeek-V4-Flash-0731 · Clair Obscure | 98 of 152 | 4.85 to 9.89 | 15.24 | 36,962 | 158,469 | 500.3 |
 
-<sub><b>n</b> scored responses of all responses · <b>Prefill</b> median t/s over all prompts · <b>Tokens</b> generated over all responses · <b>GPU min</b> decode plus prefill as timed by the server. Totals as <code>parse_logs.py</code> prints them: 869 scored responses, 1,835,623 tokens generated, 35.2 h of GPU time.</sub>
+<sub><b>n</b> scored responses of all responses · <b>Prefill</b> median t/s over all prompts; Halogen logs no prefill rate, so there it is the new prompt tokens divided by the prefill time the server reports. Its requests bring 654 new tokens in the median, and requests with 32 to 511 new tokens already took 1.46 s in the median, so its median over all prompts describes those small steps; from 8,192 new tokens up its prefill median is 1,120.69 t/s over 39 requests · <b>Tokens</b> generated over all responses · <b>GPU min</b> decode plus prefill as timed by the server. Totals as <code>parse_logs.py</code> prints them: 1,521 scored responses, 3,013,509 tokens generated, 45.7 h of GPU time.</sub>
 
 </details>
 
@@ -226,7 +229,7 @@ The Qwen3.8-27B UD-Q4_K_XL log covers the first of two sessions. For the Flash-N
 </picture>
 </div>
 
-<sub>Filled points are agent runs, hollow points synthetic sweeps, a different measurement. The dashed line is the Pareto front of the agent runs, the runs no other agent run beats on both axes: Qwen3.8-Flash-Next on Moorhuhn (21.76 t/s, 35) and Qwen3.8-27B UD-Q4_K_XL (33.69 t/s, 31). Drawn from <code>data/runs.json</code> by <code>scripts/make_chart.py</code>, so the picture cannot drift from the data.</sub>
+<sub>Filled points are agent runs, hollow points synthetic sweeps, a different measurement. The dashed line is the Pareto front of the agent runs, the runs no other agent run beats on both axes: Qwen3.8-Flash-Next on Moorhuhn (21.76 t/s, 35) and Qwen3.8-27B UD-Q4_K_XL (33.69 t/s, 31). Drawn from <code>data/runs.json</code> by <code>scripts/make_chart.py</code>, so the picture cannot drift from the data. The Halogen run has no quality score yet and is not drawn.</sub>
 
 > [!IMPORTANT]
 > **There is no overall ranking here.** Any weighting of speed against quality is an opinion, so
@@ -263,7 +266,7 @@ sessions of 20, 376 and 419 minutes; between them the context was lost and had t
 ## What the models built
 
 Every clip is the model's own build, recorded from what it delivered. The full source of every
-run is in [`benchmarks/`](benchmarks/), exactly as the model left it, and nine of the builds run
+run is in [`benchmarks/`](benchmarks/), exactly as the model left it, and ten of the builds run
 in your browser on the website. The Moorhuhn prompt asks for a finished arcade shooter with
 modes, menus, statistics and tests. The Clair Obscure prompt asks for a single fight with parry
 and dodge on tight timing windows.
@@ -311,9 +314,23 @@ and dodge on tight timing windows.
 <a href="https://benchmark.securesight.ai/spiel/laguna-s21-evox2/">Play</a> · <a href="https://benchmark.securesight.ai/m/laguna-s-21/en">Video</a> · <a href="benchmarks/laguna-s21/clairobscure/">Source</a></sub>
 </td>
 </tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://benchmark.securesight.ai/spiel/qwen38-flashnext-moorhuhn-halogen-evox2/"><img src="media/gif/moorhuhn-flashnext-halogen.gif" width="100%" alt="The last seconds of a Blitz round in Moorland Mayhem, Federsturm, built by Qwen3.8-Flash-Next on Halogen: birds, combo counter and PERFECT popups, played by a script"></a>
+<b>Moorhuhn</b> · Qwen3.8-Flash-Next W4B · Halogen · AI MAX 395<br>
+<sub>65 files · 20,887 lines · 11 test files · not assessed yet · this clip is played by a script<br>
+<a href="https://benchmark.securesight.ai/spiel/qwen38-flashnext-moorhuhn-halogen-evox2/">Play</a> · <a href="https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-halogen-evox2">Video</a> · <a href="benchmarks/qwen38-flashnext/moorhuhn-halogen/">Source</a></sub>
+</td>
+<td width="50%" valign="top">
+<a href="https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-clairobscure-r9700"><img src="media/gif/clair-obscur-qwen36.gif" width="100%" alt="A foggy 3D forest scene with a controllable character, built by Qwen3.6-27B"></a>
+<b>Clair Obscure</b> · Qwen3.6-27B UD-Q6_K_XL · R9700<br>
+<sub>26 files · 8,705 lines · quality 22, proposal · too large to play in the browser<br>
+<a href="https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-clairobscure-r9700">Video</a> · <a href="benchmarks/qwen36-27b/clairobscure-q6/">Source</a></sub>
+</td>
+</tr>
 </table>
 
-## Eight findings
+## Nine findings
 
 Each one links to the measurement it came from. Where a source limits what can be claimed, that
 limit is part of the finding.
@@ -431,7 +448,7 @@ Qwen3.8-27B UD-Q4_K_XL on the R9700, same launch line, same Moorhuhn prompt, and
 
 | | xhigh | medium |
 |---|--:|--:|
-| Source lines | 10,839 | 8,530 |
+| Lines of code, tests included | 10,839 | 8,530 |
 | Test files | 11 with 1,257 lines | 10 with 604 lines |
 | Main menu entries | 11 | 5 |
 | Runtime | about 9 h in two sessions | 6 h 28 min |
@@ -478,6 +495,31 @@ different abilities.
 </details>
 
 <sub>Image B is provisional: its answer key is confirmed for four of seven tags, and the tag scores use those four only. The traps are confirmed. The answer keys stay unpublished so the test keeps working for future models. Model answers are in <a href="evidence/vision/"><code>evidence/vision/</code></a> and on the model pages. Laguna S 2.1 is a text model and cannot take part.</sub>
+
+### 9. Same model, same machine, another server
+
+Qwen3.8-Flash-Next on the AMD AI MAX 395 with the same Moorhuhn prompt, once on llama.cpp and once
+on [Halogen](https://github.com/peonist-ai/halogen-flash-server), which its project page presents
+as a server made for this model on Strix Halo:
+
+| | llama.cpp | Halogen |
+|---|--:|--:|
+| Decode median | **21.76 t/s** | **38.28 t/s** |
+| Decode p10 to p90 | 17.15 to 26.28 | 33.08 to 43.65 |
+| Scored responses | 346 of 459 | 652 of 891 |
+| Weights | UD-Q4_K_XL, GGUF | W4B with quality overlay |
+| Speculation | MTP draft, shared Q8_0, `n_max 2` | MTP depth 1, plus prompt lookup |
+| System | Windows 11, 64.4 GiB reserved for the iGPU | Linux, 2.0 GiB reserved for the iGPU |
+| Test files in the delivered game | 10 with 1,398 lines | 11 with 1,876 lines |
+
+This is not a controlled experiment either: weights, speculation, operating system and the
+firmware memory split all differ, and Halogen served two requests at once, so 268 of its 652
+scored responses ran next to a second one. What stays the same is the model, the prompt and the
+machine. The Halogen run is not assessed yet, and its log records more trouble than the llama.cpp
+one: 15 requests ended with HTTP 400, the engine went silent three times for 300 or 1,800
+seconds, and the message count per request dropped back to seven or fewer 25 times.
+
+<sub>Sources: <a href="evidence/logs/qwen38-flashnext-moorhuhn-evox2.log">llama.cpp log</a> · <a href="evidence/logs/qwen38-flashnext-moorhuhn-halogen-evox2.log">Halogen log</a> · <a href="benchmarks/qwen38-flashnext/moorhuhn-halogen/"><code>benchmarks/qwen38-flashnext/moorhuhn-halogen/</code></a> · <a href="data/hardware.json"><code>data/hardware.json</code></a> for the 64.4 GiB</sub>
 
 ## Speed at context depth
 
@@ -532,11 +574,13 @@ runs. In agent work the same fall shows up per task, see
 | Note | headless, an RTX 5080 drives the desktop | |
 | Street price | from about €1,500 | from about €1,800 |
 
-Every run used llama.cpp on the Vulkan backend, with no ROCm and no BIOS changes, served on the
-local network and wired into VS Code Copilot Chat as a custom endpoint. Builds in play: `b10717`,
-`bd9bd1b` from the [TurboQuant fork](https://github.com/KaiFelixBennett/llama-cpp-turboquant),
-`b9985`, `580e88d` and poolside `04b2b72`. Each log records the configuration its server started
-with.
+Every run but one used llama.cpp on the Vulkan backend, with no ROCm and no BIOS changes, served
+on the local network and wired into VS Code Copilot Chat as a custom endpoint. Builds in play:
+`b10717`, `bd9bd1b` from the [TurboQuant fork](https://github.com/KaiFelixBennett/llama-cpp-turboquant),
+`b9985`, `580e88d` and poolside `04b2b72`. The exception is the Halogen run of Qwen3.8-Flash-Next:
+halogen-flash-server 0.6.3 on Linux, with 2.0 GiB reserved for the iGPU in firmware, see
+[finding 9](#9-same-model-same-machine-another-server). Each log records the configuration its
+server started with.
 
 > [!CAUTION]
 > **The AMD AI MAX 395 does not have 128 GB of VRAM.** Three numbers for the same memory: it has
@@ -550,7 +594,7 @@ Nothing in the agent run tables is typed by hand. The raw logs are in [`evidence
 pinned by SHA-256, and the parser reads exactly those files:
 
 ```bash
-cd evidence && sha256sum -c SHA256SUMS && cd ..   # 22 files, all pinned
+cd evidence && sha256sum -c SHA256SUMS && cd ..   # 23 files, all pinned
 python scripts/parse_logs.py                      # re-derive every agent run figure
 python scripts/verify_runs.py                     # cross-check data/runs.json against the logs
 ```
@@ -562,6 +606,10 @@ and both are stated in the scripts' headers:
 - **Only responses of 200 tokens or more count toward decode.** Shorter ones produce outliers of
   up to 1,000,000 t/s, one token in almost zero milliseconds. Prompts are never filtered.
 - **Percentiles are nearest rank**, without interpolation.
+- **Halogen logs no prefill rate.** For its run, prefill is the new prompt tokens divided by the
+  prefill time the server reports for each response. Because an agent run is mostly small requests,
+  `parse_logs.py` also prints its prefill in bands of new tokens per request and the median from
+  8,192 new tokens up, and `verify_runs.py` checks that median in `data/runs.json`.
 
 <details>
 <summary><b>Corrections: three measurement bugs found and fixed in these scripts</b></summary>
@@ -581,7 +629,7 @@ because a benchmark that silently edits its own numbers is worth nothing.
 
 | Path | What it is |
 |---|---|
-| [`evidence/logs/`](evidence/logs/) | six raw `llama.cpp` server logs, one per agent run |
+| [`evidence/logs/`](evidence/logs/) | seven raw server logs, one per agent run: six from `llama.cpp`, one from Halogen |
 | [`evidence/reports/`](evidence/reports/) | six measurement protocols behind the synthetic figures and the findings |
 | [`evidence/csv/`](evidence/csv/) | ten tables and sweeps behind those reports |
 | [`evidence/prompts/`](evidence/prompts/) | the two prompts, exactly as the models received them |
@@ -590,8 +638,8 @@ because a benchmark that silently edits its own numbers is worth nothing.
 | [`scripts/verify_runs.py`](scripts/verify_runs.py) | cross-checks `data/runs.json` against the same logs, independently of the parser |
 | [`scripts/make_chart.py`](scripts/make_chart.py) | draws the chart from `data/runs.json` |
 
-The logs are `llama-server` telemetry only. They carry no prompt text and no response text, so
-there was nothing in them to redact.
+The logs are server telemetry only. They carry no prompt text and no response text, so there was
+nothing in them to redact.
 
 **What is not a measurement**, stated so it cannot be mistaken for one: the quality rubric, a
 person's judgement with written reasons; self-correction counts other than the `fix_*` files you
@@ -628,6 +676,7 @@ Stated plainly, because a benchmark that hides its gaps is marketing.
 | **Cloud runs on Moorhuhn** | GPT 5.6 Sol, Opus 5 ULTRACODE | Pending. Cloud speed is not measured on purpose, because it depends on someone else's load. |
 | **The rest of the image B answer key** | image recognition | Confirmed for four of seven price tags. |
 | **DeepSeek-V4-Flash prefill at depth** | AMD AI MAX 395 | Its 15.24 t/s prefill median is the lowest in the field and took 171.5 of its 500.3 GPU minutes. |
+| **A quality score for the Halogen run** | Qwen3.8-Flash-Next · Halogen | Not assessed yet. |
 
 ## FAQ
 
@@ -649,7 +698,8 @@ get working software.
 
 <br>
 
-Vulkan, on Windows 11, with no ROCm and no BIOS changes. A larger UMA reservation does not help
+Vulkan, on Windows 11, with no ROCm and no BIOS changes, for every run but one: the Halogen run of
+Qwen3.8-Flash-Next ran on Linux ([finding 9](#9-same-model-same-machine-another-server)). A larger UMA reservation does not help
 anyway ([finding 6](#6-a-bigger-uma-reservation-buys-nothing)). The launch lines in
 [`data/configs.json`](data/configs.json) are the ones the servers ran with.
 

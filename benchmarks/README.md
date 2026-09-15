@@ -12,6 +12,7 @@ vorkommen, mit verschiedenen Aufgaben, Quantisierungen oder Reasoning-Stufen.
 | [`qwen38-27b/moorhuhn-q4xl-medium`](qwen38-27b/moorhuhn-q4xl-medium/) | Qwen3.8-27B | UD-Q4_K_XL | Moorhuhn | medium |
 | [`qwen36-27b/moorhuhn-q6`](qwen36-27b/moorhuhn-q6/) | Qwen3.6-27B | UD-Q6_K_XL | Moorhuhn | — |
 | [`qwen38-flashnext/moorhuhn-q4xl`](qwen38-flashnext/moorhuhn-q4xl/) | Qwen3.8-Flash-Next | UD-Q4_K_XL | Moorhuhn | — |
+| [`qwen38-flashnext/moorhuhn-halogen`](qwen38-flashnext/moorhuhn-halogen/) | Qwen3.8-Flash-Next | W4B, Server Halogen | Moorhuhn | — |
 | [`qwen38-flashnext/clairobscure-q4xl`](qwen38-flashnext/clairobscure-q4xl/) | Qwen3.8-Flash-Next | UD-Q4_K_XL | Clair Obscure | — |
 | [`qwen38-27b/clairobscure-q6`](qwen38-27b/clairobscure-q6/) | Qwen3.8-27B | UD-Q6_K_M | Clair Obscure | — |
 | [`qwen36-27b/clairobscure-q6`](qwen36-27b/clairobscure-q6/) | Qwen3.6-27B | UD-Q6_K_XL | Clair Obscure | — |

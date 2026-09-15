@@ -286,6 +286,72 @@
   "wall_minutes": 815
  },
  {
+  "slug": "qwen38-flashnext-moorhuhn-halogen-evox2",
+  "model": "Qwen3.8-Flash-Next",
+  "quant": "W4B",
+  "engine": "Halogen",
+  "hw": "evox2",
+  "task": "Moorhuhn",
+  "kind": "agent",
+  "reasoning": "xhigh",
+  "decode": {
+   "median": 38.28,
+   "p10": 33.08,
+   "p90": 43.65,
+   "peak": 61.8,
+   "n": 652
+  },
+  "prefill": {
+   "median": 347.85,
+   "max": 1241.74,
+   "large_prompts": {
+    "min_new_tokens": 8192,
+    "median": 1120.69,
+    "n": 39
+   }
+  },
+  "tokens": 1144717,
+  "fixes": null,
+  "code": {
+   "dateien": 65,
+   "zeilen_quelle": 20887,
+   "dateien_test": 11,
+   "zeilen_test": 1876
+  },
+  "quality": null,
+  "quality_scale": 40,
+  "rubric": null,
+  "spec": "MTP Tiefe 1, dazu Prompt Lookup",
+  "build": "halogen-flash-server 0.6.3",
+  "ctx": 262144,
+  "kv": null,
+  "ub": null,
+  "cmd": null,
+  "media": {
+   "video": "fnhalogen.webm",
+   "poster": "fnhalogen.jpg"
+  },
+  "source": "Halogen server log (halogen-flash-server 0.6.3) written through a logging proxy, 652 of 891 responses at >=200 tokens; re-derived by scripts/parse_logs.py",
+  "note": "Derselbe Auftrag wie im Lauf mit llama.cpp, auf demselben Rechner, diesmal mit dem Server Halogen 0.6.3 unter Linux und den Gewichten W4B mit Qualitäts-Overlay von peonist-ai. Eine Qualitätsbewertung steht noch aus.",
+  "depth": null,
+  "evidence": {
+   "log": "evidence/logs/qwen38-flashnext-moorhuhn-halogen-evox2.log",
+   "sha256": "cca4ec5e200a3aaf6fe6a7f04cdb9a2268126199e844df2a9677a80d017bedc8",
+   "bytes": 1440071,
+   "antworten_gesamt": 891,
+   "gewertet": 652,
+   "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz. Prefill je Anfrage: neue Tokens im Prompt geteilt durch die gemeldete Zeit für den Prefill; dazu der Median ab 8192 neuen Tokens"
+  },
+  "tokens_all": 1177886,
+  "responses_all": 891,
+  "gpu_minutes": {
+   "decode": 558.8,
+   "prefill": 76.1
+  },
+  "largest_prompt_tokens": 149681,
+  "wall_minutes": 703
+ },
+ {
   "slug": "qwen38-flashnext-clairobscure-evox2",
   "model": "Qwen3.8-Flash-Next",
   "quant": "UD-Q4_K_XL",

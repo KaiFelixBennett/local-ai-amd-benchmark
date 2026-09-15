@@ -28,6 +28,13 @@ Zwei Regeln, die jede Zahl hier bestimmen:
    Antworten und p10 also genau dann, wenn es zaehlt. Nachgemessen beim
    Clair-Obscure-Lauf von Qwen3.8-27B: p10 stand bei 18,03 statt 15,55, p90
    bei 35,31 statt 34,22.
+
+3. Beim Lauf mit Halogen steht neben dem Median des Prefill ueber alle
+   Anfragen der Median ab GROSS neuen Tokens. Im Agentenbetrieb bringt eine
+   Anfrage meist nur wenige hundert neue Tokens mit, und Anfragen mit 32 bis
+   511 neuen Tokens brauchten dort im Median 1,46 s; der Median ueber alle
+   beschreibt diese kleinen Schritte. Geprueft werden hier ausserdem Median
+   und Maximum des Prefill jedes Laufs.
 """
 import io
 import os
@@ -46,7 +53,19 @@ DECODE = re.compile(
 PREFILL = re.compile(
     r"prompt eval time\s*=\s*[\d.]+ ms /\s*(\d+) tokens.*?([\d.]+) tokens per second")
 
+# Halogen schreibt je Antwort genau eine Zeile, Decode und Prefill zusammen:
+#   serve_api: mtp 1312 tok in 38.08s = 34.45 t/s | 827 rounds, commit 1.59/round
+#     | prompt 127986 (127215 cached), prefill 1.99s | detok 47us/tok
+# Die Rundenangabe fehlt, wenn die Antwort ohne Spekulation lief. Eine
+# Prefill-Rate steht nicht darin; sie ist hier die Zahl der neuen Prompt-Tokens
+# (prompt minus cached) geteilt durch die gemeldete Prefill-Zeit.
+HALOGEN = re.compile(
+    r"^serve_api: mtp (\d+) tok in [\d.]+s = ([\d.]+) t/s"
+    r"(?: \| \d+ rounds, commit [\d.]+/round)?"
+    r" \| prompt (\d+)(?: \((\d+) cached\))?, prefill ([\d.]+)s", re.M)
+
 MINDEST = 200
+GROSS = 8192        # Regel 3, nur Halogen
 
 # Welcher Lauf haengt an welchem Rohprotokoll
 BELEGE = {
@@ -54,6 +73,7 @@ BELEGE = {
     "qwen38-27b-q4xl-moorhuhn-r9700":       "evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log",
     "qwen38-27b-q6-clairobscure-r9700":     "evidence/logs/qwen38-27b-q6-clairobscur-r9700.log",
     "qwen38-flashnext-moorhuhn-evox2":      "evidence/logs/qwen38-flashnext-moorhuhn-evox2.log",
+    "qwen38-flashnext-moorhuhn-halogen-evox2": "evidence/logs/qwen38-flashnext-moorhuhn-halogen-evox2.log",
     "qwen38-flashnext-clairobscure-evox2":  "evidence/logs/qwen38-flashnext-clairobscur-halo.log",
     "deepseek-v4-flash-clairobscure-evox2": "evidence/logs/deepseek-v4-flash-clairobscur-halo.log",
 }
@@ -99,18 +119,30 @@ def aus_tabelle(pfad):
 
 
 def messwerte(pfad):
+    halogen = []
     if pfad.lower().endswith(".csv"):
         dec, pre = aus_tabelle(pfad)
     else:
         text = io.open(pfad, encoding="utf-8", errors="replace").read()
-        dec = [(int(m.group(1)), float(m.group(2))) for m in DECODE.finditer(text)]
-        pre = [(int(m.group(1)), float(m.group(2))) for m in PREFILL.finditer(text)]
+        halogen = list(HALOGEN.finditer(text))
+        if halogen:
+            dec = [(int(m.group(1)), float(m.group(2))) for m in halogen]
+            pre = []
+            for m in halogen:
+                neu, sek = int(m.group(3)) - int(m.group(4) or 0), float(m.group(5))
+                if neu > 0 and sek > 0:
+                    pre.append((neu, neu / sek))
+        else:
+            dec = [(int(m.group(1)), float(m.group(2))) for m in DECODE.finditer(text)]
+            pre = [(int(m.group(1)), float(m.group(2))) for m in PREFILL.finditer(text)]
 
     dg = sorted(v for n, v in dec if n >= MINDEST)
     # Kein MINDEST beim Prefill - siehe Regel 1 im Kopf dieser Datei.
     pg = sorted(v for _, v in pre)
     if not dg:
         return None
+    # Regel 3: bei Halogen zaehlt pre die NEUEN Tokens je Anfrage.
+    gross = sorted(v for n, v in pre if n >= GROSS) if halogen else None
 
     return {
         "decode": {
@@ -120,10 +152,11 @@ def messwerte(pfad):
             "peak": r2(dg[-1]),
             "n": len(dg),
         },
-        "prefill": {
+        "prefill": dict({
             "median": r2(st.median(pg)) if pg else None,
             "max": r2(pg[-1]) if pg else None,
-        },
+        }, **({"large_prompts": {"min_new_tokens": GROSS, "median": r2(st.median(gross)),
+                                 "n": len(gross)}} if gross else {})),
         # Tokens nur aus den gewerteten Antworten - dieselbe Grundmenge wie oben
         "tokens": sum(n for n, _ in dec if n >= MINDEST),
         "antworten_gesamt": len(dec),
@@ -173,6 +206,22 @@ def main():
             abweichungen += 1
         print("    %-15s %-10s %s %s" % ("tokens", r.get("tokens"), m["tokens"],
                                          "ok" if gleich else "<- neu"))
+        for feld in ("median", "max"):
+            alt, neu = (r.get("prefill") or {}).get(feld), m["prefill"][feld]
+            gleich = alt == neu
+            if not gleich:
+                abweichungen += 1
+            print("    prefill.%-6s %-10s %s %s" % (feld, alt, neu, "ok" if gleich else "<- neu"))
+        # Regel 3: steht ein Wert ab GROSS neuen Tokens in runs.json oder ergibt ihn
+        # das Protokoll, muessen beide uebereinstimmen.
+        alt = (r.get("prefill") or {}).get("large_prompts")
+        neu = m["prefill"].get("large_prompts")
+        if alt is not None or neu is not None:
+            gleich = alt == neu
+            if not gleich:
+                abweichungen += 1
+            print("    prefill ab %d  %s  %s %s" % (GROSS, json.dumps(alt), json.dumps(neu),
+                                                    "ok" if gleich else "<- neu"))
 
         if schreiben:
             r["decode"] = m["decode"]

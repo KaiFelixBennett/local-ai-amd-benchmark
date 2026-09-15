@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Re-derive every published throughput figure from the raw llama.cpp server logs.
+"""Re-derive every published throughput figure from the raw server logs.
 
 Run it from the repository root with no arguments:
 
@@ -12,6 +12,23 @@ the script is right.
 
     python scripts/parse_logs.py --json   emit machine-readable output
     python scripts/parse_logs.py <file>   analyse one log of your own
+
+Two log formats are read, and the script tells them apart by their lines:
+
+  llama.cpp  "prompt eval time" and "eval time" lines of llama-server.
+  Halogen    one "serve_api: mtp" line per response from halogen-flash-server,
+             for example
+               serve_api: mtp 1312 tok in 38.08s = 34.45 t/s | 827 rounds, ...
+                 | prompt 127986 (127215 cached), prefill 1.99s | detok 47us/tok
+             Decode is the rate the server prints. The line gives no prefill rate,
+             only the prompt size, the part of it served from the cache and the
+             prefill time; the prefill rate is therefore the new prompt tokens
+             (prompt minus cached) divided by that time, which is how llama.cpp
+             computes its own figure too.
+
+             For Halogen the script also prints the prefill in bands of new
+             tokens per request and the median from LARGE_PROMPT new tokens up,
+             see note 4.
 """
 from __future__ import print_function
 import io
@@ -50,9 +67,18 @@ EVAL = re.compile(r"(?<!prompt )eval time\s*=\s*([\d.]+) ms /\s*(\d+) (?:tokens|
 # 3. Halves round up. Python's round() rounds to even (21.755 -> 21.75) while the
 #    JavaScript side of the project rounds up (21.76). Without a fixed rule the two
 #    disagree on the same data, which is how you lose an afternoon.
+# 4. Halogen reports a prefill time for every request, and an agent run is mostly small
+#    requests: on the published log a request brings 654 new tokens in the median, and
+#    requests with 32 to 511 new tokens took 1.46 s in the median. Its median over all
+#    prompts stays as note 1 defines it, but it describes those small steps rather than
+#    how fast a large prompt is read. Next to it the script prints the median from
+#    LARGE_PROMPT new tokens up, and time and rate as medians in the bands below. The
+#    llama.cpp logs are reported as before.
 MIN_TOKENS = 200
 DECODE_MIN_TOKENS = MIN_TOKENS
 PREFILL_MIN_TOKENS = 0          # see note 1: prompts are not filtered
+LARGE_PROMPT = 8192             # see note 4, Halogen only
+BANDS = (1, 32, 512, 2048, 8192, 32768)   # lower bounds of the prefill bands, note 4
 
 
 def r2(x):
@@ -79,21 +105,64 @@ def percentile(sorted_values, fraction):
     return sorted_values[min(n - 1, max(0, rank - 1))]
 
 
+# One line per response from halogen-flash-server; see the note at the top. The
+# rounds part is missing when a response ran without speculation.
+HALOGEN = re.compile(
+    r"^serve_api: mtp (\d+) tok in ([\d.]+)s = ([\d.]+) t/s"
+    r"(?: \| \d+ rounds, commit [\d.]+/round)?"
+    r" \| prompt (\d+)(?: \((\d+) cached\))?, prefill ([\d.]+)s", re.M)
+
+
 def analyse(path):
-    """Return every published figure for one llama.cpp server log."""
+    """Return every published figure for one server log, llama.cpp or Halogen."""
     raw = io.open(path, "rb").read()
     txt = raw.decode("utf-8", "replace")
 
-    prefill = [(float(m.group(3)), int(m.group(2)), float(m.group(1))) for m in PROMPT.finditer(txt)]
-    decode = [(float(m.group(3)), int(m.group(2)), float(m.group(1))) for m in EVAL.finditer(txt)]
+    # Both sides are lists of (rate in t/s, tokens, milliseconds).
+    halogen = list(HALOGEN.finditer(txt))
+    if halogen:
+        fmt = "halogen"
+        decode = [(float(m.group(3)), int(m.group(1)), float(m.group(2)) * 1000.0) for m in halogen]
+        prefill = []
+        requests = []           # (new prompt tokens, prefill seconds), for note 4
+        for m in halogen:
+            new, secs = int(m.group(4)) - int(m.group(5) or 0), float(m.group(6))
+            if new > 0 and secs > 0:
+                prefill.append((new / secs, new, secs * 1000.0))
+                requests.append((new, secs))
+        prefill_ms = sum(float(m.group(6)) * 1000.0 for m in halogen)
+    else:
+        fmt = "llama.cpp"
+        requests = None
+        prefill = [(float(m.group(3)), int(m.group(2)), float(m.group(1))) for m in PROMPT.finditer(txt)]
+        decode = [(float(m.group(3)), int(m.group(2)), float(m.group(1))) for m in EVAL.finditer(txt)]
+        prefill_ms = sum(p[2] for p in prefill)
 
     dc = [d for d in decode if d[1] >= DECODE_MIN_TOKENS]
     pf = [p for p in prefill if p[1] >= PREFILL_MIN_TOKENS]
     rates = sorted(d[0] for d in dc)
     pf_rates = sorted(p[0] for p in pf)
 
-    return {
+    # Note 4, Halogen only: the median from LARGE_PROMPT new tokens up, and time and
+    # rate as medians in bands of new tokens per request. Seconds are taken as the log
+    # prints them, so the medians round exactly like the website's own derivation.
+    large = bands = None
+    if requests is not None:
+        big = sorted(new / secs for new, secs in requests if new >= LARGE_PROMPT)
+        large = {"min_new_tokens": LARGE_PROMPT, "n": len(big),
+                 "median": r2(statistics.median(big)) if big else None,
+                 "above_1000": sum(1 for v in big if v > 1000)}
+        bands = []
+        for i, lo in enumerate(BANDS):
+            hi = BANDS[i + 1] - 1 if i + 1 < len(BANDS) else None
+            b = [(new, secs) for new, secs in requests if new >= lo and (hi is None or new <= hi)]
+            bands.append({"from": lo, "to": hi, "n": len(b),
+                          "median_seconds": r2(statistics.median([s for _, s in b])) if b else None,
+                          "median_rate": r2(statistics.median([n / s for n, s in b])) if b else None})
+
+    result = {
         "log": os.path.basename(path),
+        "format": fmt,
         "sha256": hashlib.sha256(raw).hexdigest(),
         "bytes": len(raw),
         "decode": {
@@ -114,8 +183,12 @@ def analyse(path):
         "tokens_all": sum(d[1] for d in decode),
         "responses_all": len(decode),
         "decode_minutes": round(sum(d[2] for d in decode) / 60000.0, 1),
-        "prefill_minutes": round(sum(p[2] for p in prefill) / 60000.0, 1),
+        "prefill_minutes": round(prefill_ms / 60000.0, 1),
     }
+    if large is not None:
+        result["prefill"]["large_prompts"] = large
+        result["prefill"]["bands"] = bands
+    return result
 
 
 def expected_sums():
@@ -166,7 +239,7 @@ def main(argv):
             mark = "CHECKSUM MISMATCH"
             bad += 1
         print("")
-        print("=== %s" % r["log"])
+        print("=== %s   [%s]" % (r["log"], r["format"]))
         print("    %d KB   sha256 %s   (%s)" % (r["bytes"] / 1024, r["sha256"][:16], mark))
         print("    decode   n=%-4d median %-7s p10 %-7s p90 %-7s min %-7s peak %s   [>=%d tokens]"
               % (d["n"], d["median"], d["p10"], d["p90"], d["min"], d["peak"], DECODE_MIN_TOKENS))
@@ -174,6 +247,15 @@ def main(argv):
               % (p["n"], p["median"], p["max"], p["largest_prompt_tokens"],
                  "all prompts" if PREFILL_MIN_TOKENS <= 0
                  else ">=%d tokens" % PREFILL_MIN_TOKENS))
+        if "large_prompts" in p:
+            g = p["large_prompts"]
+            print("    prefill  n=%-4d median %-7s %d of them above 1000 t/s   [>=%d new tokens, note 4]"
+                  % (g["n"], g["median"], g["above_1000"], g["min_new_tokens"]))
+            print("    prefill by new tokens per request, medians   [note 4]")
+            for b in p["bands"]:
+                span = ("%d to %d" % (b["from"], b["to"])) if b["to"] is not None else ("%d and more" % b["from"])
+                print("             %-16s n=%-4d %6.2f s  %8.2f t/s"
+                      % (span, b["n"], b["median_seconds"], b["median_rate"]))
         print("    tokens   %d in the filter, %d over all %d responses"
               % (r["tokens_filtered"], r["tokens_all"], r["responses_all"]))
         print("    GPU time %.1f min decoding + %.1f min prefill = %.1f min"

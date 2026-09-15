@@ -9,6 +9,7 @@
 2a36b590f139c3d425f15f28e8e673ed97d169384d9af49bec267adb22a1fa22 *logs/qwen38-27b-q6-clairobscur-r9700.log
 35885e4476e8528fe7bc5bd1ec8512b2ec3fac24f397032c5c4ed57a3f2a4164 *logs/qwen38-flashnext-clairobscur-halo.log
 317185ea5ee4760c7f2e838c7feed8cf05b793969cab8679c2ceedb893d71eba *logs/qwen38-flashnext-moorhuhn-evox2.log
+cca4ec5e200a3aaf6fe6a7f04cdb9a2268126199e844df2a9677a80d017bedc8 *logs/qwen38-flashnext-moorhuhn-halogen-evox2.log
 ec4e2f141997091310dd874db3f255659930033f302295156806887c536d9921 *reports/laguna-s21-strix-halo-vulkan-benchmark.md
 d59ae98ca17abc746324fa064da263db71a4b15cba4731a329d9fccc8786879a *reports/qwen35-122b-a10b-strix-halo-vulkan-benchmark.md
 80f2e3d5b041157be5821f82adb588fb25aa5646216a6f359e0d864a5c7402d3 *reports/qwen38-27b-decode-depth-q6-vs-q4.md

@@ -1,0 +1,33 @@
+{
+  "name": "moorland-mayhem-featherstorm",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Moorland Mayhem - Featherstorm: an original cartoon arcade duck-hunt style shooter built with Vite, TypeScript and Phaser 3.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.css\" \"tests/**/*.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "phaser": "^3.80.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "eslint": "^9.9.0",
+    "jsdom": "^25.0.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.4.0",
+    "vite": "^5.4.0",
+    "vitest": "^2.1.0"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}
