@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use these measurements, please cite them and name the measurement style with each figure: agent run or synthetic sweep."
+type: dataset
+title: "Local AI on AMD: agentic coding with local LLMs on affordable AMD hardware"
+authors:
+  - family-names: Bennett
+    given-names: Kai Felix
+repository-code: "https://github.com/KaiFelixBennett/local-ai-amd-benchmark"
+url: "https://benchmark.securesight.ai"
+abstract: >-
+  Local language models measured in unattended agentic coding in VS Code Copilot
+  Chat on two AMD machines, a Radeon AI PRO R9700 and an AMD AI MAX 395 (AMD Halo),
+  with llama.cpp on the Vulkan backend. Includes the raw llama.cpp server logs
+  pinned by SHA-256, the parser that re-derives every agent run speed figure from
+  them, the source code of every game the models built, the launch configurations
+  and the agent harness.
+keywords:
+  - llama.cpp
+  - Vulkan
+  - AMD
+  - Strix Halo
+  - Radeon AI PRO R9700
+  - local LLM
+  - agentic coding
+  - benchmark
+license:
+  - MIT
+  - CC-BY-4.0
