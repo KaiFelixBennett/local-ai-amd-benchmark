@@ -35,6 +35,11 @@ Zwei Regeln, die jede Zahl hier bestimmen:
    511 neuen Tokens brauchten dort im Median 1,46 s; der Median ueber alle
    beschreibt diese kleinen Schritte. Geprueft werden hier ausserdem Median
    und Maximum des Prefill jedes Laufs.
+
+4. Beim Lauf mit Halogen schreibt ein Proxy zwischen VS Code und Server jede
+   Anfrage mit Uhrzeit ins Protokoll. Daraus kommen die gesendeten Anfragen und
+   das Arbeitsfenster: erste Anfrage bis letzte Antwort, ohne die Pausen ueber
+   60 Sekunden, in denen keine Anfrage offen war.
 """
 import io
 import os
@@ -66,6 +71,46 @@ HALOGEN = re.compile(
 
 MINDEST = 200
 GROSS = 8192        # Regel 3, nur Halogen
+PAUSE = 60          # Regel 4, Sekunden
+
+STARTZEILE = re.compile(r"^===== Start \d{4}-\d\d-\d\d (\d\d):(\d\d):(\d\d) =====", re.M)
+PROXYZEILE = re.compile(r"^(\d\d):(\d\d):(\d\d) (?:\[#(\d+)\] )?(.*)$", re.M)
+
+
+def proxy(text):
+    """Regel 4: gesendete Anfragen und Arbeitsfenster aus den Zeilen des Proxys."""
+    s = STARTZEILE.search(text)
+    if not s:
+        return None
+    vorher = int(s.group(1)) * 3600 + int(s.group(2)) * 60 + int(s.group(3))
+    tage = 0
+    marken = []
+    for m in PROXYZEILE.finditer(text):
+        sek = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3)) + tage * 86400
+        if sek < vorher - 3600:          # Mitternacht
+            tage += 1
+            sek += 86400
+        vorher = sek
+        was = m.group(5)
+        if was.startswith("Anfrage /v1/chat/completions:"):
+            marken.append((sek, 0, m.group(4) or ""))
+        elif was.startswith("fertig:") or "FEHLER" in was or "getrennt" in was:
+            marken.append((sek, 1, m.group(4) or ""))
+    anfragen = [x for x in marken if x[1] == 0]
+    if not anfragen:
+        return None
+    marken.sort()
+    offen, pausen, ende = set(), 0.0, None
+    for sek, art, nr in marken:
+        if art == 0:
+            if not offen and ende is not None and sek - ende > PAUSE:
+                pausen += sek - ende
+            offen.add(nr)
+        else:
+            offen.discard(nr)
+            ende = sek
+    return {"anfragen": len(anfragen),
+            "arbeitsfenster_min": (marken[-1][0] - anfragen[0][0] - pausen) / 60.0}
 
 # Welcher Lauf haengt an welchem Rohprotokoll
 BELEGE = {
@@ -144,7 +189,7 @@ def messwerte(pfad):
     # Regel 3: bei Halogen zaehlt pre die NEUEN Tokens je Anfrage.
     gross = sorted(v for n, v in pre if n >= GROSS) if halogen else None
 
-    return {
+    ergebnis = {
         "decode": {
             "median": r2(st.median(dg)),
             "p10": r2(rang(dg, 0.10)),
@@ -161,6 +206,9 @@ def messwerte(pfad):
         "tokens": sum(n for n, _ in dec if n >= MINDEST),
         "antworten_gesamt": len(dec),
     }
+    if halogen:
+        ergebnis["proxy"] = proxy(text)
+    return ergebnis
 
 
 def pruefsumme(pfad):
@@ -222,6 +270,15 @@ def main():
                 abweichungen += 1
             print("    prefill ab %d  %s  %s %s" % (GROSS, json.dumps(alt), json.dumps(neu),
                                                     "ok" if gleich else "<- neu"))
+        # Regel 4: Anfragen und Arbeitsfenster, soweit das Protokoll einen Proxy hat.
+        px = m.get("proxy")
+        if px:
+            for feld, neu in (("requests", px["anfragen"]), ("wall_minutes", int(round(px["arbeitsfenster_min"])))):
+                alt = r.get(feld)
+                gleich = alt == neu
+                if not gleich:
+                    abweichungen += 1
+                print("    %-15s %-10s %s %s" % (feld, alt, neu, "ok" if gleich else "<- neu"))
 
         if schreiben:
             r["decode"] = m["decode"]

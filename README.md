@@ -15,6 +15,7 @@ tried out first hand on local, affordable AMD hardware.</p>
 <p>
   <a href="https://benchmark.securesight.ai"><b>Website</b></a> ·
   <a href="#at-a-glance">At a glance</a> ·
+  <a href="#halogen-the-fastest-run">Halogen</a> ·
   <a href="#start-here">Start here</a> ·
   <a href="#every-measured-run">Results</a> ·
   <a href="#what-the-models-built">Games</a> ·
@@ -25,6 +26,7 @@ tried out first hand on local, affordable AMD hardware.</p>
 
 <p>
   <a href="https://benchmark.securesight.ai"><img alt="Website benchmark.securesight.ai" src="https://img.shields.io/badge/website-benchmark.securesight.ai-cb7815?style=flat-square"></a>
+  <a href="#halogen-the-fastest-run"><img alt="Fastest run: Qwen3.8-Flash-Next on Halogen, 38.28 t/s decode median" src="https://img.shields.io/badge/fastest_run-38.28_t%2Fs_%C2%B7_Halogen-e0533d?style=flat-square"></a>
   <a href="#verify-every-number"><img alt="3,013,509 tokens generated, as printed by scripts/parse_logs.py" src="https://img.shields.io/badge/tokens_generated-3%2C013%2C509-1c9ab8?style=flat-square"></a>
   <a href="evidence/SHA256SUMS"><img alt="7 raw server logs, pinned by SHA-256" src="https://img.shields.io/badge/raw_logs-7_%C2%B7_SHA--256_pinned-8957e5?style=flat-square"></a>
   <img alt="Servers: llama.cpp on Vulkan, and Halogen in one run" src="https://img.shields.io/badge/servers-llama.cpp_Vulkan_%C2%B7_Halogen-141130?style=flat-square">
@@ -41,7 +43,7 @@ shipped is a playable game. What the server log recorded is what it cost, and tw
 independent scripts re-derive every agent run figure from those logs. Each run has its own
 page on
 **[benchmark.securesight.ai](https://benchmark.securesight.ai)** with a video, the playable
-build and the launch line to copy.
+build and the launch line or server setup to copy.
 
 **My pick per machine**
 
@@ -53,15 +55,15 @@ build and the launch line to copy.
 <tr>
 <td valign="top">
 
-**[Qwen3.8-Flash-Next](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-evox2)** · UD-Q4_K_XL<br>
-<sub>MTP draft, shared Q8_0, `n_max 2`</sub>
+**[Qwen3.8-Flash-Next](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-halogen-evox2)** · W4B · Halogen<br>
+<sub>halogen-flash-server 0.6.3 on Linux, MTP depth 1 plus prompt lookup</sub>
 
-**21.76 t/s** decode median, 346 responses<br>
-**35 / 40** quality, confirmed<br>
-459 requests · 786,506 tokens generated<br>
-10 test files with 1,398 lines
+**38.28 t/s** decode median, 652 responses<br>
+**1,120.69 t/s** prefill median from 8,192 new tokens<br>
+917 requests · 1,177,886 tokens generated<br>
+11 test files with 1,876 lines · quality not assessed yet
 
-<sub>[Raw log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) · [Launch line](#start-here) · [Play the game](https://benchmark.securesight.ai/spiel/qwen38-flashnext-moorhuhn-evox2/)</sub>
+<sub>[Raw log](evidence/logs/qwen38-flashnext-moorhuhn-halogen-evox2.log) · [Every figure](#halogen-the-fastest-run) · [Play the game](https://benchmark.securesight.ai/spiel/qwen38-flashnext-moorhuhn-halogen-evox2/)</sub>
 
 </td>
 <td valign="top">
@@ -85,7 +87,7 @@ The log covers the first of two sessions<br>
 > hardware and as of September 2026, that is the best compromise between quality and speed,
 > without paying for tokens, without depending on cloud providers and without sharing my data.
 >
-> **Qwen3.8-Flash-Next.** Not the fastest and not the highest quality either, but it makes use
+> **Qwen3.8-Flash-Next.** Not the highest quality, but it makes use
 > of the advantages of the AMD Strix Halo, meaning it uses the entire VRAM, already includes the
 > Qwen 4 architecture and delivers well at a steady speed.
 >
@@ -95,14 +97,85 @@ The log covers the first of two sessions<br>
 >
 > **Kai Bennett**
 
-## Start here
+## Halogen, the fastest run
 
-**1. Copy the launch line behind a pick.** These are the command lines of the two runs above,
-and the logs confirm them: the Flash-Next log records its MTP draft model being loaded and a
-slot context of 131,072, the Qwen3.8-27B log a slot context of 262,144.
+<div align="center">
+<a href="https://benchmark.securesight.ai/spiel/qwen38-flashnext-moorhuhn-halogen-evox2/"><img src="media/gif/moorhuhn-flashnext-halogen.gif" width="720" alt="The last seconds of a Blitz round in Moorland Mayhem, Federsturm, built by Qwen3.8-Flash-Next on Halogen: birds, a combo counter and PERFECT popups, played by a script"></a>
+</div>
+
+The same model with the same Moorhuhn prompt, byte for byte, on the same AMD AI MAX 395, served by
+[halogen-flash-server](https://github.com/peonist-ai/halogen-flash-server) 0.6.3 on Linux with the
+[W4B weights](https://huggingface.co/peonist-ai/halogen-qwen3.8-flash-next) and their quality
+overlay. No other agent run in this repository decodes faster, and large prompts go in at a
+median of 1,120.69 t/s.
+
+| Decode median | Decode p10 to p90 | Prefill from 8,192 new tokens | Requests | Tokens generated | Working window |
+|--:|--:|--:|--:|--:|--:|
+| **38.28 t/s** | 33.08 to 43.65 t/s | **1,120.69 t/s** | 917 | 1,177,886 | 11.7 h |
 
 <details>
-<summary><b>AMD AI MAX 395 · Qwen3.8-Flash-Next UD-Q4_K_XL</b></summary>
+<summary><b>Every figure of the Halogen run</b></summary>
+
+<br>
+
+| Figure | Value | Read from |
+|---|---|---|
+| Decode median | **38.28 t/s** over 652 of 891 responses, those of 200 tokens or more | the `serve_api: mtp` line the server writes per response |
+| Decode p10 to p90 · peak | 33.08 to 43.65 t/s · 61.80 t/s | the same lines |
+| Prefill median from 8,192 new tokens | **1,120.69 t/s** over 39 requests, 35 of them above 1,000 t/s | prompt size, cached part and prefill time in the same lines |
+| Prefill median over all 891 responses | 347.85 t/s; a request brought 654 new tokens in the median | the same lines |
+| Fastest prefill | 1,241.74 t/s | the same lines |
+| Largest prompt | 149,681 tokens | the same lines |
+| Prompt tokens | 50,510,287 in total: 2,862,509 new, 47,647,778 from the prompt cache | the same lines |
+| Tokens generated | 1,177,886 over all responses | the same lines |
+| GPU time | 634.9 min: 558.8 decode plus 76.1 prefill | the same lines |
+| Next to a second request | 268 of the 652 scored responses | `beside other streams` in the same lines |
+| Requests | 917 sent by VS Code, 891 of them answered | the proxy's `Anfrage` lines |
+| Working window | 703.3 min: 1,121.6 min from the first request to the last answer, minus seven pauses over 60 s totalling 418.3 min | the proxy's time stamps |
+| Delivered | 65 files, 20,887 lines including tests, 11 test files with 1,876 lines | [`benchmarks/qwen38-flashnext/moorhuhn-halogen/`](benchmarks/qwen38-flashnext/moorhuhn-halogen/) |
+| Server | halogen-flash-server 0.6.3 in a container, W4B with quality overlay, MTP depth 1 plus prompt lookup, two slots sharing one KV pool of 262,144 positions | the startup lines at the top of the log |
+| Machine | AMD AI MAX 395 on Linux, 2.0 GiB reserved for the iGPU in firmware | the startup lines at the top of the log |
+| Quality | not assessed yet | |
+
+</details>
+
+<sub>Every measured figure above is printed by <code>python scripts/parse_logs.py</code> from the <a href="evidence/logs/qwen38-flashnext-moorhuhn-halogen-evox2.log">raw log</a>, and <code>scripts/verify_runs.py</code> checks the ones stored in <code>data/runs.json</code>. The prompt is <a href="evidence/prompts/qwen38-flashnext-moorhuhn-evox2.txt"><code>evidence/prompts/qwen38-flashnext-moorhuhn-evox2.txt</code></a>, and <code>benchmarks/qwen38-flashnext/moorhuhn-halogen/prompt.md</code> has the same SHA-256. What went wrong during the run, and how it compares with the llama.cpp run, is <a href="#9-same-model-same-machine-another-server">finding 9</a>.</sub>
+
+**[Play it in your browser](https://benchmark.securesight.ai/spiel/qwen38-flashnext-moorhuhn-halogen-evox2/)** · [Watch the video and read the server setup](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-halogen-evox2) · [Read the source](benchmarks/qwen38-flashnext/moorhuhn-halogen/)
+
+## Start here
+
+**1. Copy the setup behind a pick.** Halogen runs as a container and has no launch line; its
+setup is the header its start script wrote into the log. For llama.cpp there are two launch
+lines, Qwen3.8-Flash-Next from its llama.cpp run and the Qwen3.8-27B pick, and the logs confirm
+them: the Flash-Next log records its MTP draft model being loaded and a slot context of 131,072,
+the Qwen3.8-27B log a slot context of 262,144.
+
+<details>
+<summary><b>AMD AI MAX 395 · Qwen3.8-Flash-Next W4B on Halogen</b></summary>
+
+```text
+  Halogen Qwen3.8-Flash-Next W4B + Qualitaets-Overlay + Vision  (ghcr.io/peonist-ai/halogen-flash-server:0.6.3)
+
+  Kontext  : 262144 je Request, KV-Pool 262144 Positionen, 2 Slot
+  Budget   : max_tokens-Default 65536 je Anfrage, Cap 262144, Slots 2
+  Reasoning: xhigh, getrennt in reasoning_content
+  Sampling : temp 1.0  top_p 0.95  top_k 20  min_p 0.0  presence 0.0  (nur fuer fehlende Felder)
+  Cache    : Prompt-Cache 2, Queue-Timeout 28800 s
+  Vision   : an (qwen38-flash-next-vision.hgn)
+  RAM      : 123 GiB sichtbar, 13 GiB belegt, 1179 freie 2-MiB-Bloecke
+  Endpoint : http://127.0.0.1:18099/v1 (VS Code ueber Live-Log-Proxy :8099)   Modell: halogen-qwen3.8-flash-next-w4b-quality-overlay
+  Watchdog : 0 (0 = aus)
+
+  Laden: gemessen 30 s (13.09., Pool 32768); bei fragmentiertem Speicher ueber 5 min.
+```
+
+<sub>Verbatim from lines 4 to 16 of the <a href="evidence/logs/qwen38-flashnext-moorhuhn-halogen-evox2.log">raw log</a>. Server: <a href="https://github.com/peonist-ai/halogen-flash-server">peonist-ai/halogen-flash-server</a> · weights: <a href="https://huggingface.co/peonist-ai/halogen-qwen3.8-flash-next">peonist-ai/halogen-qwen3.8-flash-next</a>. VS Code talked to the logging proxy at <code>http://127.0.0.1:8099/v1</code>.</sub>
+
+</details>
+
+<details>
+<summary><b>AMD AI MAX 395 · Qwen3.8-Flash-Next UD-Q4_K_XL on llama.cpp</b></summary>
 
 ```bash
 llama-server \
@@ -711,11 +784,12 @@ anyway ([finding 6](#6-a-bigger-uma-reservation-buys-nothing)). The launch lines
 <br>
 
 They answer different questions. The **Radeon AI PRO R9700** has 32 GB of dedicated memory and
-the fastest measured run, Qwen3.8-27B UD-Q4_K_XL at 33.69 t/s; if your models fit into 32 GB, it
-is the quicker machine. The **AMD AI MAX 395 (AMD Halo)** has 128 GiB of unified memory and runs
-models no consumer GPU holds, like Qwen3.8-Flash-Next with 177 billion parameters or
-DeepSeek-V4-Flash-0731, and it produced the longest run in this repository. My pick for each is
-[at the top](#at-a-glance).
+the fastest llama.cpp run, Qwen3.8-27B UD-Q4_K_XL at 33.69 t/s; if your models fit into 32 GB, it
+is the quicker machine on llama.cpp. The **AMD AI MAX 395 (AMD Halo)** has 128 GiB of unified
+memory and runs models no consumer GPU holds, like Qwen3.8-Flash-Next with 177 billion parameters
+or DeepSeek-V4-Flash-0731. On llama.cpp it produced the longest run in this repository, and on
+Halogen the fastest of all, 38.28 t/s ([Halogen, the fastest run](#halogen-the-fastest-run)). My
+pick for each is [at the top](#at-a-glance).
 
 </details>
 

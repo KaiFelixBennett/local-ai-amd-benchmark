@@ -28,7 +28,8 @@ Two log formats are read, and the script tells them apart by their lines:
 
              For Halogen the script also prints the prefill in bands of new
              tokens per request and the median from LARGE_PROMPT new tokens up,
-             see note 4.
+             see note 4, and what its logging proxy recorded: the requests VS
+             Code sent and the working window, see note 5.
 """
 from __future__ import print_function
 import io
@@ -80,6 +81,54 @@ PREFILL_MIN_TOKENS = 0          # see note 1: prompts are not filtered
 LARGE_PROMPT = 8192             # see note 4, Halogen only
 BANDS = (1, 32, 512, 2048, 8192, 32768)   # lower bounds of the prefill bands, note 4
 
+# 5. Halogen only: a logging proxy sits between VS Code and the server. It writes one line
+#    per event with the wall clock time in front, and the log starts with the date. Its
+#    "Anfrage" lines are the requests VS Code sent, including those that got no answer.
+#    The working window runs from the first request to the last answer, minus every pause
+#    of more than PAUSE_SECONDS in which no request was open.
+PAUSE_SECONDS = 60
+LOG_START = re.compile(r"^===== Start (\d{4}-\d\d-\d\d) (\d\d:\d\d:\d\d) =====", re.M)
+PROXY_LINE = re.compile(r"^(\d\d):(\d\d):(\d\d) (?:\[#(\d+)\] )?(.*)$")
+
+
+def proxy_figures(txt):
+    """Requests and working window from the proxy lines of a Halogen log, note 5."""
+    import datetime
+    start = LOG_START.search(txt)
+    if not start:
+        return None
+    day = last = datetime.datetime.strptime(start.group(1) + " " + start.group(2), "%Y-%m-%d %H:%M:%S")
+    marks = []
+    for line in txt.splitlines():
+        m = PROXY_LINE.match(line)
+        if not m:
+            continue
+        t = day.replace(hour=int(m.group(1)), minute=int(m.group(2)), second=int(m.group(3)))
+        while t < last - datetime.timedelta(hours=1):     # the clock passed midnight
+            t += datetime.timedelta(days=1)
+        last = t
+        event = m.group(5)
+        if event.startswith("Anfrage /v1/chat/completions:"):
+            marks.append((t, 0, m.group(4) or ""))
+        elif event.startswith("fertig:") or "FEHLER" in event or "getrennt" in event:
+            marks.append((t, 1, m.group(4) or ""))
+    requests = [x for x in marks if x[1] == 0]
+    if not requests:
+        return None
+    marks.sort()
+    open_ids, pauses, end = set(), [], None
+    for t, kind, rid in marks:
+        if kind == 0:
+            if not open_ids and end is not None and (t - end).total_seconds() > PAUSE_SECONDS:
+                pauses.append((t - end).total_seconds() / 60.0)
+            open_ids.add(rid)
+        else:
+            open_ids.discard(rid)
+            end = t
+    span = (marks[-1][0] - requests[0][0]).total_seconds() / 60.0
+    return {"requests": len(requests), "span_minutes": round(span, 1), "pauses": len(pauses),
+            "pause_minutes": round(sum(pauses), 1), "working_minutes": round(span - sum(pauses), 1)}
+
 
 def r2(x):
     """Round to two places, halves upward -- matches the JavaScript harness."""
@@ -130,10 +179,21 @@ def analyse(path):
             if new > 0 and secs > 0:
                 prefill.append((new / secs, new, secs * 1000.0))
                 requests.append((new, secs))
+        # Note 5: prompt sums, responses next to a second stream, and the proxy lines.
+        extra = {
+            "prompt_tokens": sum(int(m.group(4)) for m in halogen),
+            "new_prompt_tokens": sum(int(m.group(4)) - int(m.group(5) or 0) for m in halogen),
+            "new_tokens_median": statistics.median([int(m.group(4)) - int(m.group(5) or 0) for m in halogen]),
+            "scored_beside_second_stream": sum(
+                1 for m in halogen if int(m.group(1)) >= DECODE_MIN_TOKENS
+                and "beside other streams" in txt[m.start():txt.find("\n", m.start())]),
+            "proxy": proxy_figures(txt),
+        }
         prefill_ms = sum(float(m.group(6)) * 1000.0 for m in halogen)
     else:
         fmt = "llama.cpp"
         requests = None
+        extra = None
         prefill = [(float(m.group(3)), int(m.group(2)), float(m.group(1))) for m in PROMPT.finditer(txt)]
         decode = [(float(m.group(3)), int(m.group(2)), float(m.group(1))) for m in EVAL.finditer(txt)]
         prefill_ms = sum(p[2] for p in prefill)
@@ -188,6 +248,8 @@ def analyse(path):
     if large is not None:
         result["prefill"]["large_prompts"] = large
         result["prefill"]["bands"] = bands
+    if extra is not None:
+        result["halogen"] = extra
     return result
 
 
@@ -260,6 +322,18 @@ def main(argv):
               % (r["tokens_filtered"], r["tokens_all"], r["responses_all"]))
         print("    GPU time %.1f min decoding + %.1f min prefill = %.1f min"
               % (r["decode_minutes"], r["prefill_minutes"], r["decode_minutes"] + r["prefill_minutes"]))
+        if "halogen" in r:
+            h = r["halogen"]
+            print("    prompts  %d tokens in total, %d of them new, %d from the prompt cache; %s new tokens per request in the median   [note 5]"
+                  % (h["prompt_tokens"], h["new_prompt_tokens"], h["prompt_tokens"] - h["new_prompt_tokens"], h["new_tokens_median"]))
+            print("    beside   %d of the %d scored responses ran next to a second stream"
+                  % (h["scored_beside_second_stream"], d["n"]))
+            x = h["proxy"]
+            if x:
+                print("    requests %d sent by VS Code through the logging proxy, %d answered with a serve_api line   [note 5]"
+                      % (x["requests"], r["responses_all"]))
+                print("    window   %.1f min from the first request to the last answer, %d pauses over %d s totalling %.1f min: working window %.1f min"
+                      % (x["span_minutes"], x["pauses"], PAUSE_SECONDS, x["pause_minutes"], x["working_minutes"]))
 
     if len(results) > 1:
         gpu = sum(r["decode_minutes"] + r["prefill_minutes"] for r in results)

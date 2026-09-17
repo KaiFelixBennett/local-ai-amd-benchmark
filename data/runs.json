@@ -344,6 +344,7 @@
   },
   "tokens_all": 1177886,
   "responses_all": 891,
+  "requests": 917,
   "gpu_minutes": {
    "decode": 558.8,
    "prefill": 76.1
