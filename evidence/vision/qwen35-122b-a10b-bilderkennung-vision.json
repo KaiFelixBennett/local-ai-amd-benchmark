@@ -1,0 +1,66 @@
+{
+  "slug": "qwen35-122b-a10b-bilderkennung",
+  "modell": "Qwen3.5-122B-A10B (lokal :8098)",
+  "datum": "2026-09-14",
+  "a1_ablesen": {
+    "ueberschrift": "DER HEUTIGE GAMING-PC SCHLÄGT DAS RECHENZENTRUM VON GESTERN",
+    "unterzeile": "Open-Weight-Modelle auf einer 32-GB-Gaming-GPU — kein API-Schlüssel, keine Token-Kosten. Wie nah sind sie an der proprietären Spitze?",
+    "aktueller_reiter": "QWEN",
+    "tooltip_tabelle": {
+      "spaltenueberschriften": ["Claude Opus 4.5", "Qwen3.5 27B"],
+      "zeilen": [
+        {"name": "Intelligence Index", "claude_opus_4_5": 40.8, "qwen3_5_27b": 37.1},
+        {"name": "GPQA diamond", "claude_opus_4_5": 87, "qwen3_5_27b": 84},
+        {"name": "Humanity's Last Exam", "claude_opus_4_5": 29, "qwen3_5_27b": 22},
+        {"name": "Terminal-bench 2.0", "claude_opus_4_5": 50, "qwen3_5_27b": 61}
+      ]
+    },
+    "kennzahlkacheln": [
+      {
+        "titel": "QWEN3.5 27B",
+        "wert": 37.1,
+        "beschreibung": "AI Intelligence Index — Open-Weight, kein API-Key, läuft auf der eigenen GPU"
+      },
+      {
+        "titel": "VS. OPUS 4.5 (49.7)",
+        "wert": 91,
+        "beschreibung": "des Opus-4.5-Niveaus im Gesamtindex. Bei Coding-Benchmarks: gleichauf."
+      },
+      {
+        "titel": "PROPRIETÄRE SPITZE · HEUTE",
+        "wert": 59.9,
+        "beschreibung": "Das Rechenzentrum klettert weiter — doch der Abstand schrumpft jedes Quartal."
+      }
+    ],
+    "filter": {
+      "aktiv": ["QWEN"],
+      "inaktiv": ["FRONTIER", "GEMMA", "MISTRAL", "DEEPSEEK", "GLM"]
+    },
+    "achsen": {
+      "y_achse_beschriftung": "INTELLIGENCE INDEX",
+      "x_achse_werte": ["'23", "'24", "'25", "Nov"]
+    },
+    "legende": [
+      {"farbe": "gelb", "label": "Proprietäre Flaggschiffe"},
+      {"farbe": "türkis", "label": "Qwen"},
+      {"farbe": "hellgrün", "label": "Gemma"},
+      {"farbe": "orange", "label": "Mistral"}
+    ]
+  },
+  "a2_nachbau": {
+    "svg": "<svg viewBox=\"0 0 800 600\" xmlns=\"http://www.w3.org/2000/svg\"><style>.axis{stroke:#666;stroke-width:1}.line-proprietary{stroke:#f5c400;stroke-width:2;fill:none}.line-qwen{stroke:#00d4aa;stroke-width:2;fill:none}.line-gemma{stroke:#7fff7f;stroke-width:2;fill:none}.line-mistral{stroke:#ff8c00;stroke-width:2;fill:none}.text{font-family:sans-serif;font-size:10px;fill:#ccc}.label{font-weight:bold}</style><rect width=\"800\" height=\"600\" fill=\"#0a0a12\"/><g class=\"axis\"><line x1=\"60\" y1=\"520\" x2=\"760\" y2=\"520\"/><line x1=\"60\" y1=\"520\" x2=\"60\" y2=\"80\"/></g><g class=\"axis-labels\"><text x=\"380\" y=\"545\" text-anchor=\"middle\" class=\"text\">Zeit</text><text x=\"20\" y=\"300\" text-anchor=\"middle\" class=\"text\" transform=\"rotate(-90 20,300)\">Intelligence Index</text></g><g class=\"ticks\"><text x=\"140\" y=\"535\" text-anchor=\"middle\" class=\"text\">'23</text><text x=\"300\" y=\"535\" text-anchor=\"middle\" class=\"text\">'24</text><text x=\"460\" y=\"535\" text-anchor=\"middle\" class=\"text\">'25</text><text x=\"620\" y=\"535\" text-anchor=\"middle\" class=\"text\">Nov</text><text x=\"50\" y=\"440\" text-anchor=\"end\" class=\"text\">30</text><text x=\"50\" y=\"360\" text-anchor=\"end\" class=\"text\">40</text><text x=\"50\" y=\"280\" text-anchor=\"end\" class=\"text\">50</text><text x=\"50\" y=\"200\" text-anchor=\"end\" class=\"text\">60</text></g><polyline class=\"line-proprietary\" points=\"140,460 300,430 460,370 540,330 620,280 680,220\"/><polyline class=\"line-qwen\" points=\"460,370 540,350 620,310 660,290\"/><polyline class=\"line-gemma\" points=\"480,380 560,340 640,300 680,320\"/><polyline class=\"line-mistral\" points=\"520,400 600,350 660,310\"/><g class=\"data-labels\"><text x=\"140\" y=\"450\" class=\"text\">GPT-4</text><text x=\"300\" y=\"420\" class=\"text\">GPT-4o</text><text x=\"460\" y=\"360\" class=\"text\">Claude 3.5 Sonnet</text><text x=\"680\" y=\"210\" class=\"text label\">Claude Lable 5</text><text x=\"670\" y=\"230\" class=\"text\">GPT-5.5</text><text x=\"620\" y=\"290\" class=\"text\">Opus 4.6</text><text x=\"640\" y=\"300\" class=\"text\">Qwen3.5 27B</text><text x=\"660\" y=\"330\" class=\"text\">Gemma 4 31B</text><text x=\"680\" y=\"340\" class=\"text\">Gemma 4 12B</text><text x=\"640\" y=\"350\" class=\"text\">Mistral Small 4</text><text x=\"600\" y=\"360\" class=\"text\">Qwen3.5 8B</text><text x=\"480\" y=\"390\" class=\"text\">Gemma 3 27B</text><text x=\"520\" y=\"410\" class=\"text\">Ministral 3 14B</text></g><g class=\"legend\" transform=\"translate(60,60)\"><line x1=\"0\" y1=\"0\" x2=\"30\" y2=\"0\" stroke=\"#f5c400\" stroke-width=\"2\"/><text x=\"35\" y=\"8\" class=\"text\">Proprietäre Flaggschiffe</text><line x1=\"160\" y1=\"0\" x2=\"190\" y2=\"0\" stroke=\"#00d4aa\" stroke-width=\"2\"/><text x=\"195\" y=\"8\" class=\"text\">Qwen</text><line x1=\"260\" y1=\"0\" x2=\"290\" y2=\"0\" stroke=\"#7fff7f\" stroke-width=\"2\"/><text x=\"295\" y=\"8\" class=\"text\">Gemma</text><line x1=\"360\" y1=\"0\" x2=\"390\" y2=\"0\" stroke=\"#ff8c00\" stroke-width=\"2\"/><text x=\"395\" y=\"8\" class=\"text\">Mistral</text></g></svg>"
+  },
+  "b_schilder": {
+    "gefunden": [],
+    "sichtbar_gesamt": 3,
+    "nicht_lesbar": 3
+  },
+  "selbsteinschaetzung": {
+    "schwierigstes": "Die Preisschilder im unteren linken Bereich (Wertungsbereich: x<700, y>950) sind extrem unscharf, gedreht und teilweise verdeckt. Keine einzige Zahl war sicher lesbar.",
+    "unsicher_bei": [
+      "Alle Preisschilder in Bild B - keine Zahlen konnten sicher gelesen werden",
+      "Genaue Positionsbestimmung welches Schild im Wertungsbereich liegt bei dieser Perspektive",
+      "Unterscheidung von £ und € bei gedrehten Schildern"
+    ]
+  }
+}

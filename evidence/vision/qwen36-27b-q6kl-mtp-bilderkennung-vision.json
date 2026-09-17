@@ -1,0 +1,130 @@
+{
+  "slug": "qwen36-27b-q6kl-mtp-bilderkennung",
+  "modell": "Qwen3.6-27B UD-Q6_K_XL",
+  "datum": "2026-09-08",
+
+  "a1_ablesen": {
+    "kopfzeile": {
+      "ueberschrift": "DER HEUTIGE GAMING-PC SCHLÄGT DAS RECHENZENTRUM VON GESTERN",
+      "hervorgehoben": "SCHLÄGT",
+      "unterzeile": "Open-Weight-Modelle auf einer 32-GB-Gaming-GPU — kein API-Schlüssel, keine Token-Kosten. Wie nah sind sie an der proprietären Spitze?",
+      "reiter_aktiv": "Lokal · Kostenlos",
+      "reiter_weitere": ["Open Weight", "ROI / Break-even"]
+    },
+
+    "filter": {
+      "aktiv": ["FRONTIER", "QWEN", "GEMMA", "MISTRAL"],
+      "inaktiv": ["KIMI", "META", "DEEPSEEK", "GLM"],
+      "knopf_rechts": "+ MODELLE AUSWÄHLEN 10"
+    },
+
+    "tooltip": {
+      "spalte_links": "Claude Opus 4.5",
+      "spalte_rechts": "Qwen3.6 27B",
+      "zeilen": [
+        { "name": "Intelligence Index",    "links": 40.8, "rechts": 37.1 },
+        { "name": "GPQA Diamond",          "links": 87,   "rechts": 84 },
+        { "name": "Humanity's Last Exam",  "links": 29,   "rechts": 22 },
+        { "name": "Terminal-Bench 2.0",    "links": 50,   "rechts": 61 }
+      ],
+      "fussnote": "AA Intelligence Index v4.3 · Punkt erneut anklicken zum Entfernen"
+    },
+
+    "kacheln": [
+      {
+        "titel": "QWEN3.6 27B",
+        "wert": "37.1",
+        "text": "AA Intelligence Index — Open-Weight, kein API-Key, läuft auf Ihrer eigenen GPU."
+      },
+      {
+        "titel": "VS. OPUS 4.5 (40,7)",
+        "wert": "91%",
+        "text": "des Opus-4.5-Niveaus im Gesamtindex. Bei Coding-Benchmarks: gleichauf."
+      },
+      {
+        "titel": "PROPRIETÄRE SPITZE · HEUTE",
+        "wert": "59.9",
+        "text": "Das Rechenzentrum klettert weiter — doch der Abstand schrumpft jedes Quartal."
+      }
+    ],
+
+    "achsen": {
+      "y_beschriftung": "INTELLIGENCE INDEX (AA V4.0)",
+      "y_werte": [10, 20, 30, 40, 50, 60, 70],
+      "x_werte": ["'23", "'24", "'25", "'26", "nov"]
+    },
+
+    "legende": [
+      { "name": "Proprietäre Flaggschiffe", "zusatz": null },
+      { "name": "Qwen",    "zusatz": "open" },
+      { "name": "Gemma",   "zusatz": "open" },
+      { "name": "Mistral", "zusatz": "cloud+open" }
+    ]
+  },
+
+  "a2_nachbau": {
+    "svg": "<svg viewBox=\"0 0 900 560\" xmlns=\"http://www.w3.org/2000/svg\">\n  <style>\n    text { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }\n    .grid { stroke: #1a2332; stroke-width: 0.5; }\n    .axis { stroke: #444; stroke-width: 1; }\n    .al { fill: #888; font-size: 11px; }\n    .dl { font-size: 10px; }\n    .lt { fill: #ccc; font-size: 11px; }\n  </style>\n\n  <rect width=\"900\" height=\"560\" fill=\"#0d1117\"/>\n\n  <text x=\"450\" y=\"25\" text-anchor=\"middle\" fill=\"#ffffff\" font-size=\"13\" font-weight=\"600\">Intelligence Index über Zeit</text>\n\n  <!-- Grid lines -->\n  <line class=\"grid\" x1=\"110\" y1=\"450\" x2=\"830\" y2=\"450\"/>\n  <line class=\"grid\" x1=\"110\" y1=\"386.7\" x2=\"830\" y2=\"386.7\"/>\n  <line class=\"grid\" x1=\"110\" y1=\"323.3\" x2=\"830\" y2=\"323.3\"/>\n  <line class=\"grid\" x1=\"110\" y1=\"260\" x2=\"830\" y2=\"260\"/>\n  <line class=\"grid\" x1=\"110\" y1=\"196.7\" x2=\"830\" y2=\"196.7\"/>\n  <line class=\"grid\" x1=\"110\" y1=\"133.3\" x2=\"830\" y2=\"133.3\"/>\n  <line class=\"grid\" x1=\"110\" y1=\"70\" x2=\"830\" y2=\"70\"/>\n\n  <!-- Axes -->\n  <line class=\"axis\" x1=\"110\" y1=\"70\" x2=\"110\" y2=\"450\"/>\n  <line class=\"axis\" x1=\"110\" y1=\"450\" x2=\"830\" y2=\"450\"/>\n\n  <!-- Y-axis labels -->\n  <text class=\"al\" x=\"100\" y=\"454\" text-anchor=\"end\">10</text>\n  <text class=\"al\" x=\"100\" y=\"390.7\" text-anchor=\"end\">20</text>\n  <text class=\"al\" x=\"100\" y=\"327.3\" text-anchor=\"end\">30</text>\n  <text class=\"al\" x=\"100\" y=\"264\" text-anchor=\"end\">40</text>\n  <text class=\"al\" x=\"100\" y=\"200.7\" text-anchor=\"end\">50</text>\n  <text class=\"al\" x=\"100\" y=\"137.3\" text-anchor=\"end\">60</text>\n  <text class=\"al\" x=\"100\" y=\"74\" text-anchor=\"end\">70</text>\n\n  <!-- Y-axis title -->\n  <text x=\"22\" y=\"260\" text-anchor=\"middle\" fill=\"#666\" font-size=\"10\" transform=\"rotate(-90, 22, 260)\">INTELLIGENCE INDEX (AA V4.0)</text>\n\n  <!-- X-axis labels -->\n  <text class=\"al\" x=\"110\" y=\"470\" text-anchor=\"middle\">'23</text>\n  <text class=\"al\" x=\"290\" y=\"470\" text-anchor=\"middle\">'24</text>\n  <text class=\"al\" x=\"470\" y=\"470\" text-anchor=\"middle\">'25</text>\n  <text class=\"al\" x=\"650\" y=\"470\" text-anchor=\"middle\">'26</text>\n  <text class=\"al\" x=\"830\" y=\"470\" text-anchor=\"middle\">nov</text>\n\n  <!-- Yellow line: Proprietäre Flaggschiffe -->\n  <polyline points=\"110,437.3 290,361.3 470,310.7 650,227.3 830,161.3\" fill=\"none\" stroke=\"#f0c040\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n  <line x1=\"830\" y1=\"161.3\" x2=\"830\" y2=\"128\" stroke=\"#f0c040\" stroke-width=\"2.5\"/>\n\n  <!-- Teal line: Qwen -->\n  <polyline points=\"785,336.7 785,323.3 812,246.7\" fill=\"none\" stroke=\"#20d0a0\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n\n  <!-- Green line: Gemma -->\n  <polyline points=\"470,399.3 812,372 812,296\" fill=\"none\" stroke=\"#50e060\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n\n  <!-- Orange line: Mistral -->\n  <line x1=\"650\" y1=\"424.7\" x2=\"650\" y2=\"372\" stroke=\"#f08030\" stroke-width=\"2.5\"/>\n\n  <!-- Yellow data points & labels -->\n  <circle cx=\"110\" cy=\"437.3\" r=\"4\" fill=\"#f0c040\"/>\n  <text class=\"dl\" x=\"110\" y=\"428\" text-anchor=\"middle\" fill=\"#f0c040\">GPT-4</text>\n\n  <circle cx=\"290\" cy=\"361.3\" r=\"4\" fill=\"#f0c040\"/>\n  <text class=\"dl\" x=\"290\" y=\"352\" text-anchor=\"middle\" fill=\"#f0c040\">GPT-4o</text>\n\n  <circle cx=\"470\" cy=\"310.7\" r=\"4\" fill=\"#f0c040\"/>\n  <text class=\"dl\" x=\"470\" y=\"301\" text-anchor=\"middle\" fill=\"#f0c040\">Claude 3.5 Sonnet</text>\n\n  <circle cx=\"650\" cy=\"227.3\" r=\"4\" fill=\"#f0c040\"/>\n  <text class=\"dl\" x=\"650\" y=\"218\" text-anchor=\"middle\" fill=\"#f0c040\">Opus 4.6</text>\n\n  <circle cx=\"830\" cy=\"161.3\" r=\"4\" fill=\"#f0c040\"/>\n  <text class=\"dl\" x=\"815\" y=\"155\" text-anchor=\"end\" fill=\"#f0c040\">GPT-5.5</text>\n\n  <circle cx=\"830\" cy=\"128\" r=\"4\" fill=\"#f0c040\"/>\n  <text class=\"dl\" x=\"815\" y=\"122\" text-anchor=\"end\" fill=\"#f0c040\">Claude Fable 5</text>\n\n  <!-- Teal data points & labels -->\n  <circle cx=\"785\" cy=\"336.7\" r=\"4\" fill=\"#20d0a0\"/>\n  <text class=\"dl\" x=\"773\" y=\"350\" text-anchor=\"end\" fill=\"#20d0a0\">Qwen3.5 9B</text>\n\n  <circle cx=\"785\" cy=\"323.3\" r=\"4\" fill=\"#20d0a0\"/>\n  <text class=\"dl\" x=\"773\" y=\"318\" text-anchor=\"end\" fill=\"#20d0a0\">Qwen3 Next 80B (reasoning)</text>\n\n  <circle cx=\"812\" cy=\"246.7\" r=\"4\" fill=\"#20d0a0\"/>\n  <text class=\"dl\" x=\"800\" y=\"240\" text-anchor=\"end\" fill=\"#20d0a0\">Qwen3.6 27B</text>\n\n  <!-- Green data points & labels -->\n  <circle cx=\"470\" cy=\"399.3\" r=\"4\" fill=\"#50e060\"/>\n  <text class=\"dl\" x=\"470\" y=\"415\" text-anchor=\"middle\" fill=\"#50e060\">Gemma 3.27B</text>\n\n  <circle cx=\"812\" cy=\"372\" r=\"4\" fill=\"#50e060\"/>\n  <text class=\"dl\" x=\"800\" y=\"385\" text-anchor=\"end\" fill=\"#50e060\">Gemma 4 12B</text>\n\n  <circle cx=\"812\" cy=\"296\" r=\"4\" fill=\"#50e060\"/>\n  <text class=\"dl\" x=\"800\" y=\"290\" text-anchor=\"end\" fill=\"#50e060\">Gemma 4 31B</text>\n\n  <!-- Orange data points & labels -->\n  <circle cx=\"650\" cy=\"424.7\" r=\"4\" fill=\"#f08030\"/>\n  <text class=\"dl\" x=\"650\" y=\"442\" text-anchor=\"middle\" fill=\"#f08030\">Ministral 3.14B</text>\n\n  <circle cx=\"650\" cy=\"372\" r=\"4\" fill=\"#f08030\"/>\n  <text class=\"dl\" x=\"650\" y=\"363\" text-anchor=\"middle\" fill=\"#f08030\">Mistral Small 4</text>\n\n  <!-- Legend -->\n  <g transform=\"translate(140, 510)\">\n    <line x1=\"0\" y1=\"0\" x2=\"20\" y2=\"0\" stroke=\"#f0c040\" stroke-width=\"2.5\"/>\n    <text class=\"lt\" x=\"28\" y=\"4\">Proprietäre Flaggschiffe</text>\n\n    <line x1=\"230\" y1=\"0\" x2=\"250\" y2=\"0\" stroke=\"#20d0a0\" stroke-width=\"2.5\"/>\n    <text class=\"lt\" x=\"258\" y=\"4\">Qwen <tspan fill=\"#666\" font-size=\"9\">(open)</tspan></text>\n\n    <line x1=\"360\" y1=\"0\" x2=\"380\" y2=\"0\" stroke=\"#50e060\" stroke-width=\"2.5\"/>\n    <text class=\"lt\" x=\"388\" y=\"4\">Gemma <tspan fill=\"#666\" font-size=\"9\">(open)</tspan></text>\n\n    <line x1=\"500\" y1=\"0\" x2=\"520\" y2=\"0\" stroke=\"#f08030\" stroke-width=\"2.5\"/>\n    <text class=\"lt\" x=\"528\" y=\"4\">Mistral <tspan fill=\"#666\" font-size=\"9\">(cloud+open)</tspan></text>\n  </g>\n</svg>"
+  },
+
+  "b_schilder": {
+    "gefunden": [
+      {
+        "name": "JOKER",
+        "gbp": 30,
+        "eur": 40,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": "REDHOOD ARKHAM",
+        "gbp": 80,
+        "eur": 65,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": "REDHOOD BATTLE DAMAGED",
+        "gbp": 80,
+        "eur": 65,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": null,
+        "gbp": 35,
+        "eur": 45,
+        "reihenfolge": "eur_zuerst",
+        "sicher": true,
+        "beschreibung": "Weiße Maske mit roten Streifen und Metallbrille, auf Holzständer"
+      },
+      {
+        "name": "DC REDHOOD V1",
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false,
+        "beschreibung": "Roter Helm, linke Seite. Namensschild lesbar, Preistag stark gedreht."
+      },
+      {
+        "name": "DEADPOOL",
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false,
+        "beschreibung": "Rote Maske mit schwarzen Augenausschnitten. Name lesbar, Preistag im Winkel, Währungszeichen nicht sicher trennbar."
+      }
+    ],
+    "sichtbar_gesamt": 6,
+    "nicht_lesbar": 2
+  },
+
+  "selbsteinschaetzung": {
+    "schwierigstes": "Die Preisschilder auf Bild B bei starkem Drehwinkel — insbesondere DEADPOOL und DC REDHOOD V1, wo die Währungszeichen £ und € bei der Schräglage nicht sicher unterscheidbar sind. Auch die exakte Position des REDHOOD BATTLE DAMAGED-Schilds relativ zur x=700-Grenze ist unsicher.",
+    "unsicher_bei": [
+      "DEADPOOL: Preistag im Winkel, Zahlen und Währungszeichen nicht sicher lesbar",
+      "DC REDHOOD V1: Preistag nicht einsehbar (Nur Name lesbar)",
+      "REDHOOD BATTLE DAMAGED: ob Schild innerhalb x<700 liegt (am Rand des Wertungsbereichs)",
+      "Weiße Maske: ob ein Name auf dem Schild steht (nicht erkennbar, nur €45/£35 lesbar)"
+    ]
+  }
+}
