@@ -723,8 +723,8 @@ energy, which is not measured at all. [`evidence/README.md`](evidence/README.md)
 
 ```
 benchmarks/          the source code of every run, exactly as the model delivered it
-data/runs.json       every run: speeds, percentiles, tokens, code counts, rubric, launch line,
-                     and an evidence field naming the log and its SHA-256
+data/runs.json       every run: speeds, percentiles, tokens, code counts, rubric, self-repairs,
+                     launch line, and an evidence field naming the log and its SHA-256
 data/configs.json    19 complete llama-server launch configurations for both machines
 data/hardware.json   both machines, every memory figure, drivers and Vulkan versions
 docs/                the measurement inventory
@@ -733,6 +733,9 @@ harness/             the VS Code agents the runs were made with
 media/               recordings and GIFs of the builds, the chart, the banners
 scripts/             parser, independent cross-check, chart generator, gameplay recorder
 ```
+
+The `fixes` field in `data/runs.json` counts self-repairs: how often a model had to rework
+code it had already written. It does not count restarts after a run broke off.
 
 ## What is missing
 
