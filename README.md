@@ -136,7 +136,7 @@ median of 1,120.69 t/s.
 | Server | halogen-flash-server 0.6.3 in a container, W4B with quality overlay, MTP depth 1 plus prompt lookup, two slots sharing one KV pool of 262,144 positions | the startup lines at the top of the log |
 | Machine | AMD AI MAX 395 on Linux, 2.0 GiB reserved for the iGPU in firmware | the startup lines at the top of the log |
 | Quality | not assessed yet | |
-| Image recognition, a separate test | 39 of 50 values read, 0 of 4 price tags, 1 of 4 traps; all 6 tags it saw reported as unreadable | [finding 8](#8-a-local-27b-read-the-dashboard-best) |
+| Image recognition, a separate test | 42 of 50 values read, 1 of 4 price tags, 3 of 4 traps, in the repeat of 18 September with the original images | [finding 8](#8-local-models-read-almost-as-well-as-the-cloud-reference) |
 
 </details>
 
@@ -536,40 +536,61 @@ build or lint runs.
 
 <sub>Sources: <a href="benchmarks/qwen38-27b/"><code>benchmarks/qwen38-27b/</code></a> · <a href="evidence/chats/qwen38-27b-q4xl-moorhuhn-medium-r9700.md">chat transcript of the medium pass</a></sub>
 
-### 8. A local 27B read the dashboard best
+### 8. Local models read almost as well as the cloud reference
 
-Two images made for this benchmark, so neither is in any training set. Image A is a dashboard
-with a tooltip table, KPI tiles, active filters and footnotes; the model returns 50 values as
-JSON and redraws the chart as SVG. Image B is a trade fair stand with more than forty objects;
-what counts is how many price tags are read correctly, and how many are invented.
+Two images made for this benchmark. Image A is a dashboard with a tooltip table, KPI tiles, active
+filters and footnotes; the model returns 50 values as JSON and redraws the chart as SVG. Image B is
+a trade fair stand with more than forty objects; what counts is how many of its small, angled price
+tags are read correctly, and how many are invented. Sonnet 5 in the cloud is a reference here, not
+a test subject.
 
 | Model | Runs on | A · values read correctly | B · price tags fully correct | B · invented tags |
 |---|---|--:|--:|--:|
-| **Qwen3.6-27B** UD-Q6_K_XL | R9700 | **50 of 50** | **4 of 4** | 0 |
-| Sonnet 5 | cloud | 46 of 50 | 1 of 4 | 2, none claimed as certain; 3 more reported as unreadable |
-| Qwen3.8-27B UD-Q4_K_XL | R9700 | 44 of 50 | 2 of 4 | 4, one claimed as certain |
-| Qwen3.8-Flash-Next W4B · Halogen | AI MAX 395 | 39 of 50 | 0 of 4 | 0; all 6 tags it saw reported as unreadable |
+| Qwen3.8-27B UD-Q4_K_XL | R9700 | **44 of 50** | 1 of 4 | 4, one claimed as certain |
+| Qwen3.8-Flash-Next W4B · Halogen | AI MAX 395 | 42 of 50 | 1 of 4 | 2, one claimed as certain |
+| Qwen3.8-Flash-Next UD-Q4_K_XL · llama.cpp | AI MAX 395 | 41 of 50 | 2 of 4 | 4, one claimed as certain |
+| Qwen3.6-27B UD-Q6_K_XL | R9700 | 38 of 50 | **4 of 4** | 3, one claimed as certain |
 | Qwen3.5-122B-A10B UD-Q4_K_XL | AI MAX 395 | 30 of 50 | 0 of 4 | 0 |
+| *Sonnet 5, cloud reference* | cloud | 46 of 50 | 1 of 4 | 2, none claimed as certain; 3 more reported as unreadable |
 
-The model behind the lowest Moorhuhn score in this repository read the dashboard without a single
-error and beat a frontier cloud model doing it. Reading an image and shipping software are
-different abilities.
+On the dashboard the best local models come within two to five values of the cloud reference: 44,
+42 and 41 of 50 against 46. On the price tags, the hardest part of the test, a local 27B beats it:
+Qwen3.6-27B read all four confirmed tags, Sonnet 5 one. The same Qwen3.6-27B read the dashboard
+less well than the Qwen3.8 models, so small print in a photo and an interface are different
+abilities. Each model ran once; differences of one to three values are within what a second run
+could change.
+
+**Three runs were repeated** because they did not measure what they should. Qwen3.6-27B's first run
+on 8 September read the answer keys, which then lay in the same folder as the images, and scored 50
+of 50 and 4 of 4; the table shows its repeat of 18 September in an isolated folder. The first runs
+of Qwen3.8-Flash-Next on Halogen (17 September) and on llama.cpp (18 September) got a web version of
+image B with 675 × 900 pixels instead of 1176 × 1568, in which the scored region lies outside the
+image. The Halogen run also used VS Code's built-in agent mode, the llama.cpp run an agent file
+whose tool restriction did not take effect. Both were repeated with the original images and the
+restriction in place. The original images are in [`harness/bilder/`](harness/bilder/); the answers of
+the invalid runs stay in [`evidence/vision/`](evidence/vision/) for the record.
+
+**One caveat for image B.** The agent file shows REDHOOD ARKHAM at £80 and €65 as a format example,
+and that is one of the four confirmed tags; a second confirmed tag, REDHOOD BATTLE DAMAGED, has the
+same prices. The tags Qwen3.8-27B and Qwen3.8-Flash-Next on llama.cpp got right are exactly these.
+JOKER, which the example does not give away, was read by Qwen3.6-27B, Qwen3.8-Flash-Next on Halogen
+and Sonnet 5.
 
 <details>
 <summary>The four traps: in each image exactly one place breaks the pattern</summary>
 
 <br>
 
-| Trap | Qwen3.6-27B | Sonnet 5 | Qwen3.8-27B | Flash-Next · Halogen | Qwen3.5-122B |
-|---|---|---|---|---|---|
-| Row Terminal-Bench 2.0: every other row has the larger value on the left, this one does not | recognised | recognised | recognised | recognised | recognised |
-| Tile value 40.7: the tooltip gives 40.8 for the same model, and both numbers really are in the image | recognised | not recognised | recognised | not recognised | not recognised |
-| Price tag JOKER: on every other tag the pound price is higher than the euro price | recognised | recognised | not recognised | not recognised | not recognised |
-| White mask: on every other tag the pound is on top and the euro below | recognised | order spotted, amounts swapped | not recognised | not recognised | not recognised |
+| Trap | Qwen3.8-27B | Flash-Next · Halogen | Flash-Next · llama.cpp | Qwen3.6-27B | Qwen3.5-122B | Sonnet 5 (reference) |
+|---|---|---|---|---|---|---|
+| Row Terminal-Bench 2.0: every other row has the larger value on the left, this one does not | recognised | recognised | recognised | recognised | recognised | recognised |
+| Tile value 40.7: the tooltip gives 40.8 for the same model, and both numbers really are in the image | recognised | recognised | not recognised | not recognised | not recognised | not recognised |
+| Price tag JOKER: on every other tag the pound price is higher than the euro price | not recognised | recognised | not recognised | recognised | not recognised | recognised |
+| White mask: on every other tag the pound is on top and the euro below | not recognised | not recognised | not recognised | recognised | not recognised | order spotted, amounts swapped |
 
 </details>
 
-<sub>Image B is provisional: its answer key is confirmed for four of seven tags, and the tag scores use those four only. The traps are confirmed. The answer keys stay unpublished so the test keeps working for future models. Model answers are in <a href="evidence/vision/"><code>evidence/vision/</code></a> and on the model pages. Invented tags count only entries with a name or an amount; a tag the model saw but reported as unreadable is listed apart. Since 17 September 2026 the scorer counts that way, which lowered Sonnet 5 from 5 invented tags to 2. Qwen3.8-Flash-Next took the test on Halogen on 17 September 2026, as a test of its own and not within a game run. Laguna S 2.1 is a text model and cannot take part.</sub>
+<sub>Image B is provisional: its answer key is confirmed for four of seven tags, and the tag scores use those four only. The traps are confirmed. The answer keys stay unpublished so the test keeps working for future models. Model answers are in <a href="evidence/vision/"><code>evidence/vision/</code></a> and on the model pages. Invented tags count only entries with a name or an amount; a tag the model saw but reported as unreadable is listed apart. Since 17 September 2026 the scorer counts that way, which lowered Sonnet 5 from 5 invented tags to 2. On 18 September 2026 the scorer was corrected twice: price tags are now matched one to one, so two REDHOOD answers can no longer both be credited to the same tag in the key (Qwen3.8-27B: 1 of 4, before 2), and the white mask trap now also counts when a model gives that tag a descriptive name. Qwen3.6-27B's answer of 18 September contained four invalid JSON escapes (<code>\'</code>) inside its SVG; they were replaced by plain apostrophes before scoring, and the original file is kept next to it. The image tests are tests of their own, not part of a game run. Laguna S 2.1 is a text model and cannot take part.</sub>
 
 ### 9. Same model, same machine, another server
 

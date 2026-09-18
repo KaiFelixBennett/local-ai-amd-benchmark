@@ -1,0 +1,157 @@
+{
+  "slug": "qwen36-27b-q6xl-mtp-bilderkennung-r9700",
+  "modell": "Qwen3.6-27B UD-Q6 (Local)",
+  "datum": "2026-09-18",
+  "a1_ablesen": {
+    "ueberschrift_unterzeile_reiter": {
+      "ueberschrift": "DER HEUTIGE GAMING-PC SCHLÄGT DAS RECHENZENTRUM VON GESTERN",
+      "unterzeile": "Open-Weight-Modelle auf einer 32-GB-Gaming-GPU — kein API-Schlüssel, keine Token-Kosten. Wie nah sind sie an der proprietären Spitze?",
+      "aktiver_reiter": "Lokal - Kostenlos"
+    },
+    "filterreihe": [
+      {"name": "FRONTER", "aktiv": true, "farbe": "gelb"},
+      {"name": "KIMI", "aktiv": false, "farbe": "grau"},
+      {"name": "Qwen", "aktiv": true, "farbe": "grün"},
+      {"name": "META", "aktiv": false, "farbe": "grau"},
+      {"name": "GEMMA", "aktiv": true, "farbe": "gelb"},
+      {"name": "MISTRAL", "aktiv": true, "farbe": "orange"},
+      {"name": "DEEPSEEK", "aktiv": false, "farbe": "grau"},
+      {"name": "GLM", "aktiv": false, "farbe": "grau"}
+    ],
+    "vergleichstabelle_tooltip": {
+      "spalten": ["Claude Opus 4.5", "Qwen3.6 27B"],
+      "zeilen": [
+        {"name": "Intelligence Index", "claude": 40.8, "qwen": 37.1},
+        {"name": "GPU Diamond", "claude": 87, "qwen": 84},
+        {"name": "Humanity's Last Exam", "claude": 29, "qwen": 22},
+        {"name": "Terminal-bench 2.0", "claude": 50, "qwen": 61}
+      ],
+      "fussnote": "AA Intelligence Index v6.0 — Punkt erneut analysiert und korrigiert"
+    },
+    "kennzahlkacheln": [
+      {
+        "titel": "Qwen3.6 27B",
+        "wert": "37.1",
+        "beschreibung": "AA Intelligence Index — Open-Weight, kein API-Key, läuft auf Ihrer eigenen GPU."
+      },
+      {
+        "titel": "VS. Opus 4.5 (49.7)",
+        "wert": "91%",
+        "beschreibung": "des Opus 4.5-Niveaus im Gesamtindex. Bei Coding-Benchmarks gleichauf."
+      },
+      {
+        "titel": "Proprietäre Spitze - Heute",
+        "wert": "59.9",
+        "beschreibung": "Das Rechenzentrum klettert weiter — doch der Abstand schrumpft jedes Quartal."
+      }
+    ],
+    "achsen": {
+      "y": {
+        "beschriftung": "INTELLIGENCE INDEX (AAI v6.0)",
+        "werte": [10, 20, 30, 40, 50, 60, 70]
+      },
+      "x": {
+        "beschriftung": null,
+        "werte": ["'23", "'24", "'25", "'26"]
+      }
+    },
+    "legende": [
+      {"name": "Proprietäre Flaggschiffe", "farbe": "gelb"},
+      {"name": "Qwen", "farbe": "hellgrün"},
+      {"name": "Gemma", "farbe": "grün"},
+      {"name": "Mistral", "farbe": "orange"},
+      {"name": "Cloud/Open", "farbe": "grau"}
+    ],
+    "datenpunkte_diagramm": [
+      {"serie": "Proprietäre Flaggschiffe", "name": "GPT-4", "jahr": "'23", "wert_ungefuehr": 12},
+      {"serie": "Proprietäre Flaggschiffe", "name": "GPT-4o", "jahr": "'24.5", "wert_ungefuehr": 24},
+      {"serie": "Proprietäre Flaggschiffe", "name": "Claude 3.5 Sonnet", "jahr": "'25", "wert_ungefuehr": 28},
+      {"serie": "Proprietäre Flaggschiffe", "name": "Claude Opus 4.5", "jahr": "'25.5", "wert_ungefuehr": 40.8},
+      {"serie": "Proprietäre Flaggschiffe", "name": "Claude Fable 5 / GPT-5.5", "jahr": "'26", "wert_ungefuehr": 60},
+      {"serie": "Qwen", "name": "Qwen3.5", "jahr": "'25.8", "wert_ungefuehr": 27},
+      {"serie": "Qwen", "name": "Qwen3.6 27B", "jahr": "'26", "wert_ungefuehr": 37.1},
+      {"serie": "Qwen", "name": "Qwen3-Next 80B (reasoning)", "jahr": "'26", "wert_ungefuehr": 30},
+      {"serie": "Gemma", "name": "Gemma 3 27B", "jahr": "'25.5", "wert_ungefuehr": 22},
+      {"serie": "Gemma", "name": "Gemma 4 31B", "jahr": "'26", "wert_ungefuehr": 35},
+      {"serie": "Gemma", "name": "Gemma 4 12B", "jahr": "'26", "wert_ungefuehr": 22},
+      {"serie": "Mistral", "name": "Mistral 3 14B", "jahr": "'25.8", "wert_ungefuehr": 15},
+      {"serie": "Mistral", "name": "Mistral Small 3", "jahr": "'26", "wert_ungefuehr": 20}
+    ]
+  },
+  "a2_nachbau": {
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 550' font-family='Arial, sans-serif' font-size='12'>\n  <rect width='900' height='550' fill='#1a1a2e'/>\n  \n  <!-- Titel -->\n  <text x='450' y='25' text-anchor='middle' fill='#ffffff' font-size='14' font-weight='bold'>Intelligence Index Entwicklung</text>\n  \n  <!-- Y-Achse Beschriftung -->\n  <text x='20' y='245' text-anchor='middle' fill='#aaaaaa' font-size='11' transform='rotate(-90,20,245)'>INTELLIGENCE INDEX (AAI v6.0)</text>\n  \n  <!-- Gitterlinien -->\n  <line x1='100' y1='60' x2='850' y2='60' stroke='#333355' stroke-width='0.5'/>\n  <line x1='100' y1='121' x2='850' y2='121' stroke='#333355' stroke-width='0.5'/>\n  <line x1='100' y1='183' x2='850' y2='183' stroke='#333355' stroke-width='0.5'/>\n  <line x1='100' y1='244' x2='850' y2='244' stroke='#333355' stroke-width='0.5'/>\n  <line x1='100' y1='305' x2='850' y2='305' stroke='#333355' stroke-width='0.5'/>\n  <line x1='100' y1='367' x2='850' y2='367' stroke='#333355' stroke-width='0.5'/>\n  <line x1='100' y1='428' x2='850' y2='428' stroke='#333355' stroke-width='0.5'/>\n  \n  <!-- Y-Achse Werte -->\n  <text x='90' y='64' text-anchor='end' fill='#888888' font-size='11'>70</text>\n  <text x='90' y='125' text-anchor='end' fill='#888888' font-size='11'>60</text>\n  <text x='90' y='187' text-anchor='end' fill='#888888' font-size='11'>50</text>\n  <text x='90' y='248' text-anchor='end' fill='#888888' font-size='11'>40</text>\n  <text x='90' y='309' text-anchor='end' fill='#888888' font-size='11'>30</text>\n  <text x='90' y='371' text-anchor='end' fill='#888888' font-size='11'>20</text>\n  <text x='90' y='432' text-anchor='end' fill='#888888' font-size='11'>10</text>\n  \n  <!-- X-Achse Werte -->\n  <text x='150' y='450' text-anchor='middle' fill='#888888' font-size='11'>'23</text>\n  <text x='350' y='450' text-anchor='middle' fill='#888888' font-size='11'>'24</text>\n  <text x='550' y='450' text-anchor='middle' fill='#888888' font-size='11'>'25</text>\n  <text x='750' y='450' text-anchor='middle' fill='#888888' font-size='11'>'26</text>\n  \n  <!-- Achsen -->\n  <line x1='100' y1='60' x2='100' y2='428' stroke='#666666' stroke-width='1'/>\n  <line x1='100' y1='428' x2='850' y2='428' stroke='#666666' stroke-width='1'/>\n  \n  <!-- Proprietäre Flaggschiffe (gelb) -->\n  <polyline points='150,416 300,339 450,314 600,240 750,121' fill='none' stroke='#f0c040' stroke-width='2.5' stroke-linejoin='round'/>\n  <circle cx='150' cy='416' r='4' fill='#f0c040'/>\n  <circle cx='300' cy='339' r='4' fill='#f0c040'/>\n  <circle cx='450' cy='314' r='4' fill='#f0c040'/>\n  <circle cx='600' cy='240' r='4' fill='#f0c040'/>\n  <circle cx='750' cy='121' r='4' fill='#f0c040'/>\n  <text x='145' y='432' text-anchor='end' fill='#f0c040' font-size='10'>GPT-4</text>\n  <text x='300' y='330' text-anchor='middle' fill='#f0c040' font-size='10'>GPT-4o</text>\n  <text x='450' y='305' text-anchor='middle' fill='#f0c040' font-size='10'>Claude 3.5 Sonnet</text>\n  <text x='600' y='232' text-anchor='middle' fill='#f0c040' font-size='10'>Claude Opus 4.5</text>\n  <text x='755' y='118' text-anchor='start' fill='#f0c040' font-size='10'>Claude Fable 5 / GPT-5.5</text>\n  \n  <!-- Qwen (hellgrün) -->\n  <polyline points='680,320 750,260' fill='none' stroke='#4ae0a0' stroke-width='2.5' stroke-linejoin='round'/>\n  <circle cx='680' cy='320' r='4' fill='#4ae0a0'/>\n  <circle cx='750' cy='260' r='4' fill='#4ae0a0'/>\n  <text x='675' y='312' text-anchor='end' fill='#4ae0a0' font-size='10'>Qwen3.5</text>\n  <text x='755' y='257' text-anchor='start' fill='#4ae0a0' font-size='10'>Qwen3.6 27B</text>\n  \n  <!-- Gemma (grün) -->\n  <polyline points='550,355 750,272' fill='none' stroke='#60d060' stroke-width='2.5' stroke-linejoin='round'/>\n  <circle cx='550' cy='355' r='4' fill='#60d060'/>\n  <circle cx='750' cy='272' r='4' fill='#60d060'/>\n  <circle cx='750' cy='355' r='4' fill='#60d060'/>\n  <text x='545' y='348' text-anchor='end' fill='#60d060' font-size='10'>Gemma 3 27B</text>\n  <text x='755' y='269' text-anchor='start' fill='#60d060' font-size='10'>Gemma 4 31B</text>\n  <text x='755' y='352' text-anchor='start' fill='#60d060' font-size='10'>Gemma 4 12B</text>\n  \n  <!-- Mistral (orange) -->\n  <polyline points='650,395 750,367' fill='none' stroke='#e08040' stroke-width='2.5' stroke-linejoin='round'/>\n  <circle cx='650' cy='395' r='4' fill='#e08040'/>\n  <circle cx='750' cy='367' r='4' fill='#e08040'/>\n  <text x='645' y='388' text-anchor='end' fill='#e08040' font-size='10'>Mistral 3 14B</text>\n  <text x='755' y='364' text-anchor='start' fill='#e08040' font-size='10'>Mistral Small 3</text>\n  \n  <!-- Legende -->\n  <rect x='150' y='470' width='12' height='3' fill='#f0c040'/>\n  <text x='168' y='474' fill='#cccccc' font-size='11'>Proprietäre Flaggschiffe</text>\n  \n  <rect x='370' y='470' width='12' height='3' fill='#4ae0a0'/>\n  <text x='388' y='474' fill='#cccccc' font-size='11'>Qwen</text>\n  \n  <rect x='450' y='470' width='12' height='3' fill='#60d060'/>\n  <text x='468' y='474' fill='#cccccc' font-size='11'>Gemma</text>\n  \n  <rect x='540' y='470' width='12' height='3' fill='#e08040'/>\n  <text x='558' y='474' fill='#cccccc' font-size='11'>Mistral</text>\n  \n  <rect x='630' y='470' width='12' height='3' fill='#888888'/>\n  <text x='648' y='474' fill='#cccccc' font-size='11'>Cloud/Open</text>\n  \n  <!-- Tooltip-Hinweis -->\n  <rect x='120' y='70' width='280' height='110' rx='5' fill='#0d1117' stroke='#2ea043' stroke-width='1' opacity='0.9'/>\n  <text x='260' y='90' text-anchor='middle' fill='#888888' font-size='9'>Claude Opus 4.5    Qwen3.6 27B</text>\n  <text x='130' y='108' fill='#ffffff' font-size='9'>Intelligence Index      40.8            37.1</text>\n  <text x='130' y='124' fill='#ffffff' font-size='9'>GPU Diamond                 87              84</text>\n  <text x='130' y='140' fill='#ffffff' font-size='9'>Humanity's Last Exam  29              22</text>\n  <text x='130' y='156' fill='#ffffff' font-size='9'>Terminal-bench 2.0       50             61</text>\n  <text x='130' y='172' fill='#666666' font-size='8'>AA Intelligence Index v6.0 — Punkt erneut analysiert und korrigiert</text>\n</svg>"
+  },
+  "b_schilder": {
+    "gefunden": [
+      {
+        "name": "JOKER",
+        "gbp": 30,
+        "eur": 40,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": "STARK",
+        "gbp": 35,
+        "eur": 45,
+        "reihenfolge": "eur_zuerst",
+        "sicher": false
+      },
+      {
+        "name": "REDHOOD ARKHAM",
+        "gbp": 80,
+        "eur": 65,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": "REDHOOD BATTLE DAMAGED",
+        "gbp": 80,
+        "eur": 65,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": "ALIEN",
+        "gbp": 60,
+        "eur": 45,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": "DEADPOOL",
+        "gbp": 65,
+        "eur": 45,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": "CAPTAIN AMERICA",
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false
+      },
+      {
+        "name": "DARK KNIGHT",
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false
+      }
+    ],
+    "sichtbar_gesamt": 10,
+    "nicht_lesbar": 2
+  },
+  "selbsteinschaetzung": {
+    "schwierigstes": "Die Preisschilder auf den Masken in Bild B waren am schwersten zu lesen, insbesondere bei den Helmen, die schräg zur Kamera stehen oder deren Schilder teilweise verdeckt sind. Bei CAPTAIN AMERICA und DARK KNIGHT waren die Preise nicht sicher lesbar.",
+    "unsicher_bei": [
+      "Name der weißen Maske mit roten Akzenten (STARK?)",
+      "Preise bei CAPTAIN AMERICA Helm",
+      "Preise bei DARK KNIGHT Helm",
+      "Genauer Name des großen roten Helms links",
+      "Ob es noch weitere verdeckte Schilder im Wertungsbereich gibt",
+      "Reihenfolge der Währungen bei einigen Schildern (GBP/EUR)"
+    ]
+  }
+}
