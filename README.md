@@ -568,7 +568,9 @@ image B with 675 × 900 pixels instead of 1176 × 1568, in which the scored regi
 image. The Halogen run also used VS Code's built-in agent mode, the llama.cpp run an agent file
 whose tool restriction did not take effect. Both were repeated with the original images and the
 restriction in place. The original images are in [`harness/bilder/`](harness/bilder/); the answers of
-the invalid runs stay in [`evidence/vision/`](evidence/vision/) for the record.
+the two invalid Flash-Next runs stay in [`evidence/vision/`](evidence/vision/) for the record.
+Qwen3.6-27B's first answer was removed on 18 September 2026: it was written after reading the answer
+keys and reproduces them, so publishing it would publish the keys.
 
 **One caveat for image B.** The agent file shows REDHOOD ARKHAM at £80 and €65 as a format example,
 and that is one of the four confirmed tags; a second confirmed tag, REDHOOD BATTLE DAMAGED, has the
