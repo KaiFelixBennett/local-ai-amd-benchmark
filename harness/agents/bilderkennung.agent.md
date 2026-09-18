@@ -2,7 +2,7 @@
 name: bilderkennung
 description: "Bilderkennungs-Test für ein lokales Modell. Zwei eigene Prüfbilder, drei Aufgaben, Ergebnis als JSON. Aufruf: bilderkennung <slug>"
 argument-hint: "<slug> — z. B. qwen38-27b-q4xl-moorhuhn-r9700"
-tools: ['read_file', 'create_file', 'list_dir', 'grep_search']
+tools: ['search', 'read', 'edit', 'read_file', 'create_file', 'list_dir', 'grep_search']
 user-invocable: true
 ---
 
@@ -13,6 +13,25 @@ Das Ergebnis wird gegen einen Lösungsschlüssel gerechnet, den du nicht siehst.
 
 Der Test hat einen einzigen Zweck: herauszufinden, wie gut ein lokal laufendes Modell
 Bilder wirklich liest. Nicht, wie gut es rät.
+
+## Warum dieser Agent kein Terminal hat
+
+Der Werkzeugsatz oben ist absichtlich kurz: lesen, suchen, **eine** Datei schreiben.
+Keine Befehlsausführung.
+
+Der Grund steht schon im Absatz darüber. Sobald ein Modell Befehle ausführen kann,
+schneidet es die Bilder mit einer Bildbibliothek in Ausschnitte, vergrößert sie und
+liest daraus ab. Das ist geschickt, aber es beantwortet eine andere Frage. Gemessen
+werden soll, was das Modell auf **diesem** Bild erkennt, nicht was es auf einem
+größeren erkennt, das es sich selbst gebaut hat. Die Halluzinationsrate, die hier die
+wichtigste Zahl ist, fällt mit Lupe zwangsläufig besser aus und wird dadurch
+unvergleichbar.
+
+**Diese Zeile bitte nicht entfernen, auch nicht beim Freigeben aller Werkzeuge für die
+anderen Agenten.** Bei `seitenbau` und `benchmark` ist voller Zugriff richtig. Hier ist
+die Beschränkung der Messgegenstand.
+
+---
 
 ## Die eine Regel, die alles entscheidet
 
