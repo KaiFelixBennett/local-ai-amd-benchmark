@@ -136,7 +136,7 @@ median of 1,120.69 t/s.
 | Server | halogen-flash-server 0.6.3 in a container, W4B with quality overlay, MTP depth 1 plus prompt lookup, two slots sharing one KV pool of 262,144 positions | the startup lines at the top of the log |
 | Machine | AMD AI MAX 395 on Linux, 2.0 GiB reserved for the iGPU in firmware | the startup lines at the top of the log |
 | Quality | not assessed yet | |
-| Image recognition, a separate test | 42 of 50 values read, 1 of 4 price tags, 3 of 4 traps, in the repeat of 18 September with the original images | [finding 8](#8-local-models-read-almost-as-well-as-the-cloud-reference) |
+| Image recognition, a separate test | 42 of 50 values read, 1 of 4 price tags, 3 of 4 traps, in the repeat of 18 September with the original images | [finding 8](#8-local-models-keep-up-with-the-cloud-reference-and-beat-it-in-parts) |
 
 </details>
 
@@ -536,7 +536,7 @@ build or lint runs.
 
 <sub>Sources: <a href="benchmarks/qwen38-27b/"><code>benchmarks/qwen38-27b/</code></a> · <a href="evidence/chats/qwen38-27b-q4xl-moorhuhn-medium-r9700.md">chat transcript of the medium pass</a></sub>
 
-### 8. Local models read almost as well as the cloud reference
+### 8. Local models keep up with the cloud reference and beat it in parts
 
 Two images made for this benchmark. Image A is a dashboard with a tooltip table, KPI tiles, active
 filters and footnotes; the model returns 50 values as JSON and redraws the chart as SVG. Image B is
@@ -555,7 +555,8 @@ a test subject.
 
 On the dashboard the best local models come within two to five values of the cloud reference: 44,
 42 and 41 of 50 against 46. On the price tags, the hardest part of the test, a local 27B beats it:
-Qwen3.6-27B read all four confirmed tags, Sonnet 5 one. The same Qwen3.6-27B read the dashboard
+Qwen3.6-27B read all four confirmed tags, Sonnet 5 one. Of the four traps, Qwen3.6-27B and
+Qwen3.8-Flash-Next on Halogen spotted three each, Sonnet 5 two. The same Qwen3.6-27B read the dashboard
 less well than the Qwen3.8 models, so small print in a photo and an interface are different
 abilities. Each model ran once; differences of one to three values are within what a second run
 could change.
