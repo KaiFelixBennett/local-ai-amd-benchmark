@@ -1,10 +1,7 @@
 node_modules/
 dist/
-*.log
 
-# Die Rohprotokolle unter evidence/ sind der Zweck dieses Repos und muessen
-# eingecheckt sein - sonst zeigen alle Belege auf der Seite ins Leere.
-!evidence/logs/*.log
-!evidence/csv/*.log
+# Log-Dateien sind in diesem Repo wesentlich: Rohprotokolle sind die Belege fuer
+# alle Zahlen und werden immer eingecheckt. Deshalb bewusst keine *.log-Regel.
 .DS_Store
 Thumbs.db
