@@ -1,0 +1,24 @@
+# Auszug Proxy-/Serverlog Halogen, Wiederholungslauf qwen38-flash-next-halogen-r2 am 2026-09-18 (Ortszeit). Anfragen #3 bis #6.
+===== Start 2026-09-18 14:03:06 =====
+  Halogen Qwen3.8-Flash-Next W4B + Qualitaets-Overlay + Vision  (ghcr.io/peonist-ai/halogen-flash-server:0.9.1)
+halogen: halogen-flash-server 0.9.1, mode all
+halogen: vision ON, tower /models/qwen38-flash-next-vision.hgn (resolved from HALOGEN_VISION_TOWER=1)
+halogen: WARNING 17.5 GiB of host RAM is in use before this server starts. The server sizes itself from the machine's total and leaves a fixed reserve for the OS and the model's 47.7 GiB lookup table, which is read through the file cache; whatever is already u
+startup [  91.9 s] KV pool reserved: 208 contiguous 2 MiB blocks free (416 MiB), 18488 compaction stalls during that step (1464 failed)
+halogen: engine listening after 94s
+14:05:59 [#3] Anfrage /v1/chat/completions: 3 Nachrichten, Body 44 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 20, max_tokens 65536, stream True
+14:06:12 [#3] erstes Token nach 13.5 s
+serve_api: mtp 258 tok in 9.20s = 28.03 t/s | 120 rounds, commit 1.62/round | prompt 11173, prefill 13.42s | detok 58us/tok | 64 tok beside other streams
+14:06:21 [#3] fertig: HTTP 200, finish=tool_calls, 258 Tokens (exakt), Decode 28.0 t/s, Prompt 11173 Tokens, gesamt 22.7 s, Denken 639 Z., Antwort 1 Z., Tool-Stuecke 58
+14:06:21 [#4] Anfrage /v1/chat/completions: 6 Nachrichten, Body 45 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 20, max_tokens 65536, stream True
+14:06:23 [#4] erstes Token nach 1.2 s
+serve_api: mtp 121 tok in 3.22s = 37.56 t/s | 66 rounds, commit 1.83/round | prompt 11306 (11168 cached), prefill 1.20s | detok 24us/tok
+14:06:26 [#4] fertig: HTTP 200, finish=tool_calls, 121 Tokens (exakt), Decode 37.5 t/s, Prompt 11306 Tokens, gesamt 4.4 s, Denken 28 Z., Antwort 1 Z., Tool-Stuecke 69
+14:06:27 [#5] Anfrage /v1/chat/completions: 9 Nachrichten, Body 1154 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 4, Tools 20, max_tokens 65536, stream True
+14:08:44 [#5] erstes Token nach 137.5 s
+serve_api: mtp 16363 tok in 673.70s = 24.29 t/s | 9536 rounds, commit 1.68/round | prompt 14343 (11301 cached), prefill 9.77s | detok 57us/tok | 320 tok beside other streams
+14:19:58 [#5] fertig: HTTP 200, finish=tool_calls, 16363 Tokens (exakt), Decode 24.3 t/s, Prompt 14343 Tokens, gesamt 811.2 s, Denken 28174 Z., Antwort 0 Z., Tool-Stuecke 4675
+14:19:59 [#6] Anfrage /v1/chat/completions: 11 Nachrichten, Body 1168 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 4, Tools 20, max_tokens 65536, stream True
+14:20:05 [#6] erstes Token nach 6.3 s
+serve_api: mtp 656 tok in 20.94s = 31.33 t/s | 422 rounds, commit 1.55/round | prompt 19585 (14338 cached), prefill 6.14s | detok 61us/tok
+14:20:26 [#6] fertig: HTTP 200, finish=stop, 656 Tokens (exakt), Decode 31.3 t/s, Prompt 19585 Tokens, gesamt 27.3 s, Denken 103 Z., Antwort 1618 Z., Tool-Stuecke 0
