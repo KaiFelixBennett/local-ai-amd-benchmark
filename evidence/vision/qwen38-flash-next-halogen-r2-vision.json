@@ -1,0 +1,167 @@
+{
+  "slug": "qwen38-flash-next-halogen-r2",
+  "modell": "Qwen3.8-Flash-Next-Halogen-524k (lokal :8099)",
+  "datum": "2026-09-18",
+  "bilder_gesehen": true,
+  "a1_ablesen": {
+    "ueberschrift": "DER HEUTIGE GAMING-PC SCHLÄGT DAS RECHENZENTRUM VON GESTERN",
+    "unterzeile": "Open-Weight-Modelle auf einer 32-GB-Gaming-GPU — kein API-Schlüssel, keine Token-Kosten. Wie nah sind sie an der proprietären Spitze?",
+    "aktiver_reiter": "FRONTIER",
+    "tooltipp_tabelle": {
+      "spaltenueberschriften": ["Claude Opus 4.5", "Qwen3.6 27B"],
+      "zeilen": [
+        { "name": "Intelligence Index", "claude_opus_4_5": 40.8, "qwen3_6_27b": 37.1 },
+        { "name": "GPU Diamond", "claude_opus_4_5": 87, "qwen3_6_27b": 84 },
+        { "name": "Humanity's Last Exam", "claude_opus_4_5": 29, "qwen3_6_27b": 72 },
+        { "name": "Terminal-Bench 2.0", "claude_opus_4_5": 50, "qwen3_6_27b": 61 }
+      ],
+      "fussnote": "AA Intelligence Index v0.6 · …",
+      "fussnote_sicher": false,
+      "hinweis": "Nicht jede Zeile im gleichen Muster: Bei Humanity's Last Exam und Terminal-Bench 2.0 liegt Qwen3.6 27B vorn."
+    },
+    "kennzahlkacheln": [
+      {
+        "titel": "QWEN3.6 27B",
+        "wert": 37.1,
+        "beschreibung": "AA Intelligence Index — Open-Weight, kein API-Key, läuft auf deiner eigenen GPU."
+      },
+      {
+        "titel": "VS. OPUS 4.5 (40,7)",
+        "titel_klammer_sicher": false,
+        "wert": "91%",
+        "beschreibung": "des Opus-4.5-Niveaus im Gesamtrating. Bei Coding-Benchmarks: gleichauf."
+      },
+      {
+        "titel": "PROPRIETÄRE SPITZE · HEUTE",
+        "wert": 59.9,
+        "beschreibung": "Das Rechenzentrum klettert weiter — doch der Abstand schrumpft jedes Quartal."
+      }
+    ],
+    "filterreihe": {
+      "aktiv": [
+        { "name": "FRONTIER", "farbe": "gelb" },
+        { "name": "QWEN", "farbe": "tuerkis" },
+        { "name": "GEMMA", "farbe": "gruen" },
+        { "name": "MISTRAL ↑", "farbe": "orange" }
+      ],
+      "inaktiv": [
+        { "name": "KIMI 2" },
+        { "name": "META" },
+        { "name": "DEEPSEEK" },
+        { "name": "GLM" }
+      ],
+      "reset_button": "↺"
+    },
+    "achsen": {
+      "y_achse": {
+        "beschriftung": "INTELLIGENCE INDEX (AA v0.6)",
+        "werte": [10, 20, 30, 40, 50, 60, 70]
+      },
+      "x_achse": {
+        "beschriftung": null,
+        "werte": ["'23", "'24", "'25", "'26"],
+        "tick_27_sicher": false
+      }
+    },
+    "legende": [
+      { "name": "Proprietäre Flaggschiffe", "farbe": "gold", "badge": null },
+      { "name": "Qwen", "farbe": "tuerkis", "badge": "open", "badge_sicher": true },
+      { "name": "Gemma", "farbe": "gruen", "badge": "open", "badge_sicher": false },
+      { "name": "Mistral", "farbe": "orange", "badge": "cloud+open", "badge_sicher": false }
+    ],
+    "datenpunkte_im_diagramm": [
+      { "serie": "propretaere_flaggschiffe", "label": "GPT-4", "wert": 12 },
+      { "serie": "propretaere_flaggschiffe", "label": "GPT-4o", "wert": 18 },
+      { "serie": "propretaere_flaggschiffe", "label": "Claude 3.5 Sonnet", "wert": 25 },
+      { "serie": "propretaere_flaggschiffe", "label": null, "wert": 33 },
+      { "serie": "propretaere_flaggschiffe", "label": null, "wert": 37 },
+      { "serie": "propretaere_flaggschiffe", "label": "Opus 4.6", "wert": 42 },
+      { "serie": "propretaere_flaggschiffe", "label": "GPT-5.5", "wert": 50 },
+      { "serie": "propretaere_flaggschiffe", "label": "Claude Fable 5", "wert": 55 },
+      { "serie": "qwen", "label": "Qwen3 Next 80B (reasoning)", "wert": 21 },
+      { "serie": "qwen", "label": "Qwen3.5 9B", "wert": 28 },
+      { "serie": "qwen", "label": "Qwen3.6 27B", "wert": 38 },
+      { "serie": "gemma", "label": "Gemma 3 27B", "wert": 15 },
+      { "serie": "gemma", "label": null, "wert": 17 },
+      { "serie": "gemma", "label": "Gemma 4 12B", "wert": 22 },
+      { "serie": "gemma", "label": "Gemma 4 31B", "wert": 31 },
+      { "serie": "mistral", "label": "Ministral 3 14B", "wert": 5 },
+      { "serie": "mistral", "label": "Mistral S 4", "wert": 11, "label_sicher": false }
+    ]
+  },
+  "a2_nachbau": {
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 560' font-family='Segoe UI, Arial, sans-serif' role='img' aria-label='Intelligence-Index-Dashboard: proprietäre Flaggschiffe, Qwen, Gemma und Mistral 2023 bis 2027'><rect x='0' y='0' width='900' height='560' fill='#0b0e1a'/><g stroke='#1e2438' stroke-width='1'><line x1='70' y1='382.9' x2='860' y2='382.9'/><line x1='70' y1='325.7' x2='860' y2='325.7'/><line x1='70' y1='268.6' x2='860' y2='268.6'/><line x1='70' y1='211.4' x2='860' y2='211.4'/><line x1='70' y1='154.3' x2='860' y2='154.3'/><line x1='70' y1='97.1' x2='860' y2='97.1'/><line x1='70' y1='40' x2='860' y2='40'/></g><g fill='#8b93a7' font-size='11' text-anchor='end'><text x='62' y='387'>10</text><text x='62' y='330'>20</text><text x='62' y='273'>30</text><text x='62' y='216'>40</text><text x='62' y='159'>50</text><text x='62' y='102'>60</text><text x='62' y='45'>70</text></g><g fill='#8b93a7' font-size='11' text-anchor='middle'><text x='70' y='458'>'23</text><text x='267.5' y='458'>'24</text><text x='465' y='458'>'25</text><text x='662.5' y='458'>'26</text></g><text x='18' y='240' fill='#8b93a7' font-size='11' transform='rotate(-90 18 240)' text-anchor='middle' letter-spacing='1'>INTELLIGENCE INDEX (AA v0.6)</text><g fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5'><path stroke='#fbbf24' d='M89.8,371.4 L267.5,337.1 L386.5,297.1 L525,251.4 L604,228.6 L683,200 L781.5,154.3 L860,125.7'/><path stroke='#2dd4bf' d='M583.7,320 L702.5,280 L821,222.9'/><path stroke='#7ed321' d='M504.5,354.3 L642.5,342.9 L722.5,314.3 L801.5,262.9 L860,240'/><path stroke='#ff7a1a' d='M604,411.4 L742,377.1'/></g><g><circle cx='89.8' cy='371.4' r='4' fill='#fbbf24'/><circle cx='267.5' cy='337.1' r='4' fill='#fbbf24'/><circle cx='386.5' cy='297.1' r='4' fill='#fbbf24'/><circle cx='525' cy='251.4' r='3.5' fill='#fbbf24'/><circle cx='604' cy='228.6' r='3.5' fill='#fbbf24'/><circle cx='683' cy='200' r='4' fill='#fbbf24'/><circle cx='781.5' cy='154.3' r='4' fill='#fbbf24'/><circle cx='860' cy='125.7' r='4.5' fill='#fbbf24'/><circle cx='583.7' cy='320' r='4' fill='#2dd4bf'/><circle cx='702.5' cy='280' r='4' fill='#2dd4bf'/><circle cx='821' cy='222.9' r='4.5' fill='#2dd4bf'/><circle cx='504.5' cy='354.3' r='4' fill='#7ed321'/><circle cx='642.5' cy='342.9' r='3.5' fill='#7ed321'/><circle cx='722.5' cy='314.3' r='4' fill='#7ed321'/><circle cx='801.5' cy='262.9' r='4' fill='#7ed321'/><circle cx='860' cy='240' r='4.5' fill='#7ed321'/><circle cx='604' cy='411.4' r='4' fill='#ff7a1a'/><circle cx='742' cy='377.1' r='4' fill='#ff7a1a'/></g><g font-size='11'><text x='89.8' y='389' fill='#fbbf24' text-anchor='middle'>GPT-4</text><text x='267.5' y='323' fill='#fbbf24' text-anchor='middle'>GPT-4o</text><text x='386.5' y='283' fill='#fbbf24' text-anchor='middle'>Claude 3.5 Sonnet</text><text x='683' y='186' fill='#fbbf24' text-anchor='middle'>Opus 4.6</text><text x='781.5' y='140' fill='#fbbf24' text-anchor='middle'>GPT-5.5</text><text x='860' y='112' fill='#fbbf24' text-anchor='end' font-weight='bold'>Claude Fable 5</text><text x='583.7' y='306' fill='#2dd4bf' text-anchor='middle'>Qwen3 Next 80B (reasoning)</text><text x='702.5' y='266' fill='#2dd4bf' text-anchor='middle'>Qwen3.5 9B</text><text x='858' y='208' fill='#2dd4bf' text-anchor='end' font-weight='bold'>Qwen3.6 27B</text><text x='504.5' y='340' fill='#7ed321' text-anchor='middle'>Gemma 3 27B</text><text x='722.5' y='335' fill='#7ed321' text-anchor='middle'>Gemma 4 12B</text><text x='801.5' y='249' fill='#7ed321' text-anchor='middle'>Gemma 4 31B</text><text x='604' y='431' fill='#ff7a1a' text-anchor='middle'>Ministral 3 14B</text><text x='742' y='363' fill='#ff7a1a' text-anchor='middle'>Mistral S 4</text></g><g font-size='12'><line x1='70' y1='485' x2='110' y2='485' stroke='#fbbf24' stroke-width='3'/><text x='118' y='489' fill='#e6e9f0'>Proprietäre Flaggschiffe</text><line x1='290' y1='485' x2='330' y2='485' stroke='#2dd4bf' stroke-width='3'/><text x='338' y='489' fill='#e6e9f0'>Qwen</text><rect x='372' y='478' width='26' height='13' rx='3' fill='#134e4a'/><text x='385' y='488' fill='#2dd4bf' font-size='9' text-anchor='middle'>open</text><line x1='430' y1='485' x2='470' y2='485' stroke='#7ed321' stroke-width='3'/><text x='478' y='489' fill='#e6e9f0'>Gemma</text><rect x='520' y='478' width='26' height='13' rx='3' fill='#2b3a12'/><text x='533' y='488' fill='#a3e635' font-size='9' text-anchor='middle'>open</text><line x1='580' y1='485' x2='620' y2='485' stroke='#ff7a1a' stroke-width='3'/><text x='628' y='489' fill='#e6e9f0'>Mistral</text><rect x='676' y='478' width='58' height='13' rx='3' fill='#3a2410'/><text x='705' y='488' fill='#fdba74' font-size='9' text-anchor='middle'>cloud+open</text></g></svg>"
+  },
+  "b_schilder": {
+    "wertungsbereich": "x 0-700, y 950-1568",
+    "gefunden": [
+      {
+        "name": "REDHOOD OVI",
+        "gbp": 30,
+        "eur": 40,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true,
+        "position": "roter Helm links, mittlere Höhe"
+      },
+      {
+        "name": "RED HOOD INFERNO",
+        "gbp": 60,
+        "eur": 65,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true,
+        "position": "rote Maske mittig links"
+      },
+      {
+        "name": "REDHOOD BADLAND DAMAGED",
+        "gbp": 80,
+        "eur": 95,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": false,
+        "position": "roter Helm mittig",
+        "unsicherheit": "Name evtl. 'BATTLE' statt 'BADLAND' — zwei sehr ähnliche Schilder im Bild"
+      },
+      {
+        "name": "REDHOOD BATTLE DAMAGED",
+        "gbp": 80,
+        "eur": 95,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": false,
+        "position": "roter Helm unten rechts",
+        "unsicherheit": "Name evtl. 'BADLAND' — Verwechslungsgefahr mit dem Helm darüber"
+      },
+      {
+        "name": "JOKER",
+        "gbp": 30,
+        "eur": 40,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true,
+        "position": "weiße Maske mit grünen Haaren, unten links"
+      },
+      {
+        "name": "UNHOLLOWED",
+        "gbp": 45,
+        "eur": 35,
+        "reihenfolge": "gbp_zuerst",
+        "waehrung_unsicher": true,
+        "sicher": false,
+        "position": "weiße Maske unten mittig",
+        "unsicherheit": "Ziffern 45/35 lesbar, Währungszeichen nicht eindeutig bestätigt"
+      }
+    ],
+    "sichtbar_gesamt": 6,
+    "nicht_lesbar": 0
+  },
+  "selbsteinschaetzung": {
+    "schwierigstes": "Die winzige Tooltip-Fußnote und die feinen Datenpunkt-Beschriftungen im Diagramm (z. B. das kleine 'Opus 4.5 · 40.8' rechts); bei Bild B die Unterscheidung von 'BADLAND' vs. 'BATTLE DAMAGED' auf zwei nahezu identischen roten Helmen und die Währungszeichen auf dem weißen 'UNHOLLOWED'-Schild.",
+    "unsicher_bei": [
+      "Tooltip-Fussnote (lautere 'AA Intelligence Index v0.6 · …', Rest unleserlich)",
+      "Kachel 2: Klammerwert '(40,7)' — könnte '(49,7)' sein",
+      "x-Achse: ob rechts noch ein Tick '27 existiert",
+      "Legenden-Badges: 'open' bei Gemma und 'cloud+open' bei Mistral nicht pixelgenau bestätigt",
+      "'Mistral S 4' — Schreibweise des Modells nicht 100% sicher",
+      "'REDHOOD OVI' — könnte 'OV1' heißen",
+      "UNHOLLOWED-Schild: Währungssymbole (£/€) nicht sicher lesbar",
+      "Humanity's Last Exam: 72 auf der Qwen-Seite überrascht mich, ist aber so lesbar"
+    ]
+  }
+}
