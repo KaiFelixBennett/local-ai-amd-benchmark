@@ -9,10 +9,12 @@ Wird nach der Auswertung gelöscht. Auftrag: [`PROMPT.md`](PROMPT.md).
 | `report-llama-cpp.md` / `.json`, `log-excerpt-llama-cpp.txt` | llama.cpp, 18.09.2026 vormittags, Slug `qwen38-flash-next-llama-cpp` |
 | `report-halogen.md` / `.json`, `log-excerpt-halogen.txt` | Halogen, 17.09.2026, Slug `qwen38-flash-next-halogen` |
 | `report-halogen-r2.md` / `.json`, `log-excerpt-halogen-r2.txt` | Halogen-Wiederholung mit den Originalbildern, 18.09.2026, Slug `qwen38-flash-next-halogen-r2` |
+| `report-llama-cpp-r2.md` / `.json`, `log-excerpt-llama-cpp-r2.txt` | llama.cpp-Wiederholung mit den Originalbildern, 18.09.2026, Slug `qwen38-flash-next-llama-cpp-r2` |
 
-Die Antwort des Wiederholungslaufs liegt unter
-[`evidence/vision/qwen38-flash-next-halogen-r2-vision.json`](../../evidence/vision/qwen38-flash-next-halogen-r2-vision.json).
-Sie ist noch nicht bewertet.
+Die Antworten der beiden Wiederholungsläufe liegen unter
+[`evidence/vision/qwen38-flash-next-halogen-r2-vision.json`](../../evidence/vision/qwen38-flash-next-halogen-r2-vision.json) und
+[`evidence/vision/qwen38-flash-next-llama-cpp-r2-vision.json`](../../evidence/vision/qwen38-flash-next-llama-cpp-r2-vision.json).
+Sie sind noch nicht bewertet.
 
 ## Chatverläufe (`chats/`)
 
@@ -23,7 +25,8 @@ Ergebnissen. Bilddaten sind durch Größe und SHA-256 ersetzt.
 |---|---|
 | `chat-llama-cpp-2026-09-18.md` | `0620129f-…`: der llama.cpp-Lauf mit der defekten Agent-Datei (Terminal benutzt) |
 | `chat-halogen-2026-09-17.md` | `6e2ee919-…`: der Halogen-Lauf im eingebauten Agent-Modus |
-| `chat-halogen-r2-2026-09-18.md` | `d9e7bddd-…`: die Wiederholung, eigener Agent, Originalbilder |
+| `chat-halogen-r2-2026-09-18.md` | `d9e7bddd-…`: die Halogen-Wiederholung, eigener Agent, Originalbilder |
+| `chat-llama-cpp-r2-2026-09-18.md` | `47233bda-…`: die llama.cpp-Wiederholung, eigener Agent, Originalbilder (Bild B viermal angesehen) |
 | `chat-halogen-verbindungstest-2026-09-17.md` | `9692e61d-…`: nur der Verbindungstest vor dem Lauf vom 17.09. |
 
 ## Serverlogs (`logs/`)
@@ -38,6 +41,7 @@ Vollständige Logs, nicht bereinigt. Sie liegen bewusst nicht unter `evidence/lo
 | `halogen-2026-09-18_11-34.log` | Halogen ab 11:34:02 bis 13:53:47, 29 Anfragen. Ab 12:34 lief daneben ein zweiter Modellserver (aria-ministral3-14b). #42 (ab 13:41:37) ist die erste, hängende Anfrage des Wiederholungslaufs. |
 | `halogen-2026-09-18_13-55.log` | Neustart um 13:55:10. Die KV-Reservierung hing wegen fragmentierten Speichers, deshalb abgebrochen. |
 | `halogen-r2-2026-09-18_14-03.log` | Neustart um 14:03:06, der Wiederholungslauf #3 bis #6 (14:05:59 bis 14:20:26). |
+| `llama-cpp-r2-2026-09-18.log` | `llama-server` :8096, Neustart um 14:22:53. 15 Anfragen: Task 0 ist die eigene Vision-Prüfung mit einem synthetischen Bild (14:24), dann die 14 Anfragen der Wiederholung (Tasks 84 bis 16071, 14:25:50 bis 14:53:03). Jeder Bildblock steht zweimal im Log (Hauptmodell und MTP-Draft). Der Server lief danach weiter; das Log endet mit dem Export. |
 
 ## Archiv (`archiv/`)
 

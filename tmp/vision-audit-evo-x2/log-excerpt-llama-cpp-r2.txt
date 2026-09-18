@@ -1,0 +1,25 @@
+# Auszug llama-server :8096, Wiederholungslauf qwen38-flash-next-llama-cpp-r2. Start 2026-09-18 14:22:53; Zeitstempel = Minuten.Sekunden.ms.us seit Start.
+# Jeder Bildblock steht zweimal im Log (Hauptmodell und MTP-Draft); hier der erste Durchgang. Bild A 512+188 = 700, Bild B 512+512+512+277 = 1813 Token.
+===== Start 2026-09-18 14:22:53 =====
+1.07.535.634 W load_hparams: Qwen-VL models require at minimum 1024 image tokens to function correctly on grounding tasks
+1.07.937.873 I srv    load_model: loaded multimodal model, '…/mmproj-F16.gguf'
+1.08.100.529 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 262144, kv_unified = 'true'
+4.08.971.372 W find_slot: non-consecutive token position 11952 after 11951 for sequence 0 with 512 new tokens
+4.08.971.376 W find_slot: non-consecutive token position 11952 after 11952 for sequence 0 with 188 new tokens
+4.11.164.686 W find_slot: non-consecutive token position 12175 after 11952 for sequence 0 with 196 new tokens
+4.16.080.316 I slot print_timing: id  0 | task 175 | prompt eval time =    5479.08 ms /   969 tokens (    5.65 ms per token,   176.85 tokens per second)
+4.16.080.929 I slot      release: id  0 | task 175 | stop processing: n_tokens = 12932, truncated = 0
+4.21.334.667 W find_slot: non-consecutive token position 12246 after 12245 for sequence 0 with 512 new tokens
+4.21.334.673 W find_slot: non-consecutive token position 12246 after 12246 for sequence 0 with 512 new tokens
+4.21.334.673 W find_slot: non-consecutive token position 12246 after 12246 for sequence 0 with 512 new tokens
+4.21.334.673 W find_slot: non-consecutive token position 12246 after 12246 for sequence 0 with 277 new tokens
+4.27.703.922 W find_slot: non-consecutive token position 12494 after 12246 for sequence 0 with 200 new tokens
+7.06.986.438 I slot print_timing: id  0 | task 210 | prompt eval time =   11290.96 ms /  2087 tokens (    5.41 ms per token,   184.84 tokens per second)
+7.06.987.353 I slot      release: id  0 | task 210 | stop processing: n_tokens = 18359, truncated = 0
+12.11.359.711 I slot print_timing: id  0 | task 1907 | prompt eval time =   11734.93 ms /  2088 tokens (    5.62 ms per token,   177.93 tokens per second)
+12.11.360.704 I slot      release: id  0 | task 1907 | stop processing: n_tokens = 24107, truncated = 0
+21.58.609.388 I slot print_timing: id  0 | task 5114 | prompt eval time =   11932.25 ms /  2084 tokens (    5.73 ms per token,   174.65 tokens per second)
+21.58.610.304 I slot      release: id  0 | task 5114 | stop processing: n_tokens = 34321, truncated = 0
+28.40.241.065 I slot print_timing: id  0 | task 13189 | prompt eval time =   12597.74 ms /  2109 tokens (    5.97 ms per token,   167.41 tokens per second)
+28.40.242.868 I slot      release: id  0 | task 13189 | stop processing: n_tokens = 31575, truncated = 0
+30.10.164.604 I slot      release: id  0 | task 16071 | stop processing: n_tokens = 31379, truncated = 0

@@ -1,0 +1,159 @@
+{
+  "test": "llama-cpp-r2",
+  "system": "Linux (Omarchy/Arch, Kernel 7.2.3-arch1-3), VS Code 1.136.1",
+  "sitzung": {
+    "datei": "~/.config/Code/User/workspaceStorage/124286191e01382022b1f5fad4452844/chatSessions/47233bda-7307-4203-9625-155e49212c48.jsonl",
+    "datum": "2026-09-18, Sitzung angelegt 14:25:27, eine Anfrage um 14:25:50 (Nachricht 'qwen38-flash-next-llama-cpp-r2'), Dauer 1633 s",
+    "modell_endpunkt": "customendpoint/Lokal evox2/Qwen3.8-Flash-Next-UD-Q4_K_XL (resolvedModel Qwen3.8-Flash-Next-UD-Q4_K_XL) = llama-server 127.0.0.1:8096; Modus: eigener Agent 'bilderkennung' (Frontmatter ausgewertet), permissionLevel autopilot",
+    "arbeitsordner": "/srv/securesight.ai/securesight.ai/model-benchmark/qwen38_flash_next_bilderkennung"
+  },
+  "weitere_passende_sitzungen": [],
+  "arbeitsordner": {
+    "dateien": [
+      {
+        "pfad": ".github/agents/bilderkennung.agent.md",
+        "bytes": 6836
+      },
+      {
+        "pfad": "harness/bilder/bild-a-dashboard.jpg",
+        "bytes": 70852
+      },
+      {
+        "pfad": "harness/bilder/bild-b-stand.jpg",
+        "bytes": 779505
+      },
+      {
+        "pfad": "harness/ergebnisse/qwen38-flash-next-llama-cpp-r2-vision.json",
+        "bytes": 10834
+      }
+    ],
+    "loesung_dateien": [],
+    "fremde_antworten": []
+  },
+  "testdateien": [
+    {
+      "pfad": "harness/bilder/bild-a-dashboard.jpg",
+      "sha256": "eb4771a7858d3309f4c45d78d3f232dac79b8f46693e235b128c4a52fdada494",
+      "bytes": 70852,
+      "pixel": "900x787",
+      "entspricht_referenz": "bild-a"
+    },
+    {
+      "pfad": "harness/bilder/bild-b-stand.jpg",
+      "sha256": "6d647d0466e34ef07123f608291d157875599b660055dac839e0b87ffc9f6511",
+      "bytes": 779505,
+      "pixel": "1176x1568",
+      "entspricht_referenz": "bild-b"
+    },
+    {
+      "pfad": ".github/agents/bilderkennung.agent.md",
+      "sha256": "a6c4eb0b9ff71952df02d4c86d426992c3e60075e38a9333ba44b5aade03b1a2",
+      "bytes": 6836,
+      "pixel": "-",
+      "entspricht_referenz": "agent"
+    }
+  ],
+  "werkzeugaufrufe": [
+    {
+      "nr": 1,
+      "werkzeug": "list_dir",
+      "ziel_oder_befehl": "harness/bilder"
+    },
+    {
+      "nr": 2,
+      "werkzeug": "list_dir",
+      "ziel_oder_befehl": "harness/ergebnisse"
+    },
+    {
+      "nr": 3,
+      "werkzeug": "view_image",
+      "ziel_oder_befehl": "harness/bilder/bild-a-dashboard.jpg"
+    },
+    {
+      "nr": 4,
+      "werkzeug": "view_image",
+      "ziel_oder_befehl": "harness/bilder/bild-b-stand.jpg"
+    },
+    {
+      "nr": 5,
+      "werkzeug": "view_image",
+      "ziel_oder_befehl": "harness/bilder/bild-b-stand.jpg"
+    },
+    {
+      "nr": 6,
+      "werkzeug": "view_image",
+      "ziel_oder_befehl": "harness/bilder/bild-b-stand.jpg"
+    },
+    {
+      "nr": 7,
+      "werkzeug": "create_file",
+      "ziel_oder_befehl": "harness/ergebnisse/qwen38-flash-next-llama-cpp-r2-vision.json"
+    },
+    {
+      "nr": 8,
+      "werkzeug": "replace_string_in_file",
+      "ziel_oder_befehl": "harness/ergebnisse/qwen38-flash-next-llama-cpp-r2-vision.json"
+    },
+    {
+      "nr": 9,
+      "werkzeug": "replace_string_in_file",
+      "ziel_oder_befehl": "harness/ergebnisse/qwen38-flash-next-llama-cpp-r2-vision.json"
+    },
+    {
+      "nr": 10,
+      "werkzeug": "view_image",
+      "ziel_oder_befehl": "harness/bilder/bild-b-stand.jpg"
+    },
+    {
+      "nr": 11,
+      "werkzeug": "replace_string_in_file",
+      "ziel_oder_befehl": "harness/ergebnisse/qwen38-flash-next-llama-cpp-r2-vision.json"
+    },
+    {
+      "nr": 12,
+      "werkzeug": "replace_string_in_file",
+      "ziel_oder_befehl": "harness/ergebnisse/qwen38-flash-next-llama-cpp-r2-vision.json"
+    },
+    {
+      "nr": 13,
+      "werkzeug": "read_file",
+      "ziel_oder_befehl": "harness/ergebnisse/qwen38-flash-next-llama-cpp-r2-vision.json"
+    },
+    {
+      "nr": 14,
+      "werkzeug": "task_complete",
+      "ziel_oder_befehl": ""
+    },
+    {
+      "nr": 15,
+      "werkzeug": "task_complete",
+      "ziel_oder_befehl": ""
+    }
+  ],
+  "andere_dateien_gelesen": false,
+  "loesung_im_verlauf": false,
+  "fremde_antworten_im_verlauf": false,
+  "modell_nennt_bildgroesse": "Ja, im Denkverlauf: \"Image B: 1176 × 1568 (displayed as roughly 1170×1560 in the output).\" (entspricht der Datei)",
+  "server": {
+    "startzeile": "llama-server -m …/unsloth/Qwen3.8-Flash-Next-GGUF/UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf -md …/MTP/mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf --spec-type draft-mtp --spec-draft-n-max 2 --mmproj …/mmproj-F16.gguf --alias Qwen3.8-Flash-Next-UD-Q4_K_XL --host 127.0.0.1 --port 8096 --device Vulkan0 --gpu-layers all --n-cpu-moe 0 --fit off -fa on --load-mode mmap --lazy-mode on --ctx-size 262144 --parallel 1 --kv-unified -ctk q8_0 -ctv q8_0 -b 2048 -ub 512 --ctx-checkpoints 4 --checkpoint-min-step 4096 --jinja --reasoning on --reasoning-format deepseek --reasoning-effort xhigh --reasoning-budget -1 --no-reasoning-preserve --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --repeat-penalty 1.0 (identisch zum ersten Lauf, gestartet 14:22:53)",
+    "build": "version: 0.3.0-dev (build 50, commit d1a9235) = llama.cpp PR #28243, Vulkan",
+    "mmproj": "mmproj-F16.gguf (Unsloth Qwen3.8-Flash-Next-GGUF, F16, 904004000 Bytes)",
+    "image_min_tokens": null,
+    "image_max_tokens": null,
+    "vision_einstellungen": "--mmproj gesetzt; --image-min-tokens und --image-max-tokens nicht gesetzt (Modellvorgabe), Bild B wurde nicht verkleinert. Startwarnung: 'Qwen-VL models require at minimum 1024 image tokens to function correctly on grounding tasks'",
+    "log_vorhanden": true,
+    "bild_token_je_bild": {
+      "bild_a": 700,
+      "bild_b": 1813
+    },
+    "herleitung": "M-RoPE-Warnungen 'find_slot: non-consecutive token position', jeder Block zweimal geloggt (Hauptmodell und MTP-Draft): Task 175 (14:27:00) Bild A 512 + 188 = 700 = 28 × 25 Kacheln à 32 px (900 × 787); Task 210 (14:27:11) Bild B 512 + 512 + 512 + 277 = 1813 = 37 × 49 (1176 × 1568). Bild B wurde viermal angesehen und jeweils neu verarbeitet (Tasks 210, 1907, 5114, 13189, je 1813 Token). Task 0 (14:24:16) ist die eigene Vision-Prüfung mit einem synthetischen 640 × 200-Bild (120 Token)."
+  },
+  "auffaelligkeiten": [
+    "Beide Testbilder entsprechen der Referenz. Bild B kam in voller Auflösung an: 1813 Bild-Token statt 588 im ersten Lauf mit der Webversion. Das Modell nennt selbst 1176 × 1568.",
+    "Der eigene Agent 'bilderkennung' war aktiv und sein Frontmatter wirksam: Der Anweisungstext beginnt nach dem YAML-Kopf. Kein Terminal, kein Memory, keine anderen Dateien gelesen.",
+    "Bild B wurde viermal mit view_image angesehen, jedes Mal die ganze Datei ohne Ausschnitt oder Vergrößerung; jede Ansicht fügte das Bild erneut in den Kontext ein (4 × 1813 Token).",
+    "Die Berechtigungsstufe war autopilot; der Lauf endete mit zwei task_complete-Aufrufen.",
+    "Bild A liegt mit 700 Token unter den 1024, die der Server beim Start als Minimum für Grounding nennt, Bild B darüber.",
+    "Server identisch zum ersten llama.cpp-Lauf (gleicher Build, gleiche Startzeile). Vor dem Lauf: eine eigene Vision-Prüfung mit synthetischem Bild (Task 0), Agent-Datei durch die Referenz ersetzt, Memory-Notiz des ersten Laufs entfernt, altes Ergebnis archiviert."
+  ]
+}
