@@ -1,0 +1,151 @@
+{
+  "slug": "qwen38-flash-next-llama-cpp-r2",
+  "modell": "Qwen3.8-Flash-Next UD-Q4_K_XL (lokal :8096)",
+  "datum": "2026-09-18",
+  "a1_ablesen": {
+    "ueberschrift": "DER HEUTIGE GAMING-PC SCHLÄGT DAS RECHENZENTRUM VON GESTERN",
+    "unterzeile": "Open-Weight-Modelle auf einer 32-GB-Gaming-GPU — kein API-Schlüssel, keine Token-Kosten. Wie nah sind sie an der proprietären Spitze?",
+    "aktiver_reiter": "Lokal - Kostenlos",
+    "tooltip_tabelle": {
+      "spaltenueberschriften": ["Claude Opus 4.5", "Qwen3.6 27B"],
+      "zeilen": [
+        { "name": "Intelligence Index", "claude_opus_4_5": 40.8, "qwen3_6_27b": 37.1 },
+        { "name": "GPQA Diamond", "claude_opus_4_5": 87, "qwen3_6_27b": 84 },
+        { "name": "Humanity's Last Exam", "claude_opus_4_5": 29, "qwen3_6_27b": 22 },
+        { "name": "Terminal-bench 2.0", "claude_opus_4_5": 50, "qwen3_6_27b": 61 }
+      ],
+      "hinweis": "Bei Terminal-bench 2.0 liegt Qwen3.6 27B (61) vor Claude Opus 4.5 (50) — dieses Zeile bricht das Muster der drei Zeilen darüber."
+    },
+    "kennzahlkacheln": [
+      {
+        "titel": "QWEN3.6 27B",
+        "wert": 37.1,
+        "beschreibung": "AA Intelligence Index — Open-Weight, kein API-Key, läuft auf deiner eigenen GPU."
+      },
+      {
+        "titel": "VS. OPUS 4.5 (40,8)",
+        "wert": "91%",
+        "beschreibung": "des Opus-4.5-Niveaus im Gesamtindex. Bei Coding-Benchmarks gleichauf.",
+        "unsicher": true,
+        "unsicher_grund": "Die Zahl in Klammern im Kacheltitel war bei der Bildauflösung nicht sicher lesbar; 40,8 ist aus Tooltip (40.8) und 91%-Relation erschlossen, nicht eindeutig abgelesen."
+      },
+      {
+        "titel": "PROPRIETÄRE SPITZE - HEUTE",
+        "wert": 59.9,
+        "beschreibung": "Das Rechenzentrum klettert weiter — doch der Abstand schrumpft jedes Quartal."
+      }
+    ],
+    "filterreihe": {
+      "aktiv": ["FRONTIER", "QWEN", "GEMMA", "MISTRAL"],
+      "inaktiv": ["KIMI", "META", "DEEPSEEK", "GLM"]
+    },
+    "achsen": {
+      "y_achse": {
+        "beschriftung": "INTELLIGENCE INDEX (AA V4.1)",
+        "werte": [10, 20, 30, 40, 50, 60, 70]
+      },
+      "x_achse": {
+        "beschriftung": null,
+        "werte": ["'23", "'24", "'25", "'26", "Now"]
+      }
+    },
+    "legende": [
+      { "name": "Proprietäre Flaggschiffe", "farbe": "gold/gelb" },
+      { "name": "Qwen", "farbe": "petrol/teal", "zusatz": "Open" },
+      { "name": "Gemma", "farbe": "hellgrün", "zusatz": "Open" },
+      { "name": "Mistral", "farbe": "orange", "zusatz": "cloud+open" }
+    ],
+    "sonstiges": {
+      "button_rechts": "+ MODELLE AUSWÄHLEN (13)",
+      "labels_schalter": "LABELS",
+      "tooltip_fussnote": "AA Intelligence Index v4.1 - Punkt erneut anklicken zum Entfernen",
+      "gestrichelte_linie": "Horizontale Hilfslinie auf Höhe von Opus 4.5 (~46) vom Tooltip zum Datenpunkt"
+    }
+  },
+  "a2_nachbau": {
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 960 620\" role=\"img\" aria-label='Intelligence Index proprietärer Flaggschiffe, Qwen, Gemma und Mistral von 2023 bis heute'><rect width='960' height='620' fill='#101418'/><g font-family='Helvetica, Arial, sans-serif'><g stroke='#2a3138' stroke-width='1'><line x1='90' y1='470' x2='930' y2='470'/><line x1='90' y1='398' x2='930' y2='398'/><line x1='90' y1='327' x2='930' y2='327'/><line x1='90' y1='255' x2='930' y2='255'/><line x1='90' y1='183' x2='930' y2='183'/><line x1='90' y1='112' x2='930' y2='112'/><line x1='90' y1='40' x2='930' y2='40'/></g><g fill='#8b949e' font-size='13' text-anchor='end'><text x='78' y='474'>10</text><text x='78' y='402'>20</text><text x='78' y='331'>30</text><text x='78' y='259'>40</text><text x='78' y='187'>50</text><text x='78' y='116'>60</text><text x='78' y='44'>70</text></g><text x='30' y='255' fill='#8b949e' font-size='12' transform='rotate(-90 30 255)' text-anchor='middle' letter-spacing='1'>INTELLIGENCE INDEX (AA V4.1)</text><g fill='#8b949e' font-size='13' text-anchor='middle'><text x='110' y='495'>'23</text><text x='310' y='495'>'24</text><text x='510' y='495'>'25</text><text x='710' y='495'>'26</text><text x='910' y='495'>Now</text></g><path d='M560,470 L585,421 L735,348 L855,327 L925,383 L925,470 Z' fill='#4ade80' opacity='0.10'/><line x1='110' y1='211' x2='795' y2='211' stroke='#e8c15a' stroke-width='1' stroke-dasharray='5 5' opacity='0.6'/><polyline points='110,449 390,362 545,297 700,240 795,204 905,126 920,104' fill='none' stroke='#e8c15a' stroke-width='3'/><polyline points='760,362 880,248' fill='none' stroke='#2dd4bf' stroke-width='3'/><polyline points='585,421 735,348 855,327 925,383' fill='none' stroke='#4ade80' stroke-width='3'/><polyline points='760,449 850,398' fill='none' stroke='#f0703a' stroke-width='3'/><g fill='#e8c15a'><circle cx='110' cy='449' r='5'/><circle cx='390' cy='362' r='5'/><circle cx='545' cy='297' r='5'/><circle cx='700' cy='240' r='5'/><circle cx='795' cy='204' r='5'/><circle cx='905' cy='126' r='5'/><circle cx='920' cy='104' r='5'/></g><g fill='#2dd4bf'><circle cx='760' cy='362' r='5'/><circle cx='880' cy='248' r='6'/></g><g fill='#4ade80'><circle cx='585' cy='421' r='5'/><circle cx='735' cy='348' r='5'/><circle cx='855' cy='327' r='5'/><circle cx='925' cy='383' r='5'/></g><g fill='#f0703a'><circle cx='760' cy='449' r='5'/><circle cx='850' cy='398' r='5'/></g><g font-size='13'><text x='110' y='435' fill='#e8c15a' text-anchor='middle'>GPT-4</text><text x='390' y='348' fill='#e8c15a' text-anchor='middle'>GPT-4o</text><text x='545' y='283' fill='#e8c15a' text-anchor='middle'>Claude 3.5 Sonnet</text><text x='693' y='226' fill='#e8c15a' text-anchor='middle'>Claude Opus 4.6</text><text x='788' y='190' fill='#e8c15a' text-anchor='middle'>Opus 4.5</text><text x='898' y='112' fill='#e8c15a' text-anchor='end'>GPT-5.5</text><text x='923' y='88' fill='#e8c15a' text-anchor='end'>Claude Fable 5</text><text x='880' y='228' fill='#2dd4bf' text-anchor='middle'>Qwen3.6 27B ★</text><text x='752' y='350' fill='#2dd4bf' text-anchor='end'>Qwen3 Next 80B (reasoning)</text><text x='585' y='407' fill='#4ade80' text-anchor='middle'>Gemma 3 27B</text><text x='728' y='334' fill='#4ade80' text-anchor='middle'>Gemma 3.5 9B</text><text x='858' y='311' fill='#4ade80' text-anchor='middle'>Gemma 4 31B</text><text x='925' y='403' fill='#4ade80' text-anchor='end'>Gemma 4 12B</text><text x='758' y='468' fill='#f0703a' text-anchor='middle'>Mistral 3 14B</text><text x='850' y='384' fill='#f0703a' text-anchor='middle'>Mistral Small 4</text></g><g font-size='14' transform='translate(90,560)'><line x1='0' y1='0' x2='30' y2='0' stroke='#e8c15a' stroke-width='3'/><text x='38' y='5' fill='#c9d1d9'>Proprietäre Flaggschiffe</text><line x1='230' y1='0' x2='260' y2='0' stroke='#2dd4bf' stroke-width='3'/><text x='268' y='5' fill='#c9d1d9'>Qwen</text><text x='308' y='5' fill='#6e7681' font-size='12'>Open</text><line x1='360' y1='0' x2='390' y2='0' stroke='#4ade80' stroke-width='3'/><text x='398' y='5' fill='#c9d1d9'>Gemma</text><text x='452' y='5' fill='#6e7681' font-size='12'>Open</text><line x1='505' y1='0' x2='535' y2='0' stroke='#f0703a' stroke-width='3'/><text x='543' y='5' fill='#c9d1d9'>Mistral</text><text x='597' y='5' fill='#6e7681' font-size='12'>cloud+open</text></g></g></svg>"
+  },
+  "b_schilder": {
+    "bewertungsbereich": "x 0-700, y 950-1568 (im 1176x1568-Bild)",
+    "gefunden": [
+      {
+        "name": "SENTINEL",
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false,
+        "anmerkung": "Weißes Schild auf dem silbernen Helm mit blauem Visier (ca. x 250, y 970). Name nur erahnt, Preis nicht lesbar."
+      },
+      {
+        "name": "DC RECYCLED V1",
+        "gbp": null,
+        "eur": null,
+        "reihenfolge": null,
+        "sicher": false,
+        "anmerkung": "Schräges Schild am linken roten Helm (ca. x 60, y 1100). Name lesbar, kein Preis erkennbar."
+      },
+      {
+        "name": "DC ROYAL RED",
+        "gbp": 45,
+        "eur": 50,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": "REDHOOD ARKHAM",
+        "gbp": 80,
+        "eur": 65,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": true
+      },
+      {
+        "name": "JOKER",
+        "gbp": 40,
+        "eur": 30,
+        "reihenfolge": "eur_zuerst",
+        "waehrung_unsicher": true,
+        "sicher": false,
+        "anmerkung": "Schild um ~90° gedreht; Leserichtung ergab '€30/£40' — Zuordnung der Währungszeichen nicht völlig sicher."
+      },
+      {
+        "name": "SPIDER-MAN 2099",
+        "gbp": 45,
+        "eur": 35,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": false,
+        "anmerkung": "Zwei separate kleine Aufkleber auf der weißen Maske, um ~90° gedreht; Reihenfolge aus Leserichtung von oben nach unten."
+      },
+      {
+        "name": "REDHOOD BATTLE DAMAGED",
+        "gbp": 80,
+        "eur": 65,
+        "reihenfolge": "gbp_zuerst",
+        "sicher": false,
+        "anmerkung": "Schild am unteren roten Helm; wirkt wie das Arkham-Schild, aber Zuordnung der beiden Zahlen war nicht völlig eindeutig."
+      }
+    ],
+    "sichtbar_gesamt": 7,
+    "nicht_lesbar": 2,
+    "ausserhalb_des_wertungsbereichs_nur_beobachtet": [
+      "Gelber Helm links (ca. y 755): Preisschild sichtbar, Preis nicht sicher lesbar",
+      "Weißer Helm, Aufschrift 'JUSTICE CORPS' direkt auf dem Helm (ca. y 660)",
+      "Rot/schwarzer Helm 'RED HOOD CROUCHED' (ca. y 825)",
+      "Oranger Helm (ca. y 780)",
+      "Schwarz mit weißem Stern (ca. y 875)",
+      "Schwarze Haube mit rotem Starburst-Schild 'SPIDER-MAN UNBACKED LED RED MASK WITH LED RED EYES' (x > 700)",
+      "MOON KNIGHT / UNBACKED weiße Mumien-Maske (x ≈ 810, außerhalb)"
+    ]
+  },
+  "selbsteinschaetzung": {
+    "schwierigstes": "Die kleinen, teils schräg oder um 90° gedrehten Preisschilder in Bild B, besonders die zweizeiligen Aufkleber mit zwei Währungen in unterschiedlicher Lesbarkeit (SPIDER-MAN 2099 und REDHOOD BATTLE DAMAGED). Bei Bild A war die Zahl in Klammern im Titel der mittleren Kachel (VS. OPUS 4.5) sowie die kleinen Modellnamen am rechten Rand des Diagramms am schwersten zu lesen.",
+    "unsicher_bei": [
+      "Kacheltitel 'VS. OPUS 4.5 (40,8)' — Klammerwert nicht sicher abgelesen, aus Kontext erschlossen",
+      "Sentinel-Schild in Bild B — Name nur erahnt, Preis nicht gelesen",
+      "DC RECYCLED V1 — kein Preis lesbar",
+      "REDHOOD BATTLE DAMAGED — Zahlenzuordnung 80/65 nicht völlig sicher",
+      "SPIDER-MAN 2099 — £45/€35 und deren Reihenfolge wegen Drehung unsicher",
+      "Diagrammpunktbezeichnungen rechts (Gemma 3.5 9B, Qwen3 Next 80B (reasoning), Opus 4.5 vs. Opus 4.6 Lage) — beim Nachbau teils nur annähernd sicher",
+      "Dashed-Line-Beschriftung am Tooltip ('Opus 4.5 – 46,8'?) — im Nachbau weggelassen"
+    ]
+  }
+}
