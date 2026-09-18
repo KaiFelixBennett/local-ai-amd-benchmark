@@ -1,0 +1,301 @@
+===== Start 2026-09-18 14:03:06 =====
+
+  Halogen Qwen3.8-Flash-Next W4B + Qualitaets-Overlay + Vision  (ghcr.io/peonist-ai/halogen-flash-server:0.9.1)
+
+  Kontext  : 216064 je Request, KV-Pool 216064 Positionen, 2 Slot
+  YaRN     : aus (nativ)   Indexer-Budget: 4096
+  Budget   : max_tokens-Default 65536 je Anfrage, Cap 216064, Slots 2
+  Reasoning: xhigh, getrennt in reasoning_content
+  Sampling : temp 1.0  top_p 0.95  top_k 20  min_p 0.0  presence 0.0  (nur fuer fehlende Felder)
+  Cache    : Prompt-Cache 2, Queue-Timeout 28800 s
+  Vision   : an (qwen38-flash-next-vision.hgn)
+  RAM      : 123 GiB sichtbar, 17 GiB belegt, 3415 freie 2-MiB-Bloecke
+  Endpoint : http://127.0.0.1:18099/v1 (VS Code ueber Live-Log-Proxy :8099)   Modell: halogen-qwen3.8-flash-next-w4b-quality-overlay
+  Watchdog : 0 (0 = aus)
+  Pin      : an (Default)
+
+  HINWEIS: Budget-Patch gilt nur fuer Image 0.6.3 und ist NICHT eingebunden. Anfragen ohne max_tokens bekommen HALOGEN_MAX_TOKENS_DEFAULT (65536).
+  HINWEIS: 17 GiB RAM schon belegt. Das fehlt dem Page-Cache der n-Gramm-Tabelle, Prefill wird langsamer.
+  Laden: gemessen 30 s (13.09., Pool 32768); bei fragmentiertem Speicher ueber 5 min.
+
+halogen: halogen-flash-server 0.9.1, mode all
+halogen: quality sidecar present (2.4G) at /models/qwen38-flash-next-w4b.overlay.hgn
+halogen: vision ON, tower /models/qwen38-flash-next-vision.hgn (resolved from HALOGEN_VISION_TOWER=1)
+         an image costs ~1,000 tokens at 1280x800 and ~2,040 at 1080p;
+         HALOGEN_VISION_MAX_PIXELS caps it (default 2560x1440; larger is downscaled).
+halogen: WARNING 17.5 GiB of host RAM is in use before this server starts. The server sizes itself from the machine's total and leaves a fixed reserve for the OS and the model's 47.7 GiB lookup table, which is read through the file cache; whatever is already using those 17.5 GiB comes out of that cache. Expect every prompt to read the table from disk, prefill to run several times slower than published, and pauses of a minute or more. Stop the other workloads, or run this server on a host of its own.
+halogen: KV budget 2 slot(s) over one 216064-position pool (each request up to 216064) = 6.2 GiB (~28 KiB/position incl. block scratch + ~115 MiB/slot) + 0.9 GiB prompt cache in RAM, on top of roughly 68 GiB of weights and 11 GiB of scratch. Those last two are estimates for this pre-flight check; the engine prints its measured figures once loaded, including the large lookup table it reads from disk and never holds. MemAvailable now 105.9 GiB.
+halogen: no /tokenizer mount, using /models/tokenizer from the models volume
+serve_api: request defaults HALOGEN_MAX_TOKENS_DEFAULT=65536, HALOGEN_TEMPERATURE=1.0, HALOGEN_TOP_P=0.95, HALOGEN_TOP_K=20, HALOGEN_MIN_P=0.0, HALOGEN_PRESENCE_PENALTY=0.0, HALOGEN_REASONING_EFFORT=xhigh
+halogen: waiting for engine on 8730 (cold load can take minutes)
+indexer budget: 4096 tokens = 1024 blocks per query (default 2048 = 512; a larger budget attends a superset of what the checkpoint was trained on)
+checkpoint: mapped 124.1 GB, NOT pinned (Pin::None)
+checkpoint: mapped 2.6 GB, NOT pinned (Pin::None)
+overlay: 30 tensors upgraded to q8g64 in place of Q4C-P
+overlay: 741 tensors, 2.40 GiB from /models/qwen38-flash-next-w4b.overlay.hgn (HALOGEN_CK_OVERLAY)
+startup [   0.0 s] host memory: 6617 contiguous 2 MiB blocks of host memory free (13234 MiB)
+startup [   0.0 s] pinning weights (reads the checkpoint from disk when it is not already in the page cache; this is usually the slowest step)
+checkpoint: pinned 65.60 GiB in 252 range(s) in 30.4 s (2.3 GB/s), 65.60 GiB of payload, MemAvailable was 105.6 GiB
+checkpoint: pinned 2.40 GiB in 1 range(s) in 0.7 s (3.5 GB/s), 2.40 GiB of payload, MemAvailable was 106.4 GiB
+startup [  31.2 s] weights pinned: 90 contiguous 2 MiB blocks free (180 MiB), 6 compaction stalls during that step (3 failed)
+startup [  31.2 s] preparing weights
+halogen: WARNING the host has only 90 contiguous 2 MiB blocks of free memory (180 MiB) before this server has allocated anything.
+  There may be plenty of free memory, but it is in the wrong shape: large allocations each stop to compact it, most of those attempts fail, and startup can take tens of minutes at 100% of one core with no disk activity and no output. This is a state of the host, not of the model, and it is usually a large process that exited moments ago.
+  Stop the other workloads, then either wait or run, as root:
+    echo 1 > /proc/sys/vm/compact_memory
+  and check that 'awk "/Normal/{print $14}" /proc/buddyinfo' is in the thousands before starting again.
+startup [  32.1 s] preparing weights, layer 0 of 48
+startup [  32.4 s] preparing weights, layer 8 of 48
+startup [  33.0 s] preparing weights, layer 16 of 48
+startup [  33.3 s] preparing weights, layer 24 of 48
+startup [  34.0 s] preparing weights, layer 32 of 48
+startup [  34.5 s] preparing weights, layer 40 of 48
+startup [  35.0 s] weights ready; reserving working memory
+checkpoint: mapped 0.9 GB, NOT pinned (Pin::None)
+checkpoint: pinned 0.84 GiB in 1 range(s) in 4.3 s (0.2 GB/s), 0.84 GiB of payload, MemAvailable was 81.3 GiB
+startup [  49.2 s] reserving the KV pool, 216064 positions (about 5.9 GiB)
+halogen: still loading, 60s elapsed (the engine is alive; the startup lines above name the step)
+halogen: still reserving the KV pool after 31 s: 125 contiguous 2 MiB blocks of host memory free, 18106 compaction stalls since the reservations began (1145 failed). Stalls climbing = the kernel is compacting host memory for this step, which finishes on its own; other large processes on this host make it slower. No stalls and no progress = report it with this log.
+startup [  91.9 s] KV pool reserved: 208 contiguous 2 MiB blocks free (416 MiB), 18488 compaction stalls during that step (1464 failed)
+startup [  91.9 s] model ready
+startup [  91.9 s] reserving 1 more serving slot(s)
+slots: 1 -> 2 POOLED, 111.0 MiB each of O(1) state; the KV is ONE pool of 216064 positions (5486.0 MiB) carved into per-request regions
+startup [  92.8 s] preparing the prompt cache
+flash_serve: prompt cache ON, resume-anywhere (8 entries, snapshot every request, chunk 32768, 111 MiB each at ctx 216064): a warm answer is NOT bitwise the cold one
+flash_serve: prompt cache keeps the KV in place (HALOGEN_CACHE_INPLACE=1): the entry is the O(1) state, the KV rows are never copied; a follow-up turn prefills only its new tokens
+startup [  92.8 s] memory: 68.0 GiB of weights locked in RAM, 5.9 GiB of KV pool, 21.2 GiB of working memory, 95.1 GiB in all
+startup [  92.8 s] memory: the model's 47.7 GiB lookup table is NOT held in RAM. It is read from disk through the file cache as each request needs it, which is why this server holds less than the checkpoint is large
+startup [  92.8 s] memory: 2.0 GiB of this machine's RAM is carved out for the iGPU in firmware. That is not free memory the OS can lend to the file cache above, and it does not appear anywhere in /proc/meminfo: the machine simply reports itself smaller
+halogen: NOTE this server now holds most of the machine, and 131 contiguous 2 MiB blocks remain. It runs best on a host of its own. If other large processes share this machine they will compete for what is left, and when it runs out BOTH they and this server can stall for minutes at a time at full CPU with no disk activity and no output, which is not a crash and needs no restart. Lowering HALOGEN_KV_POOL_POSITIONS gives some back. HALOGEN_FLASH_PIN_TRUNK=0 gives a great deal back and costs several times the decode speed, so it is a last resort.
+startup [  92.8 s] host memory left for everything else: 131 contiguous 2 MiB blocks (6.6 GiB total, most of it not contiguous)
+startup [  92.8 s] free(1) and MemAvailable will report about 74.6 GiB instead: the kernel counts this server's locked weights as reclaimable file cache, and they cannot be reclaimed
+startup [  92.8 s] opening the socket
+flash_serve: a prompt admitted beside active streams prefills in pieces of 32768 tokens with a decode tick between them (HALOGEN_ADMIT_CHUNK; 0 = the engine's own chunk, which keeps the admitted prompt bitwise its alone self; -1 = the whole prompt at once)
+flash_serve: listening on 127.0.0.1:8730, 2 slots over ONE 216064-position KV pool, each request up to 216064 (it reserves prompt + max_tokens), max_tok 32768, BATCHED greedy or sampled; MTP depth-1 selectable (drafter 1, speculates while alone)
+halogen: engine listening after 94s
+halogen: engine watchdog OFF (HALOGEN_ENGINE_WATCHDOG_S=0)
+/halogen/tools/serve_api.py:4211: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [130]
+INFO:     Waiting for application startup.
+flash_serve: grammar: vocabulary of 248077 tokens (248044 plain, longest 128 B) in 55 ms
+serve_api: engine at 127.0.0.1:8730, listening on 0.0.0.0:8731
+serve_api: request defaults HALOGEN_MAX_TOKENS_DEFAULT=65536, HALOGEN_TEMPERATURE=1.0, HALOGEN_TOP_P=0.95, HALOGEN_TOP_K=20, HALOGEN_MIN_P=0.0, HALOGEN_PRESENCE_PENALTY=0.0, HALOGEN_REASONING_EFFORT=xhigh (a field the request sends wins; temperature 0 in a request is greedy and takes no sampling default)
+serve_api: version 0.9.1, engine version 0.9.1
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8731 (Press CTRL+C to quit)
+INFO:     172.17.0.1:35482 - "GET /v1/models HTTP/1.1" 200 OK
+14:05:59 [#3] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-140559-0003.json
+14:05:59 [#3] Anfrage /v1/chat/completions: 3 Nachrichten, Body 44 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 20, max_tokens 65536, stream True
+serve_api: 'n' accepted but IGNORED by this endpoint
+INFO:     172.17.0.1:59094 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+14:06:09 [#3] wartet auf erstes Token ... 10 s (Prefill laeuft)
+14:06:12 [#3] erstes Token nach 13.5 s
+14:06:17 [#3] n_gen ~100  21.6 t/s  Phase Denken  (Denken 406 Z., Antwort 0 Z.)
+14:06:21 [#3] n_gen ~200  23.2 t/s  Phase Tool-Call  (Denken 639 Z., Antwort 1 Z.)
+serve_api: mtp 258 tok in 9.20s = 28.03 t/s | 120 rounds, commit 1.62/round | prompt 11173, prefill 13.42s | detok 58us/tok | 64 tok beside other streams
+14:06:21 [#3] fertig: HTTP 200, finish=tool_calls, 258 Tokens (exakt), Decode 28.0 t/s, Prompt 11173 Tokens, gesamt 22.7 s, Denken 639 Z., Antwort 1 Z., Tool-Stuecke 58
+14:06:21 [#4] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-140621-0004.json
+14:06:21 [#4] Anfrage /v1/chat/completions: 6 Nachrichten, Body 45 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 20, max_tokens 65536, stream True
+INFO:     172.17.0.1:59578 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+14:06:23 [#4] erstes Token nach 1.2 s
+serve_api: mtp 121 tok in 3.22s = 37.56 t/s | 66 rounds, commit 1.83/round | prompt 11306 (11168 cached), prefill 1.20s | detok 24us/tok
+14:06:26 [#4] fertig: HTTP 200, finish=tool_calls, 121 Tokens (exakt), Decode 37.5 t/s, Prompt 11306 Tokens, gesamt 4.4 s, Denken 28 Z., Antwort 1 Z., Tool-Stuecke 69
+14:06:27 [#5] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-140627-0005.json
+14:06:27 [#5] Anfrage /v1/chat/completions: 9 Nachrichten, Body 1154 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 4, Tools 20, max_tokens 65536, stream True
+INFO:     172.17.0.1:59592 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+14:06:37 [#5] wartet auf erstes Token ... 10 s (Prefill laeuft)
+14:06:47 [#5] wartet auf erstes Token ... 20 s (Prefill laeuft)
+14:06:57 [#5] wartet auf erstes Token ... 30 s (Prefill laeuft)
+14:07:07 [#5] wartet auf erstes Token ... 40 s (Prefill laeuft)
+14:07:17 [#5] wartet auf erstes Token ... 50 s (Prefill laeuft)
+14:07:27 [#5] wartet auf erstes Token ... 60 s (Prefill laeuft)
+14:07:37 [#5] wartet auf erstes Token ... 70 s (Prefill laeuft)
+14:07:47 [#5] wartet auf erstes Token ... 80 s (Prefill laeuft)
+14:07:57 [#5] wartet auf erstes Token ... 90 s (Prefill laeuft)
+14:08:07 [#5] wartet auf erstes Token ... 100 s (Prefill laeuft)
+14:08:17 [#5] wartet auf erstes Token ... 110 s (Prefill laeuft)
+14:08:27 [#5] wartet auf erstes Token ... 120 s (Prefill laeuft)
+14:08:37 [#5] wartet auf erstes Token ... 130 s (Prefill laeuft)
+14:08:44 [#5] erstes Token nach 137.5 s
+14:09:02 [#5] n_gen ~100  5.6 t/s  Phase Denken  (Denken 300 Z., Antwort 0 Z.)
+14:09:05 [#5] n_gen ~200  9.4 t/s  Phase Denken  (Denken 644 Z., Antwort 0 Z.)
+14:09:18 [#5] n_gen ~300  8.8 t/s  Phase Denken  (Denken 979 Z., Antwort 0 Z.)
+14:09:21 [#5] n_gen ~400  10.8 t/s  Phase Denken  (Denken 1357 Z., Antwort 0 Z.)
+14:09:57 [#5] keine neuen Tokens seit 21 s (bisher ~432)
+14:10:07 [#5] keine neuen Tokens seit 31 s (bisher ~432)
+14:10:17 [#5] keine neuen Tokens seit 41 s (bisher ~432)
+14:10:27 [#5] keine neuen Tokens seit 51 s (bisher ~432)
+14:10:37 [#5] keine neuen Tokens seit 61 s (bisher ~432)
+14:10:47 [#5] keine neuen Tokens seit 71 s (bisher ~432)
+14:10:57 [#5] keine neuen Tokens seit 81 s (bisher ~432)
+14:11:07 [#5] keine neuen Tokens seit 91 s (bisher ~432)
+14:11:19 [#5] n_gen ~500  3.2 t/s  Phase Denken  (Denken 1711 Z., Antwort 0 Z.)
+14:11:22 [#5] n_gen ~600  3.8 t/s  Phase Denken  (Denken 2126 Z., Antwort 0 Z.)
+14:11:26 [#5] n_gen ~700  4.3 t/s  Phase Denken  (Denken 2410 Z., Antwort 0 Z.)
+14:11:29 [#5] n_gen ~800  4.8 t/s  Phase Denken  (Denken 2688 Z., Antwort 0 Z.)
+14:11:33 [#5] n_gen ~900  5.3 t/s  Phase Denken  (Denken 3015 Z., Antwort 0 Z.)
+14:11:36 [#5] n_gen ~1000  5.8 t/s  Phase Denken  (Denken 3322 Z., Antwort 0 Z.)
+14:11:40 [#5] n_gen ~1100  6.3 t/s  Phase Denken  (Denken 3652 Z., Antwort 0 Z.)
+14:11:43 [#5] n_gen ~1200  6.7 t/s  Phase Denken  (Denken 3951 Z., Antwort 0 Z.)
+14:11:54 [#5] n_gen ~1300  6.9 t/s  Phase Denken  (Denken 4248 Z., Antwort 0 Z.)
+14:12:01 [#5] n_gen ~1400  7.1 t/s  Phase Denken  (Denken 4565 Z., Antwort 0 Z.)
+14:12:05 [#5] n_gen ~1500  7.5 t/s  Phase Denken  (Denken 4816 Z., Antwort 0 Z.)
+14:12:08 [#5] n_gen ~1600  7.9 t/s  Phase Denken  (Denken 5106 Z., Antwort 0 Z.)
+14:12:11 [#5] n_gen ~1700  8.2 t/s  Phase Denken  (Denken 5425 Z., Antwort 0 Z.)
+14:12:14 [#5] n_gen ~1800  8.6 t/s  Phase Denken  (Denken 5709 Z., Antwort 0 Z.)
+14:12:18 [#5] n_gen ~1900  8.9 t/s  Phase Denken  (Denken 5947 Z., Antwort 0 Z.)
+14:12:21 [#5] n_gen ~2000  9.2 t/s  Phase Denken  (Denken 6217 Z., Antwort 0 Z.)
+14:12:27 [#5] n_gen ~2100  9.4 t/s  Phase Denken  (Denken 6433 Z., Antwort 0 Z.)
+14:12:31 [#5] n_gen ~2200  9.7 t/s  Phase Denken  (Denken 6657 Z., Antwort 0 Z.)
+14:12:34 [#5] n_gen ~2300  10.0 t/s  Phase Denken  (Denken 6903 Z., Antwort 0 Z.)
+14:12:38 [#5] n_gen ~2400  10.3 t/s  Phase Denken  (Denken 7159 Z., Antwort 0 Z.)
+14:12:41 [#5] n_gen ~2500  10.6 t/s  Phase Denken  (Denken 7390 Z., Antwort 0 Z.)
+14:12:44 [#5] n_gen ~2600  10.8 t/s  Phase Denken  (Denken 7661 Z., Antwort 0 Z.)
+14:12:47 [#5] n_gen ~2700  11.1 t/s  Phase Denken  (Denken 7958 Z., Antwort 0 Z.)
+14:12:50 [#5] n_gen ~2800  11.4 t/s  Phase Denken  (Denken 8199 Z., Antwort 0 Z.)
+14:12:53 [#5] n_gen ~2900  11.6 t/s  Phase Denken  (Denken 8528 Z., Antwort 0 Z.)
+14:12:56 [#5] n_gen ~3000  11.9 t/s  Phase Denken  (Denken 8765 Z., Antwort 0 Z.)
+14:13:00 [#5] n_gen ~3100  12.1 t/s  Phase Denken  (Denken 9075 Z., Antwort 0 Z.)
+14:13:03 [#5] n_gen ~3200  12.4 t/s  Phase Denken  (Denken 9472 Z., Antwort 0 Z.)
+14:13:07 [#5] n_gen ~3300  12.6 t/s  Phase Denken  (Denken 9856 Z., Antwort 0 Z.)
+14:13:10 [#5] n_gen ~3400  12.8 t/s  Phase Denken  (Denken 10182 Z., Antwort 0 Z.)
+14:13:14 [#5] n_gen ~3500  13.0 t/s  Phase Denken  (Denken 10489 Z., Antwort 0 Z.)
+14:13:17 [#5] n_gen ~3600  13.2 t/s  Phase Denken  (Denken 10742 Z., Antwort 0 Z.)
+14:13:20 [#5] n_gen ~3700  13.4 t/s  Phase Denken  (Denken 11051 Z., Antwort 0 Z.)
+14:13:23 [#5] n_gen ~3800  13.6 t/s  Phase Denken  (Denken 11298 Z., Antwort 0 Z.)
+14:13:26 [#5] n_gen ~3900  13.8 t/s  Phase Denken  (Denken 11518 Z., Antwort 0 Z.)
+14:13:30 [#5] n_gen ~4000  14.0 t/s  Phase Denken  (Denken 11750 Z., Antwort 0 Z.)
+14:13:33 [#5] n_gen ~4100  14.2 t/s  Phase Denken  (Denken 12012 Z., Antwort 0 Z.)
+14:13:36 [#5] n_gen ~4200  14.4 t/s  Phase Denken  (Denken 12259 Z., Antwort 0 Z.)
+14:13:39 [#5] n_gen ~4300  14.6 t/s  Phase Denken  (Denken 12521 Z., Antwort 0 Z.)
+14:13:43 [#5] n_gen ~4400  14.7 t/s  Phase Denken  (Denken 12771 Z., Antwort 0 Z.)
+14:13:46 [#5] n_gen ~4500  14.9 t/s  Phase Denken  (Denken 13020 Z., Antwort 0 Z.)
+14:13:49 [#5] n_gen ~4600  15.1 t/s  Phase Denken  (Denken 13204 Z., Antwort 0 Z.)
+14:13:52 [#5] n_gen ~4700  15.3 t/s  Phase Denken  (Denken 13466 Z., Antwort 0 Z.)
+14:13:56 [#5] n_gen ~4800  15.4 t/s  Phase Denken  (Denken 13758 Z., Antwort 0 Z.)
+14:13:59 [#5] n_gen ~4900  15.6 t/s  Phase Denken  (Denken 13970 Z., Antwort 0 Z.)
+14:14:03 [#5] n_gen ~5000  15.7 t/s  Phase Denken  (Denken 14211 Z., Antwort 0 Z.)
+14:14:07 [#5] n_gen ~5100  15.8 t/s  Phase Denken  (Denken 14526 Z., Antwort 0 Z.)
+14:14:10 [#5] n_gen ~5200  16.0 t/s  Phase Denken  (Denken 14781 Z., Antwort 0 Z.)
+14:14:13 [#5] n_gen ~5300  16.1 t/s  Phase Denken  (Denken 15078 Z., Antwort 0 Z.)
+14:14:16 [#5] n_gen ~5400  16.3 t/s  Phase Denken  (Denken 15321 Z., Antwort 0 Z.)
+14:14:19 [#5] n_gen ~5500  16.4 t/s  Phase Denken  (Denken 15559 Z., Antwort 0 Z.)
+14:14:23 [#5] n_gen ~5600  16.5 t/s  Phase Denken  (Denken 15871 Z., Antwort 0 Z.)
+14:14:25 [#5] n_gen ~5700  16.7 t/s  Phase Denken  (Denken 16156 Z., Antwort 0 Z.)
+14:14:29 [#5] n_gen ~5800  16.8 t/s  Phase Denken  (Denken 16460 Z., Antwort 0 Z.)
+14:14:32 [#5] n_gen ~5900  17.0 t/s  Phase Denken  (Denken 16735 Z., Antwort 0 Z.)
+14:14:35 [#5] n_gen ~6000  17.1 t/s  Phase Denken  (Denken 17009 Z., Antwort 0 Z.)
+14:14:38 [#5] n_gen ~6100  17.2 t/s  Phase Denken  (Denken 17248 Z., Antwort 0 Z.)
+14:14:41 [#5] n_gen ~6200  17.4 t/s  Phase Denken  (Denken 17435 Z., Antwort 0 Z.)
+14:14:57 [#5] keine neuen Tokens seit 15 s (bisher ~6214)
+14:15:07 [#5] keine neuen Tokens seit 25 s (bisher ~6214)
+14:15:17 [#5] keine neuen Tokens seit 35 s (bisher ~6214)
+14:15:21 [#5] n_gen ~6300  15.9 t/s  Phase Denken  (Denken 17724 Z., Antwort 0 Z.)
+14:15:29 [#5] n_gen ~6400  15.8 t/s  Phase Denken  (Denken 18048 Z., Antwort 0 Z.)
+14:15:31 [#5] n_gen ~6500  16.0 t/s  Phase Denken  (Denken 18303 Z., Antwort 0 Z.)
+14:15:35 [#5] n_gen ~6600  16.1 t/s  Phase Denken  (Denken 18690 Z., Antwort 0 Z.)
+14:15:38 [#5] n_gen ~6700  16.2 t/s  Phase Denken  (Denken 18937 Z., Antwort 0 Z.)
+14:15:41 [#5] n_gen ~6800  16.3 t/s  Phase Denken  (Denken 19208 Z., Antwort 0 Z.)
+14:15:45 [#5] n_gen ~6900  16.4 t/s  Phase Denken  (Denken 19470 Z., Antwort 0 Z.)
+14:15:48 [#5] n_gen ~7000  16.5 t/s  Phase Denken  (Denken 19767 Z., Antwort 0 Z.)
+14:15:53 [#5] n_gen ~7100  16.5 t/s  Phase Denken  (Denken 20070 Z., Antwort 0 Z.)
+14:15:56 [#5] n_gen ~7200  16.7 t/s  Phase Denken  (Denken 20350 Z., Antwort 0 Z.)
+14:15:59 [#5] n_gen ~7300  16.8 t/s  Phase Denken  (Denken 20660 Z., Antwort 0 Z.)
+14:16:02 [#5] n_gen ~7400  16.9 t/s  Phase Denken  (Denken 20859 Z., Antwort 0 Z.)
+14:16:06 [#5] n_gen ~7500  17.0 t/s  Phase Denken  (Denken 21154 Z., Antwort 0 Z.)
+14:16:09 [#5] n_gen ~7600  17.1 t/s  Phase Denken  (Denken 21449 Z., Antwort 0 Z.)
+14:16:12 [#5] n_gen ~7700  17.2 t/s  Phase Denken  (Denken 21608 Z., Antwort 0 Z.)
+14:16:15 [#5] n_gen ~7800  17.3 t/s  Phase Denken  (Denken 21752 Z., Antwort 0 Z.)
+14:16:18 [#5] n_gen ~7900  17.4 t/s  Phase Denken  (Denken 21967 Z., Antwort 0 Z.)
+14:16:21 [#5] n_gen ~8000  17.5 t/s  Phase Denken  (Denken 22122 Z., Antwort 0 Z.)
+14:16:24 [#5] n_gen ~8100  17.6 t/s  Phase Denken  (Denken 22244 Z., Antwort 0 Z.)
+14:16:27 [#5] n_gen ~8200  17.7 t/s  Phase Denken  (Denken 22372 Z., Antwort 0 Z.)
+14:16:30 [#5] n_gen ~8300  17.8 t/s  Phase Denken  (Denken 22514 Z., Antwort 0 Z.)
+14:16:33 [#5] n_gen ~8400  17.9 t/s  Phase Denken  (Denken 22663 Z., Antwort 0 Z.)
+14:16:35 [#5] n_gen ~8500  18.0 t/s  Phase Denken  (Denken 22794 Z., Antwort 0 Z.)
+14:16:38 [#5] n_gen ~8600  18.1 t/s  Phase Denken  (Denken 23015 Z., Antwort 0 Z.)
+14:16:41 [#5] n_gen ~8700  18.2 t/s  Phase Denken  (Denken 23217 Z., Antwort 0 Z.)
+14:16:45 [#5] n_gen ~8800  18.3 t/s  Phase Denken  (Denken 23589 Z., Antwort 0 Z.)
+14:16:48 [#5] n_gen ~8900  18.4 t/s  Phase Denken  (Denken 23924 Z., Antwort 0 Z.)
+14:16:51 [#5] n_gen ~9000  18.5 t/s  Phase Denken  (Denken 24195 Z., Antwort 0 Z.)
+14:16:55 [#5] n_gen ~9100  18.5 t/s  Phase Denken  (Denken 24509 Z., Antwort 0 Z.)
+14:16:58 [#5] n_gen ~9200  18.6 t/s  Phase Denken  (Denken 24840 Z., Antwort 0 Z.)
+14:17:01 [#5] n_gen ~9300  18.7 t/s  Phase Denken  (Denken 25098 Z., Antwort 0 Z.)
+14:17:05 [#5] n_gen ~9400  18.8 t/s  Phase Denken  (Denken 25445 Z., Antwort 0 Z.)
+14:17:08 [#5] n_gen ~9500  18.9 t/s  Phase Denken  (Denken 25816 Z., Antwort 0 Z.)
+14:17:11 [#5] n_gen ~9600  18.9 t/s  Phase Denken  (Denken 26212 Z., Antwort 0 Z.)
+14:17:15 [#5] n_gen ~9700  19.0 t/s  Phase Denken  (Denken 26374 Z., Antwort 0 Z.)
+14:17:18 [#5] n_gen ~9800  19.1 t/s  Phase Denken  (Denken 26580 Z., Antwort 0 Z.)
+14:17:21 [#5] n_gen ~9900  19.1 t/s  Phase Denken  (Denken 26851 Z., Antwort 0 Z.)
+14:17:24 [#5] n_gen ~10000  19.2 t/s  Phase Denken  (Denken 27030 Z., Antwort 0 Z.)
+14:17:27 [#5] n_gen ~10100  19.3 t/s  Phase Denken  (Denken 27205 Z., Antwort 0 Z.)
+14:17:31 [#5] n_gen ~10200  19.4 t/s  Phase Denken  (Denken 27431 Z., Antwort 0 Z.)
+14:17:34 [#5] n_gen ~10300  19.4 t/s  Phase Denken  (Denken 27724 Z., Antwort 0 Z.)
+14:17:38 [#5] n_gen ~10400  19.5 t/s  Phase Denken  (Denken 28033 Z., Antwort 0 Z.)
+14:17:42 [#5] n_gen ~10500  19.5 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:17:45 [#5] n_gen ~10600  19.6 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:17:48 [#5] n_gen ~10700  19.7 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:17:51 [#5] n_gen ~10800  19.8 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:17:54 [#5] n_gen ~10900  19.8 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:17:58 [#5] n_gen ~11000  19.9 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:01 [#5] n_gen ~11100  19.9 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:04 [#5] n_gen ~11200  20.0 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:08 [#5] n_gen ~11300  20.1 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:11 [#5] n_gen ~11400  20.1 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:14 [#5] n_gen ~11500  20.2 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:17 [#5] n_gen ~11600  20.2 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:20 [#5] n_gen ~11700  20.3 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:23 [#5] n_gen ~11800  20.4 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:26 [#5] n_gen ~11900  20.4 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:29 [#5] n_gen ~12000  20.5 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:31 [#5] n_gen ~12100  20.6 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:34 [#5] n_gen ~12200  20.7 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:36 [#5] n_gen ~12300  20.8 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:39 [#5] n_gen ~12400  20.9 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:41 [#5] n_gen ~12500  20.9 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:44 [#5] n_gen ~12600  21.0 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:46 [#5] n_gen ~12700  21.1 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:49 [#5] n_gen ~12800  21.2 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:51 [#5] n_gen ~12900  21.3 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:53 [#5] n_gen ~13000  21.3 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:55 [#5] n_gen ~13100  21.4 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:18:58 [#5] n_gen ~13200  21.5 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:00 [#5] n_gen ~13300  21.6 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:03 [#5] n_gen ~13400  21.7 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:05 [#5] n_gen ~13500  21.7 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:08 [#5] n_gen ~13600  21.8 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:10 [#5] n_gen ~13700  21.9 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:13 [#5] n_gen ~13800  22.0 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:15 [#5] n_gen ~13900  22.0 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:17 [#5] n_gen ~14000  22.1 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:20 [#5] n_gen ~14100  22.2 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:22 [#5] n_gen ~14200  22.3 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:24 [#5] n_gen ~14300  22.3 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:27 [#5] n_gen ~14400  22.4 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:31 [#5] n_gen ~14500  22.4 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:35 [#5] n_gen ~14600  22.4 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:39 [#5] n_gen ~14700  22.5 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:42 [#5] n_gen ~14800  22.5 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:49 [#5] n_gen ~14900  22.4 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:53 [#5] n_gen ~15000  22.4 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+14:19:57 [#5] n_gen ~15100  22.5 t/s  Phase Tool-Call  (Denken 28174 Z., Antwort 0 Z.)
+serve_api: mtp 16363 tok in 673.70s = 24.29 t/s | 9536 rounds, commit 1.68/round | prompt 14343 (11301 cached), prefill 9.77s | detok 57us/tok | 320 tok beside other streams
+14:19:58 [#5] fertig: HTTP 200, finish=tool_calls, 16363 Tokens (exakt), Decode 24.3 t/s, Prompt 14343 Tokens, gesamt 811.2 s, Denken 28174 Z., Antwort 0 Z., Tool-Stuecke 4675
+14:19:59 [#6] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-141959-0006.json
+14:19:59 [#6] Anfrage /v1/chat/completions: 11 Nachrichten, Body 1168 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 4, Tools 20, max_tokens 65536, stream True
+INFO:     172.17.0.1:43416 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+14:20:05 [#6] erstes Token nach 6.3 s
+14:20:08 [#6] n_gen ~100  32.2 t/s  Phase Antwort  (Denken 103 Z., Antwort 250 Z.)
+14:20:11 [#6] n_gen ~200  32.5 t/s  Phase Antwort  (Denken 103 Z., Antwort 518 Z.)
+14:20:14 [#6] n_gen ~300  31.8 t/s  Phase Antwort  (Denken 103 Z., Antwort 741 Z.)
+14:20:18 [#6] n_gen ~400  31.2 t/s  Phase Antwort  (Denken 103 Z., Antwort 979 Z.)
+14:20:21 [#6] n_gen ~500  31.1 t/s  Phase Antwort  (Denken 103 Z., Antwort 1218 Z.)
+14:20:24 [#6] n_gen ~600  31.7 t/s  Phase Antwort  (Denken 103 Z., Antwort 1445 Z.)
+serve_api: mtp 656 tok in 20.94s = 31.33 t/s | 422 rounds, commit 1.55/round | prompt 19585 (14338 cached), prefill 6.14s | detok 61us/tok
+14:20:26 [#6] fertig: HTTP 200, finish=stop, 656 Tokens (exakt), Decode 31.3 t/s, Prompt 19585 Tokens, gesamt 27.3 s, Denken 103 Z., Antwort 1618 Z., Tool-Stuecke 0

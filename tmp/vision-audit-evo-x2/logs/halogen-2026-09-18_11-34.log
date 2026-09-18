@@ -1,0 +1,618 @@
+===== Start 2026-09-18 11:34:02 =====
+11:34:02 Live-Log-Proxy: 127.0.0.1:8099 -> 127.0.0.1:18099 (Halogen), Zeile alle 100 Tokens, max_tokens entfernen: nein
+
+  Halogen Qwen3.8-Flash-Next W4B + Qualitaets-Overlay + Vision  (ghcr.io/peonist-ai/halogen-flash-server:0.9.1)
+
+  Kontext  : 216064 je Request, KV-Pool 216064 Positionen, 2 Slot
+  YaRN     : aus (nativ)   Indexer-Budget: 4096
+  Budget   : max_tokens-Default 65536 je Anfrage, Cap 216064, Slots 2
+  Reasoning: xhigh, getrennt in reasoning_content
+  Sampling : temp 1.0  top_p 0.95  top_k 20  min_p 0.0  presence 0.0  (nur fuer fehlende Felder)
+  Cache    : Prompt-Cache 2, Queue-Timeout 28800 s
+  Vision   : an (qwen38-flash-next-vision.hgn)
+  RAM      : 123 GiB sichtbar, 16 GiB belegt, 8882 freie 2-MiB-Bloecke
+  Endpoint : http://127.0.0.1:18099/v1 (VS Code ueber Live-Log-Proxy :8099)   Modell: halogen-qwen3.8-flash-next-w4b-quality-overlay
+  Watchdog : 0 (0 = aus)
+  Pin      : an (Default)
+
+  HINWEIS: Budget-Patch gilt nur fuer Image 0.6.3 und ist NICHT eingebunden. Anfragen ohne max_tokens bekommen HALOGEN_MAX_TOKENS_DEFAULT (65536).
+  Laden: gemessen 30 s (13.09., Pool 32768); bei fragmentiertem Speicher ueber 5 min.
+
+halogen: halogen-flash-server 0.9.1, mode all
+halogen: quality sidecar present (2.4G) at /models/qwen38-flash-next-w4b.overlay.hgn
+halogen: vision ON, tower /models/qwen38-flash-next-vision.hgn (resolved from HALOGEN_VISION_TOWER=1)
+         an image costs ~1,000 tokens at 1280x800 and ~2,040 at 1080p;
+         HALOGEN_VISION_MAX_PIXELS caps it (default 2560x1440; larger is downscaled).
+halogen: KV budget 2 slot(s) over one 216064-position pool (each request up to 216064) = 6.2 GiB (~28 KiB/position incl. block scratch + ~115 MiB/slot) + 0.9 GiB prompt cache in RAM, on top of roughly 68 GiB of weights and 11 GiB of scratch. Those last two are estimates for this pre-flight check; the engine prints its measured figures once loaded, including the large lookup table it reads from disk and never holds. MemAvailable now 107.3 GiB.
+halogen: WARNING 16.2 GiB of host RAM is in use before this server starts. The server sizes itself from the machine's total and leaves a fixed reserve for the OS and the model's 47.7 GiB lookup table, which is read through the file cache; whatever is already using those 16.2 GiB comes out of that cache. Expect every prompt to read the table from disk, prefill to run several times slower than published, and pauses of a minute or more. Stop the other workloads, or run this server on a host of its own.
+halogen: no /tokenizer mount, using /models/tokenizer from the models volume
+serve_api: request defaults HALOGEN_MAX_TOKENS_DEFAULT=65536, HALOGEN_TEMPERATURE=1.0, HALOGEN_TOP_P=0.95, HALOGEN_TOP_K=20, HALOGEN_MIN_P=0.0, HALOGEN_PRESENCE_PENALTY=0.0, HALOGEN_REASONING_EFFORT=xhigh
+halogen: waiting for engine on 8730 (cold load can take minutes)
+indexer budget: 4096 tokens = 1024 blocks per query (default 2048 = 512; a larger budget attends a superset of what the checkpoint was trained on)
+checkpoint: mapped 124.1 GB, NOT pinned (Pin::None)
+checkpoint: mapped 2.6 GB, NOT pinned (Pin::None)
+overlay: 30 tensors upgraded to q8g64 in place of Q4C-P
+overlay: 741 tensors, 2.40 GiB from /models/qwen38-flash-next-w4b.overlay.hgn (HALOGEN_CK_OVERLAY)
+startup [   0.0 s] host memory: 18906 contiguous 2 MiB blocks of host memory free (37812 MiB)
+startup [   0.0 s] pinning weights (reads the checkpoint from disk when it is not already in the page cache; this is usually the slowest step)
+checkpoint: pinned 65.60 GiB in 252 range(s) in 26.8 s (2.6 GB/s), 65.60 GiB of payload, MemAvailable was 106.8 GiB
+checkpoint: pinned 2.40 GiB in 1 range(s) in 0.7 s (3.7 GB/s), 2.40 GiB of payload, MemAvailable was 107.9 GiB
+startup [  27.5 s] weights pinned: 200 contiguous 2 MiB blocks free (400 MiB), 9 compaction stalls during that step (1 failed)
+startup [  27.5 s] preparing weights
+halogen: WARNING the host has only 200 contiguous 2 MiB blocks of free memory (400 MiB) before this server has allocated anything.
+  There may be plenty of free memory, but it is in the wrong shape: large allocations each stop to compact it, most of those attempts fail, and startup can take tens of minutes at 100% of one core with no disk activity and no output. This is a state of the host, not of the model, and it is usually a large process that exited moments ago.
+  Stop the other workloads, then either wait or run, as root:
+    echo 1 > /proc/sys/vm/compact_memory
+  and check that 'awk "/Normal/{print $14}" /proc/buddyinfo' is in the thousands before starting again.
+startup [  27.7 s] preparing weights, layer 0 of 48
+startup [  27.7 s] preparing weights, layer 8 of 48
+startup [  27.8 s] preparing weights, layer 16 of 48
+startup [  27.9 s] preparing weights, layer 24 of 48
+startup [  28.0 s] preparing weights, layer 32 of 48
+startup [  28.0 s] preparing weights, layer 40 of 48
+startup [  28.1 s] weights ready; reserving working memory
+checkpoint: mapped 0.9 GB, NOT pinned (Pin::None)
+checkpoint: pinned 0.84 GiB in 1 range(s) in 0.3 s (2.9 GB/s), 0.84 GiB of payload, MemAvailable was 82.6 GiB
+startup [  30.3 s] reserving the KV pool, 216064 positions (about 5.9 GiB)
+startup [  40.7 s] KV pool reserved: 184 contiguous 2 MiB blocks free (368 MiB), 1433 compaction stalls during that step (478 failed)
+startup [  40.7 s] model ready
+startup [  40.7 s] reserving 1 more serving slot(s)
+slots: 1 -> 2 POOLED, 111.0 MiB each of O(1) state; the KV is ONE pool of 216064 positions (5486.0 MiB) carved into per-request regions
+startup [  41.7 s] preparing the prompt cache
+flash_serve: prompt cache ON, resume-anywhere (8 entries, snapshot every request, chunk 32768, 111 MiB each at ctx 216064): a warm answer is NOT bitwise the cold one
+flash_serve: prompt cache keeps the KV in place (HALOGEN_CACHE_INPLACE=1): the entry is the O(1) state, the KV rows are never copied; a follow-up turn prefills only its new tokens
+startup [  41.7 s] memory: 68.0 GiB of weights locked in RAM, 5.9 GiB of KV pool, 21.2 GiB of working memory, 95.1 GiB in all
+startup [  41.7 s] memory: the model's 47.7 GiB lookup table is NOT held in RAM. It is read from disk through the file cache as each request needs it, which is why this server holds less than the checkpoint is large
+startup [  41.7 s] memory: 2.0 GiB of this machine's RAM is carved out for the iGPU in firmware. That is not free memory the OS can lend to the file cache above, and it does not appear anywhere in /proc/meminfo: the machine simply reports itself smaller
+startup [  41.7 s] host memory left for everything else: 184 contiguous 2 MiB blocks (6.8 GiB total, most of it not contiguous)
+startup [  41.7 s] free(1) and MemAvailable will report about 74.8 GiB instead: the kernel counts this server's locked weights as reclaimable file cache, and they cannot be reclaimed
+startup [  41.7 s] opening the socket
+halogen: NOTE this server now holds most of the machine, and 184 contiguous 2 MiB blocks remain. It runs best on a host of its own. If other large processes share this machine they will compete for what is left, and when it runs out BOTH they and this server can stall for minutes at a time at full CPU with no disk activity and no output, which is not a crash and needs no restart. Lowering HALOGEN_KV_POOL_POSITIONS gives some back. HALOGEN_FLASH_PIN_TRUNK=0 gives a great deal back and costs several times the decode speed, so it is a last resort.
+flash_serve: a prompt admitted beside active streams prefills in pieces of 32768 tokens with a decode tick between them (HALOGEN_ADMIT_CHUNK; 0 = the engine's own chunk, which keeps the admitted prompt bitwise its alone self; -1 = the whole prompt at once)
+flash_serve: listening on 127.0.0.1:8730, 2 slots over ONE 216064-position KV pool, each request up to 216064 (it reserves prompt + max_tokens), max_tok 32768, BATCHED greedy or sampled; MTP depth-1 selectable (drafter 1, speculates while alone)
+halogen: engine listening after 44s
+halogen: engine watchdog OFF (HALOGEN_ENGINE_WATCHDOG_S=0)
+/halogen/tools/serve_api.py:4211: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [80]
+INFO:     Waiting for application startup.
+flash_serve: grammar: vocabulary of 248077 tokens (248044 plain, longest 128 B) in 50 ms
+serve_api: engine at 127.0.0.1:8730, listening on 0.0.0.0:8731
+serve_api: request defaults HALOGEN_MAX_TOKENS_DEFAULT=65536, HALOGEN_TEMPERATURE=1.0, HALOGEN_TOP_P=0.95, HALOGEN_TOP_K=20, HALOGEN_MIN_P=0.0, HALOGEN_PRESENCE_PENALTY=0.0, HALOGEN_REASONING_EFFORT=xhigh (a field the request sends wins; temperature 0 in a request is greedy and takes no sampling default)
+serve_api: version 0.9.1, engine version 0.9.1
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8731 (Press CTRL+C to quit)
+INFO:     172.17.0.1:55670 - "GET /v1/models HTTP/1.1" 200 OK
+11:34:57 [#5] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113457-0005.json
+11:34:57 [#5] Anfrage /v1/chat/completions: 1 Nachrichten, Body 0 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 8, stream False
+serve_api: mtp 8 tok in 0.16s = 49.05 t/s | 4 rounds, commit 2.00/round | prompt 13, prefill 0.31s | detok 30us/tok
+INFO:     172.17.0.1:55684 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:34:57 [#5] fertig: HTTP 200, finish=length, 8 Tokens (exakt), Decode n/a, Prompt 13 Tokens, gesamt 0.5 s, Denken 0 Z., Antwort 31 Z., Tool-Stuecke 0
+INFO:     172.17.0.1:56640 - "GET /v1/models HTTP/1.1" 200 OK
+11:35:07 [#7] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113507-0007.json
+11:35:07 [#7] Anfrage /v1/chat/completions: 1 Nachrichten, Body 0 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 8, stream False
+serve_api: mtp 8 tok in 0.15s = 54.13 t/s | 4 rounds, commit 2.00/round | prompt 13 (6 cached), prefill 0.07s | detok 25us/tok
+INFO:     172.17.0.1:56644 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:35:07 [#7] fertig: HTTP 200, finish=length, 8 Tokens (exakt), Decode n/a, Prompt 13 Tokens, gesamt 0.2 s, Denken 0 Z., Antwort 31 Z., Tool-Stuecke 0
+INFO:     172.17.0.1:56654 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     172.17.0.1:33676 - "GET /v1/models HTTP/1.1" 200 OK
+11:35:08 [#10] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113508-0010.json
+11:35:08 [#10] Anfrage /v1/chat/completions: 2 Nachrichten, Body 8 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 24576, stream False
+11:35:18 [#10] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:35:28 [#10] wartet auf erstes Token ... 20 s (Prefill laeuft)
+serve_api: mtp 809 tok in 19.87s = 40.72 t/s | 475 rounds, commit 1.70/round | prompt 2237, prefill 4.11s | detok 36us/tok
+INFO:     172.17.0.1:33682 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:35:32 [#10] fertig: HTTP 200, finish=stop, 809 Tokens (exakt), Decode n/a, Prompt 2237 Tokens, gesamt 24.0 s, Denken 0 Z., Antwort 2514 Z., Tool-Stuecke 0
+INFO:     172.17.0.1:43858 - "GET /v1/models HTTP/1.1" 200 OK
+11:35:32 [#12] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113532-0012.json
+11:35:32 [#12] Anfrage /v1/chat/completions: 2 Nachrichten, Body 10 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 24576, stream False
+11:35:42 [#12] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:35:52 [#12] wartet auf erstes Token ... 20 s (Prefill laeuft)
+serve_api: mtp 1042 tok in 25.47s = 40.91 t/s | 608 rounds, commit 1.70/round | prompt 2910 (793 cached), prefill 3.07s | detok 34us/tok | 6 tok beside other streams
+INFO:     172.17.0.1:43872 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:36:00 [#12] fertig: HTTP 200, finish=stop, 1042 Tokens (exakt), Decode n/a, Prompt 2910 Tokens, gesamt 28.5 s, Denken 0 Z., Antwort 3418 Z., Tool-Stuecke 0
+INFO:     172.17.0.1:60682 - "GET /v1/models HTTP/1.1" 200 OK
+11:36:00 [#14] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113600-0014.json
+11:36:00 [#14] Anfrage /v1/chat/completions: 3 Nachrichten, Body 13 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 24576, stream False
+11:36:10 [#14] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:36:20 [#14] wartet auf erstes Token ... 20 s (Prefill laeuft)
+11:36:30 [#14] wartet auf erstes Token ... 30 s (Prefill laeuft)
+serve_api: mtp 1290 tok in 32.28s = 39.96 t/s | 716 rounds, commit 1.71/round | prompt 3721 (2903 cached), prefill 1.94s | detok 30us/tok | 64 tok beside other streams
+INFO:     172.17.0.1:60686 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:36:35 [#14] fertig: HTTP 200, finish=stop, 1290 Tokens (exakt), Decode n/a, Prompt 3721 Tokens, gesamt 34.2 s, Denken 0 Z., Antwort 4283 Z., Tool-Stuecke 0
+11:36:37 [#15] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113637-0015.json
+11:36:37 [#15] Anfrage /v1/chat/completions: 12 Nachrichten, Body 36 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:36:47 [#15] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:36:57 [#15] wartet auf erstes Token ... 20 s (Prefill laeuft)
+11:37:07 [#15] wartet auf erstes Token ... 30 s (Prefill laeuft)
+11:37:17 [#15] wartet auf erstes Token ... 40 s (Prefill laeuft)
+11:37:27 [#15] wartet auf erstes Token ... 50 s (Prefill laeuft)
+11:37:37 [#15] wartet auf erstes Token ... 60 s (Prefill laeuft)
+serve_api: mtp 2280 tok in 49.91s = 45.68 t/s | 1030 rounds, commit 2.21/round | prompt 9364, prefill 10.21s | detok 23us/tok | pld 326 rounds, 2.28 acc/round
+INFO:     172.17.0.1:59820 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:37:37 [#15] fertig: HTTP 200, finish=stop, 2280 Tokens (exakt), Decode n/a, Prompt 9364 Tokens, gesamt 60.1 s, Denken 0 Z., Antwort 8176 Z., Tool-Stuecke 0
+11:37:37 [#16] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113737-0016.json
+11:37:37 [#16] Anfrage /v1/chat/completions: 2 Nachrichten, Body 11 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:37:47 [#16] wartet auf erstes Token ... 10 s (Prefill laeuft)
+serve_api: mtp 598 tok in 14.59s = 40.98 t/s | 331 rounds, commit 1.81/round | prompt 2843, prefill 4.99s | detok 27us/tok | pld 32 rounds, 1.38 acc/round
+INFO:     172.17.0.1:38738 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:37:56 [#16] fertig: HTTP 200, finish=stop, 598 Tokens (exakt), Decode n/a, Prompt 2843 Tokens, gesamt 19.6 s, Denken 0 Z., Antwort 2540 Z., Tool-Stuecke 0
+11:37:56 [#17] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113756-0017.json
+11:37:56 [#17] Anfrage /v1/chat/completions: 2 Nachrichten, Body 11 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:38:06 [#17] wartet auf erstes Token ... 10 s (Prefill laeuft)
+serve_api: mtp 598 tok in 13.56s = 44.10 t/s | 331 rounds, commit 1.81/round | prompt 2843 (2836 cached), prefill 0.07s | detok 24us/tok | pld 32 rounds, 1.38 acc/round
+INFO:     172.17.0.1:53570 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:38:10 [#17] fertig: HTTP 200, finish=stop, 598 Tokens (exakt), Decode n/a, Prompt 2843 Tokens, gesamt 13.6 s, Denken 0 Z., Antwort 2540 Z., Tool-Stuecke 0
+11:38:12 [#18] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113812-0018.json
+11:38:12 [#18] Anfrage /v1/chat/completions: 12 Nachrichten, Body 43 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:38:22 [#18] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:38:32 [#18] wartet auf erstes Token ... 20 s (Prefill laeuft)
+11:38:42 [#18] wartet auf erstes Token ... 30 s (Prefill laeuft)
+11:38:52 [#18] wartet auf erstes Token ... 40 s (Prefill laeuft)
+11:39:02 [#18] wartet auf erstes Token ... 50 s (Prefill laeuft)
+11:39:12 [#18] wartet auf erstes Token ... 60 s (Prefill laeuft)
+11:39:22 [#18] wartet auf erstes Token ... 70 s (Prefill laeuft)
+serve_api: mtp 2892 tok in 65.98s = 43.83 t/s | 1337 rounds, commit 2.16/round | prompt 11327 (1320 cached), prefill 9.71s | detok 26us/tok | pld 336 rounds, 2.18 acc/round
+INFO:     172.17.0.1:56006 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:39:28 [#18] fertig: HTTP 200, finish=stop, 2892 Tokens (exakt), Decode n/a, Prompt 11327 Tokens, gesamt 75.7 s, Denken 0 Z., Antwort 9168 Z., Tool-Stuecke 0
+11:39:28 [#19] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113928-0019.json
+11:39:28 [#19] Anfrage /v1/chat/completions: 2 Nachrichten, Body 12 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:39:38 [#19] wartet auf erstes Token ... 10 s (Prefill laeuft)
+serve_api: mtp 490 tok in 11.93s = 41.08 t/s | 259 rounds, commit 1.89/round | prompt 3451 (188 cached), prefill 4.07s | detok 30us/tok | pld 29 rounds, 1.86 acc/round
+INFO:     172.17.0.1:54920 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:39:44 [#19] fertig: HTTP 200, finish=stop, 490 Tokens (exakt), Decode n/a, Prompt 3451 Tokens, gesamt 16.0 s, Denken 0 Z., Antwort 2014 Z., Tool-Stuecke 0
+11:39:44 [#20] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113944-0020.json
+11:39:44 [#20] Anfrage /v1/chat/completions: 2 Nachrichten, Body 12 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:39:54 [#20] wartet auf erstes Token ... 10 s (Prefill laeuft)
+serve_api: mtp 490 tok in 10.75s = 45.56 t/s | 259 rounds, commit 1.89/round | prompt 3451 (3444 cached), prefill 0.07s | detok 38us/tok | pld 29 rounds, 1.86 acc/round
+INFO:     172.17.0.1:46074 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:39:55 [#20] fertig: HTTP 200, finish=stop, 490 Tokens (exakt), Decode n/a, Prompt 3451 Tokens, gesamt 10.8 s, Denken 0 Z., Antwort 2014 Z., Tool-Stuecke 0
+11:39:58 [#21] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-113958-0021.json
+11:39:58 [#21] Anfrage /v1/chat/completions: 12 Nachrichten, Body 50 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:40:08 [#21] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:40:18 [#21] wartet auf erstes Token ... 20 s (Prefill laeuft)
+11:40:28 [#21] wartet auf erstes Token ... 30 s (Prefill laeuft)
+11:40:38 [#21] wartet auf erstes Token ... 40 s (Prefill laeuft)
+11:40:48 [#21] wartet auf erstes Token ... 50 s (Prefill laeuft)
+11:40:58 [#21] wartet auf erstes Token ... 60 s (Prefill laeuft)
+11:41:08 [#21] wartet auf erstes Token ... 70 s (Prefill laeuft)
+11:41:18 [#21] wartet auf erstes Token ... 80 s (Prefill laeuft)
+11:41:28 [#21] wartet auf erstes Token ... 90 s (Prefill laeuft)
+11:41:38 [#21] wartet auf erstes Token ... 100 s (Prefill laeuft)
+11:41:48 [#21] wartet auf erstes Token ... 110 s (Prefill laeuft)
+11:41:58 [#21] wartet auf erstes Token ... 120 s (Prefill laeuft)
+11:42:08 [#21] wartet auf erstes Token ... 130 s (Prefill laeuft)
+11:42:18 [#21] wartet auf erstes Token ... 140 s (Prefill laeuft)
+11:42:28 [#21] wartet auf erstes Token ... 150 s (Prefill laeuft)
+11:42:38 [#21] wartet auf erstes Token ... 160 s (Prefill laeuft)
+11:42:48 [#21] wartet auf erstes Token ... 170 s (Prefill laeuft)
+11:42:58 [#21] wartet auf erstes Token ... 180 s (Prefill laeuft)
+11:43:08 [#21] wartet auf erstes Token ... 190 s (Prefill laeuft)
+11:43:18 [#21] wartet auf erstes Token ... 200 s (Prefill laeuft)
+11:43:28 [#21] wartet auf erstes Token ... 210 s (Prefill laeuft)
+11:43:38 [#21] wartet auf erstes Token ... 220 s (Prefill laeuft)
+11:43:48 [#21] wartet auf erstes Token ... 230 s (Prefill laeuft)
+11:43:58 [#21] wartet auf erstes Token ... 240 s (Prefill laeuft)
+11:44:08 [#21] wartet auf erstes Token ... 250 s (Prefill laeuft)
+11:44:18 [#21] wartet auf erstes Token ... 260 s (Prefill laeuft)
+11:44:28 [#21] wartet auf erstes Token ... 270 s (Prefill laeuft)
+11:44:38 [#21] wartet auf erstes Token ... 280 s (Prefill laeuft)
+11:44:48 [#21] wartet auf erstes Token ... 290 s (Prefill laeuft)
+11:44:58 [#21] wartet auf erstes Token ... 300 s (Prefill laeuft)
+11:45:08 [#21] wartet auf erstes Token ... 310 s (Prefill laeuft)
+11:45:18 [#21] wartet auf erstes Token ... 320 s (Prefill laeuft)
+11:45:28 [#21] wartet auf erstes Token ... 330 s (Prefill laeuft)
+11:45:38 [#21] wartet auf erstes Token ... 340 s (Prefill laeuft)
+11:45:48 [#21] wartet auf erstes Token ... 350 s (Prefill laeuft)
+11:45:58 [#21] wartet auf erstes Token ... 360 s (Prefill laeuft)
+11:46:08 [#21] wartet auf erstes Token ... 370 s (Prefill laeuft)
+11:46:18 [#21] wartet auf erstes Token ... 380 s (Prefill laeuft)
+serve_api: mtp 2790 tok in 369.37s = 7.55 t/s | 1447 rounds, commit 1.90/round | prompt 13820 (1320 cached), prefill 11.81s | detok 51us/tok | 44 tok beside other streams | pld 278 rounds, 1.90 acc/round
+INFO:     172.17.0.1:46158 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:46:19 [#21] fertig: HTTP 200, finish=stop, 2790 Tokens (exakt), Decode n/a, Prompt 13820 Tokens, gesamt 381.2 s, Denken 0 Z., Antwort 10488 Z., Tool-Stuecke 0
+11:46:19 [#22] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-114619-0022.json
+11:46:19 [#22] Anfrage /v1/chat/completions: 2 Nachrichten, Body 13 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:46:29 [#22] wartet auf erstes Token ... 10 s (Prefill laeuft)
+serve_api: mtp 471 tok in 12.33s = 38.19 t/s | 257 rounds, commit 1.83/round | prompt 3378 (188 cached), prefill 4.14s | detok 41us/tok | pld 37 rounds, 2.11 acc/round
+INFO:     172.17.0.1:40814 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:46:36 [#22] fertig: HTTP 200, finish=stop, 471 Tokens (exakt), Decode n/a, Prompt 3378 Tokens, gesamt 16.6 s, Denken 0 Z., Antwort 2079 Z., Tool-Stuecke 0
+11:46:36 [#23] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-114636-0023.json
+11:46:36 [#23] Anfrage /v1/chat/completions: 2 Nachrichten, Body 13 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:46:46 [#23] wartet auf erstes Token ... 10 s (Prefill laeuft)
+serve_api: mtp 471 tok in 10.94s = 43.04 t/s | 257 rounds, commit 1.83/round | prompt 3378 (3371 cached), prefill 0.07s | detok 33us/tok | pld 37 rounds, 2.11 acc/round
+INFO:     172.17.0.1:49962 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:46:47 [#23] fertig: HTTP 200, finish=stop, 471 Tokens (exakt), Decode n/a, Prompt 3378 Tokens, gesamt 11.0 s, Denken 0 Z., Antwort 2079 Z., Tool-Stuecke 0
+11:46:50 [#24] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-114650-0024.json
+11:46:50 [#24] Anfrage /v1/chat/completions: 12 Nachrichten, Body 54 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:47:00 [#24] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:47:10 [#24] wartet auf erstes Token ... 20 s (Prefill laeuft)
+11:47:20 [#24] wartet auf erstes Token ... 30 s (Prefill laeuft)
+11:47:30 [#24] wartet auf erstes Token ... 40 s (Prefill laeuft)
+11:47:40 [#24] wartet auf erstes Token ... 50 s (Prefill laeuft)
+11:47:50 [#24] wartet auf erstes Token ... 60 s (Prefill laeuft)
+11:48:00 [#24] wartet auf erstes Token ... 70 s (Prefill laeuft)
+11:48:10 [#24] wartet auf erstes Token ... 80 s (Prefill laeuft)
+11:48:20 [#24] wartet auf erstes Token ... 90 s (Prefill laeuft)
+11:48:30 [#24] wartet auf erstes Token ... 100 s (Prefill laeuft)
+11:48:40 [#24] wartet auf erstes Token ... 110 s (Prefill laeuft)
+lookup table: 217648 rows for 13603 tokens took 111.9 s to read on 64 threads (rows not in the file cache are read from disk: a fresh start, or a host with too little RAM left for the cache)
+11:48:50 [#24] wartet auf erstes Token ... 120 s (Prefill laeuft)
+11:49:00 [#24] wartet auf erstes Token ... 130 s (Prefill laeuft)
+11:49:10 [#24] wartet auf erstes Token ... 140 s (Prefill laeuft)
+11:49:20 [#24] wartet auf erstes Token ... 150 s (Prefill laeuft)
+11:49:30 [#24] wartet auf erstes Token ... 160 s (Prefill laeuft)
+11:49:40 [#24] wartet auf erstes Token ... 170 s (Prefill laeuft)
+11:49:50 [#24] wartet auf erstes Token ... 180 s (Prefill laeuft)
+11:50:00 [#24] wartet auf erstes Token ... 190 s (Prefill laeuft)
+11:50:10 [#24] wartet auf erstes Token ... 200 s (Prefill laeuft)
+11:50:20 [#24] wartet auf erstes Token ... 210 s (Prefill laeuft)
+11:50:30 [#24] wartet auf erstes Token ... 220 s (Prefill laeuft)
+serve_api: mtp 176 tok in 4.89s = 36.02 t/s | 96 rounds, commit 1.82/round | prompt 14930, prefill 220.65s | detok 29us/tok | pld 8 rounds, 1.38 acc/round
+INFO:     172.17.0.1:53012 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:50:36 [#24] fertig: HTTP 200, finish=stop, 176 Tokens (exakt), Decode n/a, Prompt 14930 Tokens, gesamt 225.6 s, Denken 0 Z., Antwort 656 Z., Tool-Stuecke 0
+11:50:38 [#25] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-115038-0025.json
+11:50:38 [#25] Anfrage /v1/chat/completions: 12 Nachrichten, Body 54 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:50:48 [#25] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:50:58 [#25] wartet auf erstes Token ... 20 s (Prefill laeuft)
+11:51:08 [#25] wartet auf erstes Token ... 30 s (Prefill laeuft)
+11:51:18 [#25] wartet auf erstes Token ... 40 s (Prefill laeuft)
+11:51:28 [#25] wartet auf erstes Token ... 50 s (Prefill laeuft)
+11:51:38 [#25] wartet auf erstes Token ... 60 s (Prefill laeuft)
+11:51:48 [#25] wartet auf erstes Token ... 70 s (Prefill laeuft)
+11:51:58 [#25] wartet auf erstes Token ... 80 s (Prefill laeuft)
+11:52:08 [#25] wartet auf erstes Token ... 90 s (Prefill laeuft)
+11:52:18 [#25] wartet auf erstes Token ... 100 s (Prefill laeuft)
+11:52:28 [#25] wartet auf erstes Token ... 110 s (Prefill laeuft)
+11:52:38 [#25] wartet auf erstes Token ... 120 s (Prefill laeuft)
+11:52:48 [#25] wartet auf erstes Token ... 130 s (Prefill laeuft)
+11:52:58 [#25] wartet auf erstes Token ... 140 s (Prefill laeuft)
+11:53:08 [#25] wartet auf erstes Token ... 150 s (Prefill laeuft)
+serve_api: mtp 7944 tok in 144.57s = 54.95 t/s | 2620 rounds, commit 3.01/round | prompt 14886 (1320 cached), prefill 13.66s | detok 21us/tok | 46 tok beside other streams | pld 1771 rounds, 2.61 acc/round
+INFO:     172.17.0.1:42568 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:53:17 [#25] fertig: HTTP 200, finish=stop, 7944 Tokens (exakt), Decode n/a, Prompt 14886 Tokens, gesamt 158.3 s, Denken 0 Z., Antwort 25297 Z., Tool-Stuecke 0
+11:53:17 [#26] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-115317-0026.json
+11:53:17 [#26] Anfrage /v1/chat/completions: 2 Nachrichten, Body 28 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:53:27 [#26] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:53:37 [#26] wartet auf erstes Token ... 20 s (Prefill laeuft)
+11:53:47 [#26] wartet auf erstes Token ... 30 s (Prefill laeuft)
+11:53:57 [#26] wartet auf erstes Token ... 40 s (Prefill laeuft)
+serve_api: mtp 439 tok in 12.74s = 34.46 t/s | 245 rounds, commit 1.79/round | prompt 8532, prefill 30.02s | detok 29us/tok | pld 30 rounds, 1.80 acc/round
+INFO:     172.17.0.1:37562 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:53:59 [#26] fertig: HTTP 200, finish=stop, 439 Tokens (exakt), Decode n/a, Prompt 8532 Tokens, gesamt 42.8 s, Denken 0 Z., Antwort 1941 Z., Tool-Stuecke 0
+11:53:59 [#27] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-115359-0027.json
+11:53:59 [#27] Anfrage /v1/chat/completions: 2 Nachrichten, Body 28 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:54:09 [#27] wartet auf erstes Token ... 10 s (Prefill laeuft)
+serve_api: mtp 439 tok in 10.72s = 40.93 t/s | 245 rounds, commit 1.79/round | prompt 8532 (8525 cached), prefill 0.07s | detok 25us/tok | pld 30 rounds, 1.80 acc/round
+INFO:     172.17.0.1:46854 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:54:10 [#27] fertig: HTTP 200, finish=stop, 439 Tokens (exakt), Decode n/a, Prompt 8532 Tokens, gesamt 10.8 s, Denken 0 Z., Antwort 1941 Z., Tool-Stuecke 0
+11:54:13 [#28] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-115413-0028.json
+11:54:13 [#28] Anfrage /v1/chat/completions: 12 Nachrichten, Body 55 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:54:23 [#28] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:54:33 [#28] wartet auf erstes Token ... 20 s (Prefill laeuft)
+11:54:43 [#28] wartet auf erstes Token ... 30 s (Prefill laeuft)
+11:54:53 [#28] wartet auf erstes Token ... 40 s (Prefill laeuft)
+11:55:03 [#28] wartet auf erstes Token ... 50 s (Prefill laeuft)
+11:55:13 [#28] wartet auf erstes Token ... 60 s (Prefill laeuft)
+11:55:23 [#28] wartet auf erstes Token ... 70 s (Prefill laeuft)
+11:55:33 [#28] wartet auf erstes Token ... 80 s (Prefill laeuft)
+11:55:43 [#28] wartet auf erstes Token ... 90 s (Prefill laeuft)
+11:55:53 [#28] wartet auf erstes Token ... 100 s (Prefill laeuft)
+11:56:03 [#28] wartet auf erstes Token ... 110 s (Prefill laeuft)
+11:56:13 [#28] wartet auf erstes Token ... 120 s (Prefill laeuft)
+11:56:23 [#28] wartet auf erstes Token ... 130 s (Prefill laeuft)
+11:56:33 [#28] wartet auf erstes Token ... 140 s (Prefill laeuft)
+11:56:43 [#28] wartet auf erstes Token ... 150 s (Prefill laeuft)
+11:56:53 [#28] wartet auf erstes Token ... 160 s (Prefill laeuft)
+11:57:03 [#28] wartet auf erstes Token ... 170 s (Prefill laeuft)
+11:57:13 [#28] wartet auf erstes Token ... 180 s (Prefill laeuft)
+11:57:23 [#28] wartet auf erstes Token ... 190 s (Prefill laeuft)
+11:57:33 [#28] wartet auf erstes Token ... 200 s (Prefill laeuft)
+11:57:43 [#28] wartet auf erstes Token ... 210 s (Prefill laeuft)
+11:57:53 [#28] wartet auf erstes Token ... 220 s (Prefill laeuft)
+11:58:03 [#28] wartet auf erstes Token ... 230 s (Prefill laeuft)
+serve_api: mtp 8220 tok in 218.51s = 37.62 t/s | 2725 rounds, commit 3.02/round | prompt 15265 (1320 cached), prefill 14.90s | detok 19us/tok | pld 1859 rounds, 2.61 acc/round
+INFO:     172.17.0.1:35928 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:58:06 [#28] fertig: HTTP 200, finish=stop, 8220 Tokens (exakt), Decode n/a, Prompt 15265 Tokens, gesamt 233.4 s, Denken 0 Z., Antwort 25871 Z., Tool-Stuecke 0
+11:58:06 [#29] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-115806-0029.json
+11:58:06 [#29] Anfrage /v1/chat/completions: 2 Nachrichten, Body 29 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:58:16 [#29] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:58:26 [#29] wartet auf erstes Token ... 20 s (Prefill laeuft)
+serve_api: mtp 522 tok in 15.08s = 34.61 t/s | 297 rounds, commit 1.76/round | prompt 8808 (188 cached), prefill 8.67s | detok 29us/tok | pld 23 rounds, 1.39 acc/round
+INFO:     172.17.0.1:33778 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:58:30 [#29] fertig: HTTP 200, finish=stop, 522 Tokens (exakt), Decode n/a, Prompt 8808 Tokens, gesamt 23.8 s, Denken 0 Z., Antwort 2362 Z., Tool-Stuecke 0
+11:58:30 [#30] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-115830-0030.json
+11:58:30 [#30] Anfrage /v1/chat/completions: 2 Nachrichten, Body 29 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:58:40 [#30] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:58:50 [#30] wartet auf erstes Token ... 20 s (Prefill laeuft)
+serve_api: mtp 522 tok in 23.20s = 22.50 t/s | 297 rounds, commit 1.76/round | prompt 8808 (8801 cached), prefill 0.07s | detok 24us/tok | pld 23 rounds, 1.39 acc/round
+INFO:     172.17.0.1:37066 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+11:58:53 [#30] fertig: HTTP 200, finish=stop, 522 Tokens (exakt), Decode n/a, Prompt 8808 Tokens, gesamt 23.3 s, Denken 0 Z., Antwort 2362 Z., Tool-Stuecke 0
+11:58:56 [#31] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-115856-0031.json
+11:58:56 [#31] Anfrage /v1/chat/completions: 12 Nachrichten, Body 55 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+11:59:06 [#31] wartet auf erstes Token ... 10 s (Prefill laeuft)
+11:59:16 [#31] wartet auf erstes Token ... 20 s (Prefill laeuft)
+11:59:26 [#31] wartet auf erstes Token ... 30 s (Prefill laeuft)
+11:59:36 [#31] wartet auf erstes Token ... 40 s (Prefill laeuft)
+11:59:46 [#31] wartet auf erstes Token ... 50 s (Prefill laeuft)
+11:59:56 [#31] wartet auf erstes Token ... 60 s (Prefill laeuft)
+12:00:06 [#31] wartet auf erstes Token ... 70 s (Prefill laeuft)
+12:00:16 [#31] wartet auf erstes Token ... 80 s (Prefill laeuft)
+12:00:26 [#31] wartet auf erstes Token ... 90 s (Prefill laeuft)
+12:00:36 [#31] wartet auf erstes Token ... 100 s (Prefill laeuft)
+12:00:46 [#31] wartet auf erstes Token ... 110 s (Prefill laeuft)
+12:00:56 [#31] wartet auf erstes Token ... 120 s (Prefill laeuft)
+12:01:06 [#31] wartet auf erstes Token ... 130 s (Prefill laeuft)
+12:01:16 [#31] wartet auf erstes Token ... 140 s (Prefill laeuft)
+12:01:26 [#31] wartet auf erstes Token ... 150 s (Prefill laeuft)
+12:01:36 [#31] wartet auf erstes Token ... 160 s (Prefill laeuft)
+12:01:46 [#31] wartet auf erstes Token ... 170 s (Prefill laeuft)
+12:01:56 [#31] wartet auf erstes Token ... 180 s (Prefill laeuft)
+12:02:06 [#31] wartet auf erstes Token ... 190 s (Prefill laeuft)
+12:02:16 [#31] wartet auf erstes Token ... 200 s (Prefill laeuft)
+12:02:26 [#31] wartet auf erstes Token ... 210 s (Prefill laeuft)
+12:02:36 [#31] wartet auf erstes Token ... 220 s (Prefill laeuft)
+12:02:46 [#31] wartet auf erstes Token ... 230 s (Prefill laeuft)
+12:02:56 [#31] wartet auf erstes Token ... 240 s (Prefill laeuft)
+12:03:06 [#31] wartet auf erstes Token ... 250 s (Prefill laeuft)
+12:03:16 [#31] wartet auf erstes Token ... 260 s (Prefill laeuft)
+12:03:26 [#31] wartet auf erstes Token ... 270 s (Prefill laeuft)
+12:03:36 [#31] wartet auf erstes Token ... 280 s (Prefill laeuft)
+12:03:46 [#31] wartet auf erstes Token ... 290 s (Prefill laeuft)
+12:03:56 [#31] wartet auf erstes Token ... 300 s (Prefill laeuft)
+12:04:06 [#31] wartet auf erstes Token ... 310 s (Prefill laeuft)
+12:04:16 [#31] wartet auf erstes Token ... 320 s (Prefill laeuft)
+12:04:26 [#31] wartet auf erstes Token ... 330 s (Prefill laeuft)
+12:04:36 [#31] wartet auf erstes Token ... 340 s (Prefill laeuft)
+12:04:46 [#31] wartet auf erstes Token ... 350 s (Prefill laeuft)
+12:04:56 [#31] wartet auf erstes Token ... 360 s (Prefill laeuft)
+12:05:06 [#31] wartet auf erstes Token ... 370 s (Prefill laeuft)
+12:05:16 [#31] wartet auf erstes Token ... 380 s (Prefill laeuft)
+12:05:26 [#31] wartet auf erstes Token ... 390 s (Prefill laeuft)
+12:05:36 [#31] wartet auf erstes Token ... 400 s (Prefill laeuft)
+12:05:46 [#31] wartet auf erstes Token ... 410 s (Prefill laeuft)
+12:05:56 [#31] wartet auf erstes Token ... 420 s (Prefill laeuft)
+12:06:06 [#31] wartet auf erstes Token ... 430 s (Prefill laeuft)
+12:06:16 [#31] wartet auf erstes Token ... 440 s (Prefill laeuft)
+12:06:26 [#31] wartet auf erstes Token ... 450 s (Prefill laeuft)
+12:06:36 [#31] wartet auf erstes Token ... 460 s (Prefill laeuft)
+12:06:46 [#31] wartet auf erstes Token ... 470 s (Prefill laeuft)
+12:06:56 [#31] wartet auf erstes Token ... 480 s (Prefill laeuft)
+12:07:06 [#31] wartet auf erstes Token ... 490 s (Prefill laeuft)
+12:07:16 [#31] wartet auf erstes Token ... 500 s (Prefill laeuft)
+12:07:26 [#31] wartet auf erstes Token ... 510 s (Prefill laeuft)
+12:07:36 [#31] wartet auf erstes Token ... 520 s (Prefill laeuft)
+12:07:46 [#31] wartet auf erstes Token ... 530 s (Prefill laeuft)
+12:07:56 [#31] wartet auf erstes Token ... 540 s (Prefill laeuft)
+12:08:06 [#31] wartet auf erstes Token ... 550 s (Prefill laeuft)
+12:08:16 [#31] wartet auf erstes Token ... 560 s (Prefill laeuft)
+12:08:26 [#31] wartet auf erstes Token ... 570 s (Prefill laeuft)
+12:08:36 [#31] wartet auf erstes Token ... 580 s (Prefill laeuft)
+12:08:46 [#31] wartet auf erstes Token ... 590 s (Prefill laeuft)
+12:08:56 [#31] wartet auf erstes Token ... 600 s (Prefill laeuft)
+12:08:57 [#32] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-120857-0032.json
+12:08:57 [#32] Anfrage /v1/chat/completions: 12 Nachrichten, Body 55 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+12:09:06 [#31] wartet auf erstes Token ... 610 s (Prefill laeuft)
+12:09:07 [#32] wartet auf erstes Token ... 10 s (Prefill laeuft)
+12:09:16 [#31] wartet auf erstes Token ... 620 s (Prefill laeuft)
+12:09:17 [#32] wartet auf erstes Token ... 20 s (Prefill laeuft)
+12:09:26 [#31] wartet auf erstes Token ... 630 s (Prefill laeuft)
+12:09:27 [#32] wartet auf erstes Token ... 30 s (Prefill laeuft)
+12:09:36 [#31] wartet auf erstes Token ... 640 s (Prefill laeuft)
+12:09:37 [#32] wartet auf erstes Token ... 40 s (Prefill laeuft)
+12:09:46 [#31] wartet auf erstes Token ... 650 s (Prefill laeuft)
+12:09:47 [#32] wartet auf erstes Token ... 50 s (Prefill laeuft)
+12:09:56 [#31] wartet auf erstes Token ... 660 s (Prefill laeuft)
+12:09:57 [#32] wartet auf erstes Token ... 60 s (Prefill laeuft)
+12:10:06 [#31] wartet auf erstes Token ... 670 s (Prefill laeuft)
+12:10:07 [#32] wartet auf erstes Token ... 70 s (Prefill laeuft)
+12:10:16 [#31] wartet auf erstes Token ... 680 s (Prefill laeuft)
+12:10:17 [#32] wartet auf erstes Token ... 80 s (Prefill laeuft)
+12:10:26 [#31] wartet auf erstes Token ... 690 s (Prefill laeuft)
+12:10:27 [#32] wartet auf erstes Token ... 90 s (Prefill laeuft)
+12:10:36 [#31] wartet auf erstes Token ... 700 s (Prefill laeuft)
+12:10:37 [#32] wartet auf erstes Token ... 100 s (Prefill laeuft)
+12:10:46 [#31] wartet auf erstes Token ... 710 s (Prefill laeuft)
+12:10:47 [#32] wartet auf erstes Token ... 110 s (Prefill laeuft)
+12:10:56 [#31] wartet auf erstes Token ... 720 s (Prefill laeuft)
+12:10:57 [#32] wartet auf erstes Token ... 120 s (Prefill laeuft)
+12:11:06 [#31] wartet auf erstes Token ... 730 s (Prefill laeuft)
+12:11:07 [#32] wartet auf erstes Token ... 130 s (Prefill laeuft)
+12:11:16 [#31] wartet auf erstes Token ... 740 s (Prefill laeuft)
+12:11:17 [#32] wartet auf erstes Token ... 140 s (Prefill laeuft)
+12:11:26 [#31] wartet auf erstes Token ... 750 s (Prefill laeuft)
+12:11:27 [#32] wartet auf erstes Token ... 150 s (Prefill laeuft)
+12:11:36 [#31] wartet auf erstes Token ... 760 s (Prefill laeuft)
+12:11:37 [#32] wartet auf erstes Token ... 160 s (Prefill laeuft)
+12:11:46 [#31] wartet auf erstes Token ... 770 s (Prefill laeuft)
+12:11:47 [#32] wartet auf erstes Token ... 170 s (Prefill laeuft)
+12:11:56 [#31] wartet auf erstes Token ... 780 s (Prefill laeuft)
+12:11:57 [#32] wartet auf erstes Token ... 180 s (Prefill laeuft)
+serve_api: mtp 3621 tok in 224.40s = 16.14 t/s | 700 rounds, commit 1.76/round | prompt 15341, prefill 562.25s | detok 61us/tok | 2389 tok beside other streams | pld 96 rounds, 1.85 acc/round
+INFO:     172.17.0.1:58084 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+12:12:03 [#31] Client hat die Verbindung getrennt (Abbruch in VS Code?)
+12:12:03 [#31] fertig: HTTP 200, finish=None, 0 Tokens (Stream-Stuecke), Decode n/a, Prompt ? Tokens, gesamt 786.7 s, Denken 0 Z., Antwort 0 Z., Tool-Stuecke 0
+12:12:07 [#32] wartet auf erstes Token ... 190 s (Prefill laeuft)
+12:12:17 [#32] wartet auf erstes Token ... 200 s (Prefill laeuft)
+12:12:27 [#32] wartet auf erstes Token ... 210 s (Prefill laeuft)
+12:12:37 [#32] wartet auf erstes Token ... 220 s (Prefill laeuft)
+12:12:47 [#32] wartet auf erstes Token ... 230 s (Prefill laeuft)
+12:12:57 [#32] wartet auf erstes Token ... 240 s (Prefill laeuft)
+12:13:07 [#32] wartet auf erstes Token ... 250 s (Prefill laeuft)
+12:13:17 [#32] wartet auf erstes Token ... 260 s (Prefill laeuft)
+12:13:27 [#32] wartet auf erstes Token ... 270 s (Prefill laeuft)
+12:13:37 [#32] wartet auf erstes Token ... 280 s (Prefill laeuft)
+12:13:47 [#32] wartet auf erstes Token ... 290 s (Prefill laeuft)
+12:13:57 [#32] wartet auf erstes Token ... 300 s (Prefill laeuft)
+12:14:07 [#32] wartet auf erstes Token ... 310 s (Prefill laeuft)
+INFO:     172.17.0.1:60372 - "GET /v1/models HTTP/1.1" 200 OK
+12:14:08 [#34] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-121408-0034.json
+12:14:08 [#34] Anfrage /v1/chat/completions: 2 Nachrichten, Body 15 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+12:14:17 [#32] wartet auf erstes Token ... 320 s (Prefill laeuft)
+12:14:18 [#34] wartet auf erstes Token ... 10 s (Prefill laeuft)
+12:14:27 [#32] wartet auf erstes Token ... 330 s (Prefill laeuft)
+12:14:28 [#34] wartet auf erstes Token ... 20 s (Prefill laeuft)
+12:14:37 [#32] wartet auf erstes Token ... 340 s (Prefill laeuft)
+12:14:38 [#34] wartet auf erstes Token ... 30 s (Prefill laeuft)
+12:14:47 [#32] wartet auf erstes Token ... 350 s (Prefill laeuft)
+12:14:48 [#34] wartet auf erstes Token ... 40 s (Prefill laeuft)
+12:14:57 [#32] wartet auf erstes Token ... 360 s (Prefill laeuft)
+12:14:58 [#34] wartet auf erstes Token ... 50 s (Prefill laeuft)
+12:15:07 [#32] wartet auf erstes Token ... 370 s (Prefill laeuft)
+12:15:08 [#34] wartet auf erstes Token ... 60 s (Prefill laeuft)
+12:15:17 [#32] wartet auf erstes Token ... 380 s (Prefill laeuft)
+12:15:18 [#34] wartet auf erstes Token ... 70 s (Prefill laeuft)
+12:15:27 [#32] wartet auf erstes Token ... 390 s (Prefill laeuft)
+12:15:28 [#34] wartet auf erstes Token ... 80 s (Prefill laeuft)
+12:15:37 [#32] wartet auf erstes Token ... 400 s (Prefill laeuft)
+12:15:38 [#34] wartet auf erstes Token ... 90 s (Prefill laeuft)
+12:15:47 [#32] wartet auf erstes Token ... 410 s (Prefill laeuft)
+12:15:48 [#34] wartet auf erstes Token ... 100 s (Prefill laeuft)
+serve_api: mtp 3621 tok in 331.56s = 10.92 t/s | 147 rounds, commit 3.12/round | prompt 15341 (15334 cached), prefill 0.09s | detok 23us/tok | 3162 tok beside other streams | pld 107 rounds, 2.69 acc/round
+INFO:     172.17.0.1:46168 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+12:15:49 [#32] fertig: HTTP 200, finish=stop, 3621 Tokens (exakt), Decode n/a, Prompt 15341 Tokens, gesamt 412.6 s, Denken 0 Z., Antwort 13150 Z., Tool-Stuecke 0
+12:15:58 [#34] wartet auf erstes Token ... 110 s (Prefill laeuft)
+serve_api: mtp 1179 tok in 45.80s = 25.74 t/s | 229 rounds, commit 1.77/round | prompt 4204, prefill 65.81s | detok 24us/tok | 773 tok beside other streams
+INFO:     172.17.0.1:60376 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+12:16:00 [#34] fertig: HTTP 200, finish=stop, 1179 Tokens (exakt), Decode n/a, Prompt 4204 Tokens, gesamt 111.9 s, Denken 0 Z., Antwort 4059 Z., Tool-Stuecke 0
+INFO:     172.17.0.1:40414 - "GET /v1/models HTTP/1.1" 200 OK
+12:16:00 [#36] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-121600-0036.json
+12:16:00 [#36] Anfrage /v1/chat/completions: 2 Nachrichten, Body 33 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+12:16:10 [#36] wartet auf erstes Token ... 10 s (Prefill laeuft)
+serve_api: mtp 289 tok in 7.13s = 40.51 t/s | 157 rounds, commit 1.83/round | prompt 9168, prefill 10.41s | detok 27us/tok
+INFO:     172.17.0.1:40424 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+12:16:18 [#36] fertig: HTTP 200, finish=stop, 289 Tokens (exakt), Decode n/a, Prompt 9168 Tokens, gesamt 17.6 s, Denken 0 Z., Antwort 1053 Z., Tool-Stuecke 0
+INFO:     172.17.0.1:39648 - "GET /v1/models HTTP/1.1" 200 OK
+12:16:18 [#38] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-121618-0038.json
+12:16:18 [#38] Anfrage /v1/chat/completions: 2 Nachrichten, Body 19 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 0, max_tokens 32768, stream False
+12:16:28 [#38] wartet auf erstes Token ... 10 s (Prefill laeuft)
+12:16:38 [#38] wartet auf erstes Token ... 20 s (Prefill laeuft)
+12:16:48 [#38] wartet auf erstes Token ... 30 s (Prefill laeuft)
+12:16:58 [#38] wartet auf erstes Token ... 40 s (Prefill laeuft)
+12:17:08 [#38] wartet auf erstes Token ... 50 s (Prefill laeuft)
+12:17:18 [#38] wartet auf erstes Token ... 60 s (Prefill laeuft)
+12:17:28 [#38] wartet auf erstes Token ... 70 s (Prefill laeuft)
+12:17:38 [#38] wartet auf erstes Token ... 80 s (Prefill laeuft)
+12:17:48 [#38] wartet auf erstes Token ... 90 s (Prefill laeuft)
+12:17:58 [#38] wartet auf erstes Token ... 100 s (Prefill laeuft)
+12:18:08 [#38] wartet auf erstes Token ... 110 s (Prefill laeuft)
+12:18:18 [#38] wartet auf erstes Token ... 120 s (Prefill laeuft)
+12:18:28 [#38] wartet auf erstes Token ... 130 s (Prefill laeuft)
+12:18:38 [#38] wartet auf erstes Token ... 140 s (Prefill laeuft)
+12:18:48 [#38] wartet auf erstes Token ... 150 s (Prefill laeuft)
+12:18:58 [#38] wartet auf erstes Token ... 160 s (Prefill laeuft)
+12:19:08 [#38] wartet auf erstes Token ... 170 s (Prefill laeuft)
+12:19:18 [#38] wartet auf erstes Token ... 180 s (Prefill laeuft)
+12:19:28 [#38] wartet auf erstes Token ... 190 s (Prefill laeuft)
+12:19:38 [#38] wartet auf erstes Token ... 200 s (Prefill laeuft)
+12:19:48 [#38] wartet auf erstes Token ... 210 s (Prefill laeuft)
+12:19:58 [#38] wartet auf erstes Token ... 220 s (Prefill laeuft)
+12:20:08 [#38] wartet auf erstes Token ... 230 s (Prefill laeuft)
+12:20:18 [#38] wartet auf erstes Token ... 240 s (Prefill laeuft)
+12:20:28 [#38] wartet auf erstes Token ... 250 s (Prefill laeuft)
+12:20:38 [#38] wartet auf erstes Token ... 260 s (Prefill laeuft)
+12:20:48 [#38] wartet auf erstes Token ... 270 s (Prefill laeuft)
+12:20:58 [#38] wartet auf erstes Token ... 280 s (Prefill laeuft)
+12:21:08 [#38] wartet auf erstes Token ... 290 s (Prefill laeuft)
+12:21:18 [#38] wartet auf erstes Token ... 300 s (Prefill laeuft)
+12:21:28 [#38] wartet auf erstes Token ... 310 s (Prefill laeuft)
+INFO:     172.17.0.1:39650 - "POST /v1/chat/completions HTTP/1.1" 504 Gateway Timeout
+12:21:36 [#38] fertig: HTTP 504, finish=None, 0 Tokens (Stream-Stuecke), Decode n/a, Prompt ? Tokens, gesamt 318.4 s, Denken 0 Z., Antwort 0 Z., Tool-Stuecke 0
+INFO:     172.17.0.1:51830 - "GET /v1/models HTTP/1.1" 200 OK
+13:41:09 [#40] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-134109-0040.json
+13:41:09 [#40] Anfrage /v1/chat/completions: 3 Nachrichten, Body 122 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 72, max_tokens 65536, stream True
+serve_api: 'n' accepted but IGNORED by this endpoint
+INFO:     172.17.0.1:38066 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+13:41:18 [#41] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-134118-0041.json
+13:41:18 [#41] Anfrage /v1/chat/completions: 4 Nachrichten, Body 46 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 20, max_tokens 65536, stream True
+INFO:     172.17.0.1:37648 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+13:41:19 [#40] wartet auf erstes Token ... 10 s (Prefill laeuft)
+13:41:19 [#40] Client hat die Verbindung getrennt (Abbruch in VS Code?)
+13:41:19 [#40] fertig: HTTP 200, finish=None, 0 Tokens (Stream-Stuecke), Decode n/a, Prompt ? Tokens, gesamt 10.2 s, Denken 0 Z., Antwort 0 Z., Tool-Stuecke 0
+serve_api: client disconnected mid-stream, chatcmpl-579ca42173fe4869bfb82082, 0 SSE frames and 0 chars sent in 10.0s, largest gap between frames 10.0s, last frame 10.0s before the hangup, 1 keepalives (the engine is being stopped; this is the client hanging up, not a server error)
+13:41:28 [#41] wartet auf erstes Token ... 10 s (Prefill laeuft)
+13:41:28 [#41] Client hat die Verbindung getrennt (Abbruch in VS Code?)
+13:41:28 [#41] fertig: HTTP 200, finish=None, 0 Tokens (Stream-Stuecke), Decode n/a, Prompt ? Tokens, gesamt 10.0 s, Denken 0 Z., Antwort 0 Z., Tool-Stuecke 0
+serve_api: client disconnected mid-stream, chatcmpl-d8c626bcb413449bb692b6dc, 0 SSE frames and 0 chars sent in 10.0s, largest gap between frames 10.0s, last frame 10.0s before the hangup, 1 keepalives (the engine is being stopped; this is the client hanging up, not a server error)
+13:41:37 [#42] Anfrage-Body gespeichert: ~/.local/state/llama-server/proxy-dump/20260918-134137-0042.json
+13:41:37 [#42] Anfrage /v1/chat/completions: 3 Nachrichten, Body 44 KB (exakte Prompt-Tokens in der fertig-Zeile), Bilder 0, Tools 20, max_tokens 65536, stream True
+INFO:     172.17.0.1:41606 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+13:41:47 [#42] wartet auf erstes Token ... 10 s (Prefill laeuft)
+13:41:57 [#42] wartet auf erstes Token ... 20 s (Prefill laeuft)
+13:42:07 [#42] wartet auf erstes Token ... 30 s (Prefill laeuft)
+13:42:17 [#42] wartet auf erstes Token ... 40 s (Prefill laeuft)
+13:42:27 [#42] wartet auf erstes Token ... 50 s (Prefill laeuft)
+13:42:37 [#42] wartet auf erstes Token ... 60 s (Prefill laeuft)
+13:42:47 [#42] wartet auf erstes Token ... 70 s (Prefill laeuft)
+13:42:57 [#42] wartet auf erstes Token ... 80 s (Prefill laeuft)
+13:43:07 [#42] wartet auf erstes Token ... 90 s (Prefill laeuft)
+13:43:17 [#42] wartet auf erstes Token ... 100 s (Prefill laeuft)
+13:43:27 [#42] wartet auf erstes Token ... 110 s (Prefill laeuft)
+13:43:37 [#42] wartet auf erstes Token ... 120 s (Prefill laeuft)
+13:43:47 [#42] wartet auf erstes Token ... 130 s (Prefill laeuft)
+13:43:57 [#42] wartet auf erstes Token ... 140 s (Prefill laeuft)
+13:44:07 [#42] wartet auf erstes Token ... 150 s (Prefill laeuft)
+13:44:17 [#42] wartet auf erstes Token ... 160 s (Prefill laeuft)
+13:44:27 [#42] wartet auf erstes Token ... 170 s (Prefill laeuft)
+13:44:37 [#42] wartet auf erstes Token ... 180 s (Prefill laeuft)
+13:44:47 [#42] wartet auf erstes Token ... 190 s (Prefill laeuft)
+13:44:57 [#42] wartet auf erstes Token ... 200 s (Prefill laeuft)
+13:45:07 [#42] wartet auf erstes Token ... 210 s (Prefill laeuft)
+13:45:17 [#42] wartet auf erstes Token ... 220 s (Prefill laeuft)
+13:45:27 [#42] wartet auf erstes Token ... 230 s (Prefill laeuft)
+13:45:37 [#42] wartet auf erstes Token ... 240 s (Prefill laeuft)
+13:45:47 [#42] wartet auf erstes Token ... 250 s (Prefill laeuft)
+13:45:57 [#42] wartet auf erstes Token ... 260 s (Prefill laeuft)
+13:46:07 [#42] wartet auf erstes Token ... 270 s (Prefill laeuft)
+13:46:17 [#42] wartet auf erstes Token ... 280 s (Prefill laeuft)
+13:46:27 [#42] wartet auf erstes Token ... 290 s (Prefill laeuft)
+13:46:37 [#42] wartet auf erstes Token ... 300 s (Prefill laeuft)
+13:46:47 [#42] wartet auf erstes Token ... 310 s (Prefill laeuft)
+13:46:57 [#42] wartet auf erstes Token ... 320 s (Prefill laeuft)
+13:47:07 [#42] wartet auf erstes Token ... 330 s (Prefill laeuft)
+13:47:17 [#42] wartet auf erstes Token ... 340 s (Prefill laeuft)
+13:47:27 [#42] wartet auf erstes Token ... 350 s (Prefill laeuft)
+13:47:37 [#42] wartet auf erstes Token ... 360 s (Prefill laeuft)
+13:47:47 [#42] wartet auf erstes Token ... 370 s (Prefill laeuft)
+13:47:57 [#42] wartet auf erstes Token ... 380 s (Prefill laeuft)
+13:48:07 [#42] wartet auf erstes Token ... 390 s (Prefill laeuft)
+13:48:17 [#42] wartet auf erstes Token ... 400 s (Prefill laeuft)
+13:48:27 [#42] wartet auf erstes Token ... 410 s (Prefill laeuft)
+13:48:37 [#42] wartet auf erstes Token ... 420 s (Prefill laeuft)
+13:48:47 [#42] wartet auf erstes Token ... 430 s (Prefill laeuft)
+13:48:57 [#42] wartet auf erstes Token ... 440 s (Prefill laeuft)
+13:49:07 [#42] wartet auf erstes Token ... 450 s (Prefill laeuft)
+13:49:17 [#42] wartet auf erstes Token ... 460 s (Prefill laeuft)
+13:49:27 [#42] wartet auf erstes Token ... 470 s (Prefill laeuft)
+13:49:37 [#42] wartet auf erstes Token ... 480 s (Prefill laeuft)
+13:49:47 [#42] wartet auf erstes Token ... 490 s (Prefill laeuft)
+13:49:57 [#42] wartet auf erstes Token ... 500 s (Prefill laeuft)
+13:50:07 [#42] wartet auf erstes Token ... 510 s (Prefill laeuft)
+13:50:17 [#42] wartet auf erstes Token ... 520 s (Prefill laeuft)
+13:50:27 [#42] wartet auf erstes Token ... 530 s (Prefill laeuft)
+13:50:37 [#42] wartet auf erstes Token ... 540 s (Prefill laeuft)
+13:50:47 [#42] wartet auf erstes Token ... 550 s (Prefill laeuft)
+13:50:57 [#42] wartet auf erstes Token ... 560 s (Prefill laeuft)
+13:51:07 [#42] wartet auf erstes Token ... 570 s (Prefill laeuft)
+13:51:17 [#42] wartet auf erstes Token ... 580 s (Prefill laeuft)
+13:51:27 [#42] wartet auf erstes Token ... 590 s (Prefill laeuft)
+13:51:37 [#42] wartet auf erstes Token ... 600 s (Prefill laeuft)
+13:51:47 [#42] wartet auf erstes Token ... 610 s (Prefill laeuft)
+13:51:57 [#42] wartet auf erstes Token ... 620 s (Prefill laeuft)
+13:52:07 [#42] wartet auf erstes Token ... 630 s (Prefill laeuft)
+13:52:17 [#42] wartet auf erstes Token ... 640 s (Prefill laeuft)
+13:52:27 [#42] wartet auf erstes Token ... 650 s (Prefill laeuft)
+13:52:37 [#42] wartet auf erstes Token ... 660 s (Prefill laeuft)
+13:52:47 [#42] wartet auf erstes Token ... 670 s (Prefill laeuft)
+13:52:57 [#42] wartet auf erstes Token ... 680 s (Prefill laeuft)
+13:53:07 [#42] wartet auf erstes Token ... 690 s (Prefill laeuft)
+13:53:17 [#42] wartet auf erstes Token ... 700 s (Prefill laeuft)
+13:53:27 [#42] wartet auf erstes Token ... 710 s (Prefill laeuft)
+13:53:37 [#42] wartet auf erstes Token ... 720 s (Prefill laeuft)
+13:53:47 [#42] wartet auf erstes Token ... 730 s (Prefill laeuft)
+serve_api: client disconnected mid-stream, chatcmpl-38deb70974414e7598e622a0, 0 SSE frames and 0 chars sent in 738.6s, largest gap between frames 738.6s, last frame 738.6s before the hangup, 73 keepalives (the engine is being stopped; this is the client hanging up, not a server error)
+halogen-log-sichern: 12 Sitzung(en), 1 neu/erweitert gesichert nach ~/.local/state/llama-server/halogen-logs
