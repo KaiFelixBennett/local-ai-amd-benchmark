@@ -89,14 +89,14 @@
    "dateien_test": 0,
    "zeilen_test": 0
   },
-  "quality": 20,
+  "quality": 16,
   "quality_scale": 40,
   "rubric": {
-   "game_feel": 6,
+   "game_feel": 4,
    "presentation": 6,
    "code_quality": 2,
-   "scope": 6,
-   "status": "proposal"
+   "scope": 4,
+   "status": "confirmed"
   },
   "spec": "draft-mtp · n_max 2",
   "build": "b9985",
@@ -154,12 +154,12 @@
    "dateien_test": 10,
    "zeilen_test": 1398
   },
-  "quality": 35,
+  "quality": 34,
   "quality_scale": 40,
   "rubric": {
    "game_feel": 9,
    "presentation": 9,
-   "code_quality": 8,
+   "code_quality": 7,
    "scope": 9,
    "status": "confirmed"
   },
@@ -284,9 +284,15 @@
    "dateien_test": 11,
    "zeilen_test": 1876
   },
-  "quality": null,
+  "quality": 32,
   "quality_scale": 40,
-  "rubric": null,
+  "rubric": {
+   "game_feel": 8,
+   "presentation": 9,
+   "code_quality": 7,
+   "scope": 8,
+   "status": "confirmed"
+  },
   "spec": "MTP Tiefe 1, dazu Prompt Lookup",
   "build": "halogen-flash-server 0.6.3",
   "ctx": 262144,
@@ -850,14 +856,14 @@
    "dateien_test": 11,
    "zeilen_test": 885
   },
-  "quality": 32,
+  "quality": 30,
   "quality_scale": 40,
   "rubric": {
-   "game_feel": 8,
+   "game_feel": 7,
    "presentation": 8,
-   "code_quality": 8,
+   "code_quality": 7,
    "scope": 8,
-   "status": "proposal"
+   "status": "confirmed"
   },
   "spec": "—",
   "build": "—",

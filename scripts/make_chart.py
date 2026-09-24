@@ -26,7 +26,7 @@ OUT = os.path.join(ROOT, "media", "chart")
 W, H = 900, 562
 X0, X1 = 64, 752            # plot area
 Y0, Y1 = 44, 474
-XMAX = 36.0                 # t/s
+XMAX = 42.0                 # t/s; the Halogen run reaches 38.28, its label needs room to the right
 QMIN, QMAX = 0.0, 40.0      # rubric, four criteria of 10 points each
 QSTEP = 5
 
@@ -47,6 +47,7 @@ LABELS = {
     "qwen38-27b-q6-clairobscure-r9700":     (-12,   5, "end",    "Qwen3.8-27B Q6"),
     # High enough that the second line clears the point.
     "qwen38-flashnext-moorhuhn-evox2":      (  0, -30, "middle", "Qwen3.8-Flash-Next"),
+    "qwen38-flashnext-moorhuhn-halogen-evox2": (0, -30, "middle", "Qwen3.8-Flash-Next · Halogen"),
     "qwen38-flashnext-clairobscure-evox2":  (  0, -30, "middle", "Qwen3.8-Flash-Next"),
     "deepseek-v4-flash-clairobscure-evox2": ( 12,   5, "start",  "DeepSeek-V4-Flash-0731"),
     "qwen35-122b-a10b-evox2":               (-12,   5, "end",    "Qwen3.5-122B-A10B"),

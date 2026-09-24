@@ -249,11 +249,11 @@ tokens or more in that log.
 |---|---|--:|--:|--:|---|
 | **Radeon AI PRO R9700** | | | | | |
 | Qwen3.8-27B<br><sub>UD-Q4_K_XL</sub> | Moorhuhn | **33.69** | **31** ✓ | 11 | [log](evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log) · [page](https://benchmark.securesight.ai/m/qwen38-27b/en?lauf=qwen38-27b-q4xl-moorhuhn-r9700) |
-| Qwen3.6-27B<br><sub>UD-Q6_K_XL</sub> | Moorhuhn | **33.45** | 20 | 0 | [log](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) · [page](https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-moorhuhn-r9700) |
+| Qwen3.6-27B<br><sub>UD-Q6_K_XL</sub> | Moorhuhn | **33.45** | **16** ✓ | 0 | [log](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) · [page](https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-moorhuhn-r9700) |
 | Qwen3.8-27B<br><sub>UD-Q6_K_M</sub> | Clair Obscure | **26.30** | 28 | 0 | [log](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log) · [page](https://benchmark.securesight.ai/m/qwen38-27b/en?lauf=qwen38-27b-q6-clairobscure-r9700) |
 | **AMD AI MAX 395 (AMD Halo)** | | | | | |
-| Qwen3.8-Flash-Next<br><sub>UD-Q4_K_XL</sub> | Moorhuhn | **21.76** | **35** ✓ | 10 | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) · [page](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-evox2) |
-| Qwen3.8-Flash-Next<br><sub>W4B · Halogen</sub> | Moorhuhn | **38.28** | — | 11 | [log](evidence/logs/qwen38-flashnext-moorhuhn-halogen-evox2.log) · [page](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-halogen-evox2) |
+| Qwen3.8-Flash-Next<br><sub>UD-Q4_K_XL</sub> | Moorhuhn | **21.76** | **34** ✓ | 10 | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) · [page](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-evox2) |
+| Qwen3.8-Flash-Next<br><sub>W4B · Halogen</sub> | Moorhuhn | **38.28** | **32** ✓ | 11 | [log](evidence/logs/qwen38-flashnext-moorhuhn-halogen-evox2.log) · [page](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-halogen-evox2) |
 | Qwen3.8-Flash-Next<br><sub>UD-Q4_K_XL</sub> | Clair Obscure | **10.93** | 22 | 0 | [log](evidence/logs/qwen38-flashnext-clairobscur-halo.log) · [page](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-clairobscure-evox2) |
 | DeepSeek-V4-Flash-0731<br><sub>UD-IQ3_XXS</sub> | Clair Obscure | **7.02** | 16 | 0 | [log](evidence/logs/deepseek-v4-flash-clairobscur-halo.log) · [page](https://benchmark.securesight.ai/m/deepseek-v4-flash-0731/en?lauf=deepseek-v4-flash-clairobscure-evox2) |
 
@@ -290,7 +290,7 @@ The Qwen3.8-27B UD-Q4_K_XL log covers the first of two sessions. For the Flash-N
 | Laguna S 2.1<br><sub>AI MAX 395</sub> | Clair Obscure | synthetic in Q4_K_M: 20.71 t/s tg128, 338.68 t/s pp512; the game was built in UD-Q4_K_XL without a server log | 22 | 0 | [report](evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md) · [page](https://benchmark.securesight.ai/m/laguna-s-21/en) |
 | Qwen3.8-27B, reasoning medium<br><sub>UD-Q4_K_XL · R9700</sub> | Moorhuhn | the launch line above with <code>--reasoning-effort medium</code>; no server log, 6 h 28 min read from VS Code | 26 | 10 | [chat](evidence/chats/qwen38-27b-q4xl-moorhuhn-medium-r9700.md) · [page](https://benchmark.securesight.ai/m/qwen38-27b/en?lauf=qwen38-27b-q4xl-moorhuhn-medium-r9700) |
 | Qwen3.6-27B<br><sub>UD-Q6_K_XL · R9700</sub> | Clair Obscure | the build only, no server log was kept | 22 | 0 | [page](https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-clairobscure-r9700) |
-| Sonnet 5, reasoning high<br><sub>cloud reference</sub> | Moorhuhn | the build and 42 min of work from the Claude Code session log; cloud speed is not measured on purpose | 32 | 11 | [page](https://benchmark.securesight.ai/m/sonnet-5/en) |
+| Sonnet 5, reasoning high<br><sub>cloud reference</sub> | Moorhuhn | the build and 42 min of work from the Claude Code session log; cloud speed is not measured on purpose | **30** ✓ | 11 | [page](https://benchmark.securesight.ai/m/sonnet-5/en) |
 | Opus 5 ULTRACODE<br><sub>cloud reference</sub> | Clair Obscure | the build; cloud speed is not measured on purpose | 34 | 0 | [page](https://benchmark.securesight.ai/m/opus-5-ultracode/en) |
 | GPT 5.6 Sol<br><sub>cloud reference</sub> | Moorhuhn | pending, only the prompt exists | | | [page](https://benchmark.securesight.ai/m/gpt-56-sol/en) |
 | Opus 5, reasoning high<br><sub>cloud reference, not in ULTRACODE mode</sub> | Moorhuhn | 1 h 52 min of work and 1.33 million tokens from the Claude Code session log, up to 7 agents in parallel; the build is not published yet | | | [page](https://benchmark.securesight.ai/m/opus-5/en) |
@@ -300,11 +300,11 @@ The Qwen3.8-27B UD-Q4_K_XL log covers the first of two sessions. For the Flash-N
 <div align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="media/chart/field-dark.svg">
-  <img src="media/chart/field-light.svg" width="880" alt="Scatter chart of decode speed in tokens per second against quality on a rubric from 0 to 40. Filled points are agent runs, hollow points synthetic sweeps, teal for the Radeon AI PRO R9700 and orange for the AMD AI MAX 395. A dashed Pareto front joins Qwen3.8-Flash-Next on Moorhuhn at 21.76 t/s and 35 points with Qwen3.8-27B UD-Q4_K_XL at 33.69 t/s and 31 points. A dotted line marks Sonnet 5 in the cloud at 32 points.">
+  <img src="media/chart/field-light.svg" width="880" alt="Scatter chart of decode speed in tokens per second against quality on a rubric from 0 to 40. Filled points are agent runs, hollow points synthetic sweeps, teal for the Radeon AI PRO R9700 and orange for the AMD AI MAX 395. A dashed Pareto front joins Qwen3.8-Flash-Next on Moorhuhn at 21.76 t/s and 34 points with its Halogen run at 38.28 t/s and 32 points. A dotted line marks Sonnet 5 in the cloud at 30 points.">
 </picture>
 </div>
 
-<sub>Filled points are agent runs, hollow points synthetic sweeps, a different measurement. The dashed line is the Pareto front of the agent runs, the runs no other agent run beats on both axes: Qwen3.8-Flash-Next on Moorhuhn (21.76 t/s, 35) and Qwen3.8-27B UD-Q4_K_XL (33.69 t/s, 31). Drawn from <code>data/runs.json</code> by <code>scripts/make_chart.py</code>, so the picture cannot drift from the data. The Halogen run has no quality score yet and is not drawn.</sub>
+<sub>Filled points are agent runs, hollow points synthetic sweeps, a different measurement. The dashed line is the Pareto front of the agent runs, the runs no other agent run beats on both axes: Qwen3.8-Flash-Next on Moorhuhn with llama.cpp (21.76 t/s, 34) and with Halogen (38.28 t/s, 32). Drawn from <code>data/runs.json</code> by <code>scripts/make_chart.py</code>, so the picture cannot drift from the data. The Halogen run has no quality score yet and is not drawn.</sub>
 
 > [!IMPORTANT]
 > **There is no overall ranking here.** Any weighting of speed against quality is an opinion, so
@@ -357,7 +357,7 @@ and dodge on tight timing windows.
 <td width="50%" valign="top">
 <a href="https://benchmark.securesight.ai/spiel/sonnet5/"><img src="media/gif/moorhuhn-sonnet5.gif" width="100%" alt="A flat 2D shooter built by Sonnet 5 as the cloud reference for the same prompt"></a>
 <b>Moorhuhn</b> · Sonnet 5 · cloud reference<br>
-<sub>72 files · 9,433 lines · 11 test files · quality 32, proposal<br>
+<sub>72 files · 9,433 lines · 11 test files · quality 30, confirmed<br>
 <a href="https://benchmark.securesight.ai/spiel/sonnet5/">Play</a> · <a href="https://benchmark.securesight.ai/m/sonnet-5/en">Video</a> · <a href="benchmarks/sonnet5/moorhuhn/">Source</a></sub>
 </td>
 </tr>
@@ -379,7 +379,7 @@ and dodge on tight timing windows.
 <td width="50%" valign="top">
 <a href="https://benchmark.securesight.ai/spiel/qwen36-27b-q6-moorhuhn-r9700/"><img src="media/gif/moorhuhn-qwen36.gif" width="100%" alt="A 2D side scrolling shooter with parallax layers, built by Qwen3.6-27B"></a>
 <b>Moorhuhn</b> · Qwen3.6-27B UD-Q6_K_XL · R9700<br>
-<sub>39 files · 6,903 lines · no tests · 12 <code>fix_*</code> repair scripts · quality 20, proposal<br>
+<sub>39 files · 6,903 lines · no tests · 12 <code>fix_*</code> repair scripts · quality 16, confirmed<br>
 <a href="https://benchmark.securesight.ai/spiel/qwen36-27b-q6-moorhuhn-r9700/">Play</a> · <a href="https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-moorhuhn-r9700">Video</a> · <a href="benchmarks/qwen36-27b/moorhuhn-q6/">Source</a></sub>
 </td>
 <td width="50%" valign="top">
@@ -393,7 +393,7 @@ and dodge on tight timing windows.
 <td width="50%" valign="top">
 <a href="https://benchmark.securesight.ai/spiel/qwen38-flashnext-moorhuhn-halogen-evox2/"><img src="media/gif/moorhuhn-flashnext-halogen.gif" width="100%" alt="The last seconds of a Blitz round in Moorland Mayhem, Federsturm, built by Qwen3.8-Flash-Next on Halogen: birds, combo counter and PERFECT popups, played by a script"></a>
 <b>Moorhuhn</b> · Qwen3.8-Flash-Next W4B · Halogen · AI MAX 395<br>
-<sub>65 files · 20,887 lines · 11 test files · not assessed yet · this clip is played by a script<br>
+<sub>65 files · 20,887 lines · 11 test files · quality 32, confirmed · this clip is played by a script<br>
 <a href="https://benchmark.securesight.ai/spiel/qwen38-flashnext-moorhuhn-halogen-evox2/">Play</a> · <a href="https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-halogen-evox2">Video</a> · <a href="benchmarks/qwen38-flashnext/moorhuhn-halogen/">Source</a></sub>
 </td>
 <td width="50%" valign="top">
