@@ -290,9 +290,10 @@ The Qwen3.8-27B UD-Q4_K_XL log covers the first of two sessions. For the Flash-N
 | Laguna S 2.1<br><sub>AI MAX 395</sub> | Clair Obscure | synthetic in Q4_K_M: 20.71 t/s tg128, 338.68 t/s pp512; the game was built in UD-Q4_K_XL without a server log | 22 | 0 | [report](evidence/reports/laguna-s21-strix-halo-vulkan-benchmark.md) · [page](https://benchmark.securesight.ai/m/laguna-s-21/en) |
 | Qwen3.8-27B, reasoning medium<br><sub>UD-Q4_K_XL · R9700</sub> | Moorhuhn | the launch line above with <code>--reasoning-effort medium</code>; no server log, 6 h 28 min read from VS Code | 26 | 10 | [chat](evidence/chats/qwen38-27b-q4xl-moorhuhn-medium-r9700.md) · [page](https://benchmark.securesight.ai/m/qwen38-27b/en?lauf=qwen38-27b-q4xl-moorhuhn-medium-r9700) |
 | Qwen3.6-27B<br><sub>UD-Q6_K_XL · R9700</sub> | Clair Obscure | the build only, no server log was kept | 22 | 0 | [page](https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-clairobscure-r9700) |
-| Sonnet 5<br><sub>cloud reference</sub> | Moorhuhn | the build; cloud speed is not measured on purpose | 32 | 11 | [page](https://benchmark.securesight.ai/m/sonnet-5/en) |
+| Sonnet 5, reasoning high<br><sub>cloud reference</sub> | Moorhuhn | the build and 42 min of work from the Claude Code session log; cloud speed is not measured on purpose | 32 | 11 | [page](https://benchmark.securesight.ai/m/sonnet-5/en) |
 | Opus 5 ULTRACODE<br><sub>cloud reference</sub> | Clair Obscure | the build; cloud speed is not measured on purpose | 34 | 0 | [page](https://benchmark.securesight.ai/m/opus-5-ultracode/en) |
-| GPT 5.6 Sol, Opus 5 ULTRACODE<br><sub>cloud reference</sub> | Moorhuhn | pending, only the prompt exists | | | [page](https://benchmark.securesight.ai/m/gpt-56-sol/en) |
+| GPT 5.6 Sol<br><sub>cloud reference</sub> | Moorhuhn | pending, only the prompt exists | | | [page](https://benchmark.securesight.ai/m/gpt-56-sol/en) |
+| Opus 5, reasoning high<br><sub>cloud reference, not in ULTRACODE mode</sub> | Moorhuhn | 1 h 52 min of work and 1.33 million tokens from the Claude Code session log, up to 7 agents in parallel; the build is not published yet | | | [page](https://benchmark.securesight.ai/m/opus-5/en) |
 
 </details>
 
@@ -775,7 +776,7 @@ Stated plainly, because a benchmark that hides its gaps is marketing.
 | **Agent logs for Laguna S 2.1 and Qwen3.5-122B-A10B** | AMD AI MAX 395 | Both have builds and synthetic sweeps but no agent log, so neither can join the Pareto front. |
 | **Server logs for two runs** | Qwen3.6-27B Clair Obscure, Qwen3.8-27B medium | Not kept. The builds exist, the measurement does not. |
 | **The second session of the Qwen3.8-27B xhigh run** | R9700 | Its log covers the first session only. |
-| **Cloud runs on Moorhuhn** | GPT 5.6 Sol, Opus 5 ULTRACODE | Pending. Cloud speed is not measured on purpose, because it depends on someone else's load. |
+| **Cloud runs on Moorhuhn** | GPT 5.6 Sol | Pending. The Opus 5 run is done, its build is not published yet. Cloud speed is not measured on purpose, because it depends on someone else's load. |
 | **The rest of the image B answer key** | image recognition | Confirmed for four of seven price tags. |
 | **DeepSeek-V4-Flash prefill at depth** | AMD AI MAX 395 | Its 15.24 t/s prefill median is the lowest in the field and took 171.5 of its 500.3 GPU minutes. |
 | **A quality score for the Halogen run** | Qwen3.8-Flash-Next · Halogen | Not assessed yet. |

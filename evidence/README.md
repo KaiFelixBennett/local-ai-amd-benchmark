@@ -110,8 +110,9 @@ Stated here so it cannot be mistaken for measurement:
   proposals. An informed opinion, not a measurement.
 - **Self-corrections.** Only the 12 `fix_*` scripts of the Qwen3.6-27B Moorhuhn run can be
   counted in `benchmarks/`. The other counts in `data/runs.json` are the operator's record.
-- **Runtimes without a log.** The 6 h 28 min of the medium run come from the VS Code display,
-  the roughly 70 minutes of Sonnet 5 from the session, the roughly 9 h of the Qwen3.8-27B xhigh
+- **Runtimes without a server log.** The 6 h 28 min of the medium run come from the VS Code display,
+  the 42 min of Sonnet 5 and the 1 h 52 min of Opus 5 from their Claude Code session logs (pauses at
+  the subscription's session limit removed), the roughly 9 h of the Qwen3.8-27B xhigh
   run from the operator's notes. Its log covers the first of two sessions only.
 - **What Halogen is.** That it is made for Qwen3.8-Flash-Next on Strix Halo is how its project
   page describes it. The log confirms version, container, weights, context and memory figures,
