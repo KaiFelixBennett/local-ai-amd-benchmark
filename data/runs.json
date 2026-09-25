@@ -764,13 +764,14 @@
   "cmd": null,
   "media": null,
   "source": "Cloud-Referenz in Claude Code mit Effort high, nicht im ULTRACODE-Modus: Das Sitzungsprotokoll zeigt Effort high in allen 230 Anfragen und keine Ultracode-Aktivierung. Arbeitszeit und Token sind aus dem Protokoll gerechnet.",
-  "note": "Cloud-Referenz. Bis zu sieben Agenten arbeiteten parallel und schrieben 1,33 Millionen Token in 1 h 52 min netto. Eine Pause von 1 h 43 min am Sitzungslimit des Claude-Abos ist abgezogen. Das Artefakt ist hier noch nicht eingebunden.",
+  "note": "Cloud-Referenz. Bis zu sieben Agenten arbeiteten parallel und schrieben 1,33 Millionen Token in 1 h 52 min Arbeitszeit. Dazu kommen 1 h 42 min Wartezeit am Sitzungslimit des Claude-Abos (letzte Aktivität 09:38, frei ab 11:20), bis zum fertigen Spiel also 3 h 34 min. Das Artefakt ist hier noch nicht eingebunden.",
   "depth": null,
   "evidence": {
    "log": null,
    "regel": "Der Lauf ging über Claude Code. Es gibt kein Serverprotokoll, nur das Sitzungsprotokoll. Daraus stammen Arbeitszeit und Tokenzahl, eine Geschwindigkeit lässt sich nicht ausweisen."
   },
-  "wall_minutes": 112
+  "wall_minutes": 112,
+  "limit_wait_minutes": 102
  },
  {
   "slug": "opus5-clairobscure",
@@ -878,13 +879,14 @@
    "video": "sonnet.webm",
    "poster": "sonnet.jpg"
   },
-  "source": "Cloud-Referenz in Claude Code mit Effort high. Das Artefakt liegt vor, die Geschwindigkeit ist nicht vergleichbar gemessen. Die Arbeitszeit von 42 Minuten ist aus dem Sitzungsprotokoll gerechnet, eine Pause von 12 Minuten am Sitzungslimit des Claude-Abos ist abgezogen.",
+  "source": "Cloud-Referenz in Claude Code mit Effort high. Das Artefakt liegt vor, die Geschwindigkeit ist nicht vergleichbar gemessen. Die Arbeitszeit von 42 Minuten ist aus dem Sitzungsprotokoll gerechnet. Dazu kommen 7 Minuten Wartezeit am Sitzungslimit des Claude-Abos (erreicht um 11:32, frei ab 11:40), bis zum fertigen Spiel also 49 Minuten. Die 5 Minuten danach bis zum Weiter des Autors sind abgezogen.",
   "note": "Cloud-Referenz, gelaufen mit hoher Reasoning-Stufe. Sie steht hier zum Vergleich des Ergebnisses, nicht der Geschwindigkeit.",
   "depth": null,
   "evidence": {
    "log": null,
    "regel": "Der Lauf ging über Claude Code. Es gibt kein Serverprotokoll, nur das Sitzungsprotokoll. Daraus stammt die Arbeitszeit, eine Geschwindigkeit lässt sich nicht ausweisen. Was zählt, ist das Artefakt."
   },
-  "wall_minutes": 42
+  "wall_minutes": 42,
+  "limit_wait_minutes": 7
  }
 ]
