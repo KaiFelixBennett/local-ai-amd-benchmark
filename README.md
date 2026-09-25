@@ -249,7 +249,7 @@ tokens or more in that log.
 |---|---|--:|--:|--:|---|
 | **Radeon AI PRO R9700** | | | | | |
 | Qwen3.8-27B<br><sub>UD-Q4_K_XL</sub> | Moorhuhn | **33.69** | **31** ✓ | 11 | [log](evidence/logs/qwen38-27b-q4xl-moorhuhn-r9700.log) · [page](https://benchmark.securesight.ai/m/qwen38-27b/en?lauf=qwen38-27b-q4xl-moorhuhn-r9700) |
-| Qwen3.6-27B<br><sub>UD-Q6_K_XL</sub> | Moorhuhn | **33.45** | **16** ✓ | 0 | [log](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) · [page](https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-moorhuhn-r9700) |
+| Qwen3.6-27B<br><sub>UD-Q6_K_XL · disqualified</sub> | Moorhuhn | **33.45** | **16** ✓ | 0 | [log](evidence/logs/qwen36-27b-q6-moorhuhn-r9700.log) · [page](https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-moorhuhn-r9700) |
 | Qwen3.8-27B<br><sub>UD-Q6_K_M</sub> | Clair Obscure | **26.30** | 28 | 0 | [log](evidence/logs/qwen38-27b-q6-clairobscur-r9700.log) · [page](https://benchmark.securesight.ai/m/qwen38-27b/en?lauf=qwen38-27b-q6-clairobscure-r9700) |
 | **AMD AI MAX 395 (AMD Halo)** | | | | | |
 | Qwen3.8-Flash-Next<br><sub>UD-Q4_K_XL</sub> | Moorhuhn | **21.76** | **34** ✓ | 10 | [log](evidence/logs/qwen38-flashnext-moorhuhn-evox2.log) · [page](https://benchmark.securesight.ai/m/qwen38-flash-next/en?lauf=qwen38-flashnext-moorhuhn-evox2) |
@@ -258,7 +258,7 @@ tokens or more in that log.
 | DeepSeek-V4-Flash-0731<br><sub>UD-IQ3_XXS</sub> | Clair Obscure | **7.02** | 16 | 0 | [log](evidence/logs/deepseek-v4-flash-clairobscur-halo.log) · [page](https://benchmark.securesight.ai/m/deepseek-v4-flash-0731/en?lauf=deepseek-v4-flash-clairobscure-evox2) |
 
 <sub><b>Decode</b> median in t/s · <b>Quality</b> rubric of four criteria with 10 points each (game feel, presentation, code quality, scope), ✓ confirmed, — not assessed yet, the others are proposals · <b>Tests</b> files named <code>*.test.*</code> in the delivered project · <b>page</b> the model page with video, playable build and the reason behind every rubric point.<br>
-The Qwen3.8-27B UD-Q4_K_XL log covers the first of two sessions. For the Flash-Next Clair Obscure run the run notes record an older MTP version, but its log shows no draft model being loaded and no draft acceptance line, so this log cannot show what MTP contributed. The Halogen run used another server on Linux, halogen-flash-server 0.6.3 with weights in W4B, and served two requests at a time: 268 of its 652 scored responses ran next to a second one.</sub>
+The Qwen3.8-27B UD-Q4_K_XL log covers only the first 3.2 hours of a run of about 9 hours (31 Aug, 16:20 to 19:32); the rest of the first session and the second session have no server log. Qwen3.6-27B on Moorhuhn is disqualified: the prompt was sent once more together with a hint on two bugs, which the test rules do not allow. It stays as a reference, and its speed values are valid. For the Flash-Next Clair Obscure run the run notes record an older MTP version, but its log shows no draft model being loaded and no draft acceptance line, so this log cannot show what MTP contributed. The Halogen run used another server on Linux, halogen-flash-server 0.6.3 with weights in W4B, and served two requests at a time: 268 of its 652 scored responses ran next to a second one.</sub>
 
 <details>
 <summary>Percentiles, prefill, largest prompt, tokens and GPU time per run</summary>
@@ -267,7 +267,7 @@ The Qwen3.8-27B UD-Q4_K_XL log covers the first of two sessions. For the Flash-N
 
 | Run | n | Decode p10 to p90 | Prefill | Largest prompt | Tokens | GPU min |
 |---|--:|--:|--:|--:|--:|--:|
-| Qwen3.8-27B UD-Q4_K_XL · Moorhuhn | 82 of 108 | 27.83 to 45.34 | 234.86 | 139,720 | 336,107 | 188.9 |
+| Qwen3.8-27B UD-Q4_K_XL · Moorhuhn | 82 of 108 | 27.83 to 45.34 | 234.86 | 139,720 | 336,107<br><sub>first 3.2 h only, over 390,000 by 21:12, total not recorded</sub> | 188.9 |
 | Qwen3.6-27B UD-Q6_K_XL · Moorhuhn | 221 of 409 | 29.02 to 38.25 | 152.71 | 43,238 | 196,543 | 139.1 |
 | Qwen3.8-27B UD-Q6_K_M · Clair Obscure | 30 of 35 | 15.55 to 34.22 | 159.40 | 180,396 | 119,627 | 114.5 |
 | Qwen3.8-Flash-Next · Moorhuhn | 346 of 459 | 17.15 to 26.28 | 77.63 | 69,985 | 786,506 | 798.8 |
@@ -379,7 +379,7 @@ and dodge on tight timing windows.
 <td width="50%" valign="top">
 <a href="https://benchmark.securesight.ai/spiel/qwen36-27b-q6-moorhuhn-r9700/"><img src="media/gif/moorhuhn-qwen36.gif" width="100%" alt="A 2D side scrolling shooter with parallax layers, built by Qwen3.6-27B"></a>
 <b>Moorhuhn</b> · Qwen3.6-27B UD-Q6_K_XL · R9700<br>
-<sub>39 files · 6,903 lines · no tests · 12 <code>fix_*</code> repair scripts · quality 16, confirmed<br>
+<sub>39 files · 6,903 lines · no tests · 12 <code>fix_*</code> repair scripts · quality 16, confirmed · disqualified<br>
 <a href="https://benchmark.securesight.ai/spiel/qwen36-27b-q6-moorhuhn-r9700/">Play</a> · <a href="https://benchmark.securesight.ai/m/qwen36-27b/en?lauf=qwen36-27b-q6-moorhuhn-r9700">Video</a> · <a href="benchmarks/qwen36-27b/moorhuhn-q6/">Source</a></sub>
 </td>
 <td width="50%" valign="top">
@@ -419,7 +419,7 @@ Two runs on the R9700 with the same Moorhuhn prompt:
 | Decode median | **33.69 t/s** | **33.45 t/s** |
 | Test files | 11 with 1,257 lines | none |
 | `fix_*` repair scripts in the project | none | 12 |
-| Quality | 31, confirmed | 20, proposal |
+| Quality | 31, confirmed | 16, confirmed, disqualified |
 
 Tokens per second did not tell these two apart, and they were entirely different afternoons.
 It is not a controlled experiment: model generation, quant, llama.cpp build and speculation

@@ -43,7 +43,7 @@ THEMES = {
 LABELS = {
     # Below its point: above it run the Sonnet 5 reference line and the end of the Pareto front.
     "qwen38-27b-q4xl-moorhuhn-r9700":       (  8,  30, "end",    "Qwen3.8-27B Q4_XL"),
-    "qwen36-27b-q6-moorhuhn-r9700":         (-12,   5, "end",    "Qwen3.6-27B Q6"),
+    "qwen36-27b-q6-moorhuhn-r9700":         (-12,   5, "end",    "Qwen3.6-27B Q6 · disqualified"),
     "qwen38-27b-q6-clairobscure-r9700":     (-12,   5, "end",    "Qwen3.8-27B Q6"),
     # High enough that the second line clears the point.
     "qwen38-flashnext-moorhuhn-evox2":      (  0, -30, "middle", "Qwen3.8-Flash-Next"),

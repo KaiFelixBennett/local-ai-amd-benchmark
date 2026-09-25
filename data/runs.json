@@ -55,6 +55,8 @@
    "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
   "tokens_all": 336107,
+  "tokens_complete": false,
+  "tokens_note": "The server log covers only the first 3.2 hours of the run (31 Aug 2026, 16:20 to 19:32). The VS Code chat reaches 21:12 and counts 389,899 generated tokens there, and its text, calibrated against the log, gives 390,000 to 442,000 by then. After 21:12 nothing was recorded, so the total is unknown. tokens and tokens_all cover the logged part only.",
   "responses_all": 108,
   "gpu_minutes": {
    "decode": 162.1,
@@ -120,6 +122,7 @@
    "regel": "Antworten ab 200 Tokens; Perzentile nach Rangplatz"
   },
   "tokens_all": 196543,
+  "disqualified": "The prompt was sent once more together with a hint on two bugs, and the test rules allow no hints. The run stays as a reference. Its speed values are valid.",
   "responses_all": 409,
   "gpu_minutes": {
    "decode": 98.1,

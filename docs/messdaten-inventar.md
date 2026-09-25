@@ -37,7 +37,7 @@ echte Arbeit über viele Aufgaben statt `pp512`/`tg128` im Labor. Ausgewertet mi
 
 | Lauf | Hardware | Aufgabe | n | Decode Median | Spanne | Prefill Median (≥500 Tok) | erzeugte Tokens | Generierzeit |
 |---|---|---|---:|---:|---|---:|---:|---:|
-| Qwen3.8-27B UD-Q4_K_XL | R9700 | Moorhuhn | 108 | **34,36** t/s | 22,9–84,9 | 266,95 t/s | 336.107 | 162,1 min |
+| Qwen3.8-27B UD-Q4_K_XL | R9700 | Moorhuhn | 108 | **34,36** t/s | 22,9–84,9 | 266,95 t/s | 336.107 (nur die ersten 3,2 h von rund 9 h, bis 21:12 über 390.000, Gesamtzahl nicht erfasst) | 162,1 min |
 | Qwen3.8-27B UD-Q6 | R9700 | Clair Obscure | 35 | **26,43** t/s | 13,9–42,4 | 167,98 t/s | 119.627 | 88,8 min |
 | Qwen3.8-Flash-Next UD-Q4_K_XL | AI MAX 395 | Clair Obscure | 106 | **10,98** t/s | 9,0–17,0 | 123,65 t/s | 238.371 | 337,8 min |
 | DeepSeek-V4-Flash-0731 UD-IQ3_XXS | AI MAX 395 | Clair Obscure | 152 | **6,32** t/s | 2,8–10,8 | 17,59 t/s | 158.469 | 328,8 min |

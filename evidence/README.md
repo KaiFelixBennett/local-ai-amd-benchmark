@@ -46,7 +46,7 @@ stand at the top. It too carries no prompt text and no response text, only count
 
 | Run | Log | Decode median | n | Prefill median | Tokens, all responses | GPU time |
 |---|---|--:|--:|--:|--:|--:|
-| Qwen3.8-27B UD-Q4_K_XL · R9700 · Moorhuhn | [`qwen38-27b-q4xl-moorhuhn-r9700.log`](logs/qwen38-27b-q4xl-moorhuhn-r9700.log) | 33.69 t/s | 82 | 234.86 t/s | 336,107 | 188.9 min |
+| Qwen3.8-27B UD-Q4_K_XL · R9700 · Moorhuhn | [`qwen38-27b-q4xl-moorhuhn-r9700.log`](logs/qwen38-27b-q4xl-moorhuhn-r9700.log) | 33.69 t/s | 82 | 234.86 t/s | 336,107 (first 3.2 h of about 9 h only) | 188.9 min |
 | Qwen3.6-27B UD-Q6_K_XL · R9700 · Moorhuhn | [`qwen36-27b-q6-moorhuhn-r9700.log`](logs/qwen36-27b-q6-moorhuhn-r9700.log) | 33.45 t/s | 221 | 152.71 t/s | 196,543 | 139.1 min |
 | Qwen3.8-27B UD-Q6_K_M · R9700 · Clair Obscur | [`qwen38-27b-q6-clairobscur-r9700.log`](logs/qwen38-27b-q6-clairobscur-r9700.log) | 26.30 t/s | 30 | 159.40 t/s | 119,627 | 114.5 min |
 | Qwen3.8-Flash-Next UD-Q4_K_XL · AI MAX 395 · Moorhuhn | [`qwen38-flashnext-moorhuhn-evox2.log`](logs/qwen38-flashnext-moorhuhn-evox2.log) | 21.76 t/s | 346 | 77.63 t/s | 786,506 | 798.8 min |
